@@ -694,22 +694,26 @@ async function doAdminLogin(){
     const r=await fetch(`${SERVER}/admin/dashboard`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({admin_pass:pass})});
     if(!r.ok){showErrBox(err,'Wrong password!');return;}
     adminToken=pass;
-    localStorage.setItem(ADMIN_TOKEN_KEY, pass);
-    // If user already logged in, just show admin panel
-    if(currentUser){
-      document.getElementById('nav-admin').style.display='flex';
-      showInner('admin');
-    } else {
-      // Create temp admin session
-      showPage('app');
-      document.getElementById('nav-admin').style.display='flex';
-      document.getElementById('userName').textContent='Admin';
-      document.getElementById('userAv').textContent='A';
-      document.getElementById('userPlanBadge').textContent='Admin';
-      showInner('admin');
-    }
+    localStorage.setItem(ADMIN_TOKEN_KEY,pass);
+    showAdminOnlyView();
   }catch(e){showErrBox(err,'Server error');}
   finally{btn.disabled=false;btn.innerHTML='Enter Admin Panel';}
+}
+
+function showAdminOnlyView(){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-app').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(x=>x.style.display='none');
+  document.querySelectorAll('.nav-label').forEach(x=>x.style.display='none');
+  const an=document.getElementById('nav-admin');
+  an.style.display='flex';an.classList.add('active');
+  document.getElementById('userName').textContent='Owner';
+  document.getElementById('userAv').textContent='A';
+  document.getElementById('userAv').style.background='#a855f7';
+  document.getElementById('userPlanBadge').textContent='Admin Mode';
+  document.querySelectorAll('.inner-page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('inner-admin').classList.add('active');
+  loadAdminDash();
 }
 
 function doLogout(){
