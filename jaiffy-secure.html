@@ -244,7 +244,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
     <div class="fg"><label class="fl">Password</label><input class="fi" id="loginPass" type="password" placeholder="••••••••"></div>
     <button class="btn-primary" onclick="doLogin()" id="loginBtn">Login</button>
     <div class="auth-link">Account nahi? <a onclick="showPage('signup')">Sign up karein</a></div>
-    <div class="auth-link" style="margin-top:8px;"><a onclick="showAdminLogin()" style="color:#a855f7;font-size:11px;">🔐 Admin</a></div>
+    
   </div>
 </div>
 
@@ -570,10 +570,18 @@ let activeSearchCols = SEARCH_COLS.filter(c=>c.default).map(c=>c.id);
 let activeSavedCols  = SAVED_COLS.filter(c=>c.default).map(c=>c.id);
 
 // ===== INIT =====
+const ADMIN_SECRET_HASH = 'jaiffy-owner-9z8k2025';
+
 window.onload = () => {
   const tok = localStorage.getItem('j_token');
   const usr = localStorage.getItem('j_user');
   adminToken = localStorage.getItem(ADMIN_TOKEN_KEY) || '';
+  const hash = window.location.hash.replace('#','');
+  if(hash === ADMIN_SECRET_HASH){
+    history.replaceState(null,'',window.location.pathname);
+    showPage('adminlogin');
+    return;
+  }
   if(tok && usr){ currentUser = JSON.parse(usr); enterApp(); fetchMe(); }
   const ref = new URLSearchParams(window.location.search).get('ref');
   if(ref){ document.getElementById('signupRef').value=ref; document.getElementById('refNotice').style.display='block'; showPage('signup'); }
