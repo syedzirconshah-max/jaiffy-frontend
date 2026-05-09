@@ -138,11 +138,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 /* ONBOARDING STEPS */
 .onboard-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;}
 .onboard-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-.step-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;transition:all 0.3s;cursor:default;}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;position:relative;}
+.step-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;}
 .step-item:hover{transform:translateY(-2px);}
 .step-item.done{border-color:rgba(29,184,126,0.4);background:linear-gradient(135deg,rgba(29,184,126,0.08),rgba(29,184,126,0.02));}
 .step-item.active-step{border-color:rgba(240,125,42,0.5);background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(240,125,42,0.03));box-shadow:0 0 20px rgba(240,125,42,0.1);}
+.step-item.active-step::before{content:'← Yeh karein!';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--orange);font-weight:600;white-space:nowrap;}
 .step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;margin:0 auto 8px;}
 .step-item.done .step-num{background:rgba(29,184,126,0.2);color:var(--success);box-shadow:0 0 12px rgba(29,184,126,0.2);}
 .step-item.active-step .step-num{background:rgba(240,125,42,0.2);color:var(--orange);box-shadow:0 0 12px rgba(240,125,42,0.2);animation:pulse 2s infinite;}
