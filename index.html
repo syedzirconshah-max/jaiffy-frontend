@@ -2521,22 +2521,21 @@ setTimeout(initAllInteractions, 500);
 
 // ===== SAMPLE CSV DOWNLOAD =====
 function downloadSampleCSV() {
-  const rows = [
-    ['Business Name','Email','Phone','Website','Address','Category','Rating','Score','Priority'],
-    ['Al-Shifa Medical Supplies','info@alshifa.ae','+971-4-234-5678','www.alshifa.ae','Dubai Healthcare City, UAE','Medical Supplies','4.7','92','High'],
-    ['Gulf Surgical Trading','contact@gulfsurgical.com','+971-2-678-9012','www.gulfsurgical.com','Abu Dhabi, UAE','Surgical Instruments','4.5','87','High'],
-    ['MedEquip International','sales@medequip.co.uk','+44-20-1234-5678','www.medequip.co.uk','London, UK','Medical Equipment','4.3','74','Medium'],
-    ['SportZone Wholesale','info@sportzone.de','+49-89-123-4567','www.sportzone.de','Munich, Germany','Sports Equipment','4.8','95','High'],
-    ['Leather Palace Dubai','lp@leatherpalace.ae','+971-4-567-8901','','Dubai, UAE','Leather Goods','4.1','65','Medium'],
+  const header = "Business Name,Email,Phone,Website,Address,Category,Rating,Score,Priority";
+  const data = [
+    "Al-Shifa Medical Supplies,info@alshifa.ae,+971-4-234-5678,www.alshifa.ae,Dubai UAE,Medical Supplies,4.7,92,High",
+    "Gulf Surgical Trading,contact@gulfsurgical.com,+971-2-678-9012,www.gulfsurgical.com,Abu Dhabi UAE,Surgical Instruments,4.5,87,High",
+    "MedEquip International,sales@medequip.co.uk,+44-20-1234-5678,www.medequip.co.uk,London UK,Medical Equipment,4.3,74,Medium",
+    "SportZone Wholesale,info@sportzone.de,+49-89-123-4567,www.sportzone.de,Munich Germany,Sports Equipment,4.8,95,High",
+    "Leather Palace Dubai,lp@leatherpalace.ae,+971-4-567-8901,,Dubai UAE,Leather Goods,4.1,65,Medium",
   ];
-  const csv = rows.map(r => r.map(c => '"'+c+'"').join(',')).join('
-');
-  const blob = new Blob([csv], {type:'text/csv'});
+  const csv = [header, ...data].join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'jaiffy_sample_leads.csv';
+  const a = document.createElement("a");
+  a.href = url; a.download = "jaiffy_sample_leads.csv";
   a.click(); URL.revokeObjectURL(url);
-  showToast('📊 Sample CSV download ho raha hai!');
+  showToast("Sample CSV download ho raha hai!");
 }
 
 // ===== RECENT SEARCHES (localStorage) =====
