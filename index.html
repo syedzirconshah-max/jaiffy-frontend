@@ -398,6 +398,247 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .auth-logo-icon-img{width:56px;height:56px;border-radius:14px;object-fit:cover;animation:logoPulse 3s ease-in-out infinite,logoSpin 0.8s ease;}
 .s-logo-icon-img{width:36px;height:36px;border-radius:9px;object-fit:cover;animation:logoPulse 4s ease-in-out infinite;}
 .s-logo-icon-img:hover{animation:logoSpin 0.5s ease,logoPulse 4s ease-in-out infinite;}
+
+/* ============================================
+   JAIFFY — HOOK & HUNT THEME
+   "AI se duniya bhar ke buyers pakro"
+   ============================================ */
+
+/* ===== PAGE TRANSITIONS ===== */
+.inner{opacity:1;transform:translateX(0);transition:opacity 0.35s ease,transform 0.35s ease;}
+.inner-exit{opacity:0;transform:translateX(-30px);}
+.inner-enter{opacity:0;transform:translateX(30px);}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ===== HOOK & HUNT HERO ===== */
+.hero-section{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 36px 40px;
+  position:relative;overflow:hidden;
+}
+.hero-radar{
+  position:absolute;right:-100px;top:50%;transform:translateY(-50%);
+  width:500px;height:500px;opacity:0.06;pointer-events:none;
+}
+.radar-ring{
+  position:absolute;border-radius:50%;border:1px solid var(--orange);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:radarPulse 3s ease-in-out infinite;
+}
+.radar-ring:nth-child(1){width:100px;height:100px;animation-delay:0s;}
+.radar-ring:nth-child(2){width:200px;height:200px;animation-delay:0.5s;}
+.radar-ring:nth-child(3){width:300px;height:300px;animation-delay:1s;}
+.radar-ring:nth-child(4){width:400px;height:400px;animation-delay:1.5s;}
+.radar-ring:nth-child(5){width:500px;height:500px;animation-delay:2s;}
+@keyframes radarPulse{0%,100%{opacity:0.3;transform:translate(-50%,-50%) scale(1);}50%{opacity:0.8;transform:translate(-50%,-50%) scale(1.02);}}
+
+.radar-sweep{
+  position:absolute;top:50%;left:50%;width:250px;height:2px;
+  transform-origin:left center;
+  background:linear-gradient(90deg,var(--orange),transparent);
+  animation:radarSweep 3s linear infinite;
+  border-radius:99px;
+}
+@keyframes radarSweep{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* ===== FLOATING PRODUCT ICONS ===== */
+.product-float{
+  position:absolute;font-size:28px;
+  animation:productFloat ease-in-out infinite;
+  opacity:0.12;pointer-events:none;user-select:none;
+  filter:grayscale(0.3);
+}
+@keyframes productFloat{
+  0%,100%{transform:translateY(0px) rotate(0deg);}
+  33%{transform:translateY(-15px) rotate(5deg);}
+  66%{transform:translateY(8px) rotate(-3deg);}
+}
+
+/* ===== HOOK ANIMATION ===== */
+.fish-hook{
+  position:absolute;right:60px;top:20px;
+  font-size:48px;opacity:0.08;
+  animation:hookDangle 4s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes hookDangle{
+  0%,100%{transform:rotate(-8deg) translateY(0);}
+  50%{transform:rotate(8deg) translateY(12px);}
+}
+
+/* ===== HERO HEADLINE ===== */
+.hero-title{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,52px);
+  font-weight:800;line-height:1.15;letter-spacing:-1px;
+  margin-bottom:16px;
+}
+.hero-title .hook-word{
+  color:var(--orange);
+  display:inline-block;
+  animation:hookWord 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes hookWord{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+.hero-subtitle{font-size:16px;color:var(--muted);max-width:500px;line-height:1.7;margin-bottom:28px;}
+.hero-subtitle strong{color:var(--text);}
+
+/* ===== PRODUCT BADGES ===== */
+.product-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.prod-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:99px;padding:6px 14px;font-size:12px;
+  color:var(--muted);transition:all 0.3s;cursor:default;
+  animation:badgeIn 0.5s ease both;
+}
+.prod-badge:hover{
+  border-color:rgba(240,125,42,0.4);color:var(--text);
+  background:rgba(240,125,42,0.05);transform:translateY(-2px);
+}
+@keyframes badgeIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+
+/* ===== LIVE HUNT COUNTER ===== */
+.hunt-counters{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-bottom:32px;max-width:500px;
+}
+.hunt-count{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:14px;text-align:center;
+  transition:all 0.3s;
+}
+.hunt-count:hover{border-color:rgba(240,125,42,0.3);transform:translateY(-2px);}
+.hunt-num{
+  font-family:'Syne',sans-serif;font-size:24px;font-weight:800;
+  color:var(--orange);display:block;
+}
+.hunt-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;}
+
+/* ===== SEARCH SECTION HERO ===== */
+.search-hero{
+  background:linear-gradient(135deg,rgba(240,125,42,0.06),rgba(42,110,240,0.04));
+  border:1px solid rgba(240,125,42,0.15);
+  border-radius:20px;padding:28px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.search-hero::before{
+  content:'🎯';position:absolute;right:20px;top:50%;
+  transform:translateY(-50%);font-size:80px;opacity:0.06;
+  animation:targetBob 3s ease-in-out infinite;
+}
+@keyframes targetBob{0%,100%{transform:translateY(-50%) scale(1);}50%{transform:translateY(-55%) scale(1.05);}}
+.search-hero-title{
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
+  margin-bottom:6px;
+}
+.search-hero-sub{font-size:12px;color:var(--muted);margin-bottom:18px;}
+
+/* ===== RADAR SEARCH LOADING ===== */
+.radar-loading{
+  display:none;flex-direction:column;align-items:center;
+  padding:60px 20px;gap:0;
+}
+.radar-loading.on{display:flex;}
+.radar-container{
+  width:160px;height:160px;position:relative;margin-bottom:24px;
+}
+.rl-ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(240,125,42,0.3);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.rl-ring:nth-child(1){width:40px;height:40px;border-color:var(--orange);animation:rlPulse 1.5s ease-in-out infinite;}
+.rl-ring:nth-child(2){width:80px;height:80px;animation:rlPulse 1.5s ease-in-out 0.3s infinite;}
+.rl-ring:nth-child(3){width:120px;height:120px;animation:rlPulse 1.5s ease-in-out 0.6s infinite;}
+.rl-ring:nth-child(4){width:160px;height:160px;animation:rlPulse 1.5s ease-in-out 0.9s infinite;}
+@keyframes rlPulse{0%,100%{opacity:0.2;transform:translate(-50%,-50%) scale(1);}50%{opacity:0.8;transform:translate(-50%,-50%) scale(1.05);}}
+.rl-sweep{
+  position:absolute;top:50%;left:50%;
+  width:80px;height:2px;transform-origin:left center;
+  background:linear-gradient(90deg,var(--orange),rgba(240,125,42,0.1));
+  animation:rlSweep 1.5s linear infinite;border-radius:99px;
+}
+@keyframes rlSweep{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.rl-dot{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--orange);top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 16px var(--orange);
+}
+.radar-loading-text{font-size:14px;color:var(--text);font-weight:600;margin-bottom:6px;}
+.radar-loading-sub{font-size:12px;color:var(--muted);}
+.radar-loading-steps{margin-top:16px;display:flex;flex-direction:column;gap:6px;align-items:center;}
+.rl-step{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;opacity:0;animation:stepFade 0.5s ease both;}
+.rl-step.active{opacity:1;color:var(--orange);}
+@keyframes stepFade{from{opacity:0;transform:translateX(-10px);}to{opacity:1;transform:translateX(0);}}
+
+/* ===== ENHANCED STAT CARDS ===== */
+.stat-card{overflow:hidden;}
+.stat-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(240,125,42,0.08),transparent);pointer-events:none;}
+
+/* ===== PLANS - HORIZONTAL SCROLL ON MOBILE ===== */
+@media(min-width:768px){
+  .plans-grid{grid-template-columns:repeat(3,1fr)!important;}
+}
+
+/* ===== SECTION DIVIDERS ===== */
+.section-divider{
+  height:1px;margin:32px 0;
+  background:linear-gradient(90deg,transparent,var(--border),var(--orange),var(--border),transparent);
+  opacity:0.5;
+}
+
+/* ===== MOBILE SCROLL OPTIMIZATION ===== */
+.inner{min-height:100vh;padding-bottom:80px;}
+@media(max-width:768px){
+  .hero-title{font-size:26px;}
+  .hunt-counters{grid-template-columns:repeat(3,1fr);gap:8px;}
+  .hunt-num{font-size:20px;}
+  .product-badges{gap:6px;}
+  .prod-badge{font-size:11px;padding:5px 10px;}
+  .inner{padding:16px 14px 80px;}
+}
+
+/* ===== SMOOTH SCROLL ===== */
+html{scroll-behavior:smooth;}
+.main{overflow-y:auto;}
+
+/* ===== HOOK CURSOR ===== */
+.btn-search,.btn-act,.btn-primary{position:relative;overflow:hidden;}
+.btn-search::after,.btn-act::after,.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn-search:hover::after,.btn-act:hover::after,.btn-primary:hover::after{transform:translateX(100%);}
+
+/* ===== NOTIFICATION DOT PULSE ===== */
+.nav-badge.new{animation:badgePop 0.4s cubic-bezier(0.34,1.56,0.64,1) both,badgePulse 2s ease-in-out 0.5s infinite;}
+@keyframes badgePop{from{transform:scale(0);}to{transform:scale(1);}}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(29,184,126,0.4);}50%{box-shadow:0 0 0 5px rgba(29,184,126,0);}}
+
+/* ===== WORLD MAP DOTS ===== */
+.world-dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0.04;}
+.w-dot{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--orange);}
+
+/* ===== RESULT CARD HOVER ===== */
+tr:hover td{background:rgba(240,125,42,0.03)!important;}
+tr{transition:background 0.2s;}
+
+/* ===== SCORE PILL ENHANCED ===== */
+.score-pill{position:relative;}
+.score-pill::before{
+  content:'';position:absolute;inset:-3px;border-radius:10px;
+  background:linear-gradient(135deg,var(--orange),transparent);
+  opacity:0;transition:opacity 0.3s;z-index:-1;
+}
+.sp-high:hover::before{opacity:0.3;}
 </style>
 </head>
 <body>
@@ -505,7 +746,50 @@ tr:hover td{background:rgba(255,255,255,0.01);}
   <div class="main">
     <!-- DASHBOARD -->
     <div class="inner active" id="inner-dashboard">
-      <div class="page-hdr"><div><div class="page-title">Dashboard</div><div class="page-sub">Aapki lead hunting activity</div></div><button class="btn-act" onclick="goTo('search')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>New Search</button></div>
+      <!-- Background radar -->
+      <div class="hero-radar">
+        <div class="radar-ring"></div><div class="radar-ring"></div>
+        <div class="radar-ring"></div><div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-sweep"></div>
+      </div>
+      <!-- Floating hook -->
+      <div class="fish-hook">🪝</div>
+      <!-- Floating products -->
+      <div class="product-float" style="top:15%;left:8%;font-size:22px;animation-duration:6s;animation-delay:0s;">💊</div>
+      <div class="product-float" style="top:25%;right:12%;font-size:20px;animation-duration:8s;animation-delay:1s;">🧤</div>
+      <div class="product-float" style="top:60%;left:5%;font-size:18px;animation-duration:7s;animation-delay:2s;">⚽</div>
+      <div class="product-float" style="top:70%;right:8%;font-size:22px;animation-duration:9s;animation-delay:0.5s;">🛋️</div>
+      <div class="product-float" style="top:40%;left:3%;font-size:16px;animation-duration:5s;animation-delay:3s;">🧵</div>
+      <div class="product-float" style="top:80%;left:20%;font-size:18px;animation-duration:7s;animation-delay:1.5s;">🔧</div>
+      <!-- Hero Headline -->
+      <div style="padding-top:20px;margin-bottom:28px;position:relative;z-index:1;" class="reveal">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="live-badge"><span class="live-pulse"></span> AI Active</span>
+          <span style="font-size:11px;color:var(--muted);" id="heroTime"></span>
+        </div>
+        <div class="hero-title">
+          Duniya bhar ke <span class="hook-word">Buyers</span> pakro<br>
+          <span style="color:var(--muted);font-size:0.65em;font-weight:600;">🪝 AI Fish Hook se — B2B Leads in Seconds</span>
+        </div>
+        <div class="hero-subtitle">
+          Pakistan ka <strong>pehla AI-powered</strong> B2B lead hunter.<br>
+          Surgical instruments UAE mein, Leather goods Germany mein — <strong>real buyers, real data.</strong>
+        </div>
+        <div class="product-badges" id="prodBadges">
+          <span class="prod-badge" style="animation-delay:0.1s">💊 Surgical Instruments</span>
+          <span class="prod-badge" style="animation-delay:0.2s">🧤 Leather Goods</span>
+          <span class="prod-badge" style="animation-delay:0.3s">⚽ Sports Goods</span>
+          <span class="prod-badge" style="animation-delay:0.4s">🧵 Textile</span>
+          <span class="prod-badge" style="animation-delay:0.5s">🛋️ Furniture</span>
+          <span class="prod-badge" style="animation-delay:0.6s">🔧 Hardware</span>
+        </div>
+        <button class="btn-act" onclick="goTo('search')" style="width:fit-content;font-size:15px;padding:13px 28px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          🎯 Lead Hunt Shuru Karein
+        </button>
+      </div>
+      <div class="section-divider"></div>
       <div id="smartBanners"></div>
 
       <!-- Live Activity Feed -->
@@ -518,7 +802,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
         </div>
         <div style="font-size:11px;color:var(--muted);white-space:nowrap;" id="liveTime"></div>
       </div>
-      <div class="onboard-card" id="onboardCard">
+      <div class="onboard-card reveal" id="onboardCard">
         <div class="onboard-title">🗺️ Shuru Kaise Karein — 4 Easy Steps</div>
         <div class="steps-grid">
           <div class="step-item done" id="step1"><div class="step-num">✓</div><div class="step-title">Account Banaya</div><div class="step-desc">Free account ready hai</div></div>
@@ -527,13 +811,13 @@ tr:hover td{background:rgba(255,255,255,0.01);}
           <div class="step-item" id="step4"><div class="step-num">4</div><div class="step-title">Dost Invite</div><div class="step-desc">20 ref = Pro FREE!</div></div>
         </div>
       </div>
-      <div class="stats-grid">
+      <div class="stats-grid reveal">
         <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="sTotalLeads">0</div><div class="stat-sub">Aaj tak</div></div>
         <div class="stat-card"><div class="stat-label">Hot Leads</div><div class="stat-val" id="sHotLeads">0</div><div class="stat-sub">Score 70+</div></div>
         <div class="stat-card"><div class="stat-label">Aaj Use Ki</div><div class="stat-val" id="sUsedToday">0</div><div class="stat-sub" id="sRemText">remaining</div></div>
         <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-val" id="sRefs">0</div><div class="stat-sub" id="sRefsTo">Pro ke liye</div></div>
       </div>
-      <div class="usage-wrap">
+      <div class="usage-wrap reveal">
         <div class="usage-top"><div class="usage-title">Aaj ki Lead Limit</div><div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div></div>
         <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
         <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span><span id="uTrialBadge"></span></div>
@@ -543,7 +827,12 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 
     <!-- SEARCH -->
     <div class="inner" id="inner-search">
-      <div class="page-hdr"><div><div class="page-title">Lead Search</div><div class="page-sub">AI-powered B2B leads dhundein</div></div></div>
+      <div class="search-hero reveal">
+        <div class="hero-title" style="font-size:clamp(22px,3vw,38px);margin-bottom:8px;">
+          🎯 <span class="hook-word">Hunt</span> Mode
+        </div>
+        <div class="search-hero-sub">Product likho → Country chuno → AI duniya bhar se buyers pakarta hai 🪝</div>
+      </div>
       <div class="smart-banner sb-ref" style="margin-bottom:18px;" id="searchGuide">
         <div class="sb-icon">💡</div>
         <div class="sb-content"><div class="sb-title">Kaise kaam karta hai?</div><div class="sb-text">Product ya service likho → Country chuno → Search dabao → Google se real businesses milti hain → AI score karta hai → Email generator se professional email bhejo!</div></div>
@@ -567,7 +856,21 @@ tr:hover td{background:rgba(255,255,255,0.01);}
         <div class="sb-content"><div class="sb-title">Contact info locked hai</div><div class="sb-text">Free plan mein email aur phone blur hoti hai. <strong>Pro plan (Rs.2,000/mo)</strong> mein sab unlock hoga — ya 20 dost refer karo!</div></div>
         <button class="sb-btn" onclick="goTo('plans')">Upgrade karein</button>
       </div>
-      <div class="loading-box" id="searchLoading"><div class="big-spin"></div><div>Leads dhundh rahe hain... (30-60 sec)</div><div style="font-size:11px;">Google Places + AI Scoring chal raha hai</div></div>
+      <div class="radar-loading" id="searchLoading">
+      <div class="radar-container">
+        <div class="rl-ring"></div><div class="rl-ring"></div>
+        <div class="rl-ring"></div><div class="rl-ring"></div>
+        <div class="rl-sweep"></div>
+        <div class="rl-dot"></div>
+      </div>
+      <div class="radar-loading-text">🎯 AI Hunt Mode — Active</div>
+      <div class="radar-loading-sub">Google Maps + AI scoring chal raha hai...</div>
+      <div class="radar-loading-steps">
+        <div class="rl-step" id="rlStep1">📡 Google Maps scan kar raha hai...</div>
+        <div class="rl-step" id="rlStep2">🤖 AI har business analyze kar raha hai...</div>
+        <div class="rl-step" id="rlStep3">⚡ Top leads sort ho rahi hain...</div>
+      </div>
+    </div>
       <div id="resultsArea" style="display:none">
         <div class="col-chooser"><div class="col-chooser-title">📊 Columns Choose Karein</div><div class="col-tags" id="colTags"></div></div>
         <div class="results-wrap">
@@ -843,7 +1146,7 @@ async function doSearch(page=1){
   const product=document.getElementById('searchProduct').value.trim();const country=document.getElementById('searchCountry').value;const campaign=document.getElementById('searchCampaign').value.trim()||'Default';
   if(!product){showToast('Product/Service likho pehle!',true);return;}
   const btn=document.getElementById('searchBtn');btn.disabled=true;btn.innerHTML='<div class="spin"></div> Searching...';
-  document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';
+  document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';startRadarSteps();
   try{
     const r=await api('POST','/search',{query:product,country,page,campaign});
     if(r.status===429||r.limit_reached){showToast(r.error||'Limit khatam!',true);return;}
@@ -1312,6 +1615,125 @@ document.addEventListener('DOMContentLoaded',()=>{
   },2000);
   setInterval(cycleAiMessages,6000);
 });
+
+// ===== PAGE TRANSITIONS =====
+let _currentPage = 'dashboard';
+function goToAnimated(p) {
+  const currentInner = document.getElementById('inner-' + _currentPage);
+  const nextInner = document.getElementById('inner-' + p);
+  if (!nextInner || _currentPage === p) return;
+  
+  if (currentInner) {
+    currentInner.style.opacity = '0';
+    currentInner.style.transform = 'translateX(-20px)';
+    currentInner.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+  }
+  setTimeout(() => {
+    document.querySelectorAll('.inner').forEach(x => {
+      x.classList.remove('active');
+      x.style.opacity = '';
+      x.style.transform = '';
+      x.style.transition = '';
+    });
+    document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+    nextInner.classList.add('active');
+    nextInner.style.opacity = '0';
+    nextInner.style.transform = 'translateX(20px)';
+    setTimeout(() => {
+      nextInner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      nextInner.style.opacity = '1';
+      nextInner.style.transform = 'translateX(0)';
+      setTimeout(() => {
+        nextInner.style.transition = '';
+        nextInner.style.opacity = '';
+        nextInner.style.transform = '';
+      }, 320);
+    }, 20);
+    const nav = document.getElementById('nav-' + p);
+    if (nav) nav.classList.add('active');
+    closeSidebar();
+    _currentPage = p;
+    if (p === 'dashboard') loadDashboard();
+    if (p === 'leads') loadSavedLeads();
+    if (p === 'referral') loadReferral();
+    if (p === 'plans') loadPlans();
+    if (p === 'settings') loadSettings();
+    if (p === 'admin') loadAdmin();
+    // Trigger scroll reveals
+    setTimeout(initReveal, 100);
+  }, 220);
+}
+
+// ===== SCROLL REVEAL =====
+function initReveal() {
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  els.forEach(el => observer.observe(el));
+}
+
+// ===== RADAR LOADING STEPS =====
+function startRadarSteps() {
+  ['rlStep1','rlStep2','rlStep3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.remove('active');
+      setTimeout(() => el.classList.add('active'), i * 1800);
+    }
+  });
+}
+
+// ===== HERO TIME =====
+function updateHeroTime() {
+  const el = document.getElementById('heroTime');
+  if (!el) return;
+  const now = new Date();
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  el.textContent = days[now.getDay()] + ', ' + now.toLocaleTimeString('en-PK', {hour:'2-digit',minute:'2-digit'});
+}
+setInterval(updateHeroTime, 1000);
+
+// ===== WORLD DOTS =====
+function addWorldDots() {
+  const positions = [
+    {t:'20%',l:'15%'},{t:'30%',l:'35%'},{t:'25%',l:'55%'},{t:'35%',l:'75%'},
+    {t:'50%',l:'20%'},{t:'45%',l:'50%'},{t:'55%',l:'70%'},{t:'60%',l:'40%'},
+    {t:'70%',l:'60%'},{t:'65%',l:'25%'},{t:'40%',l:'85%'},{t:'75%',l:'80%'},
+  ];
+  const bg = document.getElementById('animBg');
+  if (!bg) return;
+  positions.forEach((pos, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'w-dot';
+    dot.style.cssText = `top:${pos.t};left:${pos.l};animation:orbPulse ${3+i*0.3}s ease-in-out ${i*0.2}s infinite;`;
+    bg.appendChild(dot);
+  });
+}
+
+// ===== OVERRIDE goTo WITH ANIMATED VERSION =====
+// Patch the existing goTo
+const _origGoTo = goTo;
+window.goTo = function(p) { goToAnimated(p); };
+
+// ===== ENHANCED INIT =====
+const _origOnload = window.onload;
+window.onload = function() {
+  if (_origOnload) _origOnload();
+  updateHeroTime();
+  setTimeout(() => { initReveal(); addWorldDots(); }, 500);
+};
+
+// Init on DOM ready too
+if (document.readyState !== 'loading') {
+  setTimeout(() => { initReveal(); addWorldDots(); updateHeroTime(); }, 300);
+}
+
 </script>
 </body>
 </html>
