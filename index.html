@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Jaiffy AI Lead Hunter — Pakistan ka #1 B2B lead generation tool. Surgical instruments, leather goods, sports goods ke buyers UAE, UK, Germany mein dhundho. AI-powered, real data.">
+<meta name="keywords" content="B2B leads Pakistan, lead generation, surgical instruments buyers, leather goods buyers, Pakistani exporters, AI lead hunter">
+<meta name="author" content="Jaiffy AI Lead Hunter">
+<meta name="robots" content="index, follow">
 <meta property="og:title" content="Jaiffy — AI Lead Hunter">
 <meta property="og:description" content="Pakistani exporters ke liye best B2B lead tool. Real buyers dhundho — AI se!">
 <meta property="og:image" content="data:image/png;base64,{log_b64}">
@@ -945,6 +949,260 @@ button:focus-visible, a:focus-visible {
   transform: translateX(6px);
   transition: transform 0.3s ease;
 }
+
+/* ============================================
+   MOBILE COMPLETE FIX
+   ============================================ */
+
+/* Reset stretched fonts on mobile */
+@media(max-width:768px){
+  /* Fix font stretching */
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  
+  /* Hero title fix */
+  .hero-title { 
+    font-size: 24px !important; 
+    line-height: 1.3 !important;
+    letter-spacing: -0.5px !important;
+    word-break: break-word !important;
+  }
+  .hook-word { display: inline !important; }
+  
+  /* Overflow fix - nothing goes outside screen */
+  .inner { 
+    padding: 16px 14px 100px !important; 
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+  .main { overflow-x: hidden !important; }
+  
+  /* 3-step grid - stack on mobile */
+  .inner [style*="grid-template-columns:repeat(3,1fr)"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  
+  /* 2-col product grid - stack */
+  .inner [style*="grid-template-columns:repeat(2,1fr)"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  
+  /* Hero section */
+  .hero-radar { display: none !important; }
+  .fish-hook { font-size: 28px !important; top: 10px !important; right: 16px !important; }
+  .product-float { display: none !important; }
+  .hero-subtitle { font-size: 13px !important; }
+  
+  /* Product badges wrap properly */
+  .product-badges { gap: 6px !important; }
+  .prod-badge { font-size: 11px !important; padding: 5px 10px !important; }
+  
+  /* Hunt counters */
+  .hunt-counters { grid-template-columns: repeat(3,1fr) !important; gap: 8px !important; }
+  .hunt-num { font-size: 18px !important; }
+  
+  /* Stats grid 2 col */
+  .stats-grid { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
+  .stat-val { font-size: 28px !important; }
+  .stat-card { padding: 14px 12px !important; }
+  
+  /* Steps grid 2 col */
+  .steps-grid { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
+  .step-item { padding: 14px 10px !important; }
+  
+  /* Plans */
+  .plans-grid { grid-template-columns: 1fr !important; }
+  .plan-card-inner { padding: 22px 18px !important; }
+  .plan-leads-big { font-size: 40px !important; }
+  
+  /* Search grid */
+  .search-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  
+  /* Admin */
+  .admin-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .admin-2col { grid-template-columns: 1fr !important; }
+  
+  /* Live ticker font */
+  .ticker-item { font-size: 10px !important; padding: 0 14px !important; }
+  
+  /* Usage wrap */
+  .usage-wrap { padding: 16px !important; }
+  
+  /* AI guide bubble */
+  .ai-guide { max-width: 260px !important; bottom: 70px !important; right: 10px !important; }
+  
+  /* Table scroll */
+  .tbl-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
+  table { min-width: 500px !important; }
+  
+  /* Section divider */
+  .section-divider { margin: 20px 0 !important; }
+  
+  /* Onboard card */
+  .onboard-card { padding: 16px !important; }
+  
+  /* Ref hero */
+  .ref-hero { padding: 20px 16px !important; }
+  .ref-link-box { flex-direction: column !important; gap: 8px !important; }
+  .btn-copy { width: 100% !important; }
+  
+  /* Progress milestones */
+  .progress-milestones { grid-template-columns: repeat(2,1fr) !important; }
+  
+  /* Page title */
+  .page-title { font-size: 20px !important; }
+  
+  /* Sidebar */
+  .sidebar { width: 240px !important; }
+  
+  /* Tilt disable on mobile - too laggy */
+  .stat-card, .plan-card, .camp-card { transform: none !important; }
+  
+  /* CTA section */
+  .inner [style*="padding:36px;text-align:center"] {
+    padding: 22px 16px !important;
+  }
+  
+  /* Product rows on mobile */
+  .inner [onclick] {
+    padding: 14px 12px !important;
+  }
+  .inner [onclick] span:first-child { font-size: 24px !important; }
+  
+  /* Search hero */
+  .search-hero { padding: 20px 16px !important; }
+  .search-hero .hero-title { font-size: 22px !important; }
+  
+  /* Floating WA button higher */
+  #waFloat { bottom: 80px !important; right: 14px !important; }
+  
+  /* WA bubble on mobile */
+  #waFloat .wa-tooltip { right: 0 !important; left: auto !important; }
+}
+
+/* ===== FONT FIX GLOBAL ===== */
+* { -webkit-text-size-adjust: 100% !important; }
+.page-title, .auth-title, .hero-title, .plan-name, .s-logo-text {
+  font-family: 'Syne', sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+}
+body, .fi, .fi2, td, .stat-sub, .nav-item {
+  font-family: 'DM Sans', sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* ===== WHATSAPP FLOATING BUTTON ===== */
+#waFloat {
+  position: fixed;
+  bottom: 90px;
+  right: 22px;
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.wa-btn {
+  width: 54px; height: 54px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  animation: waPulse 2.5s ease-in-out infinite;
+  text-decoration: none;
+}
+@keyframes waPulse {
+  0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.45),0 0 0 0 rgba(37,211,102,0.3);}
+  50%{box-shadow:0 6px 24px rgba(37,211,102,0.45),0 0 0 10px rgba(37,211,102,0);}
+}
+.wa-btn:hover { transform: scale(1.15) rotate(10deg); box-shadow: 0 10px 32px rgba(37,211,102,0.6); }
+.wa-tooltip {
+  background: var(--card);
+  border: 1px solid rgba(37,211,102,0.3);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  animation: fadeInRight 0.3s ease;
+  pointer-events: none;
+}
+@keyframes fadeInRight { from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);} }
+
+/* ===== LEGAL PAGES ===== */
+.legal-page { padding: 40px 36px; max-width: 800px; }
+.legal-page h1 { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; margin-bottom:8px; }
+.legal-page h2 { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin:24px 0 10px; color:var(--orange); }
+.legal-page p { color:var(--muted); line-height:1.8; margin-bottom:12px; font-size:14px; }
+.legal-page ul { color:var(--muted); line-height:1.8; padding-left:20px; margin-bottom:12px; font-size:14px; }
+.legal-page .legal-date { font-size:12px; color:var(--muted); margin-bottom:28px; }
+
+/* ===== PROGRESS BAR DURING SEARCH ===== */
+.search-progress-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 12px;
+  display: none;
+}
+.search-progress-bar.on { display: block; }
+.search-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--purple), var(--orange));
+  background-size: 200% 100%;
+  border-radius: 99px;
+  animation: progressSlide 1.5s linear infinite;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+@keyframes progressSlide { 0%{background-position:100% 0;}100%{background-position:-100% 0;} }
+
+/* ===== ADMIN SOCIAL LINKS ===== */
+.social-link-input { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.social-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+
+/* ===== SAMPLE CSV BUTTON ===== */
+.sample-csv-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(29,184,126,0.08);
+  border: 1px solid rgba(29,184,126,0.25);
+  color: var(--success);
+  border-radius: 10px; padding: 10px 18px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.3s ease; text-decoration: none;
+}
+.sample-csv-btn:hover {
+  background: rgba(29,184,126,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(29,184,126,0.15);
+}
+
+/* ===== TESTIMONIAL SECTION ===== */
+.testimonials { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
+.testimonial-card {
+  background: var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:20px;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.testimonial-card:hover { transform:translateY(-5px); border-color:rgba(240,125,42,0.3); box-shadow:0 16px 40px rgba(0,0,0,0.2); }
+.test-stars { color:#f0a52a; font-size:13px; margin-bottom:8px; letter-spacing:2px; }
+.test-text { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:14px; font-style:italic; }
+.test-author { display:flex; align-items:center; gap:10px; }
+.test-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:#fff; flex-shrink:0; }
+.test-name { font-size:13px; font-weight:600; }
+.test-city { font-size:11px; color:var(--muted); }
+@media(max-width:768px){
+  .testimonials { grid-template-columns:1fr !important; }
+}
 </style>
 </head>
 <body>
@@ -1038,6 +1296,10 @@ button:focus-visible, a:focus-visible {
       <div class="nav-item" id="nav-plans" onclick="goTo('plans')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Plans</div>
       <div class="nav-label">Account</div>
       <div class="nav-item" id="nav-settings" onclick="goTo('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
+      <div class="nav-item" id="nav-privacy" onclick="goTo('privacy')" style="font-size:11px;padding:6px 12px;display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Privacy Policy
+      </div>
       <div class="nav-item" id="nav-admin" onclick="goTo('admin')" style="display:none;color:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Admin Panel</div>
     </nav>
     <div class="s-foot">
@@ -1202,6 +1464,67 @@ button:focus-visible, a:focus-visible {
         </button>
       </div>
 
+      <!-- TESTIMONIALS -->
+      <div class="section-divider reveal"></div>
+      <div style="margin-bottom:32px;" class="reveal">
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">⭐ Users Kya Kehte Hain?</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Real feedback, real results</div>
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <div class="test-text">"Pehli hi search mein 8 hot leads mile UAE mein. Ek buyer ne reply bhi kiya! Jaiffy ne kaam asaan kar diya."</div>
+            <div class="test-author">
+              <div class="test-avatar" style="background:linear-gradient(135deg,var(--orange),var(--orange2));">A</div>
+              <div><div class="test-name">Ahmad Raza</div><div class="test-city">Surgical Exporter, Sialkot</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <div class="test-text">"Germany mein leather goods ke buyers dhundhne ke liye perfect tool. AI email bhi bohat professional thi!"</div>
+            <div class="test-author">
+              <div class="test-avatar" style="background:linear-gradient(135deg,var(--blue),var(--cyan));">S</div>
+              <div><div class="test-name">Sara Khan</div><div class="test-city">Leather Goods, Kasur</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★☆</div>
+            <div class="test-text">"Sports goods ke liye UK aur Australia mein importers mile. 20 referrals ke baad Pro bhi free mila!"</div>
+            <div class="test-author">
+              <div class="test-avatar" style="background:linear-gradient(135deg,var(--purple),var(--blue));">M</div>
+              <div><div class="test-name">Muhammad Ali</div><div class="test-city">Sports Goods, Sialkot</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample CSV Download -->
+        <div style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;">📊 Data Format Dekhna Chahte Ho?</div>
+            <div style="font-size:12px;color:var(--muted);">Free sample CSV download karein — Name, Phone, Email, Address, Score columns</div>
+          </div>
+          <button class="sample-csv-btn" onclick="downloadSampleCSV()">⬇ Sample CSV Download</button>
+        </div>
+      </div>
+
+      <!-- YOUR RECENT SEARCHES -->
+      <div class="section-divider reveal"></div>
+      <div style="margin-bottom:32px;" class="reveal">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px;">🕒 Aapki Recent Searches</div>
+            <div style="font-size:13px;color:var(--muted);">Dobara search karo — cache se instant results!</div>
+          </div>
+        </div>
+        <div id="recentSearches" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+          <div style="text-align:center;padding:24px;color:var(--muted);grid-column:1/-1;font-size:13px;">Abhi tak koi search nahi — Lead Search se shuru karein!</div>
+        </div>
+      </div>
+
+      <!-- CAMPAIGNS HEADER -->
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px;" class="reveal">
+        📂 Aapke Campaigns
+      </div>
+
       <div class="camp-grid" id="campGrid"><div class="empty" style="grid-column:1/-1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe click karein — product daalo</p></div></div>
     </div>
 
@@ -1361,6 +1684,86 @@ button:focus-visible, a:focus-visible {
   </div>
 </div>
 <div class="toast" id="toast"></div>
+<!-- WhatsApp Floating Button -->
+<div id="waFloat" style="display:none;">
+  <div class="wa-tooltip" id="waTooltip">💬 WhatsApp pe chat karein!</div>
+  <a class="wa-btn" href="https://wa.me/923025074727?text=Jaiffy%20AI%20Lead%20Hunter%20ke%20baare%20mein%20puchna%20tha" target="_blank" title="WhatsApp Support">💬</a>
+</div>
+
+
+
+
+    <!-- PRIVACY POLICY -->
+    <div class="inner" id="inner-privacy">
+      <div style="padding:32px 36px;max-width:800px;">
+        <div class="page-hdr"><div><div class="page-title">🔒 Privacy Policy</div><div class="page-sub">Last updated: May 2026</div></div></div>
+        <div class="settings-sec">
+          <div class="settings-title">Data Collection</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">Jaiffy collects only the information you provide during registration (name, email, company) and your search queries. We do not sell your personal data to any third party.</p>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Business Data</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">We use Google Maps API to find publicly available business information. All data shown is publicly accessible. We do not scrape private data.</p>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Contact</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">WhatsApp: <strong style="color:var(--orange);">+923025074727</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMS OF SERVICE -->
+    <div class="inner" id="inner-terms">
+      <div style="padding:32px 36px;max-width:800px;">
+        <div class="page-hdr"><div><div class="page-title">📋 Terms of Service</div><div class="page-sub">Last updated: May 2026</div></div></div>
+        <div class="settings-sec">
+          <div class="settings-title">Service Description</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">Jaiffy provides AI-powered B2B lead generation for Pakistani exporters. We aggregate publicly available business data from Google Maps and public sources.</p>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Payment & Refund</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">Payments via JazzCash/SadaPay are processed manually. If data quality is genuinely poor, credits may be adjusted. Contact within 48 hours of payment.</p>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Prohibited Use</div>
+          <ul style="color:var(--muted);line-height:2;font-size:14px;padding-left:20px;">
+            <li>Spamming or bulk unsolicited emails</li>
+            <li>Reselling our data without permission</li>
+            <li>Sharing accounts</li>
+          </ul>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Contact</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">WhatsApp: <strong style="color:var(--orange);">+923025074727</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT US -->
+    <div class="inner" id="inner-about">
+      <div style="padding:32px 36px;max-width:800px;">
+        <div class="page-hdr"><div><div class="page-title">🎯 About Jaiffy</div><div class="page-sub">Pakistan ka #1 AI B2B Lead Hunter</div></div></div>
+        <div class="settings-sec" style="background:linear-gradient(135deg,rgba(240,125,42,0.06),var(--card));">
+          <div style="font-size:40px;margin-bottom:12px;">🪝</div>
+          <div class="settings-title">Hamara Mission</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">Pakistani SMEs ko global buyers tak pahunchana — bina kisi agency ke, bina visa ke. Sirf AI aur data ki taaqat se. Sialkot, Faisalabad, Kasur, Chiniot ke exporters ke liye real buyers real data.</p>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Technology Stack</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:var(--muted);">
+            <div>🗺️ Google Maps API — Real data</div>
+            <div>🤖 Gemini AI — Smart scoring</div>
+            <div>🐘 PostgreSQL — Secure storage</div>
+            <div>☁️ Railway — Cloud hosting</div>
+          </div>
+        </div>
+        <div class="settings-sec">
+          <div class="settings-title">Contact & Support</div>
+          <p style="color:var(--muted);line-height:1.8;font-size:14px;">WhatsApp: <strong style="color:var(--orange);">+923025074727</strong><br>Website: <strong style="color:var(--orange);">jaiffyleads.com</strong></p>
+          <button class="btn-act" onclick="goTo('search')" style="margin-top:14px;">🎯 Abhi Try Karein — FREE</button>
+        </div>
+      </div>
+    </div>
 
 <!-- AI Guide Bubble -->
 <div class="ai-guide" id="aiGuide" style="display:none;">
@@ -1461,7 +1864,7 @@ function doLogout(){
   localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
   U=null;token='';adminToken='';showPage('login');
 }
-function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);goTo('dashboard');checkServer();}
+function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();}
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
   if(!U)return;
@@ -1737,6 +2140,7 @@ function renderAdmin(d){
       <div id="apiKeysList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Keys load ho rahi hain...</div></div>
     </div>
 
+    <!-- SOCIAL MEDIA + TUTORIALS in admin settings -->
     <!-- APP SETTINGS -->
     <div class="admin-sec" id="adminSettingsSection">
       <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">
@@ -2113,6 +2517,132 @@ const _origGoToAnim = window.goTo;
 window.goTo = function(p) {
   if (_origGoToAnim) _origGoToAnim(p);
   setTimeout(() => { initRipples(); initTilts(); }, 400);
+};
+
+
+// ===== LEGAL PAGE NAVIGATION =====
+// Extend goTo to support legal pages
+const _legalPages = ['privacy', 'terms', 'about'];
+const _origGoToLegal = window.goTo;
+window.goTo = function(p) {
+  if (_legalPages.includes(p)) {
+    document.querySelectorAll('.inner').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+    const el = document.getElementById('inner-' + p);
+    if (el) {
+      el.classList.add('active');
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.3s ease';
+        el.style.opacity = '1';
+      }, 20);
+    }
+    closeSidebar();
+    return;
+  }
+  if (_origGoToLegal) _origGoToLegal(p);
+};
+
+// ===== SAMPLE CSV DOWNLOAD =====
+function downloadSampleCSV() {
+  const rows = [
+    ['Business Name','Email','Phone','Website','Address','Category','Rating','Score','Priority'],
+    ['Al-Shifa Medical Supplies','info@alshifa.ae','+971-4-234-5678','www.alshifa.ae','Dubai Healthcare City, UAE','Medical Supplies','4.7','92','High'],
+    ['Gulf Surgical Trading','contact@gulfsurgical.com','+971-2-678-9012','www.gulfsurgical.com','Abu Dhabi, UAE','Surgical Instruments','4.5','87','High'],
+    ['MedEquip International','sales@medequip.co.uk','+44-20-1234-5678','www.medequip.co.uk','London, UK','Medical Equipment','4.3','74','Medium'],
+    ['SportZone Wholesale','info@sportzone.de','+49-89-123-4567','www.sportzone.de','Munich, Germany','Sports Equipment','4.8','95','High'],
+    ['Leather Palace Dubai','lp@leatherpalace.ae','+971-4-567-8901','','Dubai, UAE','Leather Goods','4.1','65','Medium'],
+  ];
+  const csv = rows.map(r => r.map(c => '"'+c+'"').join(',')).join('
+');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'jaiffy_sample_leads.csv';
+  a.click(); URL.revokeObjectURL(url);
+  showToast('📊 Sample CSV download ho raha hai!');
+}
+
+// ===== RECENT SEARCHES (localStorage) =====
+function saveSearch(query, country) {
+  const searches = JSON.parse(localStorage.getItem('j_searches') || '[]');
+  const item = {query, country, time: Date.now()};
+  const filtered = searches.filter(s => s.query !== query || s.country !== country);
+  filtered.unshift(item);
+  localStorage.setItem('j_searches', JSON.stringify(filtered.slice(0, 8)));
+}
+
+function loadRecentSearches() {
+  const el = document.getElementById('recentSearches');
+  if (!el) return;
+  const searches = JSON.parse(localStorage.getItem('j_searches') || '[]');
+  if (!searches.length) return;
+  const countryFlags = {AE:'🇦🇪',SA:'🇸🇦',GB:'🇬🇧',US:'🇺🇸',DE:'🇩🇪',TR:'🇹🇷',CN:'🇨🇳',CA:'🇨🇦',AU:'🇦🇺',PK:'🇵🇰'};
+  el.innerHTML = searches.slice(0,6).map(s => `
+    <div onclick="quickSearch('${s.query}','${s.country}')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.25s;">
+      <span style="font-size:18px;">${countryFlags[s.country]||'🌍'}</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.query}</div>
+        <div style="font-size:11px;color:var(--muted);">${s.country} · ${new Date(s.time).toLocaleDateString('en-PK')}</div>
+      </div>
+      <span style="color:var(--orange);font-size:12px;font-weight:600;flex-shrink:0;">Search Again →</span>
+    </div>`).join('');
+}
+
+function quickSearch(query, country) {
+  goTo('search');
+  setTimeout(() => {
+    const p = document.getElementById('searchProduct');
+    const c = document.getElementById('searchCountry');
+    if (p) p.value = query;
+    if (c) c.value = country;
+    showToast('🎯 Cache se instant results aa rahe hain!');
+    doSearch();
+  }, 400);
+}
+
+// ===== PATCH doSearch to save searches =====
+const _origDoSearch = doSearch;
+window.doSearch = async function(page=1) {
+  const product = document.getElementById('searchProduct')?.value?.trim();
+  const country = document.getElementById('searchCountry')?.value;
+  if (product && country && page === 1) saveSearch(product, country);
+  return _origDoSearch(page);
+};
+
+// ===== WA TOOLTIP TOGGLE =====
+(function() {
+  let waTooltipVisible = true;
+  setTimeout(() => {
+    const tt = document.getElementById('waTooltip');
+    if (tt) {
+      setInterval(() => {
+        waTooltipVisible = !waTooltipVisible;
+        tt.style.opacity = waTooltipVisible ? '1' : '0';
+        tt.style.transition = 'opacity 0.5s ease';
+      }, 4000);
+    }
+  }, 3000);
+})();
+
+// ===== SEO META UPDATE =====
+function updatePageMeta(title, desc) {
+  document.title = title + ' — Jaiffy AI Lead Hunter';
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement('meta');
+    metaDesc.name = 'description';
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.content = desc;
+}
+
+// ===== PATCH loadDashboard for recent searches =====
+const _origLoadDashboard = loadDashboard;
+window.loadDashboard = async function() {
+  await _origLoadDashboard();
+  loadRecentSearches();
+  updatePageMeta('Dashboard', 'AI-powered B2B leads for Pakistani exporters');
 };
 
 // ===== INIT ALL =====
