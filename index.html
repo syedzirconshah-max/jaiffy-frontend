@@ -639,6 +639,312 @@ tr{transition:background 0.2s;}
   opacity:0;transition:opacity 0.3s;z-index:-1;
 }
 .sp-high:hover::before{opacity:0.3;}
+
+/* ============================================
+   MEGA INTERACTION & LONG PAGE CSS
+   ============================================ */
+
+/* ===== GLOBAL CURSOR EFFECTS ===== */
+* { cursor: default; }
+a, button, .nav-item, .camp-card, .plan-card,
+.stat-card, .col-tag, .prod-badge, .ref-row,
+.btn-email, .btn-copy, .btn-up, .share-btn { cursor: pointer !important; }
+
+/* ===== MAGNETIC BUTTON GLOW ===== */
+.btn-act, .btn-primary, .btn-search, .btn-save, .btn-act {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.btn-act:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 12px 35px rgba(240,125,42,0.5), 0 0 0 1px rgba(240,125,42,0.3) !important;
+}
+.btn-act:active { transform: translateY(0) scale(0.97) !important; }
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 10px 30px rgba(240,125,42,0.45) !important;
+}
+.btn-search:hover {
+  transform: translateY(-3px) scale(1.04) !important;
+  box-shadow: 0 14px 40px rgba(240,125,42,0.55) !important;
+}
+.btn-search:active { transform: scale(0.97) !important; }
+
+/* ===== INPUT FOCUS GLOW ===== */
+.fi:focus, .fi2:focus {
+  border-color: var(--orange) !important;
+  box-shadow: 0 0 0 3px rgba(240,125,42,0.15), 0 0 20px rgba(240,125,42,0.08) !important;
+  transform: translateY(-1px);
+  transition: all 0.3s ease !important;
+}
+.fi, .fi2 { transition: all 0.25s ease !important; }
+.fi:hover, .fi2:hover {
+  border-color: rgba(240,125,42,0.3) !important;
+  background: rgba(11,21,32,0.9) !important;
+}
+
+/* ===== NAV ITEM HOVER ===== */
+.nav-item {
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;
+  border-left: 3px solid transparent;
+}
+.nav-item:hover {
+  background: linear-gradient(90deg, rgba(240,125,42,0.12), rgba(240,125,42,0.03)) !important;
+  color: var(--text) !important;
+  transform: translateX(6px) !important;
+  border-left-color: rgba(240,125,42,0.4) !important;
+}
+.nav-item.active { transform: translateX(0) !important; }
+
+/* ===== STAT CARD MEGA HOVER ===== */
+.stat-card {
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1) !important;
+  border: 1px solid var(--border) !important;
+}
+.stat-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: var(--orange) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(240,125,42,0.12) !important;
+  background: linear-gradient(135deg, rgba(240,125,42,0.06), var(--card)) !important;
+}
+.stat-val { transition: color 0.3s ease; }
+.stat-card:hover .stat-val { color: var(--orange) !important; -webkit-text-fill-color: var(--orange) !important; }
+
+/* ===== CAMP CARD MEGA ===== */
+.camp-card {
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.camp-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: var(--orange) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(240,125,42,0.2) !important;
+}
+.camp-card:hover .camp-name { color: var(--orange); }
+
+/* ===== TABLE ROW HOVER ===== */
+tbody tr { transition: all 0.2s ease !important; position: relative; }
+tbody tr:hover { 
+  background: rgba(240,125,42,0.04) !important;
+  transform: translateX(3px);
+}
+tbody tr:hover td:first-child { color: var(--orange); }
+
+/* ===== PLAN CARD MEGA ===== */
+.plan-card {
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.plan-card.pro-card:hover {
+  transform: translateY(-10px) scale(1.02) !important;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 50px rgba(240,125,42,0.15) !important;
+}
+.plan-card.agency-card:hover {
+  transform: translateY(-10px) scale(1.02) !important;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 50px rgba(42,110,240,0.15) !important;
+}
+.plan-card.free-card:hover { transform: translateY(-6px) !important; }
+
+/* ===== PROD BADGE HOVER ===== */
+.prod-badge {
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.prod-badge:hover {
+  transform: translateY(-4px) scale(1.08) !important;
+  border-color: var(--orange) !important;
+  color: var(--orange) !important;
+  box-shadow: 0 8px 20px rgba(240,125,42,0.2) !important;
+}
+
+/* ===== SCORE PILL HOVER ===== */
+.score-pill {
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.score-pill:hover {
+  transform: scale(1.3) rotate(5deg) !important;
+  box-shadow: 0 6px 20px rgba(240,125,42,0.3) !important;
+}
+
+/* ===== BTN EMAIL HOVER ===== */
+.btn-email {
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.btn-email:hover {
+  transform: translateY(-2px) scale(1.08) !important;
+  background: rgba(42,110,240,0.25) !important;
+  box-shadow: 0 6px 16px rgba(42,110,240,0.25) !important;
+}
+
+/* ===== COL TAG HOVER ===== */
+.col-tag { transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.col-tag:hover { transform: scale(1.08) !important; }
+.col-tag.on { transform: scale(1.05); }
+
+/* ===== SIDEBAR LOGO HOVER ===== */
+.s-logo-icon-img {
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.s-logo:hover .s-logo-icon-img {
+  transform: rotate(360deg) scale(1.15) !important;
+  filter: drop-shadow(0 0 12px rgba(240,125,42,0.6)) !important;
+}
+
+/* ===== REFERRAL ROW HOVER ===== */
+.ref-row { transition: all 0.25s ease !important; }
+.ref-row:hover {
+  transform: translateX(6px) !important;
+  background: var(--bg2) !important;
+  border-color: rgba(240,125,42,0.2) !important;
+}
+
+/* ===== SHARE BUTTON HOVER ===== */
+.share-btn { transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.share-btn:hover { transform: translateY(-3px) scale(1.05) !important; box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important; }
+.share-wa:hover { box-shadow: 0 8px 20px rgba(37,211,102,0.3) !important; }
+.share-fb:hover { box-shadow: 0 8px 20px rgba(24,119,242,0.3) !important; }
+.share-li:hover { box-shadow: 0 8px 20px rgba(10,102,194,0.3) !important; }
+
+/* ===== ADMIN CARD HOVER ===== */
+.admin-card { transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.admin-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(240,125,42,0.3) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2) !important;
+}
+
+/* ===== USAGE BAR HOVER ===== */
+.usage-wrap { transition: all 0.3s ease !important; }
+.usage-wrap:hover { border-color: rgba(240,125,42,0.35) !important; box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; }
+.usage-fill { transition: width 1s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease !important; }
+.usage-fill:hover { box-shadow: 0 0 12px rgba(240,125,42,0.5) !important; }
+
+/* ===== STEP ITEM HOVER ===== */
+.step-item { transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.step-item:hover { transform: translateY(-5px) scale(1.03) !important; border-color: rgba(240,125,42,0.3) !important; }
+
+/* ===== RIPPLE EFFECT ===== */
+.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: rippleAnim 0.6s linear; background: rgba(255,255,255,0.15); pointer-events: none; }
+@keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+/* ===== GLOW ON HOVER - LINKS ===== */
+.usage-meta a { transition: all 0.2s ease !important; }
+.usage-meta a:hover { text-shadow: 0 0 8px rgba(240,125,42,0.6) !important; }
+
+/* ===== LONG PAGE - ONE PAGE FEEL ===== */
+/* Remove sidebar scroll limit */
+.main { overflow-x: hidden; }
+
+/* Dashboard sections are now tall */
+#inner-dashboard { min-height: 100vh; }
+
+/* Stats section tall */
+.stats-grid { margin-bottom: 32px !important; }
+.stat-card { padding: 24px 20px !important; }
+.stat-val { font-size: 40px !important; }
+
+/* Each section gets more breathing room */
+.onboard-card { padding: 28px !important; margin-bottom: 28px !important; }
+.step-item { padding: 22px 16px !important; }
+.step-num { width: 36px !important; height: 36px !important; font-size: 14px !important; }
+.step-title { font-size: 13px !important; }
+
+.usage-wrap { padding: 24px 28px !important; margin-bottom: 28px !important; }
+.usage-track { height: 14px !important; }
+
+/* Camp grid taller */
+.camp-card { padding: 24px 26px !important; }
+.camp-stat span { font-size: 22px !important; }
+
+/* Search page long */
+.search-hero { padding: 36px 32px !important; margin-bottom: 24px !important; }
+.search-card { padding: 28px !important; }
+.fi2 { padding: 14px 16px !important; font-size: 15px !important; }
+
+/* Plans tall */
+.plan-card-inner { padding: 36px 32px !important; }
+.plan-leads-big { font-size: 60px !important; }
+.plan-price-big { font-size: 40px !important; }
+.plan-btn-new { padding: 16px !important; font-size: 15px !important; }
+.plan-features-new li { padding: 10px 0 !important; font-size: 14px !important; }
+
+/* Referral page long */
+.ref-hero { padding: 36px 32px !important; }
+.pro-progress { padding: 28px !important; }
+.progress-track { height: 18px !important; }
+.pm-num { font-size: 24px !important; }
+
+/* Section spacing */
+.settings-sec { padding: 28px !important; margin-bottom: 20px !important; }
+
+/* ===== SCROLLBAR THIN ORANGE ===== */
+::-webkit-scrollbar { width: 3px !important; }
+::-webkit-scrollbar-track { background: var(--bg2) !important; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--orange), var(--purple)) !important; }
+
+/* ===== FOCUS RING ===== */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--orange) !important;
+  outline-offset: 3px !important;
+  border-radius: 6px !important;
+}
+
+/* ===== TOAST UPGRADE ===== */
+.toast {
+  border-radius: 14px !important;
+  padding: 14px 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* ===== MODAL HOVER ===== */
+.modal { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.modal:hover { transform: translateY(-2px) !important; }
+.modal-close { transition: all 0.2s ease !important; }
+.modal-close:hover { 
+  color: var(--danger) !important; 
+  transform: rotate(90deg) scale(1.2) !important;
+  background: rgba(240,74,74,0.1) !important;
+  border-radius: 50% !important;
+}
+
+/* ===== RESULTS WRAP HOVER ===== */
+.results-wrap { transition: all 0.3s ease !important; }
+.results-wrap:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(240,125,42,0.08) !important; }
+
+/* ===== PAYMENT NOTE HOVER ===== */
+.payment-note { transition: all 0.3s ease !important; }
+.payment-note:hover { border-color: rgba(29,184,126,0.4) !important; box-shadow: 0 8px 24px rgba(29,184,126,0.08) !important; }
+
+/* ===== ADMIN TABLE HOVER ===== */
+.admin-users-tbl tbody tr { transition: all 0.2s ease !important; }
+.admin-users-tbl tbody tr:hover { background: rgba(240,125,42,0.04) !important; transform: translateX(3px); }
+
+/* ===== BTN UP HOVER ===== */
+.btn-up { transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.btn-up:hover { background: var(--orange) !important; color: #fff !important; transform: scale(1.1) !important; box-shadow: 0 4px 12px rgba(240,125,42,0.3) !important; }
+
+/* ===== SEARCH GUIDE BANNER ===== */
+.smart-banner { transition: all 0.3s ease !important; }
+.smart-banner:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; }
+.sb-btn { transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.sb-btn:hover { transform: scale(1.05) !important; box-shadow: 0 6px 16px rgba(240,125,42,0.3) !important; }
+
+/* ===== PRODUCT QUICK ROWS ===== */
+.step-glow-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  border-color: rgba(240,125,42,0.4) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 20px rgba(240,125,42,0.08) !important;
+}
+[onclick]:hover {
+  border-color: rgba(240,125,42,0.4) !important;
+  background: linear-gradient(135deg, rgba(240,125,42,0.06), var(--card)) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2) !important;
+  transform: translateY(-3px) translateX(4px) !important;
+}
+[onclick]:hover span:last-child {
+  transform: translateX(6px);
+  transition: transform 0.3s ease;
+}
 </style>
 </head>
 <body>
@@ -822,6 +1128,80 @@ tr{transition:background 0.2s;}
         <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
         <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span><span id="uTrialBadge"></span></div>
       </div>
+      <!-- How It Works - Long Page Section -->
+      <div class="section-divider reveal"></div>
+      <div style="margin-bottom:32px;" class="reveal">
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">🎯 Kaise Kaam Karta Hai?</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">3 steps mein duniya bhar ke buyers pakro</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:40px;margin-bottom:12px;">🔍</div>
+            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">1. Product Likho</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">Surgical instruments, leather goods, sports gear — kuch bhi. AI samajh jaata hai.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:40px;margin-bottom:12px;">🌍</div>
+            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">2. Country Chuno</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">UAE, UK, Germany, USA — 10 countries. Jahan buyers hain, wahan search karo.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:40px;margin-bottom:12px;">📧</div>
+            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">3. Email Bhejo</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">AI professional email likhta hai. Ek click mein buyer ke inbox mein!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pakistan Products Section -->
+      <div class="section-divider reveal"></div>
+      <div style="margin-bottom:32px;" class="reveal">
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">🇵🇰 Pakistani Products — Global Buyers</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Inhe search karo — real buyers milte hain</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+          <div onclick="document.getElementById('searchProduct').value='Surgical instruments';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">💊</span>
+            <div><div style="font-weight:700;font-size:14px;">Surgical Instruments</div><div style="font-size:11px;color:var(--muted);">Sialkot → UAE, UK, Germany</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+          <div onclick="document.getElementById('searchProduct').value='Leather goods';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">🧤</span>
+            <div><div style="font-weight:700;font-size:14px;">Leather Goods</div><div style="font-size:11px;color:var(--muted);">Kasur/Lahore → Europe, USA</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+          <div onclick="document.getElementById('searchProduct').value='Sports goods';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">⚽</span>
+            <div><div style="font-weight:700;font-size:14px;">Sports Goods</div><div style="font-size:11px;color:var(--muted);">Sialkot → Global Markets</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+          <div onclick="document.getElementById('searchProduct').value='Textile fabric';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">🧵</span>
+            <div><div style="font-weight:700;font-size:14px;">Textile & Fabric</div><div style="font-size:11px;color:var(--muted);">Faisalabad → Asia, Middle East</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+          <div onclick="document.getElementById('searchProduct').value='Furniture';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">🛋️</span>
+            <div><div style="font-weight:700;font-size:14px;">Furniture</div><div style="font-size:11px;color:var(--muted);">Chiniot → Gulf Countries</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+          <div onclick="document.getElementById('searchProduct').value='Rice basmati';goTo('search')" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s;">
+            <span style="font-size:32px;">🌾</span>
+            <div><div style="font-weight:700;font-size:14px;">Rice & Agriculture</div><div style="font-size:11px;color:var(--muted);">Punjab → Middle East, Asia</div></div>
+            <span style="margin-left:auto;color:var(--orange);font-size:18px;">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="section-divider reveal"></div>
+      <div style="background:linear-gradient(135deg,rgba(240,125,42,0.08),rgba(168,85,247,0.05));border:1px solid rgba(240,125,42,0.2);border-radius:20px;padding:36px;text-align:center;margin-bottom:32px;" class="reveal">
+        <div style="font-size:40px;margin-bottom:12px;">🪝</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;">Abhi Shuru Karo — FREE hai!</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto;">7 din mein 30 leads/day. Koi credit card nahi. Sirf product likho aur buyers pakro!</div>
+        <button class="btn-act" onclick="goTo('search')" style="font-size:16px;padding:14px 32px;margin:0 auto;">
+          🎯 Pehli Search Karein — FREE
+        </button>
+      </div>
+
       <div class="camp-grid" id="campGrid"><div class="empty" style="grid-column:1/-1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe click karein — product daalo</p></div></div>
     </div>
 
@@ -1606,6 +1986,135 @@ function updateLiveActivity(){
 }
 setInterval(updateLiveActivity,4000);
 setTimeout(updateLiveActivity,1000);
+
+// ===== RIPPLE EFFECT ON ALL BUTTONS =====
+function addRipple(e) {
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 2;
+  const x = e.clientX - rect.left - size/2;
+  const y = e.clientY - rect.top - size/2;
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+  // Remove old ripples
+  const old = btn.querySelector('.ripple');
+  if (old) old.remove();
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 700);
+}
+
+function initRipples() {
+  document.querySelectorAll('.btn-act, .btn-primary, .btn-search, .btn-save, .plan-btn-new').forEach(btn => {
+    btn.style.overflow = 'hidden';
+    btn.style.position = 'relative';
+    btn.removeEventListener('click', addRipple);
+    btn.addEventListener('click', addRipple);
+  });
+}
+
+// Re-init ripples when DOM changes
+const _rippleObserver = new MutationObserver(() => initRipples());
+document.addEventListener('DOMContentLoaded', () => {
+  initRipples();
+  _rippleObserver.observe(document.body, { childList: true, subtree: true });
+});
+
+// ===== TILT EFFECT ON CARDS =====
+function addTilt(el, intensity = 8) {
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(600px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) translateY(-6px)`;
+    el.style.transition = 'transform 0.1s ease';
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = '';
+    el.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+  });
+}
+
+function initTilts() {
+  document.querySelectorAll('.stat-card').forEach(el => addTilt(el, 6));
+  document.querySelectorAll('.plan-card').forEach(el => addTilt(el, 4));
+  document.querySelectorAll('.camp-card').forEach(el => addTilt(el, 5));
+}
+
+// ===== TYPEWRITER for Hero =====
+function typeWriter(el, text, speed = 60, callback) {
+  if (!el) return;
+  let i = 0;
+  el.textContent = '';
+  const timer = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) {
+      clearInterval(timer);
+      if (callback) callback();
+    }
+  }, speed);
+}
+
+// ===== COUNTER ANIMATION ===== 
+function animCount(el, target, duration = 1500) {
+  if (!el) return;
+  const start = 0;
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(start + (target - start) * ease);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ===== CURSOR GLOW =====
+function initCursorGlow() {
+  const glow = document.createElement('div');
+  glow.id = 'cursorGlow';
+  glow.style.cssText = `
+    position:fixed;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(240,125,42,0.04) 0%,transparent 70%);
+    pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+    transition:left 0.15s ease,top 0.15s ease;will-change:left,top;
+  `;
+  document.body.appendChild(glow);
+  document.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+}
+
+// ===== HOVER SOUND (visual feedback only - flash) =====
+function addClickFlash(btn) {
+  btn.addEventListener('click', function() {
+    this.style.filter = 'brightness(1.3)';
+    setTimeout(() => { this.style.filter = ''; }, 150);
+  });
+}
+
+// ===== INIT ALL INTERACTIONS =====
+function initAllInteractions() {
+  initRipples();
+  initTilts();
+  initCursorGlow();
+  // Click flash on all buttons
+  document.querySelectorAll('button').forEach(btn => addClickFlash(btn));
+}
+
+document.addEventListener('DOMContentLoaded', initAllInteractions);
+setTimeout(initAllInteractions, 500);
+
+// Re-run on page changes
+const _origGoToAnim = window.goTo;
+window.goTo = function(p) {
+  if (_origGoToAnim) _origGoToAnim(p);
+  setTimeout(() => { initRipples(); initTilts(); }, 400);
+};
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded',()=>{
   initParticles();
