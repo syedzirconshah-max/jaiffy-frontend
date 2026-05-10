@@ -6,55 +6,32 @@
 <title>Jaiffy — AI Lead Hunter</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#060d16;--bg2:#0b1520;--bg3:#10192b;--card:#0c1825;
-  --orange:#f07d2a;--orange2:#e06520;--orange3:#ff9a50;
-  --blue:#2a6ef0;--purple:#a855f7;--cyan:#00d4ff;
-  --text:#edf2fa;--muted:#5a6a82;--border:#172333;
-  --success:#1db87e;--warning:#f0a52a;--danger:#f04a4a;
-  --sw:240px;
-}
+:root{--bg:#060d16;--bg2:#0b1520;--bg3:#10192b;--card:#0c1825;--orange:#f07d2a;--orange2:#e06520;--orange3:#ff9a50;--blue:#2a6ef0;--purple:#a855f7;--cyan:#00d4ff;--text:#edf2fa;--muted:#5a6a82;--border:#172333;--success:#1db87e;--warning:#f0a52a;--danger:#f04a4a;--sw:240px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-/* Global glow on bg */
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;background:radial-gradient(ellipse at 60% 0%,rgba(240,125,42,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
-::-webkit-scrollbar{width:4px;height:4px;}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
-
-/* PAGES */
-.page{display:none;min-height:100vh;}
-.page.active{display:flex;}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+.page{display:none;min-height:100vh;}.page.active{display:flex;}
 #pg-login,#pg-signup,#pg-adminlogin{align-items:center;justify-content:center;background:var(--bg);flex-direction:column;}
-
-/* AUTH */
 .auth-box{width:440px;max-width:95vw;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:42px;animation:fadeUp 0.4s ease;box-shadow:0 24px 60px rgba(0,0,0,0.4);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 .auth-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
 .auth-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;}
-.auth-logo-text{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
-.auth-logo-sub{font-size:11px;color:var(--muted);}
+.auth-logo-text{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}.auth-logo-sub{font-size:11px;color:var(--muted);}
 .auth-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:5px;}
 .auth-sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
 .fg{margin-bottom:13px;}
 .fl{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.7px;text-transform:uppercase;margin-bottom:5px;display:block;}
 .fi{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
-.fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}
-.fi::placeholder{color:var(--muted);}
-.fi option{background:var(--bg2);}
+.fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}.fi::placeholder{color:var(--muted);}.fi option{background:var(--bg2);}
 .btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:12px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(240,125,42,0.3);}
 .btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
-.auth-link{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);}
-.auth-link a{color:var(--orange);cursor:pointer;font-weight:500;}
+.auth-link{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);}.auth-link a{color:var(--orange);cursor:pointer;font-weight:500;}
 .err-box{background:rgba(240,74,74,0.08);border:1px solid rgba(240,74,74,0.25);color:#f47070;padding:10px 13px;border-radius:8px;font-size:12px;margin-bottom:12px;display:none;}
-
-/* Trial Banner on Auth */
 .trial-banner{background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(168,85,247,0.1));border:1px solid rgba(240,125,42,0.2);border-radius:12px;padding:14px 16px;margin-bottom:20px;text-align:center;}
 .trial-banner-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--orange);margin-bottom:4px;}
-.trial-banner-sub{font-size:12px;color:var(--muted);}
-.trial-banner-sub strong{color:var(--text);}
-
-/* APP LAYOUT */
+.trial-banner-sub{font-size:12px;color:var(--muted);}.trial-banner-sub strong{color:var(--text);}
 #pg-app{flex-direction:row;}
 .sidebar{width:var(--sw);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform 0.3s;}
 .s-logo{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
@@ -74,25 +51,17 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .user-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
 .user-name{font-size:12px;font-weight:500;}
 .user-plan-badge{font-size:9px;padding:1px 7px;border-radius:20px;font-weight:600;display:inline-block;margin-top:2px;}
-.badge-free{background:rgba(90,106,130,0.2);color:var(--muted);}
-.badge-trial{background:rgba(240,125,42,0.2);color:var(--orange);}
-.badge-pro{background:rgba(240,125,42,0.2);color:var(--orange);}
-.badge-agency{background:rgba(42,110,240,0.2);color:var(--blue);}
+.badge-free{background:rgba(90,106,130,0.2);color:var(--muted);}.badge-trial{background:rgba(240,125,42,0.2);color:var(--orange);}
+.badge-pro{background:rgba(240,125,42,0.2);color:var(--orange);}.badge-agency{background:rgba(42,110,240,0.2);color:var(--blue);}
 .logout-btn{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;border-radius:5px;transition:all 0.15s;}
 .logout-btn:hover{color:var(--danger);}
-
-/* MAIN */
 .main{margin-left:var(--sw);flex:1;min-height:100vh;}
-.inner{display:none;padding:32px 36px;}
-.inner.active{display:block;}
+.inner{display:none;padding:32px 36px;}.inner.active{display:block;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
 .page-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
 .page-sub{color:var(--muted);font-size:13px;margin-top:4px;}
 .btn-act{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.25s;box-shadow:0 4px 12px rgba(240,125,42,0.2);}
-.btn-act:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,125,42,0.35);}
-.btn-act:active{transform:translateY(0);}
-
-/* SMART BANNERS */
+.btn-act:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,125,42,0.35);}.btn-act:active{transform:translateY(0);}
 .smart-banner{border-radius:14px;padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;animation:slideInRight 0.4s ease;}
 @keyframes slideInRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
 .smart-banner::before{content:'';position:absolute;inset:0;opacity:0.06;background:linear-gradient(135deg,currentColor,transparent);}
@@ -100,16 +69,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .sb-upgrade{background:linear-gradient(135deg,rgba(42,110,240,0.12),rgba(0,212,255,0.06));border:1px solid rgba(42,110,240,0.25);}
 .sb-ref{background:linear-gradient(135deg,rgba(29,184,126,0.12),rgba(0,212,255,0.06));border:1px solid rgba(29,184,126,0.25);}
 .sb-limit{background:linear-gradient(135deg,rgba(240,74,74,0.12),rgba(240,125,42,0.06));border:1px solid rgba(240,74,74,0.25);}
-.sb-icon{font-size:28px;flex-shrink:0;}
-.sb-content{flex:1;}
+.sb-icon{font-size:28px;flex-shrink:0;}.sb-content{flex:1;}
 .sb-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
-.sb-text{font-size:12px;color:var(--muted);}
-.sb-text strong{color:var(--text);}
+.sb-text{font-size:12px;color:var(--muted);}.sb-text strong{color:var(--text);}
 .sb-btn{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
 .sb-btn:hover{background:var(--orange2);}
 .sb-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;}
-
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all 0.25s;cursor:default;position:relative;overflow:hidden;}
 .stat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(240,125,42,0.03),transparent);opacity:0;transition:opacity 0.25s;}
@@ -118,13 +83,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px;}
 .stat-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;}
 .stat-sub{font-size:12px;margin-top:4px;color:var(--success);}
-
-/* USAGE BAR */
 .usage-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-bottom:20px;transition:border-color 0.25s;}
 .usage-wrap:hover{border-color:rgba(240,125,42,0.2);}
 .usage-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.usage-title{font-size:12px;font-weight:600;}
-.usage-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.usage-title{font-size:12px;font-weight:600;}.usage-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
 .usage-track{height:10px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-bottom:8px;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);}
 .usage-fill{height:100%;border-radius:99px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);position:relative;}
 .usage-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shimmer 2s infinite;}
@@ -132,10 +94,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .usage-fill.ok{background:linear-gradient(90deg,var(--orange),var(--orange3));}
 .usage-fill.warn{background:linear-gradient(90deg,var(--warning),var(--orange));}
 .usage-fill.full{background:linear-gradient(90deg,var(--danger),var(--warning));}
-.usage-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}
-.usage-meta a{color:var(--orange);cursor:pointer;}
-
-/* ONBOARDING STEPS */
+.usage-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}.usage-meta a{color:var(--orange);cursor:pointer;}
 .onboard-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;}
 .onboard-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;position:relative;}
@@ -149,10 +108,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .step-item.active-step .step-num{background:rgba(240,125,42,0.2);color:var(--orange);box-shadow:0 0 12px rgba(240,125,42,0.2);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 12px rgba(240,125,42,0.2);}50%{box-shadow:0 0 20px rgba(240,125,42,0.4);}}
 .step-item:not(.done):not(.active-step) .step-num{background:var(--bg3);color:var(--muted);}
-.step-title{font-size:12px;font-weight:700;margin-bottom:4px;}
-.step-desc{font-size:11px;color:var(--muted);}
-
-/* CAMP GRID */
+.step-title{font-size:12px;font-weight:700;margin-bottom:4px;}.step-desc{font-size:11px;color:var(--muted);}
 .camp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .camp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
 .camp-card::after{content:'→';position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;transition:all 0.25s;opacity:0;}
@@ -160,34 +116,24 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .camp-card:hover::after{opacity:1;right:14px;}
 .camp-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;}
 .camp-stats{display:flex;gap:14px;margin-top:10px;}
-.camp-stat span{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;display:block;}
-.camp-stat{font-size:10px;color:var(--muted);}
-
-/* SEARCH */
+.camp-stat span{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;display:block;}.camp-stat{font-size:10px;color:var(--muted);}
 .search-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;}
 .search-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
 .fg2{display:flex;flex-direction:column;gap:5px;}
 .fl2{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.6px;text-transform:uppercase;}
 .fi2{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
-.fi2:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}
-.fi2::placeholder{color:var(--muted);}
-.fi2 option{background:var(--bg2);}
+.fi2:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}.fi2::placeholder{color:var(--muted);}.fi2 option{background:var(--bg2);}
 .btn-search{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);}
 .btn-search:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,125,42,0.4);}
-.btn-search:active{transform:translateY(0);}
-.btn-search:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+.btn-search:active{transform:translateY(0);}.btn-search:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .ai-hint{background:rgba(240,125,42,0.04);border:1px solid rgba(240,125,42,0.12);border-radius:9px;padding:10px 14px;margin-top:12px;display:none;}
 .ai-hint-title{font-size:10px;color:var(--orange);text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-bottom:6px;}
 .tag{background:rgba(240,125,42,0.08);color:var(--orange);font-size:11px;padding:3px 8px;border-radius:20px;border:1px solid rgba(240,125,42,0.15);display:inline-block;margin:2px;}
-
-/* COL CHOOSER */
 .col-chooser{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:14px;}
 .col-chooser-title{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.6px;}
 .col-tags{display:flex;flex-wrap:wrap;gap:5px;}
 .col-tag{background:var(--bg2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 9px;border-radius:20px;cursor:pointer;transition:all 0.15s;user-select:none;}
 .col-tag.on{background:rgba(240,125,42,0.1);border-color:rgba(240,125,42,0.3);color:var(--orange);}
-
-/* RESULTS */
 .results-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:box-shadow 0.25s;}
 .results-wrap:hover{box-shadow:0 4px 20px rgba(0,0,0,0.15);}
 .results-hdr{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
@@ -203,28 +149,17 @@ td{padding:12px 14px;font-size:13px;border-top:1px solid var(--border);vertical-
 tr:hover td{background:rgba(255,255,255,0.01);}
 .score-pill{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;transition:transform 0.2s;}
 .score-pill:hover{transform:scale(1.15);}
-.sp-high{background:rgba(240,125,42,0.15);color:var(--orange);}
-.sp-med{background:rgba(240,165,42,0.15);color:var(--warning);}
-.sp-low{background:rgba(90,106,130,0.15);color:var(--muted);}
+.sp-high{background:rgba(240,125,42,0.15);color:var(--orange);}.sp-med{background:rgba(240,165,42,0.15);color:var(--warning);}.sp-low{background:rgba(90,106,130,0.15);color:var(--muted);}
 .pri-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;text-transform:uppercase;}
-.pp-high{background:rgba(240,125,42,0.1);color:var(--orange);}
-.pp-med{background:rgba(240,165,42,0.1);color:var(--warning);}
-.pp-low{background:rgba(90,106,130,0.1);color:var(--muted);}
-.confirmed{color:var(--success);font-size:11px;}
-.not-found{color:var(--muted);font-size:11px;}
-.blur-info{color:var(--muted);font-size:11px;cursor:pointer;}
-.blur-info:hover{color:var(--orange);}
-.lock-icon{display:inline-block;margin-right:3px;}
-.website-link{color:var(--cyan);font-size:11px;text-decoration:none;}
-.website-link:hover{text-decoration:underline;}
+.pp-high{background:rgba(240,125,42,0.1);color:var(--orange);}.pp-med{background:rgba(240,165,42,0.1);color:var(--warning);}.pp-low{background:rgba(90,106,130,0.1);color:var(--muted);}
+.confirmed{color:var(--success);font-size:11px;}.not-found{color:var(--muted);font-size:11px;}
+.blur-info{color:var(--muted);font-size:11px;cursor:pointer;}.blur-info:hover{color:var(--orange);}
+.website-link{color:var(--cyan);font-size:11px;text-decoration:none;}.website-link:hover{text-decoration:underline;}
 .btn-email{background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.2);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .btn-email:hover{background:rgba(42,110,240,0.2);}
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;}
 .page-btn{background:var(--bg2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:6px 13px;font-size:12px;cursor:pointer;transition:all 0.15s;}
-.page-btn:hover{border-color:var(--orange);color:var(--orange);}
-.page-btn:disabled{opacity:0.4;cursor:not-allowed;}
-
-/* REFERRAL PAGE */
+.page-btn:hover{border-color:var(--orange);color:var(--orange);}.page-btn:disabled{opacity:0.4;cursor:not-allowed;}
 .ref-hero{background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(168,85,247,0.08));border:1px solid rgba(240,125,42,0.2);border-radius:16px;padding:24px;margin-bottom:16px;text-align:center;}
 .ref-hero-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:6px;}
 .ref-hero-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
@@ -232,8 +167,6 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .ref-link-text{font-size:12px;color:var(--orange);font-family:monospace;word-break:break-all;}
 .btn-copy{background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);border-radius:7px;padding:6px 12px;font-size:11px;cursor:pointer;font-weight:600;white-space:nowrap;margin-left:10px;transition:all 0.15s;}
 .btn-copy:hover{background:rgba(240,125,42,0.2);}
-
-/* PROGRESS TO PRO */
 .pro-progress{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
 .progress-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
 .progress-sub{font-size:12px;color:var(--muted);margin-bottom:14px;}
@@ -246,48 +179,29 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .pm-item.reached{border-color:rgba(29,184,126,0.3);background:rgba(29,184,126,0.04);}
 .pm-item.pro-reward{border-color:rgba(240,125,42,0.3);background:rgba(240,125,42,0.04);}
 .pm-num{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--orange);}
-.pm-label{font-size:10px;color:var(--muted);margin-top:2px;}
-.pm-reward{font-size:11px;font-weight:600;margin-top:4px;}
-.pm-item.reached .pm-reward{color:var(--success);}
-.pm-item:not(.reached) .pm-reward{color:var(--muted);}
-.pm-item.pro-reward .pm-reward{color:var(--orange);}
-
-/* REF HISTORY */
+.pm-label{font-size:10px;color:var(--muted);margin-top:2px;}.pm-reward{font-size:11px;font-weight:600;margin-top:4px;}
+.pm-item.reached .pm-reward{color:var(--success);}.pm-item:not(.reached) .pm-reward{color:var(--muted);}.pm-item.pro-reward .pm-reward{color:var(--orange);}
 .ref-history{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
 .ref-history-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
 .ref-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;margin-bottom:6px;transition:background 0.2s;border:1px solid transparent;}
-.ref-row:hover{background:var(--bg2);border-color:var(--border);}
-.ref-row:last-child{border:none;}
+.ref-row:hover{background:var(--bg2);border-color:var(--border);}.ref-row:last-child{border:none;}
 .ref-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--blue));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
-.ref-info{flex:1;}
-.ref-name{font-size:12px;font-weight:500;}
-.ref-email{font-size:11px;color:var(--muted);}
-.ref-date{font-size:11px;color:var(--muted);}
-.ref-bonus{font-size:11px;color:var(--success);font-weight:600;}
-
-/* SHARE BOX */
+.ref-info{flex:1;}.ref-name{font-size:12px;font-weight:500;}.ref-email{font-size:11px;color:var(--muted);}
+.ref-date{font-size:11px;color:var(--muted);}.ref-bonus{font-size:11px;color:var(--success);font-weight:600;}
 .share-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
 .share-channels{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
 .share-btn{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:9px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;transition:all 0.2s;}
-.share-wa{background:rgba(37,211,102,0.12);color:#25d366;border:1px solid rgba(37,211,102,0.2);}
-.share-wa:hover{background:rgba(37,211,102,0.2);}
-.share-fb{background:rgba(24,119,242,0.12);color:#1877f2;border:1px solid rgba(24,119,242,0.2);}
-.share-fb:hover{background:rgba(24,119,242,0.2);}
-.share-li{background:rgba(10,102,194,0.12);color:#0a66c2;border:1px solid rgba(10,102,194,0.2);}
-.share-li:hover{background:rgba(10,102,194,0.2);}
-.share-copy{background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);}
-.share-copy:hover{background:rgba(240,125,42,0.2);}
+.share-wa{background:rgba(37,211,102,0.12);color:#25d366;border:1px solid rgba(37,211,102,0.2);}.share-wa:hover{background:rgba(37,211,102,0.2);}
+.share-fb{background:rgba(24,119,242,0.12);color:#1877f2;border:1px solid rgba(24,119,242,0.2);}.share-fb:hover{background:rgba(24,119,242,0.2);}
+.share-li{background:rgba(10,102,194,0.12);color:#0a66c2;border:1px solid rgba(10,102,194,0.2);}.share-li:hover{background:rgba(10,102,194,0.2);}
+.share-copy{background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);}.share-copy:hover{background:rgba(240,125,42,0.2);}
 .share-msg-box{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;color:var(--text);min-height:100px;}
-
-/* PLANS */
 .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
 .plan-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;position:relative;transition:all 0.3s;overflow:hidden;}
 .plan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange3));opacity:0;transition:opacity 0.3s;}
-.plan-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.25);}
-.plan-card:hover::before{opacity:1;}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.25);}.plan-card:hover::before{opacity:1;}
 .plan-card.popular::before{opacity:1;background:linear-gradient(90deg,var(--blue),var(--cyan));}
-.plan-card.current{border-color:var(--orange);}
-.plan-card.popular{border-color:rgba(42,110,240,0.4);}
+.plan-card.current{border-color:var(--orange);}.plan-card.popular{border-color:rgba(42,110,240,0.4);}
 .popular-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap;}
 .plan-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
 .plan-price{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--orange);}
@@ -295,8 +209,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .plan-leads{font-size:11px;color:var(--muted);margin-top:4px;margin-bottom:14px;}
 .plan-features{list-style:none;margin-bottom:14px;}
 .plan-features li{font-size:12px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
-.plan-features li:last-child{border:none;}
-.plan-features li::before{content:'✓';color:var(--success);font-weight:700;font-size:11px;}
+.plan-features li:last-child{border:none;}.plan-features li::before{content:'✓';color:var(--success);font-weight:700;font-size:11px;}
 .plan-btn{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;}
 .plan-btn:hover{border-color:var(--orange);color:var(--orange);}
 .plan-card.current .plan-btn,.plan-btn.current-btn{background:var(--orange);color:#fff;border-color:var(--orange);}
@@ -306,21 +219,14 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .payment-steps li{counter-increment:steps;padding:6px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;}
 .payment-steps li::before{content:counter(steps);background:rgba(29,184,126,0.2);color:var(--success);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
 .payment-steps li strong{color:var(--text);}
-
-/* SETTINGS */
 .settings-sec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px;}
 .settings-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.settings-grid .full{grid-column:1/-1;}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.settings-grid .full{grid-column:1/-1;}
 .btn-save{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;margin-top:14px;}
 .badge-online{background:rgba(29,184,126,0.1);color:var(--success);font-size:11px;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;}
-
-/* ADMIN */
 .admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
 .admin-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;}
-.admin-card.good{border-color:rgba(29,184,126,0.3);}
-.admin-card.warn{border-color:rgba(240,165,42,0.3);}
-.admin-card.danger{border-color:rgba(240,74,74,0.3);}
+.admin-card.good{border-color:rgba(29,184,126,0.3);}.admin-card.warn{border-color:rgba(240,165,42,0.3);}.admin-card.danger{border-color:rgba(240,74,74,0.3);}
 .admin-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:7px;}
 .admin-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;}
 .admin-sub{font-size:11px;color:var(--muted);margin-top:3px;}
@@ -330,10 +236,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .api-bar{margin-bottom:10px;}
 .api-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px;}
 .api-bar-track{height:7px;background:var(--bg3);border-radius:99px;overflow:hidden;}
-.api-bar-fill{height:100%;border-radius:99px;}
-.apb-ok{background:var(--success);}
-.apb-warn{background:var(--warning);}
-.apb-bad{background:var(--danger);}
+.api-bar-fill{height:100%;border-radius:99px;}.apb-ok{background:var(--success);}.apb-warn{background:var(--warning);}.apb-bad{background:var(--danger);}
 .sec-ev{font-size:11px;padding:6px 10px;border-radius:6px;background:var(--bg2);margin-bottom:3px;display:flex;justify-content:space-between;gap:8px;}
 .admin-users-tbl{width:100%;border-collapse:collapse;font-size:12px;}
 .admin-users-tbl th{padding:7px 10px;text-align:left;font-size:10px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border);}
@@ -342,8 +245,6 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .pp-pro{background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600;}
 .pp-agency{background:rgba(42,110,240,0.15);color:var(--blue);font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600;}
 .btn-up{background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;}
-
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.2s;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;width:560px;max-width:94vw;max-height:88vh;overflow-y:auto;animation:slideUp 0.25s ease;}
@@ -355,51 +256,31 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .email-body{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px;font-size:12px;line-height:1.7;white-space:pre-wrap;min-height:150px;}
 .modal-actions{display:flex;gap:9px;margin-top:14px;justify-content:flex-end;}
 .btn-sec{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;}
-
-/* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:500;z-index:99999;display:none;max-width:300px;box-shadow:0 8px 30px rgba(0,0,0,0.3);animation:slideIn 0.3s ease;}
 @keyframes slideIn{from{transform:translateX(60px);opacity:0;}to{transform:translateX(0);opacity:1;}}
-
-/* LOADING */
 .spin{width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:sp 0.7s linear infinite;display:inline-block;}
 @keyframes sp{to{transform:rotate(360deg);}}
 .big-spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:sp 0.8s linear infinite;}
-.loading-box{display:none;flex-direction:column;align-items:center;padding:40px;gap:12px;color:var(--muted);font-size:13px;}
-.loading-box.on{display:flex;}
-
-/* EMPTY */
+.loading-box{display:none;flex-direction:column;align-items:center;padding:40px;gap:12px;color:var(--muted);font-size:13px;}.loading-box.on{display:flex;}
 .empty{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty svg{margin:0 auto 12px;display:block;opacity:0.25;}
-.empty h3{font-family:'Syne',sans-serif;font-size:15px;color:var(--text);margin-bottom:5px;}
-.empty p{font-size:12px;}
-
-/* ADMIN LOGIN */
+.empty h3{font-family:'Syne',sans-serif;font-size:15px;color:var(--text);margin-bottom:5px;}.empty p{font-size:12px;}
 .admin-login-box{max-width:360px;width:95vw;background:var(--card);border:1px solid rgba(168,85,247,0.3);border-radius:18px;padding:32px;}
 .admin-login-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;color:var(--purple);}
 .admin-login-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
-
-/* RESPONSIVE */
 @media(max-width:768px){
-  .sidebar{transform:translateX(-100%);z-index:200;}
-  .sidebar.open{transform:translateX(0);}
-  .main{margin-left:0;}
-  .inner{padding:20px 16px;}
+  .sidebar{transform:translateX(-100%);z-index:200;}.sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}.inner{padding:20px 16px;}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
-  .plans-grid{grid-template-columns:1fr;}
-  .admin-grid{grid-template-columns:repeat(2,1fr);}
-  .steps-grid{grid-template-columns:repeat(2,1fr);}
-  .search-grid{grid-template-columns:1fr;}
-  .admin-2col{grid-template-columns:1fr;}
-  .mob-menu{display:flex!important;}
+  .plans-grid{grid-template-columns:1fr;}.admin-grid{grid-template-columns:repeat(2,1fr);}
+  .steps-grid{grid-template-columns:repeat(2,1fr);}.search-grid{grid-template-columns:1fr;}
+  .admin-2col{grid-template-columns:1fr;}.mob-menu{display:flex!important;}
 }
 .mob-menu{display:none;position:fixed;top:14px;left:14px;z-index:300;background:var(--card);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;align-items:center;justify-content:center;cursor:pointer;}
-.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150;}
-.mob-overlay.on{display:block;}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150;}.mob-overlay.on{display:block;}
 </style>
 </head>
 <body>
-
-<!-- Mobile Menu Button -->
 <div class="mob-menu" id="mobMenu" onclick="toggleSidebar()">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
 </div>
@@ -408,16 +289,9 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 <!-- LOGIN -->
 <div id="pg-login" class="page active">
   <div class="auth-box">
-    <div class="auth-logo">
-      <div class="auth-logo-icon">J</div>
-      <div><div class="auth-logo-text">Jaiffy</div><div class="auth-logo-sub">AI Lead Hunter</div></div>
-    </div>
-    <div class="trial-banner">
-      <div class="trial-banner-title">🚀 7 Din FREE Trial!</div>
-      <div class="trial-banner-sub">Signup karo aur <strong>30 leads/day</strong> pao — koi credit card nahi</div>
-    </div>
-    <div class="auth-title">Wapas aaye!</div>
-    <div class="auth-sub">Apne account mein login karein</div>
+    <div class="auth-logo"><div class="auth-logo-icon">J</div><div><div class="auth-logo-text">Jaiffy</div><div class="auth-logo-sub">AI Lead Hunter</div></div></div>
+    <div class="trial-banner"><div class="trial-banner-title">🚀 7 Din FREE Trial!</div><div class="trial-banner-sub">Signup karo aur <strong>30 leads/day</strong> pao — koi credit card nahi</div></div>
+    <div class="auth-title">Wapas aaye!</div><div class="auth-sub">Apne account mein login karein</div>
     <div class="err-box" id="loginErr"></div>
     <div class="fg"><label class="fl">Email</label><input class="fi" id="loginEmail" type="email" placeholder="aap@company.com"></div>
     <div class="fg"><label class="fl">Password</label><input class="fi" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
@@ -429,16 +303,9 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 <!-- SIGNUP -->
 <div id="pg-signup" class="page">
   <div class="auth-box">
-    <div class="auth-logo">
-      <div class="auth-logo-icon">J</div>
-      <div><div class="auth-logo-text">Jaiffy</div><div class="auth-logo-sub">AI Lead Hunter</div></div>
-    </div>
-    <div class="trial-banner">
-      <div class="trial-banner-title">🎁 Pehle 7 Din — 30 Leads/Day FREE!</div>
-      <div class="trial-banner-sub">Sialkot exporters, Faisalabad textile — real buyer leads abhi</div>
-    </div>
-    <div class="auth-title">Shuru karein!</div>
-    <div class="auth-sub">Free account — koi credit card nahi</div>
+    <div class="auth-logo"><div class="auth-logo-icon">J</div><div><div class="auth-logo-text">Jaiffy</div><div class="auth-logo-sub">AI Lead Hunter</div></div></div>
+    <div class="trial-banner"><div class="trial-banner-title">🎁 Pehle 7 Din — 30 Leads/Day FREE!</div><div class="trial-banner-sub">Sialkot exporters, Faisalabad textile — real buyer leads abhi</div></div>
+    <div class="auth-title">Shuru karein!</div><div class="auth-sub">Free account — koi credit card nahi</div>
     <div id="refNotice" style="display:none;background:rgba(29,184,126,0.08);border:1px solid rgba(29,184,126,0.2);border-radius:9px;padding:10px 13px;margin-bottom:12px;font-size:12px;color:var(--success);">🎁 Referral link se aaye! Aapko aur aapke dost dono ko bonus milega.</div>
     <div class="err-box" id="signupErr"></div>
     <div class="fg"><label class="fl">Poora Naam</label><input class="fi" id="sName" placeholder="Muhammad Ahmed"></div>
@@ -466,212 +333,88 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 <!-- APP -->
 <div id="pg-app" class="page">
   <div class="sidebar" id="sidebar">
-    <div class="s-logo">
-      <div class="s-logo-icon">J</div>
-      <div class="s-logo-text">Jaiffy <span class="s-logo-version">v4.1</span></div>
-    </div>
+    <div class="s-logo"><div class="s-logo-icon">J</div><div class="s-logo-text">Jaiffy <span class="s-logo-version">v4.2</span></div></div>
     <nav class="s-nav">
       <div class="nav-label">Main</div>
-      <div class="nav-item active" id="nav-dashboard" onclick="goTo('dashboard')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Dashboard
-      </div>
-      <div class="nav-item" id="nav-search" onclick="goTo('search')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        Lead Search
-      </div>
-      <div class="nav-item" id="nav-leads" onclick="goTo('leads')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        Saved Leads
-      </div>
+      <div class="nav-item active" id="nav-dashboard" onclick="goTo('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+      <div class="nav-item" id="nav-search" onclick="goTo('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Lead Search</div>
+      <div class="nav-item" id="nav-leads" onclick="goTo('leads')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Saved Leads</div>
       <div class="nav-label">Growth</div>
-      <div class="nav-item" id="nav-referral" onclick="goTo('referral')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        Referral
-        <span class="nav-badge new" id="refNavBadge" style="display:none">New</span>
-      </div>
-      <div class="nav-item" id="nav-plans" onclick="goTo('plans')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Plans
-      </div>
+      <div class="nav-item" id="nav-referral" onclick="goTo('referral')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Referral<span class="nav-badge new" id="refNavBadge" style="display:none">New</span></div>
+      <div class="nav-item" id="nav-plans" onclick="goTo('plans')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Plans</div>
       <div class="nav-label">Account</div>
-      <div class="nav-item" id="nav-settings" onclick="goTo('settings')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Settings
-      </div>
-      <div class="nav-item" id="nav-admin" onclick="goTo('admin')" style="display:none;color:var(--purple);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Admin Panel
-      </div>
+      <div class="nav-item" id="nav-settings" onclick="goTo('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
+      <div class="nav-item" id="nav-admin" onclick="goTo('admin')" style="display:none;color:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Admin Panel</div>
     </nav>
     <div class="s-foot">
       <div class="user-card">
         <div class="user-av" id="uAv" style="background:linear-gradient(135deg,var(--orange),var(--blue))">U</div>
-        <div style="flex:1;min-width:0;">
-          <div class="user-name" id="uName">User</div>
-          <span class="user-plan-badge badge-free" id="uPlanBadge">Free</span>
-        </div>
-        <button class="logout-btn" onclick="doLogout()" title="Logout">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        </button>
+        <div style="flex:1;min-width:0;"><div class="user-name" id="uName">User</div><span class="user-plan-badge badge-free" id="uPlanBadge">Free</span></div>
+        <button class="logout-btn" onclick="doLogout()" title="Logout"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
       </div>
     </div>
   </div>
 
   <div class="main">
-
     <!-- DASHBOARD -->
     <div class="inner active" id="inner-dashboard">
-      <div class="page-hdr">
-        <div><div class="page-title">Dashboard</div><div class="page-sub">Aapki lead hunting activity</div></div>
-        <button class="btn-act" onclick="goTo('search')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          New Search
-        </button>
-      </div>
-
-      <!-- Smart Banners -->
+      <div class="page-hdr"><div><div class="page-title">Dashboard</div><div class="page-sub">Aapki lead hunting activity</div></div><button class="btn-act" onclick="goTo('search')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>New Search</button></div>
       <div id="smartBanners"></div>
-
-      <!-- Onboarding Steps -->
       <div class="onboard-card" id="onboardCard">
         <div class="onboard-title">🗺️ Shuru Kaise Karein — 4 Easy Steps</div>
         <div class="steps-grid">
-          <div class="step-item done" id="step1">
-            <div class="step-num">✓</div>
-            <div class="step-title">Account Banaya</div>
-            <div class="step-desc">Free account ready hai</div>
-          </div>
-          <div class="step-item" id="step2">
-            <div class="step-num">2</div>
-            <div class="step-title">Pehli Search</div>
-            <div class="step-desc">Lead Search mein product daalo</div>
-          </div>
-          <div class="step-item" id="step3">
-            <div class="step-num">3</div>
-            <div class="step-title">Email Bhejo</div>
-            <div class="step-desc">AI se email generate karo</div>
-          </div>
-          <div class="step-item" id="step4">
-            <div class="step-num">4</div>
-            <div class="step-title">Dost Invite</div>
-            <div class="step-desc">20 ref = Pro FREE!</div>
-          </div>
+          <div class="step-item done" id="step1"><div class="step-num">✓</div><div class="step-title">Account Banaya</div><div class="step-desc">Free account ready hai</div></div>
+          <div class="step-item" id="step2"><div class="step-num">2</div><div class="step-title">Pehli Search</div><div class="step-desc">Lead Search mein product daalo</div></div>
+          <div class="step-item" id="step3"><div class="step-num">3</div><div class="step-title">Email Bhejo</div><div class="step-desc">AI se email generate karo</div></div>
+          <div class="step-item" id="step4"><div class="step-num">4</div><div class="step-title">Dost Invite</div><div class="step-desc">20 ref = Pro FREE!</div></div>
         </div>
       </div>
-
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="sTotalLeads">0</div><div class="stat-sub">Aaj tak</div></div>
         <div class="stat-card"><div class="stat-label">Hot Leads</div><div class="stat-val" id="sHotLeads">0</div><div class="stat-sub">Score 70+</div></div>
         <div class="stat-card"><div class="stat-label">Aaj Use Ki</div><div class="stat-val" id="sUsedToday">0</div><div class="stat-sub" id="sRemText">remaining</div></div>
         <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-val" id="sRefs">0</div><div class="stat-sub" id="sRefsTo">Pro ke liye</div></div>
       </div>
-
       <div class="usage-wrap">
-        <div class="usage-top">
-          <div class="usage-title">Aaj ki Lead Limit</div>
-          <div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div>
-        </div>
+        <div class="usage-top"><div class="usage-title">Aaj ki Lead Limit</div><div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div></div>
         <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
-        <div class="usage-meta">
-          <span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span>
-          <span id="uTrialBadge"></span>
-        </div>
+        <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span><span id="uTrialBadge"></span></div>
       </div>
-
-      <div class="camp-grid" id="campGrid">
-        <div class="empty" style="grid-column:1/-1">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <h3>Pehli search karein!</h3>
-          <p>Lead Search pe click karein — product daalo</p>
-        </div>
-      </div>
+      <div class="camp-grid" id="campGrid"><div class="empty" style="grid-column:1/-1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe click karein — product daalo</p></div></div>
     </div>
 
     <!-- SEARCH -->
     <div class="inner" id="inner-search">
-      <div class="page-hdr">
-        <div><div class="page-title">Lead Search</div><div class="page-sub">AI-powered B2B leads dhundein</div></div>
-      </div>
-
-      <!-- How it works tooltip -->
+      <div class="page-hdr"><div><div class="page-title">Lead Search</div><div class="page-sub">AI-powered B2B leads dhundein</div></div></div>
       <div class="smart-banner sb-ref" style="margin-bottom:18px;" id="searchGuide">
         <div class="sb-icon">💡</div>
-        <div class="sb-content">
-          <div class="sb-title">Kaise kaam karta hai?</div>
-          <div class="sb-text">Product ya service likho → Country chuno → Search dabao → Google se real businesses milti hain → AI score karta hai → Email generator se professional email bhejo!</div>
-        </div>
+        <div class="sb-content"><div class="sb-title">Kaise kaam karta hai?</div><div class="sb-text">Product ya service likho → Country chuno → Search dabao → Google se real businesses milti hain → AI score karta hai → Email generator se professional email bhejo!</div></div>
         <button class="sb-close" onclick="this.parentElement.style.display='none'">×</button>
       </div>
-
       <div class="search-card">
         <div class="search-grid">
-          <div class="fg2">
-            <label class="fl2">Product / Service</label>
-            <input class="fi2" id="searchProduct" placeholder="Surgical instruments, Gym equipment, Leather goods..." oninput="previewKW()">
-          </div>
-          <div class="fg2">
-            <label class="fl2">Country</label>
+          <div class="fg2"><label class="fl2">Product / Service</label><input class="fi2" id="searchProduct" placeholder="Surgical instruments, Gym equipment, Leather goods..." oninput="previewKW()"></div>
+          <div class="fg2"><label class="fl2">Country</label>
             <select class="fi2" id="searchCountry">
-              <option value="AE">🇦🇪 UAE</option>
-              <option value="SA">🇸🇦 Saudi Arabia</option>
-              <option value="GB">🇬🇧 UK</option>
-              <option value="US">🇺🇸 USA</option>
-              <option value="DE">🇩🇪 Germany</option>
-              <option value="TR">🇹🇷 Turkey</option>
-              <option value="CN">🇨🇳 China</option>
-              <option value="CA">🇨🇦 Canada</option>
-              <option value="AU">🇦🇺 Australia</option>
-              <option value="PK">🇵🇰 Pakistan</option>
+              <option value="AE">🇦🇪 UAE</option><option value="SA">🇸🇦 Saudi Arabia</option><option value="GB">🇬🇧 UK</option><option value="US">🇺🇸 USA</option><option value="DE">🇩🇪 Germany</option><option value="TR">🇹🇷 Turkey</option><option value="CN">🇨🇳 China</option><option value="CA">🇨🇦 Canada</option><option value="AU">🇦🇺 Australia</option><option value="PK">🇵🇰 Pakistan</option>
             </select>
           </div>
-          <div class="fg2">
-            <label class="fl2">Campaign Name</label>
-            <input class="fi2" id="searchCampaign" placeholder="UAE Surgical Campaign">
-          </div>
-          <button class="btn-search" onclick="doSearch()" id="searchBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Search
-          </button>
+          <div class="fg2"><label class="fl2">Campaign Name</label><input class="fi2" id="searchCampaign" placeholder="UAE Surgical Campaign"></div>
+          <button class="btn-search" onclick="doSearch()" id="searchBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Search</button>
         </div>
-        <div class="ai-hint" id="aiHint">
-          <div class="ai-hint-title">🤖 Suggested searches</div>
-          <div id="aiHintTags"></div>
-        </div>
+        <div class="ai-hint" id="aiHint"><div class="ai-hint-title">🤖 Suggested searches</div><div id="aiHintTags"></div></div>
       </div>
-
-      <!-- Blur notice for free users -->
       <div class="smart-banner sb-upgrade" id="blurNotice" style="display:none;margin-bottom:16px;">
         <div class="sb-icon">🔒</div>
-        <div class="sb-content">
-          <div class="sb-title">Contact info locked hai</div>
-          <div class="sb-text">Free plan mein email aur phone blur hoti hai. <strong>Pro plan (Rs.2,000/mo)</strong> mein sab unlock hoga — ya 20 dost refer karo!</div>
-        </div>
+        <div class="sb-content"><div class="sb-title">Contact info locked hai</div><div class="sb-text">Free plan mein email aur phone blur hoti hai. <strong>Pro plan (Rs.2,000/mo)</strong> mein sab unlock hoga — ya 20 dost refer karo!</div></div>
         <button class="sb-btn" onclick="goTo('plans')">Upgrade karein</button>
       </div>
-
-      <div class="loading-box" id="searchLoading">
-        <div class="big-spin"></div>
-        <div>Leads dhundh rahe hain... (30-60 sec)</div>
-        <div style="font-size:11px;">Google Places + AI Scoring chal raha hai</div>
-      </div>
-
+      <div class="loading-box" id="searchLoading"><div class="big-spin"></div><div>Leads dhundh rahe hain... (30-60 sec)</div><div style="font-size:11px;">Google Places + AI Scoring chal raha hai</div></div>
       <div id="resultsArea" style="display:none">
-        <div class="col-chooser">
-          <div class="col-chooser-title">📊 Columns Choose Karein</div>
-          <div class="col-tags" id="colTags"></div>
-        </div>
+        <div class="col-chooser"><div class="col-chooser-title">📊 Columns Choose Karein</div><div class="col-tags" id="colTags"></div></div>
         <div class="results-wrap">
-          <div class="results-hdr">
-            <div class="results-title" id="resTitle">Results</div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span id="resCacheBadge"></span>
-              <span style="font-size:11px;color:var(--muted)" id="resMeta"></span>
-            </div>
-          </div>
-          <div class="tbl-wrap">
-            <table><thead><tr id="resHead"></tr></thead><tbody id="resBody"></tbody></table>
-          </div>
+          <div class="results-hdr"><div class="results-title" id="resTitle">Results</div><div style="display:flex;align-items:center;gap:8px;"><span id="resCacheBadge"></span><span style="font-size:11px;color:var(--muted)" id="resMeta"></span></div></div>
+          <div class="tbl-wrap"><table><thead><tr id="resHead"></tr></thead><tbody id="resBody"></tbody></table></div>
           <div class="pagination" id="resPagination"></div>
         </div>
       </div>
@@ -679,77 +422,38 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 
     <!-- SAVED LEADS -->
     <div class="inner" id="inner-leads">
-      <div class="page-hdr">
-        <div><div class="page-title">Saved Leads</div><div class="page-sub">Aapki search history</div></div>
-        <button class="btn-act" onclick="exportCSV()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          CSV Export
-        </button>
-      </div>
-      <div class="col-chooser">
-        <div class="col-chooser-title">📊 Columns</div>
-        <div class="col-tags" id="savedColTags"></div>
-      </div>
+      <div class="page-hdr"><div><div class="page-title">Saved Leads</div><div class="page-sub">Aapki search history</div></div><button class="btn-act" onclick="exportCSV()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV Export</button></div>
+      <div class="col-chooser"><div class="col-chooser-title">📊 Columns</div><div class="col-tags" id="savedColTags"></div></div>
       <div class="results-wrap">
-        <div class="results-hdr">
-          <input class="fi2" style="max-width:220px;" id="leadsSearch" placeholder="Search leads..." oninput="filterLeads()">
-          <span style="font-size:11px;color:var(--muted)" id="leadsMeta">Loading...</span>
-        </div>
-        <div class="tbl-wrap">
-          <table><thead><tr id="savedHead"></tr></thead><tbody id="savedBody"></tbody></table>
-        </div>
+        <div class="results-hdr"><input class="fi2" style="max-width:220px;" id="leadsSearch" placeholder="Search leads..." oninput="filterLeads()"><span style="font-size:11px;color:var(--muted)" id="leadsMeta">Loading...</span></div>
+        <div class="tbl-wrap"><table><thead><tr id="savedHead"></tr></thead><tbody id="savedBody"></tbody></table></div>
       </div>
     </div>
 
     <!-- REFERRAL -->
     <div class="inner" id="inner-referral">
-      <div class="page-hdr">
-        <div><div class="page-title">Referral Program</div><div class="page-sub">Har dost = +1 lead/day · 20 dost = Pro FREE!</div></div>
-      </div>
-
+      <div class="page-hdr"><div><div class="page-title">Referral Program</div><div class="page-sub">Har dost = +1 lead/day · 20 dost = Pro FREE!</div></div></div>
       <div class="ref-hero">
         <div class="ref-hero-title">🎯 Apna Referral Link Share Karo</div>
         <div class="ref-hero-sub">Har dost jo is link se join kare = <strong style="color:var(--orange)">aapko +1 lead/day permanently</strong></div>
-        <div class="ref-link-box">
-          <span class="ref-link-text" id="refLink">Loading...</span>
-          <button class="btn-copy" onclick="copyRef()">Copy</button>
-        </div>
+        <div class="ref-link-box"><span class="ref-link-text" id="refLink">Loading...</span><button class="btn-copy" onclick="copyRef()">Copy</button></div>
       </div>
-
-      <!-- Progress to Pro -->
       <div class="pro-progress">
         <div class="progress-title">🏆 Pro Plan Ki Taraf Progress</div>
         <div class="progress-sub">20 referrals pe 1 mahina Pro FREE mil jaega!</div>
-        <div class="progress-track">
-          <div class="progress-fill" id="refProgressFill" style="width:0%"></div>
-        </div>
-        <div class="progress-labels">
-          <span>0 refs</span>
-          <span id="refProgressText">0 / 20</span>
-          <span>20 refs = Pro FREE! 🎁</span>
-        </div>
+        <div class="progress-track"><div class="progress-fill" id="refProgressFill" style="width:0%"></div></div>
+        <div class="progress-labels"><span>0 refs</span><span id="refProgressText">0 / 20</span><span>20 refs = Pro FREE! 🎁</span></div>
         <div class="progress-milestones" id="refMilestones"></div>
       </div>
-
-      <!-- Stats -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
         <div class="stat-card"><div class="stat-label">Total Referrals</div><div class="stat-val" id="refTotal">0</div><div class="stat-sub">Dost join hue</div></div>
         <div class="stat-card"><div class="stat-label">Bonus Leads/Day</div><div class="stat-val" id="refBonus">0</div><div class="stat-sub">Extra roz milte hain</div></div>
         <div class="stat-card"><div class="stat-label">Refs Baaki</div><div class="stat-val" id="refToPro">20</div><div class="stat-sub">Pro ke liye chahiye</div></div>
       </div>
-
-      <!-- History -->
       <div class="ref-history">
-        <div class="ref-history-title">
-          👥 Aapke Referrals
-          <span style="font-size:11px;color:var(--muted)" id="refHistoryCount">Loading...</span>
-        </div>
-        <div id="refHistoryList">
-          <div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Loading...</div>
-        </div>
+        <div class="ref-history-title">👥 Aapke Referrals <span style="font-size:11px;color:var(--muted)" id="refHistoryCount">Loading...</span></div>
+        <div id="refHistoryList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Loading...</div></div>
       </div>
-
-      <!-- Share Channels -->
       <div class="share-box">
         <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;">📱 Share Karo — Jahan Chahein</div>
         <div class="share-channels">
@@ -764,11 +468,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 
     <!-- PLANS -->
     <div class="inner" id="inner-plans">
-      <div class="page-hdr">
-        <div><div class="page-title">Plans & Pricing</div><div class="page-sub">Apna plan choose karein</div></div>
-      </div>
-
-      <!-- Payment Instructions -->
+      <div class="page-hdr"><div><div class="page-title">Plans & Pricing</div><div class="page-sub">Apna plan choose karein</div></div></div>
       <div class="payment-note">
         <div class="payment-note-title">💚 Payment Kaise Karein?</div>
         <ol class="payment-steps">
@@ -778,9 +478,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
           <li>24 ghante mein aapka plan <strong>activate</strong> ho jaega</li>
         </ol>
       </div>
-
       <div class="plans-grid" id="plansGrid"></div>
-
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
         <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;">💡 Paid nahi karna? Free mein upgrade karo!</div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:14px;"><strong style="color:var(--orange)">20 dost refer karo</strong> = 1 mahina Pro <strong>bilkul FREE</strong></div>
@@ -792,9 +490,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
     <div class="inner" id="inner-settings">
       <div class="page-hdr"><div><div class="page-title">Settings</div></div></div>
       <div class="settings-sec">
-        <div class="settings-title">Profile
-          <span class="badge-online" id="srvBadge">Checking...</span>
-        </div>
+        <div class="settings-title">Profile <span class="badge-online" id="srvBadge">Checking...</span></div>
         <div class="settings-grid">
           <div class="fg"><label class="fl">Naam</label><input class="fi" id="settName"></div>
           <div class="fg"><label class="fl">Company</label><input class="fi" id="settCompany"></div>
@@ -819,591 +515,267 @@ tr:hover td{background:rgba(255,255,255,0.01);}
         <div><div class="page-title" style="color:var(--purple);">🔐 Admin Panel</div><div class="page-sub">System stats — sirf aap</div></div>
         <button class="btn-act" style="background:var(--purple);" onclick="loadAdmin()">↻ Refresh</button>
       </div>
-      <div id="adminContent">
-        <div class="loading-box on" style="justify-content:center;">
-          <div class="big-spin" style="border-top-color:var(--purple);"></div>
-          <div>Loading...</div>
-        </div>
-      </div>
+      <div id="adminContent"><div class="loading-box on" style="justify-content:center;"><div class="big-spin" style="border-top-color:var(--purple);"></div><div>Loading...</div></div></div>
     </div>
-
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const SERVER = 'https://web-production-431a8b.up.railway.app';
-const ADMIN_SECRET = 'jaiffy-owner-9z8k2025';
-const PAYMENT_NUMBER = '0302-5074727'; // Aap apna number yahan lagao
-const PAYMENT_WA = '+923025074727';   // Aap apna WhatsApp yahan lagao
+const SERVER='https://web-production-431a8b.up.railway.app';
+const ADMIN_SECRET='jaiffy-owner-9z8k2025';
+const PAYMENT_NUMBER='0302-5074727';
+const PAYMENT_WA='+923025074727';
+let U=null,token='',adminToken='',currentLeads=[],allLeads=[],refData=null;
+let _apiKeysData=[],_appSettingsData=[];
+const SEARCH_COLS=[{id:'name',label:'Business',def:true},{id:'address',label:'Address',def:false},{id:'category',label:'Category',def:false},{id:'rating',label:'Rating',def:true},{id:'contact',label:'Contact',def:true},{id:'website',label:'Website',def:true},{id:'score',label:'Score',def:true},{id:'priority',label:'Priority',def:true},{id:'notes',label:'Notes',def:false},{id:'action',label:'Action',def:true}];
+const SAVED_COLS=[{id:'business_name',label:'Business',def:true},{id:'email',label:'Email',def:true},{id:'phone',label:'Phone',def:true},{id:'website',label:'Website',def:true},{id:'address',label:'Address',def:false},{id:'category',label:'Category',def:false},{id:'rating',label:'Rating',def:false},{id:'score',label:'Score',def:true},{id:'priority',label:'Priority',def:false},{id:'status',label:'Status',def:true},{id:'campaign',label:'Campaign',def:false},{id:'created_at',label:'Date',def:true}];
+let activeSC=SEARCH_COLS.filter(c=>c.def).map(c=>c.id);
+let activeSaved=SAVED_COLS.filter(c=>c.def).map(c=>c.id);
 
-let U = null, token = '', adminToken = '', currentLeads = [], allLeads = [], refData = null;
-
-const SEARCH_COLS = [
-  {id:'name',label:'Business',def:true},{id:'address',label:'Address',def:false},
-  {id:'category',label:'Category',def:false},{id:'rating',label:'Rating',def:true},
-  {id:'contact',label:'Contact',def:true},{id:'website',label:'Website',def:true},
-  {id:'score',label:'Score',def:true},{id:'priority',label:'Priority',def:true},
-  {id:'notes',label:'Notes',def:false},{id:'action',label:'Action',def:true}
-];
-const SAVED_COLS = [
-  {id:'business_name',label:'Business',def:true},{id:'email',label:'Email',def:true},
-  {id:'phone',label:'Phone',def:true},{id:'website',label:'Website',def:true},
-  {id:'address',label:'Address',def:false},{id:'category',label:'Category',def:false},
-  {id:'rating',label:'Rating',def:false},{id:'score',label:'Score',def:true},
-  {id:'priority',label:'Priority',def:false},{id:'status',label:'Status',def:true},
-  {id:'campaign',label:'Campaign',def:false},{id:'created_at',label:'Date',def:true}
-];
-let activeSC = SEARCH_COLS.filter(c=>c.def).map(c=>c.id);
-let activeSaved = SAVED_COLS.filter(c=>c.def).map(c=>c.id);
-
-// ===== INIT =====
-window.onload = () => {
-  const hash = location.hash.replace('#','');
-  if(hash === ADMIN_SECRET){ history.replaceState(null,'',location.pathname); showPage('adminlogin'); return; }
-  token = localStorage.getItem('j_token') || '';
-  adminToken = localStorage.getItem('j_admin') || '';
-  const saved = localStorage.getItem('j_user');
-  if(token && saved){ U = JSON.parse(saved); enterApp(); fetchMe(); }
-  const ref = new URLSearchParams(location.search).get('ref');
-  if(ref){ document.getElementById('sRef').value=ref; document.getElementById('refNotice').style.display='block'; showPage('signup'); }
+window.onload=()=>{
+  const hash=location.hash.replace('#','');
+  if(hash===ADMIN_SECRET){history.replaceState(null,'',location.pathname);showPage('adminlogin');return;}
+  token=localStorage.getItem('j_token')||'';
+  adminToken=localStorage.getItem('j_admin')||'';
+  const saved=localStorage.getItem('j_user');
+  if(token&&saved){U=JSON.parse(saved);enterApp();fetchMe();}
+  const ref=new URLSearchParams(location.search).get('ref');
+  if(ref){document.getElementById('sRef').value=ref;document.getElementById('refNotice').style.display='block';showPage('signup');}
   initColChoosers();
-  // Set payment info
-  document.getElementById('paymentNumber').textContent = PAYMENT_NUMBER;
-  document.getElementById('paymentWhatsapp').textContent = PAYMENT_WA;
+  document.getElementById('paymentNumber').textContent=PAYMENT_NUMBER;
+  document.getElementById('paymentWhatsapp').textContent=PAYMENT_WA;
 };
-
 function initColChoosers(){
-  renderColChooser('colTags', SEARCH_COLS, activeSC, v=>{ activeSC=v; if(window._lastSearch) renderResults(window._lastSearch); });
-  renderColChooser('savedColTags', SAVED_COLS, activeSaved, v=>{ activeSaved=v; renderSavedLeads(allLeads); });
+  renderColChooser('colTags',SEARCH_COLS,activeSC,v=>{activeSC=v;if(window._lastSearch)renderResults(window._lastSearch);});
+  renderColChooser('savedColTags',SAVED_COLS,activeSaved,v=>{activeSaved=v;renderSavedLeads(allLeads);});
 }
-
-function renderColChooser(id, cols, active, onChange){
-  const el = document.getElementById(id); if(!el) return;
-  el.innerHTML = cols.map(c=>`<div class="col-tag ${active.includes(c.id)?'on':''}" data-id="${c.id}" onclick="toggleCol('${id}',this,'${c.id}')">${c.label}</div>`).join('');
-}
-
-function toggleCol(id, el, colId){
-  el.classList.toggle('on');
-  if(id==='colTags'){ activeSC=[...document.querySelectorAll('#colTags .col-tag.on')].map(e=>e.dataset.id); if(window._lastSearch) renderResults(window._lastSearch); }
-  else { activeSaved=[...document.querySelectorAll('#savedColTags .col-tag.on')].map(e=>e.dataset.id); renderSavedLeads(allLeads); }
-}
-
-// ===== PAGES =====
-function showPage(p){ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); document.getElementById('pg-'+p).classList.add('active'); }
-
+function renderColChooser(id,cols,active,onChange){const el=document.getElementById(id);if(!el)return;el.innerHTML=cols.map(c=>`<div class="col-tag ${active.includes(c.id)?'on':''}" data-id="${c.id}" onclick="toggleCol('${id}',this,'${c.id}')">${c.label}</div>`).join('');}
+function toggleCol(id,el,colId){el.classList.toggle('on');if(id==='colTags'){activeSC=[...document.querySelectorAll('#colTags .col-tag.on')].map(e=>e.dataset.id);if(window._lastSearch)renderResults(window._lastSearch);}else{activeSaved=[...document.querySelectorAll('#savedColTags .col-tag.on')].map(e=>e.dataset.id);renderSavedLeads(allLeads);}}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');}
 function goTo(p){
   document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
   document.getElementById('inner-'+p).classList.add('active');
-  const nav = document.getElementById('nav-'+p); if(nav) nav.classList.add('active');
+  const nav=document.getElementById('nav-'+p);if(nav)nav.classList.add('active');
   closeSidebar();
-  if(p==='dashboard') loadDashboard();
-  if(p==='leads') loadSavedLeads();
-  if(p==='referral') loadReferral();
-  if(p==='plans') loadPlans();
-  if(p==='settings') loadSettings();
-  if(p==='admin') loadAdmin();
+  if(p==='dashboard')loadDashboard();if(p==='leads')loadSavedLeads();if(p==='referral')loadReferral();
+  if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();
 }
+function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('mobOverlay');s.classList.toggle('open');o.classList.toggle('on');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('on');}
 
-function toggleSidebar(){ const s=document.getElementById('sidebar'); const o=document.getElementById('mobOverlay'); s.classList.toggle('open'); o.classList.toggle('on'); }
-function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobOverlay').classList.remove('on'); }
-
-// ===== AUTH =====
 async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pass=document.getElementById('loginPass').value;
-  const btn=document.getElementById('loginBtn'); const err=document.getElementById('loginErr');
-  err.style.display='none';
-  if(!email||!pass){ showErr(err,'Email aur password daalo'); return; }
-  btn.disabled=true; btn.innerHTML='<div class="spin"></div> Login...';
-  try{
-    const r=await api('POST','/auth/login',{email,password:pass});
-    if(r.error){ showErr(err,r.error); return; }
-    token=r.token; U=r.user;
-    localStorage.setItem('j_token',token); localStorage.setItem('j_user',JSON.stringify(U));
-    enterApp();
-  }catch(e){ showErr(err,'Server error'); }
-  finally{ btn.disabled=false; btn.innerHTML='Login karein'; }
+  const email=document.getElementById('loginEmail').value.trim();const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');const err=document.getElementById('loginErr');err.style.display='none';
+  if(!email||!pass){showErr(err,'Email aur password daalo');return;}
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Login...';
+  try{const r=await api('POST','/auth/login',{email,password:pass});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));enterApp();}catch(e){showErr(err,'Server error');}
+  finally{btn.disabled=false;btn.innerHTML='Login karein';}
 }
-
 async function doSignup(){
-  const name=document.getElementById('sName').value.trim();
-  const company=document.getElementById('sCompany').value.trim();
-  const email=document.getElementById('sEmail').value.trim();
-  const pass=document.getElementById('sPass').value;
-  const ref=document.getElementById('sRef').value.trim();
-  const btn=document.getElementById('signupBtn'); const err=document.getElementById('signupErr');
-  err.style.display='none';
-  if(!name||!email||pass.length<6){ showErr(err,'Sab fields bharein — password 6+ char'); return; }
-  btn.disabled=true; btn.innerHTML='<div class="spin"></div> Account ban raha hai...';
-  try{
-    const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});
-    if(r.error){ showErr(err,r.error); return; }
-    token=r.token; U=r.user;
-    localStorage.setItem('j_token',token); localStorage.setItem('j_user',JSON.stringify(U));
-    enterApp(); showToast('🎉 Welcome! 7 din trial shuru!');
-  }catch(e){ showErr(err,'Server error'); }
-  finally{ btn.disabled=false; btn.innerHTML='Free Trial Shuru Karein 🚀'; }
+  const name=document.getElementById('sName').value.trim();const company=document.getElementById('sCompany').value.trim();
+  const email=document.getElementById('sEmail').value.trim();const pass=document.getElementById('sPass').value;const ref=document.getElementById('sRef').value.trim();
+  const btn=document.getElementById('signupBtn');const err=document.getElementById('signupErr');err.style.display='none';
+  if(!name||!email||pass.length<6){showErr(err,'Sab fields bharein — password 6+ char');return;}
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Account ban raha hai...';
+  try{const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));enterApp();showToast('🎉 Welcome! 7 din trial shuru!');}catch(e){showErr(err,'Server error');}
+  finally{btn.disabled=false;btn.innerHTML='Free Trial Shuru Karein 🚀';}
 }
-
 async function doAdminLogin(){
-  const pass=document.getElementById('adminPass').value;
-  const btn=document.getElementById('adminBtn'); const err=document.getElementById('adminErr');
-  err.style.display='none';
-  if(!pass){ showErr(err,'Password daalo'); return; }
-  btn.disabled=true; btn.innerHTML='<div class="spin"></div>';
-  try{
-    const r=await api('POST','/admin/dashboard',{admin_pass:pass});
-    if(r.error){ showErr(err,'Wrong password!'); return; }
-    adminToken=pass; localStorage.setItem('j_admin',pass);
-    showAdminOnly();
-  }catch(e){ showErr(err,'Server error'); }
-  finally{ btn.disabled=false; btn.innerHTML='Enter'; }
+  const pass=document.getElementById('adminPass').value;const btn=document.getElementById('adminBtn');const err=document.getElementById('adminErr');err.style.display='none';
+  if(!pass){showErr(err,'Password daalo');return;}
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div>';
+  try{const r=await api('POST','/admin/dashboard',{admin_pass:pass});if(r.error){showErr(err,'Wrong password!');return;}adminToken=pass;localStorage.setItem('j_admin',pass);showAdminOnly();}catch(e){showErr(err,'Server error');}
+  finally{btn.disabled=false;btn.innerHTML='Enter';}
 }
-
 function showAdminOnly(){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.getElementById('pg-app').classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(x=>x.style.display='none');
-  document.querySelectorAll('.nav-label').forEach(x=>x.style.display='none');
-  const an=document.getElementById('nav-admin');
-  an.style.display='flex'; an.classList.add('active');
-  document.getElementById('uName').textContent='Owner';
-  document.getElementById('uAv').textContent='🔐';
-  document.getElementById('uAv').style.background='var(--purple)';
-  document.getElementById('uPlanBadge').textContent='Admin';
-  document.getElementById('uPlanBadge').className='user-plan-badge';
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-app').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(x=>x.style.display='none');document.querySelectorAll('.nav-label').forEach(x=>x.style.display='none');
+  const an=document.getElementById('nav-admin');an.style.display='flex';an.classList.add('active');
+  document.getElementById('uName').textContent='Owner';document.getElementById('uAv').textContent='🔐';document.getElementById('uAv').style.background='var(--purple)';
+  document.getElementById('uPlanBadge').textContent='Admin';document.getElementById('uPlanBadge').className='user-plan-badge';
   document.getElementById('uPlanBadge').style.cssText='background:rgba(168,85,247,0.2);color:var(--purple);font-size:9px;padding:1px 7px;border-radius:20px;font-weight:600;display:inline-block;margin-top:2px;';
-  document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
-  document.getElementById('inner-admin').classList.add('active');
-  loadAdmin();
+  document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));document.getElementById('inner-admin').classList.add('active');loadAdmin();
 }
-
 function doLogout(){
   fetch(`${SERVER}/auth/logout`,{method:'POST',headers:{Authorization:'Bearer '+token}}).catch(()=>{});
-  localStorage.removeItem('j_token'); localStorage.removeItem('j_user'); localStorage.removeItem('j_admin');
-  U=null; token=''; adminToken=''; showPage('login');
+  localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
+  U=null;token='';adminToken='';showPage('login');
 }
-
-function enterApp(){
-  showPage('app'); updateSidebar();
-  if(adminToken) document.getElementById('nav-admin').style.display='flex';
-  goTo('dashboard'); checkServer();
-}
-
-async function fetchMe(){
-  try{
-    const r=await api('GET','/auth/me');
-    if(!r.error){ U=r; localStorage.setItem('j_user',JSON.stringify(U)); updateSidebar(); }
-  }catch(e){}
-}
-
+function enterApp(){showPage('app');updateSidebar();if(adminToken)document.getElementById('nav-admin').style.display='flex';goTo('dashboard');checkServer();}
+async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
-  if(!U) return;
+  if(!U)return;
   document.getElementById('uName').textContent=U.name?.split(' ')[0]||'User';
   document.getElementById('uAv').textContent=U.name?.[0]?.toUpperCase()||'U';
-  const plan=U.plan||'free';
-  const inTrial=U.in_trial;
-  const badge=document.getElementById('uPlanBadge');
-  badge.textContent = inTrial ? '🔥 Trial' : plan.charAt(0).toUpperCase()+plan.slice(1);
-  badge.className = `user-plan-badge badge-${inTrial?'trial':plan}`;
-  // Show referral badge if refs=0
-  if(!U.ref_count) document.getElementById('refNavBadge').style.display='inline';
+  const plan=U.plan||'free';const inTrial=U.in_trial;const badge=document.getElementById('uPlanBadge');
+  badge.textContent=inTrial?'🔥 Trial':plan.charAt(0).toUpperCase()+plan.slice(1);
+  badge.className=`user-plan-badge badge-${inTrial?'trial':plan}`;
+  if(!U.ref_count)document.getElementById('refNavBadge').style.display='inline';
 }
+function showErr(el,msg){el.textContent=msg;el.style.display='block';}
 
-function showErr(el,msg){ el.textContent=msg; el.style.display='block'; }
-
-// ===== SMART BANNERS =====
 function renderBanners(){
-  if(!U) return;
-  const div=document.getElementById('smartBanners'); div.innerHTML='';
-  const plan=U.plan||'free';
-  const trial=U.in_trial;
-  const trial_days=U.trial_days_remaining||0;
-  const used=U.leads_used_today||0;
-  const lim=U.daily_limit||5;
-  const pct=lim>0?Math.round(used/lim*100):0;
-
-  // Trial countdown
-  if(trial && trial_days>0){
-    div.innerHTML+=`<div class="smart-banner sb-trial">
-      <div class="sb-icon">⏳</div>
-      <div class="sb-content">
-        <div class="sb-title">Trial ke <strong style="color:var(--orange)">${trial_days} din baaki!</strong></div>
-        <div class="sb-text">Abhi <strong>30 leads/day</strong> mil rahi hain. Trial ke baad 5/day. Pro lo ya refer karo!</div>
-      </div>
-      <button class="sb-btn" onclick="goTo('plans')">Pro Lein</button>
-    </div>`;
-  }
-
-  // Limit warning (80%+)
-  if(pct>=80 && pct<100){
-    div.innerHTML+=`<div class="smart-banner sb-limit">
-      <div class="sb-icon">⚠️</div>
-      <div class="sb-content">
-        <div class="sb-title">Aaj ki limit khatam hone wali hai!</div>
-        <div class="sb-text">${used}/${lim} leads use ho gayi. <strong>${lim-used} baaki hain.</strong> Kal fresh limit milegi.</div>
-      </div>
-      <button class="sb-btn" onclick="goTo('referral')">Limit Badhao</button>
-    </div>`;
-  }
-
-  // Limit full
-  if(pct>=100){
-    div.innerHTML+=`<div class="smart-banner sb-limit">
-      <div class="sb-icon">🚫</div>
-      <div class="sb-content">
-        <div class="sb-title">Aaj ki limit khatam!</div>
-        <div class="sb-text">Kal fresh limit milegi. Ya abhi refer karo — har referral = +1 lead/day permanently!</div>
-      </div>
-      <button class="sb-btn" onclick="goTo('referral')">Refer Karo</button>
-    </div>`;
-  }
-
-  // Referral push (free, not trial)
-  if(plan==='free' && !trial && (U.ref_count||0)<5){
-    div.innerHTML+=`<div class="smart-banner sb-ref">
-      <div class="sb-icon">🎯</div>
-      <div class="sb-content">
-        <div class="sb-title">Free mein zyada leads chahiye?</div>
-        <div class="sb-text">Har dost = <strong>+1 lead/day permanent</strong>. 20 dost = <strong>Pro FREE</strong>! Abhi share karo!</div>
-      </div>
-      <button class="sb-btn" onclick="goTo('referral')">Referral Link Lo</button>
-    </div>`;
-  }
-
-  // Upgrade push (free, not trial, used 70%+)
-  if(plan==='free' && !trial && pct>=70){
-    div.innerHTML+=`<div class="smart-banner sb-upgrade">
-      <div class="sb-icon">⚡</div>
-      <div class="sb-content">
-        <div class="sb-title">Pro = 100 leads/day — Rs.2,000/month</div>
-        <div class="sb-text">Sialkot exporter ka ek order = hazaron ka faida. Pro plan mein invest karo!</div>
-      </div>
-      <button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button>
-    </div>`;
-  }
+  if(!U)return;const div=document.getElementById('smartBanners');div.innerHTML='';
+  const plan=U.plan||'free',trial=U.in_trial,trial_days=U.trial_days_remaining||0;
+  const used=U.leads_used_today||0,lim=U.daily_limit||5,pct=lim>0?Math.round(used/lim*100):0;
+  if(trial&&trial_days>0){div.innerHTML+=`<div class="smart-banner sb-trial"><div class="sb-icon">⏳</div><div class="sb-content"><div class="sb-title">Trial ke <strong style="color:var(--orange)">${trial_days} din baaki!</strong></div><div class="sb-text">Abhi <strong>30 leads/day</strong> mil rahi hain.</div></div><button class="sb-btn" onclick="goTo('plans')">Pro Lein</button></div>`;}
+  if(pct>=80&&pct<100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">⚠️</div><div class="sb-content"><div class="sb-title">Limit khatam hone wali hai!</div><div class="sb-text">${used}/${lim} leads use. <strong>${lim-used} baaki.</strong></div></div><button class="sb-btn" onclick="goTo('referral')">Limit Badhao</button></div>`;}
+  if(pct>=100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">🚫</div><div class="sb-content"><div class="sb-title">Aaj ki limit khatam!</div><div class="sb-text">Kal fresh limit milegi. Ya abhi refer karo!</div></div><button class="sb-btn" onclick="goTo('referral')">Refer Karo</button></div>`;}
+  if(plan==='free'&&!trial&&(U.ref_count||0)<5){div.innerHTML+=`<div class="smart-banner sb-ref"><div class="sb-icon">🎯</div><div class="sb-content"><div class="sb-title">Free mein zyada leads chahiye?</div><div class="sb-text">Har dost = <strong>+1 lead/day</strong>. 20 dost = <strong>Pro FREE</strong>!</div></div><button class="sb-btn" onclick="goTo('referral')">Referral Link Lo</button></div>`;}
+  if(plan==='free'&&!trial&&pct>=70){div.innerHTML+=`<div class="smart-banner sb-upgrade"><div class="sb-icon">⚡</div><div class="sb-content"><div class="sb-title">Pro = 100 leads/day — Rs.2,000/month</div><div class="sb-text">Ek order = hazaron ka faida!</div></div><button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button></div>`;}
 }
-
-// ===== DASHBOARD =====
-function animateCounter(el, target){
-  if(!el) return;
-  const start = parseInt(el.textContent)||0;
-  const dur = 600, step = 20;
-  let current = start;
-  const inc = (target-start)/(dur/step);
-  const timer = setInterval(()=>{
-    current += inc;
-    if((inc>0&&current>=target)||(inc<0&&current<=target)){current=target;clearInterval(timer);}
-    el.textContent = Math.round(current);
-  },step);
-}
-
+function animateCounter(el,target){if(!el)return;const start=parseInt(el.textContent)||0,dur=600,step=20;let current=start;const inc=(target-start)/(dur/step);const timer=setInterval(()=>{current+=inc;if((inc>0&&current>=target)||(inc<0&&current<=target)){current=target;clearInterval(timer);}el.textContent=Math.round(current);},step);}
 async function loadDashboard(){
-  if(!U) return;
-  renderBanners();
-  updateUsageBar();
-  // Update steps
-  const leadsData = await api('GET','/leads');
-  const leads = leadsData.leads||[];
-  animateCounter(document.getElementById('sTotalLeads'), leads.length);
-  animateCounter(document.getElementById('sHotLeads'), leads.filter(l=>l.score>=70).length);
-  document.getElementById('sUsedToday').textContent=U.leads_used_today||0;
-  document.getElementById('sRefs').textContent=U.ref_count||0;
+  if(!U)return;renderBanners();updateUsageBar();
+  const leadsData=await api('GET','/leads');const leads=leadsData.leads||[];
+  animateCounter(document.getElementById('sTotalLeads'),leads.length);animateCounter(document.getElementById('sHotLeads'),leads.filter(l=>l.score>=70).length);
+  document.getElementById('sUsedToday').textContent=U.leads_used_today||0;document.getElementById('sRefs').textContent=U.ref_count||0;
   document.getElementById('sRefsTo').textContent=`${Math.max(0,20-(U.ref_count||0))} refs to Pro`;
-  // Onboarding steps
-  if(leads.length>0){
-    document.getElementById('step2').className='step-item done';
-    document.getElementById('step2').querySelector('.step-num').textContent='✓';
-  } else {
-    document.getElementById('step2').className='step-item active-step';
-  }
+  if(leads.length>0){document.getElementById('step2').className='step-item done';document.getElementById('step2').querySelector('.step-num').textContent='✓';}
+  else{document.getElementById('step2').className='step-item active-step';}
   renderCampGrid(leads);
 }
-
 function updateUsageBar(){
-  if(!U) return;
-  const used=U.leads_used_today||0, lim=U.daily_limit||5;
-  const rem=Math.max(0,lim-used), pct=lim>0?Math.min(100,Math.round(used/lim*100)):0;
-  document.getElementById('uUsed').textContent=used;
-  document.getElementById('uLimit').textContent=lim;
-  document.getElementById('sUsedToday').textContent=used;
-  document.getElementById('sRemText').textContent=rem+' remaining';
-  const fill=document.getElementById('uFill');
-  fill.style.width=pct+'%';
-  fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
-  const hint=document.getElementById('uHint');
-  const trial=U.in_trial, trialDays=U.trial_days_remaining||0;
-  if(trial) hint.innerHTML=`🔥 Trial: ${trialDays} din baaki — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Pro lo ya refer karo!</a>`;
-  else if(U.plan==='free') hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
+  if(!U)return;const used=U.leads_used_today||0,lim=U.daily_limit||5;const rem=Math.max(0,lim-used),pct=lim>0?Math.min(100,Math.round(used/lim*100)):0;
+  document.getElementById('uUsed').textContent=used;document.getElementById('uLimit').textContent=lim;document.getElementById('sUsedToday').textContent=used;document.getElementById('sRemText').textContent=rem+' remaining';
+  const fill=document.getElementById('uFill');fill.style.width=pct+'%';fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
+  const hint=document.getElementById('uHint');const trial=U.in_trial,trialDays=U.trial_days_remaining||0;
+  if(trial)hint.innerHTML=`🔥 Trial: ${trialDays} din baaki — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Pro lo ya refer karo!</a>`;
+  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
   else hint.innerHTML=`${U.plan} plan: ${lim} leads/day`;
   const trialBadge=document.getElementById('uTrialBadge');
-  if(trial) trialBadge.innerHTML=`<span style="background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;">🔥 Trial Active</span>`;
+  if(trial)trialBadge.innerHTML=`<span style="background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;">🔥 Trial Active</span>`;
   else trialBadge.innerHTML='';
 }
-
 function renderCampGrid(leads){
-  const camps={};
-  leads.forEach(l=>{if(!camps[l.campaign])camps[l.campaign]={leads:0,hot:0};camps[l.campaign].leads++;if(l.score>=70)camps[l.campaign].hot++;});
-  const g=document.getElementById('campGrid'), keys=Object.keys(camps);
-  if(!keys.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe jaayein — product likhein</p></div>';return;}
+  const camps={};leads.forEach(l=>{if(!camps[l.campaign])camps[l.campaign]={leads:0,hot:0};camps[l.campaign].leads++;if(l.score>=70)camps[l.campaign].hot++;});
+  const g=document.getElementById('campGrid'),keys=Object.keys(camps);
+  if(!keys.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe jaayein</p></div>';return;}
   g.innerHTML=keys.slice(0,4).map(k=>`<div class="camp-card" onclick="goTo('leads')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><div class="camp-name">${k}</div><span style="font-size:10px;background:rgba(29,184,126,0.1);color:var(--success);padding:1px 7px;border-radius:20px;">Active</span></div><div class="camp-stats"><div class="camp-stat"><span>${camps[k].leads}</span>Leads</div><div class="camp-stat"><span>${camps[k].hot}</span>Hot</div></div></div>`).join('');
 }
 
-// ===== SEARCH =====
 const KW={gym:['Fitness boutiques','Gym equipment wholesale','Sports retailers'],surgical:['Medical supply companies','Hospital equipment','Surgical instruments'],leather:['Leather goods stores','Luxury accessories','Fashion boutiques'],textile:['Fabric importers','Clothing manufacturers','Garment wholesale'],sports:['Sports equipment','Athletic gear','Outdoor stores'],furniture:['Furniture importers','Interior design firms','Home decor']};
-
 function previewKW(){
-  const p=document.getElementById('searchProduct').value.toLowerCase();
-  const box=document.getElementById('aiHint'); const tags=document.getElementById('aiHintTags');
-  let kws=[];
+  const p=document.getElementById('searchProduct').value.toLowerCase();const box=document.getElementById('aiHint');const tags=document.getElementById('aiHintTags');let kws=[];
   for(const [k,v] of Object.entries(KW)){if(p.includes(k)){kws=v;break;}}
   if(!kws.length&&p.length>2)kws=[p+' importers',p+' wholesalers',p+' retailers'];
   if(kws.length){box.style.display='block';tags.innerHTML=kws.map(k=>`<span class="tag" style="cursor:pointer;" onclick="document.getElementById('searchProduct').value='${k}';previewKW();">${k}</span>`).join('');}
   else box.style.display='none';
 }
-
 async function doSearch(page=1){
-  const product=document.getElementById('searchProduct').value.trim();
-  const country=document.getElementById('searchCountry').value;
-  const campaign=document.getElementById('searchCampaign').value.trim()||'Default';
+  const product=document.getElementById('searchProduct').value.trim();const country=document.getElementById('searchCountry').value;const campaign=document.getElementById('searchCampaign').value.trim()||'Default';
   if(!product){showToast('Product/Service likho pehle!',true);return;}
-  const btn=document.getElementById('searchBtn');
-  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Searching...';
-  document.getElementById('searchLoading').classList.add('on');
-  document.getElementById('resultsArea').style.display='none';
+  const btn=document.getElementById('searchBtn');btn.disabled=true;btn.innerHTML='<div class="spin"></div> Searching...';
+  document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';
   try{
     const r=await api('POST','/search',{query:product,country,page,campaign});
     if(r.status===429||r.limit_reached){showToast(r.error||'Limit khatam!',true);return;}
     if(r.error){showToast(r.error,true);return;}
-    currentLeads=r.leads||[];
-    window._lastSearch=r;
+    currentLeads=r.leads||[];window._lastSearch=r;
     if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
     renderResults(r);
-    // Show blur notice for free non-trial users
     const blurNotice=document.getElementById('blurNotice');
-    if(U&&U.plan==='free'&&!U.in_trial)blurNotice.style.display='flex';
-    else blurNotice.style.display='none';
-    // Update step 2
-    document.getElementById('step2').className='step-item done';
-    document.getElementById('step2').querySelector('.step-num').textContent='✓';
+    if(U&&U.plan==='free'&&!U.in_trial)blurNotice.style.display='flex';else blurNotice.style.display='none';
+    document.getElementById('step2').className='step-item done';document.getElementById('step2').querySelector('.step-num').textContent='✓';
   }catch(e){showToast('Server error',true);}
   finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';document.getElementById('searchLoading').classList.remove('on');}
 }
-
 function renderResults(d){
-  const leads=d.leads||[];
-  document.getElementById('resultsArea').style.display='block';
+  const leads=d.leads||[];document.getElementById('resultsArea').style.display='block';
   document.getElementById('resTitle').textContent=`${d.pagination?.total_results||leads.length} Leads Mile`;
   document.getElementById('resMeta').textContent=`Page ${d.pagination?.page||1}/${d.pagination?.total_pages||1}`;
-  const cb=document.getElementById('resCacheBadge');
-  cb.className=d.cache?.from_cache?'cache-badge cb-old':'cache-badge cb-fresh';
-  cb.textContent=d.cache?.from_cache?`📦 Cache (${d.cache.age_days}d)`:'🔄 Fresh';
+  const cb=document.getElementById('resCacheBadge');cb.className=d.cache?.from_cache?'cache-badge cb-old':'cache-badge cb-fresh';cb.textContent=d.cache?.from_cache?`📦 Cache (${d.cache.age_days}d)`:'🔄 Fresh';
   const colMap={name:'Business',address:'Address',category:'Category',rating:'Rating',contact:'Contact',website:'Website',score:'Score',priority:'Priority',notes:'Notes',action:'Action'};
   document.getElementById('resHead').innerHTML=activeSC.map(c=>`<th>${colMap[c]||c}</th>`).join('');
   const tbody=document.getElementById('resBody');
-  if(!leads.length){tbody.innerHTML=`<tr><td colspan="${activeSC.length}" style="text-align:center;padding:28px;color:var(--muted)">Koi result nahi mila — query change karein</td></tr>`;return;}
+  if(!leads.length){tbody.innerHTML=`<tr><td colspan="${activeSC.length}" style="text-align:center;padding:28px;color:var(--muted)">Koi result nahi mila</td></tr>`;return;}
   tbody.innerHTML=leads.map((l,i)=>{
-    const sc=l.score>=70?'sp-high':l.score>=40?'sp-med':'sp-low';
-    const pc=(l.priority||'').toLowerCase()==='high'?'pp-high':(l.priority||'').toLowerCase()==='medium'?'pp-med':'pp-low';
+    const sc=l.score>=70?'sp-high':l.score>=40?'sp-med':'sp-low';const pc=(l.priority||'').toLowerCase()==='high'?'pp-high':(l.priority||'').toLowerCase()==='medium'?'pp-med':'pp-low';
     const isBlurred=l.email_blurred||l.phone_blurred;
     const emailHtml=l.emails?.length?`<div class="${isBlurred?'blur-info':'confirmed'}" ${isBlurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${isBlurred?'🔒':''} ${l.emails[0]}</div>`:`<div class="not-found">—</div>`;
     const phoneHtml=l.phone?`<div class="${l.phone_blurred?'blur-info':'confirmed'}" ${l.phone_blurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${l.phone_blurred?'🔒':''} ${l.phone}</div>`:`<div class="not-found">—</div>`;
-    const cells={
-      name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,
-      address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,
-      category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,
-      rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,
-      contact:`${emailHtml}${phoneHtml}`,
-      website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),
-      score:`<div class="score-pill ${sc}">${l.score}</div>`,
-      priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,
-      notes:`<div style="font-size:10px;color:var(--muted);font-style:italic">${(l.data_notes||[]).join(' · ')}</div>`,
-      action:`<button class="btn-email" onclick="openEmailModal(${i})">✉ Email</button>`,
-    };
+    const cells={name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,contact:`${emailHtml}${phoneHtml}`,website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),score:`<div class="score-pill ${sc}">${l.score}</div>`,priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,notes:`<div style="font-size:10px;color:var(--muted);font-style:italic">${(l.data_notes||[]).join(' · ')}</div>`,action:`<button class="btn-email" onclick="openEmailModal(${i})">✉ Email</button>`};
     return `<tr>${activeSC.map(c=>`<td>${cells[c]||''}</td>`).join('')}</tr>`;
   }).join('');
-  const pg=d.pagination;
-  document.getElementById('resPagination').innerHTML=pg&&pg.total_pages>1?`<button class="page-btn" onclick="doSearch(${pg.page-1})" ${pg.page<=1?'disabled':''}>← Prev</button><span style="font-size:11px;color:var(--muted)">Page ${pg.page}/${pg.total_pages}</span><button class="page-btn" onclick="doSearch(${pg.page+1})" ${!pg.has_next?'disabled':''}>Next →</button>`:'';
+  const pg=d.pagination;document.getElementById('resPagination').innerHTML=pg&&pg.total_pages>1?`<button class="page-btn" onclick="doSearch(${pg.page-1})" ${pg.page<=1?'disabled':''}>← Prev</button><span style="font-size:11px;color:var(--muted)">Page ${pg.page}/${pg.total_pages}</span><button class="page-btn" onclick="doSearch(${pg.page+1})" ${!pg.has_next?'disabled':''}>Next →</button>`:'';
 }
-
-// ===== EMAIL MODAL =====
 function openEmailModal(idx){
-  const lead=currentLeads[idx];if(!lead)return;
-  const modal=document.createElement('div');modal.className='modal-overlay';
+  const lead=currentLeads[idx];if(!lead)return;const modal=document.createElement('div');modal.className='modal-overlay';
   modal.innerHTML=`<div class="modal"><div class="modal-hdr"><div class="modal-title">✉ AI Email — ${lead.name}</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div><div id="eContent"><div class="loading-box on" style="justify-content:center;"><div class="big-spin"></div><div>AI email ban rahi hai...</div></div></div></div>`;
-  document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
-  genEmail(lead,modal);
+  document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});genEmail(lead,modal);
 }
-
 async function genEmail(lead,modal){
   try{
     const r=await api('POST','/generate-email',{business_name:lead.name,category:lead.category,country:lead.country,product:document.getElementById('searchProduct').value,sender_name:U?.name||'',sender_company:U?.company||''});
     if(r.error){document.getElementById('eContent').innerHTML=`<p style="color:var(--danger);padding:20px;">${r.error}</p>`;return;}
     const to=lead.emails?.length&&!lead.email_blurred?lead.emails[0]:'';
     document.getElementById('eContent').innerHTML=`<div style="margin-bottom:8px;font-size:11px;color:var(--muted)">To: <strong style="color:var(--text)">${to||'Email available nahi'}</strong></div><div class="email-subject"><strong>Subject:</strong> ${r.subject}</div><div class="email-body">${r.body}</div><div class="modal-actions"><button class="btn-sec" onclick="navigator.clipboard.writeText(${JSON.stringify('Subject: '+r.subject+'\n\n'+r.body)});showToast('Copy ho gaya!')">📋 Copy</button>${to?`<a href="mailto:${to}?subject=${encodeURIComponent(r.subject)}&body=${encodeURIComponent(r.body)}" class="btn-act" style="text-decoration:none;padding:8px 14px;font-size:12px;">📧 Email App</a>`:''}</div>`;
-    // Update step 3
-    document.getElementById('step3').className='step-item done';
-    document.getElementById('step3').querySelector('.step-num').textContent='✓';
+    document.getElementById('step3').className='step-item done';document.getElementById('step3').querySelector('.step-num').textContent='✓';
   }catch(e){document.getElementById('eContent').innerHTML='<p style="color:var(--danger);padding:20px;">Server error</p>';}
 }
-
-// ===== SAVED LEADS =====
 async function loadSavedLeads(){
   document.getElementById('savedBody').innerHTML=`<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--muted)">Loading...</td></tr>`;
-  try{
-    const r=await api('GET','/leads');
-    if(r.success){allLeads=r.leads||[];document.getElementById('leadsMeta').textContent=`${allLeads.length} total`;renderSavedLeads(allLeads);}
-  }catch(e){}
+  try{const r=await api('GET','/leads');if(r.success){allLeads=r.leads||[];document.getElementById('leadsMeta').textContent=`${allLeads.length} total`;renderSavedLeads(allLeads);}}catch(e){}
 }
-
 function renderSavedLeads(leads){
   const colMap={business_name:'Business',email:'Email',phone:'Phone',website:'Website',address:'Address',category:'Category',rating:'Rating',score:'Score',priority:'Priority',status:'Status',campaign:'Campaign',created_at:'Date'};
   document.getElementById('savedHead').innerHTML=activeSaved.map(c=>`<th>${colMap[c]||c}</th>`).join('');
-  if(!leads.length){document.getElementById('savedBody').innerHTML=`<tr><td colspan="${activeSaved.length}" style="text-align:center;padding:28px;color:var(--muted)">Koi lead save nahi — pehle search karein</td></tr>`;return;}
+  if(!leads.length){document.getElementById('savedBody').innerHTML=`<tr><td colspan="${activeSaved.length}" style="text-align:center;padding:28px;color:var(--muted)">Koi lead save nahi</td></tr>`;return;}
   const sc=s=>(s||0)>=70?'sp-high':(s||0)>=40?'sp-med':'sp-low';
   document.getElementById('savedBody').innerHTML=leads.slice(0,300).map(l=>{
-    const cells={
-      business_name:`<div style="font-weight:500">${l.business_name||''}</div>`,
-      email:`<div style="font-size:11px">${l.email||'<span style="color:var(--muted)">—</span>'}</div>`,
-      phone:`<div style="font-size:11px">${l.phone||'<span style="color:var(--muted)">—</span>'}</div>`,
-      website:l.website?`<a href="${l.website}" target="_blank" class="website-link">🔗</a>`:`<span style="color:var(--muted);font-size:11px">—</span>`,
-      address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,40)}</div>`,
-      category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,
-      rating:`<div style="font-size:11px">⭐ ${l.rating||0}</div>`,
-      score:`<div class="score-pill ${sc(l.score)}">${l.score||0}</div>`,
-      priority:`<span style="font-size:10px;color:var(--muted)">${l.priority||''}</span>`,
-      status:`<span style="font-size:11px;color:var(--muted)">${l.status||'New'}</span>`,
-      campaign:`<span style="font-size:11px;color:var(--muted)">${l.campaign||''}</span>`,
-      created_at:`<span style="font-size:11px;color:var(--muted)">${(l.created_at||'').substring(0,10)}</span>`,
-    };
+    const cells={business_name:`<div style="font-weight:500">${l.business_name||''}</div>`,email:`<div style="font-size:11px">${l.email||'<span style="color:var(--muted)">—</span>'}</div>`,phone:`<div style="font-size:11px">${l.phone||'<span style="color:var(--muted)">—</span>'}</div>`,website:l.website?`<a href="${l.website}" target="_blank" class="website-link">🔗</a>`:`<span style="color:var(--muted);font-size:11px">—</span>`,address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,40)}</div>`,category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,rating:`<div style="font-size:11px">⭐ ${l.rating||0}</div>`,score:`<div class="score-pill ${sc(l.score)}">${l.score||0}</div>`,priority:`<span style="font-size:10px;color:var(--muted)">${l.priority||''}</span>`,status:`<span style="font-size:11px;color:var(--muted)">${l.status||'New'}</span>`,campaign:`<span style="font-size:11px;color:var(--muted)">${l.campaign||''}</span>`,created_at:`<span style="font-size:11px;color:var(--muted)">${(l.created_at||'').substring(0,10)}</span>`};
     return `<tr>${activeSaved.map(c=>`<td>${cells[c]||''}</td>`).join('')}</tr>`;
   }).join('');
 }
+function filterLeads(){const q=document.getElementById('leadsSearch').value.toLowerCase();renderSavedLeads(allLeads.filter(l=>(l.business_name||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)||(l.campaign||'').toLowerCase().includes(q)));}
+async function exportCSV(){if(U?.plan==='free'){showToast('CSV export Pro/Agency mein hai!',true);goTo('plans');return;}window.open(`${SERVER}/leads/export`,{headers:{Authorization:'Bearer '+token}});showToast('CSV download ho rahi hai...');}
 
-function filterLeads(){ const q=document.getElementById('leadsSearch').value.toLowerCase(); renderSavedLeads(allLeads.filter(l=>(l.business_name||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)||(l.campaign||'').toLowerCase().includes(q))); }
-async function exportCSV(){ if(U?.plan==='free'){showToast('CSV export Pro/Agency mein hai!',true);goTo('plans');return;} window.open(`${SERVER}/leads/export`,{headers:{Authorization:'Bearer '+token}}); showToast('CSV download ho rahi hai...'); }
-
-// ===== REFERRAL =====
 async function loadReferral(){
   try{
-    const r=await api('GET','/referral/history');
-    if(r.error)return;
-    refData=r;
-    document.getElementById('refLink').textContent=r.ref_link;
-    document.getElementById('refTotal').textContent=r.total_refs;
-    document.getElementById('refBonus').textContent=r.bonus_leads_per_day;
-    document.getElementById('refToPro').textContent=r.refs_to_pro;
-    // Progress bar
-    document.getElementById('refProgressFill').style.width=r.progress_pct+'%';
-    document.getElementById('refProgressText').textContent=`${r.total_refs} / 20`;
-    // Milestones
-    document.getElementById('refMilestones').innerHTML=(r.milestones||[]).map(m=>`
-      <div class="pm-item ${m.reached?'reached':''} ${m.is_pro?'pro-reward':''}">
-        <div class="pm-num">${m.refs}</div>
-        <div class="pm-label">Referrals</div>
-        <div class="pm-reward">${m.reward} ${m.reached?'✓':''}</div>
-      </div>`).join('');
-    // History
-    const hist=r.history||[];
-    document.getElementById('refHistoryCount').textContent=`${hist.length} log join hue`;
-    if(!hist.length){
-      document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">Abhi tak koi dost join nahi hua — share karo! 🚀</div>`;
-    } else {
-      document.getElementById('refHistoryList').innerHTML=hist.map((h,i)=>`
-        <div class="ref-row">
-          <div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div>
-          <div class="ref-info">
-            <div class="ref-name">${h.name||'User'} <span style="font-size:10px;background:rgba(90,106,130,0.15);color:var(--muted);padding:1px 6px;border-radius:20px;">${h.plan||'free'}</span></div>
-            <div class="ref-email">${h.email_masked||''}</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="ref-date">${h.created_at||''}</div>
-            <div class="ref-bonus">+1 lead/day</div>
-          </div>
-        </div>`).join('');
-    }
-    // Share message
-    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter
-
-Pakistani exporters ke liye best tool!
-✅ Real B2B leads — Google data
-✅ AI scoring
-✅ Email generator
-✅ FREE se shuru karein!
-
-Mere link se join karein:
-${r.ref_link}
-
-(Join karo to dono ko extra leads milenge!)`;
-    // Update step 4
+    const r=await api('GET','/referral/history');if(r.error)return;refData=r;
+    document.getElementById('refLink').textContent=r.ref_link;document.getElementById('refTotal').textContent=r.total_refs;document.getElementById('refBonus').textContent=r.bonus_leads_per_day;document.getElementById('refToPro').textContent=r.refs_to_pro;
+    document.getElementById('refProgressFill').style.width=r.progress_pct+'%';document.getElementById('refProgressText').textContent=`${r.total_refs} / 20`;
+    document.getElementById('refMilestones').innerHTML=(r.milestones||[]).map(m=>`<div class="pm-item ${m.reached?'reached':''} ${m.is_pro?'pro-reward':''}"><div class="pm-num">${m.refs}</div><div class="pm-label">Referrals</div><div class="pm-reward">${m.reward} ${m.reached?'✓':''}</div></div>`).join('');
+    const hist=r.history||[];document.getElementById('refHistoryCount').textContent=`${hist.length} log join hue`;
+    if(!hist.length){document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">Abhi tak koi dost join nahi hua — share karo! 🚀</div>`;}
+    else{document.getElementById('refHistoryList').innerHTML=hist.map(h=>`<div class="ref-row"><div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div><div class="ref-info"><div class="ref-name">${h.name||'User'} <span style="font-size:10px;background:rgba(90,106,130,0.15);color:var(--muted);padding:1px 6px;border-radius:20px;">${h.plan||'free'}</span></div><div class="ref-email">${h.email_masked||''}</div></div><div style="text-align:right;"><div class="ref-date">${h.created_at||''}</div><div class="ref-bonus">+1 lead/day</div></div></div>`).join('');}
+    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nPakistani exporters ke liye best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE se shuru karein!\n\nMere link se join karein:\n${r.ref_link}\n\n(Join karo to dono ko extra leads milenge!)`;
     if(r.total_refs>0){document.getElementById('step4').className='step-item done';document.getElementById('step4').querySelector('.step-num').textContent='✓';}
     else{document.getElementById('step4').className='step-item active-step';}
   }catch(e){}
 }
+function copyRef(){navigator.clipboard.writeText(document.getElementById('refLink').textContent);showToast('Link copy ho gaya! 🎉');}
+function copyShareMsg(){navigator.clipboard.writeText(document.getElementById('shareMsg').textContent);showToast('Message copy ho gaya!');}
+function shareWhatsApp(){if(!refData)return;const msg=encodeURIComponent(`🚀 Jaiffy AI Lead Hunter\nPakistani exporters ke liye!\nFree join karein: ${refData.ref_link}`);window.open(`https://wa.me/?text=${msg}`,'_blank');}
+function shareFB(){if(!refData)return;window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(refData.ref_link)}`,'_blank');}
+function shareLinkedIn(){if(!refData)return;window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(refData.ref_link)}`,'_blank');}
 
-function copyRef(){ navigator.clipboard.writeText(document.getElementById('refLink').textContent); showToast('Link copy ho gaya! 🎉'); }
-function copyShareMsg(){ navigator.clipboard.writeText(document.getElementById('shareMsg').textContent); showToast('Message copy ho gaya!'); }
-function shareWhatsApp(){ if(!refData)return; const msg=encodeURIComponent(`🚀 Jaiffy AI Lead Hunter\nPakistani exporters ke liye!\nFree join karein: ${refData.ref_link}`); window.open(`https://wa.me/?text=${msg}`,'_blank'); }
-function shareFB(){ if(!refData)return; window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(refData.ref_link)}`,'_blank'); }
-function shareLinkedIn(){ if(!refData)return; window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(refData.ref_link)}`,'_blank'); }
-
-// ===== PLANS =====
 async function loadPlans(){
-  const grid = document.getElementById('plansGrid');
-  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)"><div class="big-spin" style="margin:0 auto 12px;"></div>Plans load ho rahe hain...</div>';
+  const grid=document.getElementById('plansGrid');grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)"><div class="big-spin" style="margin:0 auto 12px;"></div>Plans load ho rahe hain...</div>';
   try{
-    const r = await fetch(SERVER+'/plans');
-    const d = await r.json();
-    const plans = d.plans || [];
-    if(!plans.length){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Plans load nahi hue — server check karein</div>'; return; }
-    grid.innerHTML = plans.map((p,i) => `
-      <div class="plan-card ${(U?.plan||'free')===p.id?'current':''} ${p.id==='pro'?'popular':''}" style="animation:fadeUp 0.4s ease ${i*0.1}s both;">
-        ${p.id==='pro'?'<div class="popular-badge">⭐ Most Popular</div>':''}
-        ${(U?.plan||'free')===p.id?'<div style="position:absolute;top:12px;right:12px;font-size:10px;background:var(--orange);color:#fff;padding:2px 8px;border-radius:20px;font-weight:700;">Current</div>':''}
-        <div class="plan-name">${p.name}</div>
-        <div class="plan-price">${p.price_pkr===0?'<span style="font-size:26px;">Free</span>':'Rs. '+p.price_pkr.toLocaleString()}<span>/month</span></div>
-        <div class="plan-leads" style="margin-bottom:16px;">
-          <span style="font-family:Syne,sans-serif;font-size:22px;font-weight:800;color:var(--orange)">${p.leads_per_day}</span>
-          <span style="color:var(--muted);font-size:12px;"> leads/day</span>
-        </div>
-        <ul class="plan-features">${(p.features||[]).map(f=>`<li>${f}</li>`).join('')}</ul>
-        <button class="plan-btn ${(U?.plan||'free')===p.id?'current-btn':''}" onclick="selectPlan('${p.id}','${p.price_pkr}')">
-          ${(U?.plan||'free')===p.id?'✓ Current Plan':p.price_pkr===0?'Free Plan':'🚀 Select Plan'}
-        </button>
-      </div>`).join('');
-  }catch(e){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Error: '+e.message+'</div>';
-  }
+    const r=await fetch(SERVER+'/plans');const d=await r.json();const plans=d.plans||[];
+    if(!plans.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Plans load nahi hue</div>';return;}
+    if(d.payment_number)document.getElementById('paymentNumber').textContent=d.payment_number;
+    if(d.payment_whatsapp)document.getElementById('paymentWhatsapp').textContent=d.payment_whatsapp;
+    grid.innerHTML=plans.map((p,i)=>`<div class="plan-card ${(U?.plan||'free')===p.id?'current':''} ${p.id==='pro'?'popular':''}" style="animation:fadeUp 0.4s ease ${i*0.1}s both;">${p.id==='pro'?'<div class="popular-badge">⭐ Most Popular</div>':''}${(U?.plan||'free')===p.id?'<div style="position:absolute;top:12px;right:12px;font-size:10px;background:var(--orange);color:#fff;padding:2px 8px;border-radius:20px;font-weight:700;">Current</div>':''}<div class="plan-name">${p.name}</div><div class="plan-price">${p.price_pkr===0?'<span style="font-size:26px;">Free</span>':'Rs. '+p.price_pkr.toLocaleString()}<span>/month</span></div><div class="plan-leads" style="margin-bottom:16px;"><span style="font-family:Syne,sans-serif;font-size:22px;font-weight:800;color:var(--orange)">${p.leads_per_day}</span><span style="color:var(--muted);font-size:12px;"> leads/day</span></div><ul class="plan-features">${(p.features||[]).map(f=>`<li>${f}</li>`).join('')}</ul><button class="plan-btn ${(U?.plan||'free')===p.id?'current-btn':''}" onclick="selectPlan('${p.id}','${p.price_pkr}')">${(U?.plan||'free')===p.id?'✓ Current Plan':p.price_pkr===0?'Free Plan':'🚀 Select Plan'}</button></div>`).join('');
+  }catch(e){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Error: '+e.message+'</div>';}
 }
-
 function selectPlan(planId,price){
   if(planId==='free')return;
   const msg=`Pro Plan (Rs.${parseInt(price).toLocaleString()}/month) ke liye:\n\n1. JazzCash/EasyPaisa: ${PAYMENT_NUMBER}\n2. Screenshot bhejein: ${PAYMENT_WA}\n3. 24 ghante mein activate!\n\nWhatsApp pe bhejein?`;
-  if(confirm(msg)) window.open(`https://wa.me/${PAYMENT_WA.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(`Jaiffy ${planId.toUpperCase()} Plan lena hai - Rs.${price}/month - User: ${U?.email||''}`)}`,'_blank');
+  if(confirm(msg))window.open(`https://wa.me/${PAYMENT_WA.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(`Jaiffy ${planId.toUpperCase()} Plan lena hai - Rs.${price}/month - User: ${U?.email||''}`)}`,'_blank');
 }
-
-// ===== SETTINGS =====
 function loadSettings(){
-  if(!U)return;
-  document.getElementById('settName').value=U.name||'';
-  document.getElementById('settEmail').value=U.email||'';
-  document.getElementById('settCompany').value=U.company||'';
-  document.getElementById('settPlan').textContent=(U.plan||'free').toUpperCase()+(U.in_trial?' (Trial)':'');
-  document.getElementById('settLimit').textContent=U.daily_limit||5;
-  document.getElementById('settRef').textContent=U.ref_code||'-';
-  document.getElementById('settRefs').textContent=U.ref_count||0;
-  checkServer();
+  if(!U)return;document.getElementById('settName').value=U.name||'';document.getElementById('settEmail').value=U.email||'';document.getElementById('settCompany').value=U.company||'';
+  document.getElementById('settPlan').textContent=(U.plan||'free').toUpperCase()+(U.in_trial?' (Trial)':'');document.getElementById('settLimit').textContent=U.daily_limit||5;
+  document.getElementById('settRef').textContent=U.ref_code||'-';document.getElementById('settRefs').textContent=U.ref_count||0;checkServer();
 }
-
 async function checkServer(){
   const badge=document.getElementById('srvBadge');if(!badge)return;
-  try{
-    const r=await fetch(`${SERVER}/health`);const d=await r.json();
-    badge.className='badge-online';badge.innerHTML=`<span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;"></span> v${d.version} Online`;
-  }catch(e){badge.style.cssText='color:var(--danger);font-size:11px;';badge.textContent='Offline';}
+  try{const r=await fetch(`${SERVER}/health`);const d=await r.json();badge.className='badge-online';badge.innerHTML=`<span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;"></span> v${d.version} Online`;}
+  catch(e){badge.style.cssText='color:var(--danger);font-size:11px;';badge.textContent='Offline';}
 }
 
 // ===== ADMIN =====
@@ -1413,12 +785,13 @@ async function loadAdmin(){
     const r=await api('POST','/admin/dashboard',{admin_pass:adminToken});
     if(r.error){document.getElementById('adminContent').innerHTML='<div style="text-align:center;padding:40px;color:var(--danger);">Access denied</div>';return;}
     renderAdmin(r);
+    setTimeout(()=>{loadApiKeys();loadAppSettings();},300);
   }catch(e){document.getElementById('adminContent').innerHTML='<div style="text-align:center;padding:40px;color:var(--danger);">Server error</div>';}
 }
-
 function renderAdmin(d){
   const u=d.users||{},l=d.leads||{},am=d.api_month||{},rev=d.revenue||{},sec=d.security||{};
   const barClass=am.status==='OK'?'apb-ok':am.status==='WARNING'?'apb-warn':'apb-bad';
+  const ks=d.api_keys_summary||{};
   document.getElementById('adminContent').innerHTML=`
     <div class="admin-grid">
       <div class="admin-card good"><div class="admin-label">Total Users</div><div class="admin-val">${u.total||0}</div><div class="admin-sub">+${u.new_today||0} aaj · +${u.new_this_month||0} mahine</div></div>
@@ -1439,6 +812,8 @@ function renderAdmin(d){
         <div style="margin-top:10px;padding:10px;background:var(--bg2);border-radius:8px;font-size:12px;">
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted)">Aaj kharcha:</span><strong>$${d.api_today?.cost_usd||0}</strong></div>
           <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Status:</span><strong style="color:${am.status==='OK'?'var(--success)':am.status==='WARNING'?'var(--warning)':'var(--danger)'}">${am.status||'OK'}</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Gemini Keys:</span><strong style="color:var(--orange)">${ks.gemini?.active||0}/${ks.gemini?.total||0} active</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Maps Keys:</span><strong style="color:var(--blue)">${ks.maps?.active||0}/${ks.maps?.total||0} active</strong></div>
         </div>
       </div>
       <div class="admin-sec">
@@ -1450,9 +825,7 @@ function renderAdmin(d){
       </div>
     </div>
     <div class="admin-sec">
-      <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">
-        👥 Users <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="loadAllUsers()">All Users</button>
-      </div>
+      <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">👥 Users <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="loadAllUsers()">All Users</button></div>
       <table class="admin-users-tbl">
         <thead><tr><th>Naam</th><th>Email</th><th>Plan</th><th>Leads</th><th>Refs</th><th>Action</th></tr></thead>
         <tbody>${(d.top_users||[]).map(u=>`<tr><td>${u.name||''}</td><td style="color:var(--muted)">${u.email||''}</td><td><span class="pp-${u.plan||'free'}">${u.plan||'free'}</span></td><td>${u.lead_count||0}</td><td>${u.ref_count||0}</td><td><button class="btn-up" onclick="quickUpgrade('${u.email}')">Upgrade</button></td></tr>`).join('')}</tbody>
@@ -1465,52 +838,188 @@ function renderAdmin(d){
         <button class="btn-act" style="background:var(--bg2);color:var(--text);border:1px solid var(--border);" onclick="quickUpgrade()">⬆ User Upgrade</button>
       </div>
       <div style="margin-top:12px;font-size:11px;color:var(--muted)">Server: ${d.server_time||''}</div>
+    </div>
+
+    <!-- API KEYS MANAGER -->
+    <div class="admin-sec" id="adminApiKeysSection">
+      <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">
+        🔑 API Keys Manager
+        <div style="display:flex;gap:8px;">
+          <button class="btn-act" style="font-size:11px;padding:6px 12px;background:var(--orange);" onclick="showAddKeyModal('gemini')">+ Gemini Key</button>
+          <button class="btn-act" style="font-size:11px;padding:6px 12px;background:var(--blue);" onclick="showAddKeyModal('maps')">+ Maps Key</button>
+        </div>
+      </div>
+      <div id="apiKeysList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Keys load ho rahi hain...</div></div>
+    </div>
+
+    <!-- APP SETTINGS -->
+    <div class="admin-sec" id="adminSettingsSection">
+      <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">
+        ⚙️ App Settings
+        <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="saveAppSettings()">💾 Save All</button>
+      </div>
+      <div id="appSettingsList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Settings load ho rahi hain...</div></div>
     </div>`;
 }
 
 async function loadAllUsers(){
   try{
-    const r=await api('POST','/admin/users',{admin_pass:adminToken});
-    if(r.error)return;
+    const r=await api('POST','/admin/users',{admin_pass:adminToken});if(r.error)return;
     const modal=document.createElement('div');modal.className='modal-overlay';
     modal.innerHTML=`<div class="modal" style="max-width:750px;width:96vw;"><div class="modal-hdr"><div class="modal-title">👥 All Users (${r.total})</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div><div style="overflow-x:auto;"><table class="admin-users-tbl"><thead><tr><th>Naam</th><th>Email</th><th>Company</th><th>Plan</th><th>Leads</th><th>Refs</th><th>Joined</th><th>Action</th></tr></thead><tbody>${(r.users||[]).map(u=>`<tr><td>${u.name||''}</td><td style="font-size:11px;color:var(--muted)">${u.email||''}</td><td style="font-size:11px;color:var(--muted)">${u.company||''}</td><td><span class="pp-${u.plan||'free'}">${u.plan||'free'}</span></td><td>${u.lead_count||0}</td><td>${u.ref_count||0}</td><td style="font-size:10px;color:var(--muted)">${(u.created_at||'').substring(0,10)}</td><td><button class="btn-up" onclick="quickUpgrade('${u.email}')">↑</button></td></tr>`).join('')}</tbody></table></div></div>`;
     document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
   }catch(e){}
 }
-
 async function quickUpgrade(email){
   email=email||prompt('User email:');if(!email)return;
   const plan=prompt(`${email} ka plan:\n(free/pro/agency)`,'pro');if(!['free','pro','agency'].includes(plan||''))return;
   const days=parseInt(prompt('Kitne din?','30')||30);
   const r=await api('POST','/admin/upgrade',{admin_pass:adminToken,email,plan,days});
-  showToast(r.success?`✅ ${r.message}`:r.error||'Error',!r.success);
-  if(r.success)loadAdmin();
+  showToast(r.success?`✅ ${r.message}`:r.error||'Error',!r.success);if(r.success)loadAdmin();
 }
-
 async function clearCache(){
   if(!confirm('Cache clear karna hai?'))return;
-  const r=await api('POST','/admin/clear-cache',{admin_pass:adminToken});
-  showToast(r.success?'✅ Cache clear!':r.error||'Error',!r.success);
+  const r=await api('POST','/admin/clear-cache',{admin_pass:adminToken});showToast(r.success?'✅ Cache clear!':r.error||'Error',!r.success);
+}
+
+// ===== API KEYS MANAGER =====
+async function loadApiKeys(){
+  const el=document.getElementById('apiKeysList');if(!el)return;
+  try{
+    const r=await api('POST','/admin/api-keys',{admin_pass:adminToken,action:'list'});
+    if(r.error){el.innerHTML=`<div style="color:var(--danger);padding:12px;">${r.error}</div>`;return;}
+    _apiKeysData=r.keys||[];renderApiKeys(_apiKeysData);
+  }catch(e){el.innerHTML='<div style="color:var(--danger);padding:12px;">Error loading keys</div>';}
+}
+function renderApiKeys(keys){
+  const el=document.getElementById('apiKeysList');if(!el)return;
+  const geminiKeys=keys.filter(k=>k.service==='gemini');const mapsKeys=keys.filter(k=>k.service==='maps');
+  const renderKeyRow=(k)=>{
+    const usedPct=k.daily_limit>0?Math.round(k.used_today/k.daily_limit*100):0;
+    const barColor=usedPct>=90?'var(--danger)':usedPct>=70?'var(--warning)':'var(--success)';
+    const maskedKey=k.key_value?'••••'+String(k.key_value).slice(-6):'(hidden)';
+    return `<div style="background:var(--bg2);border:1px solid ${k.is_active?'var(--border)':'rgba(240,74,74,0.3)'};border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:160px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <span style="font-size:12px;font-weight:600;color:${k.is_active?'var(--text)':'var(--muted)'};">${k.label||'Key #'+k.id}</span>
+          <span style="font-size:9px;padding:1px 7px;border-radius:20px;font-weight:700;${k.is_active?'background:rgba(29,184,126,0.15);color:var(--success)':'background:rgba(240,74,74,0.15);color:var(--danger)'};">${k.is_active?'ACTIVE':'DISABLED'}</span>
+          ${k.error_count>0?`<span style="font-size:9px;background:rgba(240,165,42,0.15);color:var(--warning);padding:1px 7px;border-radius:20px;">⚠ ${k.error_count} errors</span>`:''}
+        </div>
+        <div style="font-size:10px;color:var(--muted);font-family:monospace;">${maskedKey}</div>
+        ${k.last_error?`<div style="font-size:10px;color:var(--danger);margin-top:2px;">${String(k.last_error).substring(0,50)}</div>`:''}
+      </div>
+      <div style="min-width:110px;">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${k.used_today}/${k.daily_limit} today</div>
+        <div style="height:6px;background:var(--bg3);border-radius:99px;overflow:hidden;"><div style="height:100%;width:${usedPct}%;background:${barColor};border-radius:99px;"></div></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${k.last_used||'Never'}</div>
+      </div>
+      <div style="display:flex;gap:5px;flex-shrink:0;">
+        <button onclick="toggleApiKey(${k.id})" style="background:${k.is_active?'rgba(240,165,42,0.1)':'rgba(29,184,126,0.1)'};color:${k.is_active?'var(--warning)':'var(--success)'};border:1px solid ${k.is_active?'rgba(240,165,42,0.3)':'rgba(29,184,126,0.3)'};border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">${k.is_active?'Disable':'Enable'}</button>
+        <button onclick="resetKeyUsage(${k.id})" style="background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Reset</button>
+        <button onclick="deleteApiKey(${k.id})" style="background:rgba(240,74,74,0.1);color:var(--danger);border:1px solid rgba(240,74,74,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Del</button>
+      </div>
+    </div>`;
+  };
+  el.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+        🤖 Gemini Keys (${geminiKeys.filter(k=>k.is_active).length}/${geminiKeys.length} active)
+        <button onclick="showAddKeyModal('gemini')" style="background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer;">+ Add</button>
+      </div>
+      ${geminiKeys.length?geminiKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">Koi key nahi — + Add karo</div>'}
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+        🗺️ Maps Keys (${mapsKeys.filter(k=>k.is_active).length}/${mapsKeys.length} active)
+        <button onclick="showAddKeyModal('maps')" style="background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.2);border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer;">+ Add</button>
+      </div>
+      ${mapsKeys.length?mapsKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">Koi key nahi — + Add karo</div>'}
+    </div>
+  </div>
+  <div style="margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:8px;font-size:11px;color:var(--muted);">
+    💡 <strong style="color:var(--text);">Auto Rotation ON:</strong> Quota khatam hone par system automatically agla key use karta hai. Free Gemini: 1,500 req/day/key.
+  </div>`;
+}
+function showAddKeyModal(service){
+  const modal=document.createElement('div');modal.className='modal-overlay';
+  const sColor=service==='gemini'?'var(--orange)':'var(--blue)';
+  const sLabel=service==='gemini'?'🤖 Gemini AI':'🗺️ Google Maps';
+  const defLimit=service==='gemini'?1500:5000;
+  modal.innerHTML=`<div class="modal" style="max-width:460px;">
+    <div class="modal-hdr"><div class="modal-title" style="color:${sColor};">+ ${sLabel} Key Add Karein</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div>
+    <div class="fg"><label class="fl">Key Label (apna naam do)</label><input class="fi" id="newKeyLabel" placeholder="e.g. Gemini Key 1, My Free Key"></div>
+    <div class="fg"><label class="fl">API Key Value</label><input class="fi" id="newKeyValue" placeholder="${service==='gemini'?'AIzaSy...':'AIzaSy...'}" style="font-family:monospace;font-size:13px;">
+    <div style="font-size:10px;color:var(--muted);margin-top:4px;">${service==='gemini'?'👉 aistudio.google.com → Get API Key':'👉 console.cloud.google.com → Credentials'}</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+      <div class="fg"><label class="fl">Daily Limit</label><input class="fi" id="newKeyLimit" type="number" value="${defLimit}"></div>
+      <div class="fg"><label class="fl">Priority (0=pehle)</label><input class="fi" id="newKeyPriority" type="number" value="0"></div>
+    </div>
+    <div class="err-box" id="addKeyErr"></div>
+    <div class="modal-actions">
+      <button class="btn-sec" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+      <button class="btn-act" id="addKeyBtn" onclick="doAddKey('${service}')">✓ Save Key</button>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+}
+async function doAddKey(service){
+  const keyValue=document.getElementById('newKeyValue').value.trim();const label=document.getElementById('newKeyLabel').value.trim();
+  const limit=parseInt(document.getElementById('newKeyLimit').value)||1500;const priority=parseInt(document.getElementById('newKeyPriority').value)||0;
+  const err=document.getElementById('addKeyErr');const btn=document.getElementById('addKeyBtn');err.style.display='none';
+  if(!keyValue||keyValue.length<10){err.textContent='Valid API key daalo!';err.style.display='block';return;}
+  if(!label){err.textContent='Label zaroor daalo!';err.style.display='block';return;}
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Saving...';
+  const r=await api('POST','/admin/api-keys',{admin_pass:adminToken,action:'add',service,key_value:keyValue,label,daily_limit:limit,priority});
+  btn.disabled=false;btn.innerHTML='✓ Save Key';
+  if(r.error){err.textContent=r.error;err.style.display='block';return;}
+  showToast(`✅ ${label} add ho gaya!`);document.querySelector('.modal-overlay')?.remove();await loadApiKeys();
+}
+async function toggleApiKey(keyId){const r=await api('POST','/admin/api-keys',{admin_pass:adminToken,action:'toggle',key_id:keyId});if(r.error){showToast(r.error,true);return;}showToast(r.is_active?'✅ Key enabled!':'⚠ Key disabled!');await loadApiKeys();}
+async function deleteApiKey(keyId){if(!confirm('Key delete karna hai?'))return;const r=await api('POST','/admin/api-keys',{admin_pass:adminToken,action:'delete',key_id:keyId});if(r.error){showToast(r.error,true);return;}showToast('🗑 Key delete ho gaya!');await loadApiKeys();}
+async function resetKeyUsage(keyId){const r=await api('POST','/admin/api-keys',{admin_pass:adminToken,action:'reset_usage',key_id:keyId});if(r.error){showToast(r.error,true);return;}showToast('✅ Usage reset!');await loadApiKeys();}
+
+// ===== APP SETTINGS =====
+async function loadAppSettings(){
+  const el=document.getElementById('appSettingsList');if(!el)return;
+  try{
+    const r=await api('POST','/admin/settings',{admin_pass:adminToken,action:'get'});
+    if(r.error){el.innerHTML=`<div style="color:var(--danger);padding:12px;">${r.error}</div>`;return;}
+    _appSettingsData=r.settings||[];renderAppSettings(_appSettingsData);
+  }catch(e){el.innerHTML='<div style="color:var(--danger);padding:12px;">Error</div>';}
+}
+function renderAppSettings(settings){
+  const el=document.getElementById('appSettingsList');if(!el)return;
+  const cats={};settings.forEach(s=>{if(!cats[s.category])cats[s.category]=[];cats[s.category].push(s);});
+  const catLabels={limits:'📊 Lead Limits',pricing:'💰 Pricing',payment:'💳 Payment Info',referral:'🎯 Referral',system:'⚙️ System',branding:'🎨 Branding'};
+  const renderField=(s)=>{
+    const isBool=s.value==='true'||s.value==='false';const isNum=!isNaN(s.value)&&s.value!=='';
+    if(isBool){const isOn=s.value==='true';return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);"><div><div style="font-size:12px;font-weight:500;">${s.label}</div><div style="font-size:10px;color:var(--muted);">${s.key}</div></div><div onclick="toggleSettingBool('${s.key}',this)" data-val="${s.value}" style="width:40px;height:22px;border-radius:11px;cursor:pointer;transition:all 0.2s;position:relative;${isOn?'background:var(--success)':'background:var(--muted)'}"><div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:3px;${isOn?'right:3px':'left:3px'};transition:all 0.2s;"></div></div></div>`;}
+    return `<div style="padding:6px 0;border-bottom:1px solid var(--border);"><label style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;">${s.label}</label><input class="fi" data-key="${s.key}" value="${s.value||''}" type="${isNum?'number':'text'}" style="margin-top:4px;padding:8px 10px;font-size:13px;" placeholder="${s.label}"></div>`;
+  };
+  el.innerHTML=Object.entries(cats).map(([cat,items])=>`<div style="margin-bottom:16px;"><div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;">${catLabels[cat]||cat}</div><div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;">${items.map(renderField).join('')}</div></div>`).join('')+`<div style="text-align:right;margin-top:8px;"><button class="btn-act" onclick="saveAppSettings()">💾 Save All Settings</button></div>`;
+}
+function toggleSettingBool(key,el){
+  const current=el.getAttribute('data-val')==='true';const newVal=!current;
+  el.setAttribute('data-val',String(newVal));el.style.background=newVal?'var(--success)':'var(--muted)';
+  const dot=el.querySelector('div');dot.style.cssText=`width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:3px;${newVal?'right:3px':'left:3px'};transition:all 0.2s;`;
+}
+async function saveAppSettings(){
+  const updates={};
+  document.querySelectorAll('#appSettingsList input[data-key]').forEach(inp=>{updates[inp.getAttribute('data-key')]=inp.value;});
+  document.querySelectorAll('#appSettingsList [data-val]').forEach(tog=>{const oc=tog.getAttribute('onclick')||'';const m=oc.match(/'([^']+)'/);if(m)updates[m[1]]=tog.getAttribute('data-val');});
+  if(!Object.keys(updates).length){showToast('Kuch update nahi hua',true);return;}
+  const r=await api('POST','/admin/settings',{admin_pass:adminToken,action:'update',updates});
+  if(r.error){showToast(r.error,true);return;}showToast('✅ Settings save ho gayi!');
 }
 
 // ===== API HELPER =====
-async function api(method, endpoint, body=null){
+async function api(method,endpoint,body=null){
   const opts={method,headers:{'Content-Type':'application/json','Authorization':'Bearer '+token}};
   if(body)opts.body=JSON.stringify(body);
-  try{
-    const r=await fetch(SERVER+endpoint,opts);
-    const d=await r.json();
-    if(!r.ok) return {...d, _status:r.status};
-    return d;
-  }catch(e){return {error:'Network error'};}
+  try{const r=await fetch(SERVER+endpoint,opts);const d=await r.json();if(!r.ok)return{...d,_status:r.status};return d;}
+  catch(e){return{error:'Network error'};}
 }
-
-// ===== TOAST =====
-function showToast(msg,isErr=false){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.style.background=isErr?'var(--danger)':'var(--success)';t.style.display='block';
-  setTimeout(()=>t.style.display='none',3500);
-}
+function showToast(msg,isErr=false){const t=document.getElementById('toast');t.textContent=msg;t.style.background=isErr?'var(--danger)':'var(--success)';t.style.display='block';setTimeout(()=>t.style.display='none',3500);}
 </script>
 </body>
 </html>
