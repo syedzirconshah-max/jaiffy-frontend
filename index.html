@@ -2109,7 +2109,7 @@ function renderAdmin(d){
         <div style="max-height:200px;overflow-y:auto;">
           ${(sec.recent_events||[]).length?(sec.recent_events||[]).map(e=>`<div class="sec-ev"><span style="color:var(--orange);font-weight:600">${e.event}</span><span style="color:var(--muted)">${e.ip}</span><span style="font-size:10px;color:var(--muted)">${(e.created_at||'').substring(11,16)}</span></div>`).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">No events</div>'}
         </div>
-        <div style="margin-top:10px;"><div class="admin-label">Active Sessions</div><div style="font-family:\'Syne\',sans-serif;font-size:22px;font-weight:800;">${sec.active_sessions||0}</div></div>
+        <div style="margin-top:10px;"><div class="admin-label">Active Sessions</div><div style="font-family:"Syne",sans-serif;font-size:22px;font-weight:800;">${sec.active_sessions||0}</div></div>
       </div>
     </div>
     <div class="admin-sec">
@@ -2512,36 +2512,12 @@ function initAllInteractions() {
 document.addEventListener('DOMContentLoaded', initAllInteractions);
 setTimeout(initAllInteractions, 500);
 
-// Re-run on page changes
-const _origGoToAnim = window.goTo;
-window.goTo = function(p) {
-  if (_origGoToAnim) _origGoToAnim(p);
-  setTimeout(() => { initRipples(); initTilts(); }, 400);
-};
+// Re-run ripples on page changes - handled by MutationObserver
 
 
 // ===== LEGAL PAGE NAVIGATION =====
 // Extend goTo to support legal pages
-const _legalPages = ['privacy', 'terms', 'about'];
-const _origGoToLegal = window.goTo;
-window.goTo = function(p) {
-  if (_legalPages.includes(p)) {
-    document.querySelectorAll('.inner').forEach(x => x.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
-    const el = document.getElementById('inner-' + p);
-    if (el) {
-      el.classList.add('active');
-      el.style.opacity = '0';
-      setTimeout(() => {
-        el.style.transition = 'opacity 0.3s ease';
-        el.style.opacity = '1';
-      }, 20);
-    }
-    closeSidebar();
-    return;
-  }
-  if (_origGoToLegal) _origGoToLegal(p);
-};
+// Legal navigation handled in goToAnimated
 
 // ===== SAMPLE CSV DOWNLOAD =====
 function downloadSampleCSV() {
@@ -2602,7 +2578,7 @@ function quickSearch(query, country) {
 }
 
 // ===== PATCH doSearch to save searches =====
-const _origDoSearch = doSearch;
+const _origDoSearch = window.doSearch || doSearch;
 window.doSearch = async function(page=1) {
   const product = document.getElementById('searchProduct')?.value?.trim();
   const country = document.getElementById('searchCountry')?.value;
@@ -2638,7 +2614,7 @@ function updatePageMeta(title, desc) {
 }
 
 // ===== PATCH loadDashboard for recent searches =====
-const _origLoadDashboard = loadDashboard;
+const _origLoadDashboard = window.loadDashboard || loadDashboard;
 window.loadDashboard = async function() {
   await _origLoadDashboard();
   loadRecentSearches();
@@ -2657,6 +2633,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // ===== PAGE TRANSITIONS =====
 let _currentPage = 'dashboard';
+const _legalPages = ['privacy', 'terms', 'about'];
 function goToAnimated(p) {
   const currentInner = document.getElementById('inner-' + _currentPage);
   const nextInner = document.getElementById('inner-' + p);
@@ -2756,8 +2733,7 @@ function addWorldDots() {
 }
 
 // ===== OVERRIDE goTo WITH ANIMATED VERSION =====
-// Patch the existing goTo
-const _origGoTo = goTo;
+// Single clean override - handles everything
 window.goTo = function(p) { goToAnimated(p); };
 
 // ===== ENHANCED INIT =====
