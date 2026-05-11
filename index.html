@@ -2417,12 +2417,229 @@ function renderAdmin(d){
 
 async function loadAllUsers(){
   try{
-    const r=await api('POST','/admin/users',{admin_pass:adminToken});if(r.error)return;
+    const r=await api('POST','/admin/users',{admin_pass:adminToken});
+    if(r.error)return;
+    const users=r.users||[];
+    
     const modal=document.createElement('div');modal.className='modal-overlay';
-    modal.innerHTML=`<div class="modal" style="max-width:750px;width:96vw;"><div class="modal-hdr"><div class="modal-title">👥 All Users (${r.total})</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div><div style="overflow-x:auto;"><table class="admin-users-tbl"><thead><tr><th>Naam</th><th>Email</th><th>Company</th><th>Plan</th><th>Leads</th><th>Refs</th><th>Joined</th><th>Action</th></tr></thead><tbody>${(r.users||[]).map(u=>`<tr><td>${u.name||''}</td><td style="font-size:11px;color:var(--muted)">${u.email||''}</td><td style="font-size:11px;color:var(--muted)">${u.company||''}</td><td><span class="pp-${u.plan||'free'}">${u.plan||'free'}</span></td><td>${u.lead_count||0}</td><td>${u.ref_count||0}</td><td style="font-size:10px;color:var(--muted)">${(u.created_at||'').substring(0,10)}</td><td><button class="btn-up" onclick="quickUpgrade('${u.email}')">↑</button></td></tr>`).join('')}</tbody></table></div></div>`;
-    document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
-  }catch(e){}
+    modal.innerHTML=`
+    <div class="modal" style="max-width:860px;width:96vw;max-height:90vh;display:flex;flex-direction:column;">
+      <div class="modal-hdr" style="flex-shrink:0;">
+        <div class="modal-title">👥 All Users (${users.length})</div>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+      </div>
+      
+      <!-- Search + Filter bar -->
+      <div style="padding:14px 20px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;display:flex;gap:10px;flex-wrap:wrap;">
+        <input id="userSearch" placeholder="🔍 Naam ya email search..." 
+          oninput="filterUsers()"
+          style="flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:9px 14px;color:var(--text);font-size:13px;">
+        <select id="userFilter" onchange="filterUsers()" 
+          style="background:var(--card);border:1px solid var(--border);border-radius:9px;padding:9px 12px;color:var(--text);font-size:12px;">
+          <option value="all">All Users</option>
+          <option value="free">Free Plan</option>
+          <option value="pro">Pro Plan</option>
+          <option value="agency">Agency</option>
+          <option value="unverified">⚠️ Unverified</option>
+          <option value="trial">Trial Active</option>
+        </select>
+        <button onclick="deleteUnverified()" 
+          style="background:rgba(240,74,74,0.1);color:var(--danger);border:1px solid rgba(240,74,74,0.3);border-radius:9px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;">
+          🗑 Delete Unverified
+        </button>
+      </div>
+      
+      <!-- Users count -->
+      <div id="usersCountBar" style="padding:8px 20px;font-size:12px;color:var(--muted);background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;">
+        ${users.length} users total
+      </div>
+      
+      <!-- Table -->
+      <div style="overflow-y:auto;flex:1;">
+        <table style="width:100%;border-collapse:collapse;" id="usersTable">
+          <thead style="position:sticky;top:0;background:var(--bg2);z-index:1;">
+            <tr>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">NAAM</th>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">EMAIL</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">PLAN</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">LEADS</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">VERIFY</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">SIGNUP</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+      
+      <!-- Pagination -->
+      <div id="usersPagination" style="padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-shrink:0;background:var(--bg2);">
+        <span id="usersPageInfo" style="font-size:12px;color:var(--muted);"></span>
+        <div style="display:flex;gap:8px;">
+          <button id="usersPrevBtn" onclick="usersChangePage(-1)" style="padding:7px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;cursor:pointer;">← Prev</button>
+          <button id="usersNextBtn" onclick="usersChangePage(1)" style="padding:7px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;cursor:pointer;">Next →</button>
+        </div>
+      </div>
+    </div>`;
+    
+    document.body.appendChild(modal);
+    modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+    
+    // Store users data globally for filtering
+    window._allUsersData = users;
+    window._usersPage = 1;
+    window._usersPageSize = 15;
+    
+    filterUsers();
+    
+  }catch(e){ showToast('Users load nahi hue',true); }
 }
+
+// ===== USER FILTER + PAGINATION =====
+function filterUsers() {
+  const q = (document.getElementById('userSearch')?.value || '').toLowerCase();
+  const filter = document.getElementById('userFilter')?.value || 'all';
+  const users = window._allUsersData || [];
+  
+  let filtered = users.filter(u => {
+    const matchSearch = !q || 
+      (u.name||'').toLowerCase().includes(q) || 
+      (u.email||'').toLowerCase().includes(q);
+    
+    const matchFilter = filter === 'all' ? true :
+      filter === 'unverified' ? !u.is_verified :
+      filter === 'trial' ? u.in_trial :
+      u.plan === filter;
+    
+    return matchSearch && matchFilter;
+  });
+  
+  window._usersFiltered = filtered;
+  window._usersPage = 1;
+  renderUsersPage();
+}
+
+function renderUsersPage() {
+  const filtered = window._usersFiltered || [];
+  const page = window._usersPage || 1;
+  const pageSize = window._usersPageSize || 15;
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const start = (page-1) * pageSize;
+  const pageUsers = filtered.slice(start, start + pageSize);
+  
+  // Update count bar
+  const countBar = document.getElementById('usersCountBar');
+  if(countBar) countBar.textContent = `${total} users dikh rahe hain`;
+  
+  // Update page info
+  const pageInfo = document.getElementById('usersPageInfo');
+  if(pageInfo) pageInfo.textContent = `Page ${page} of ${totalPages} (${total} users)`;
+  
+  // Update buttons
+  const prevBtn = document.getElementById('usersPrevBtn');
+  const nextBtn = document.getElementById('usersNextBtn');
+  if(prevBtn) prevBtn.disabled = page <= 1;
+  if(nextBtn) nextBtn.disabled = page >= totalPages;
+  
+  // Render rows
+  const tbody = document.getElementById('usersBody');
+  if(!tbody) return;
+  
+  if(!pageUsers.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);">Koi user nahi mila</td></tr>`;
+    return;
+  }
+  
+  const planColors = {free:'var(--muted)',pro:'var(--orange)',agency:'var(--blue)'};
+  
+  tbody.innerHTML = pageUsers.map(u => `
+    <tr style="border-bottom:1px solid var(--border);transition:background 0.2s;" 
+        onmouseover="this.style.background='rgba(240,125,42,0.04)'" 
+        onmouseout="this.style.background=''">
+      <td style="padding:11px 14px;font-size:13px;font-weight:600;">${u.name||'—'}</td>
+      <td style="padding:11px 14px;font-size:12px;color:var(--muted);">${u.email||'—'}</td>
+      <td style="padding:11px 14px;text-align:center;">
+        <span style="background:rgba(240,125,42,0.1);color:${planColors[u.plan]||'var(--muted)'};border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;">${u.plan||'free'}</span>
+      </td>
+      <td style="padding:11px 14px;text-align:center;font-size:13px;font-weight:700;">${u.leads_count||0}</td>
+      <td style="padding:11px 14px;text-align:center;font-size:16px;">${u.is_verified?'✅':'⚠️'}</td>
+      <td style="padding:11px 14px;text-align:center;font-size:11px;color:var(--muted);">${u.created_at?(u.created_at+'').substring(0,10):'—'}</td>
+      <td style="padding:11px 14px;text-align:center;">
+        <div style="display:flex;gap:5px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="quickUpgradeUser('${u.email}')" 
+            style="padding:5px 10px;background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.3);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">
+            ↑ Upgrade
+          </button>
+          <button onclick="confirmDeleteUser('${u.email}','${(u.name||'').replace(/'/g,'')}')" 
+            style="padding:5px 10px;background:rgba(240,74,74,0.08);color:var(--danger);border:1px solid rgba(240,74,74,0.25);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">
+            🗑 Del
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function usersChangePage(dir) {
+  const filtered = window._usersFiltered || [];
+  const totalPages = Math.ceil(filtered.length / (window._usersPageSize||15));
+  window._usersPage = Math.max(1, Math.min(totalPages, (window._usersPage||1) + dir));
+  renderUsersPage();
+}
+
+function quickUpgradeUser(email) {
+  const plan = prompt(`${email}\n\nKaun sa plan?: pro / agency`, 'pro');
+  if(!plan || !['pro','agency'].includes(plan)) return;
+  const days = prompt('Kitne din ke liye?', '30');
+  if(!days) return;
+  
+  api('POST','/admin/upgrade',{
+    admin_pass:adminToken, email, plan, days:parseInt(days)
+  }).then(r=>{
+    if(r.success){
+      showToast(`✅ ${email} ko ${plan} upgrade kar diya!`);
+      // Update in local data
+      const u = (window._allUsersData||[]).find(x=>x.email===email);
+      if(u) u.plan = plan;
+      renderUsersPage();
+    } else {
+      showToast(r.error||'Upgrade failed',true);
+    }
+  });
+}
+
+function confirmDeleteUser(email, name) {
+  if(!confirm(`"${name}" (${email}) delete karna hai?\n\nYeh wapas nahi hoga!`)) return;
+  api('POST','/admin/delete-user',{admin_pass:adminToken, email}).then(r=>{
+    if(r.success){
+      showToast(`✅ ${name} delete ho gaya`);
+      window._allUsersData = (window._allUsersData||[]).filter(u=>u.email!==email);
+      filterUsers();
+    } else {
+      showToast(r.error||'Delete failed',true);
+    }
+  });
+}
+
+async function deleteUnverified() {
+  const unverified = (window._allUsersData||[]).filter(u=>!u.is_verified);
+  if(!unverified.length){ showToast('Koi unverified user nahi!'); return; }
+  
+  if(!confirm(`${unverified.length} unverified users delete karne hain?\n\n${unverified.map(u=>u.email).join('\n')}\n\nYeh wapas nahi hoga!`)) return;
+  
+  let deleted = 0;
+  for(const u of unverified){
+    const r = await api('POST','/admin/delete-user',{admin_pass:adminToken, email:u.email});
+    if(r.success) deleted++;
+  }
+  
+  showToast(`✅ ${deleted} unverified users delete ho gaye!`);
+  window._allUsersData = (window._allUsersData||[]).filter(u=>u.is_verified);
+  filterUsers();
+}
+
+
 async function quickUpgrade(email){
   email=email||prompt('User email:');if(!email)return;
   const plan=prompt(`${email} ka plan:\n(free/pro/agency)`,'pro');if(!['free','pro','agency'].includes(plan||''))return;
