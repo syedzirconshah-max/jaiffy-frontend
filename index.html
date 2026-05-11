@@ -2119,8 +2119,8 @@ async function doSearch(page=1){
   document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';startRadarSteps();
   try{
     const r=await api('POST','/search',{query:product,country,city:(document.getElementById('searchCity')?.value||'').trim()||undefined,page,campaign});
-    if(r.status===429||r.limit_reached){showToast(r.error||'Limit khatam!',true);return;}
-    if(r.error){showToast(r.error,true);return;}
+    if(r.status===429||r.limit_reached){showSearchLimitUI(r);return;}
+    if(r.error){showSearchErrorUI(r.error);return;}
     currentLeads=r.leads||[];window._lastSearch=r;
     if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
     renderResults(r);
@@ -2387,12 +2387,21 @@ function loadSettings(){
   document.getElementById('settRef').textContent=U.ref_code||'-';document.getElementById('settRefs').textContent=U.ref_count||0;checkServer();
 }
 async function checkServer(){
-  const badge=document.getElementById('srvBadge');if(!badge)return;
-  try{const r=await fetch(`${SERVER}/health`);const d=await r.json();badge.className='badge-online';badge.innerHTML=`<span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;"></span> v${d.version} Online`;}
-  catch(e){badge.style.cssText='color:var(--danger);font-size:11px;';badge.textContent='Offline';}
+  const badge = document.getElementById('srvBadge');
+  try {
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), 8000);
+    const r = await fetch(`${SERVER}/health`, {signal: controller.signal});
+    const d = await r.json();
+    if(badge) { badge.className='badge-online'; badge.textContent='v'+d.version+' Online'; }
+    _serverDown = false;
+    // Remove server down banner if present
+    document.getElementById('serverDownBanner')?.remove();
+  } catch(e) {
+    if(badge) { badge.className='badge-offline'; badge.textContent='Server Offline'; }
+    showServerDown('network');
+  }
 }
-
-// ===== ADMIN =====
 async function loadAdmin(){
   document.getElementById('adminContent').innerHTML='<div class="loading-box on" style="justify-content:center;"><div class="big-spin" style="border-top-color:var(--purple);"></div><div>Loading admin data...</div></div>';
   try{
@@ -2925,11 +2934,72 @@ async function saveAppSettings(){
 }
 
 // ===== API HELPER =====
-async function api(method,endpoint,body=null){
-  const opts={method,headers:{'Content-Type':'application/json','Authorization':'Bearer '+token}};
-  if(body)opts.body=JSON.stringify(body);
-  try{const r=await fetch(SERVER+endpoint,opts);const d=await r.json();if(!r.ok)return{...d,_status:r.status};return d;}
-  catch(e){return{error:'Network error'};}
+// Server status tracking
+let _serverDown = false;
+let _serverDownShown = false;
+
+async function api(method, endpoint, body=null) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 25000); // 25 sec timeout
+  
+  const opts = {
+    method,
+    headers: {'Content-Type':'application/json', 'Authorization':'Bearer '+token},
+    signal: controller.signal
+  };
+  if(body) opts.body = JSON.stringify(body);
+  
+  try {
+    const r = await fetch(SERVER+endpoint, opts);
+    clearTimeout(timeout);
+    _serverDown = false;
+    _serverDownShown = false;
+    const d = await r.json();
+    if(!r.ok) return {...d, _status:r.status};
+    return d;
+  } catch(e) {
+    clearTimeout(timeout);
+    if(e.name === 'AbortError') {
+      showServerDown('timeout');
+      return {error:'Server ne jawab nahi diya — thodi der mein retry karein'};
+    }
+    if(e.message?.includes('fetch') || e.message?.includes('network') || e.message?.includes('Failed')) {
+      showServerDown('network');
+      return {error:'Internet connection check karein'};
+    }
+    return {error: 'Server error — thodi der mein try karein'};
+  }
+}
+
+function showServerDown(type) {
+  if(_serverDownShown) return;
+  _serverDown = true;
+  _serverDownShown = true;
+  
+  // Show non-blocking banner
+  const existing = document.getElementById('serverDownBanner');
+  if(existing) return;
+  
+  const banner = document.createElement('div');
+  banner.id = 'serverDownBanner';
+  banner.style.cssText = `position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1a1a2e,#16213e);border-bottom:2px solid rgba(240,125,42,0.5);padding:12px 20px;display:flex;align-items:center;gap:12px;`;
+  
+  const msg = type === 'timeout' 
+    ? '⏳ Server thoda slow hai — results aa rahe hain, wait karein...'
+    : '📡 Internet connection check karein — WiFi ya mobile data on hai?';
+  
+  banner.innerHTML = `
+    <div style="flex:1;font-size:13px;color:#fff;">${msg}</div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="location.reload()" style="padding:6px 14px;background:rgba(240,125,42,0.2);color:#f07d2a;border:1px solid rgba(240,125,42,0.4);border-radius:7px;font-size:12px;cursor:pointer;">🔄 Reload</button>
+      <a href="https://wa.me/923025074727?text=Website+kaam+nahi+kar+rahi" target="_blank" style="padding:6px 14px;background:rgba(37,211,102,0.15);color:#25d366;border:1px solid rgba(37,211,102,0.3);border-radius:7px;font-size:12px;cursor:pointer;text-decoration:none;">💬 Help</a>
+      <button onclick="this.parentElement.parentElement.remove();_serverDownShown=false;" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer;">×</button>
+    </div>`;
+  
+  document.body.prepend(banner);
+  
+  // Auto-hide after 15 seconds
+  setTimeout(() => { banner.remove(); _serverDownShown = false; }, 15000);
 }
 function showToast(msg,isErr=false){const t=document.getElementById('toast');t.textContent=msg;t.style.background=isErr?'var(--danger)':'var(--success)';t.style.display='block';setTimeout(()=>t.style.display='none',3500);}
 
@@ -3790,6 +3860,57 @@ async function downloadSearchCSV() {
   } catch(e) {
     showToast('CSV download failed', true);
   }
+}
+
+
+// ===== HELPFUL ERROR STATES =====
+function showSearchLimitUI(r) {
+  document.getElementById('searchLoading').classList.remove('on');
+  document.getElementById('resultsArea').style.display = 'block';
+  document.getElementById('resultsArea').innerHTML = `
+    <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;border:1px solid rgba(240,125,42,0.3);">
+      <div style="font-size:48px;margin-bottom:16px;">⏰</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Daily Limit Khatam!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7;">
+        Aaj ki ${r.daily_limit||10} leads use ho gayi hain.<br>
+        Kal midnight ke baad reset hogi — ya Pro plan lein!
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="goTo('plans')" style="padding:12px 24px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Pro Plan Lein</button>
+        <button onclick="goTo('referral')" style="padding:12px 24px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:10px;font-size:14px;cursor:pointer;">👥 Refer Karein +1 Lead</button>
+      </div>
+    </div>`;
+}
+
+function showSearchErrorUI(errMsg) {
+  document.getElementById('searchLoading').classList.remove('on');
+  const isServerErr = !errMsg || errMsg.includes('Server') || errMsg.includes('network') || errMsg.includes('jawab') || errMsg.includes('retry');
+  document.getElementById('resultsArea').style.display = 'block';
+  document.getElementById('resultsArea').innerHTML = `
+    <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;">
+      <div style="font-size:48px;margin-bottom:16px;">${isServerErr ? '🔌' : '⚠️'}</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px;">${isServerErr ? 'Server Se Connection Nahi' : 'Search Nahi Hua'}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">${errMsg || 'Thodi der mein dobara try karein'}</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="doSearch()" style="padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">🔄 Dobara Try Karein</button>
+        ${isServerErr ? `<a href="https://wa.me/923025074727?text=Search+kaam+nahi+kar+rahi" target="_blank" style="padding:10px 20px;background:rgba(37,211,102,0.1);color:#25d366;border:1px solid rgba(37,211,102,0.3);border-radius:9px;font-size:13px;cursor:pointer;text-decoration:none;">💬 Help Lein</a>` : ''}
+      </div>
+    </div>`;
+}
+
+function showNoResultsUI() {
+  document.getElementById('resultsArea').innerHTML = `
+    <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;">
+      <div style="font-size:48px;margin-bottom:16px;">🔍</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px;">Koi Leads Nahi Mili</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.7;">Yeh try karein:</div>
+      <div style="display:flex;flex-direction:column;gap:8px;max-width:300px;margin:0 auto 20px;text-align:left;">
+        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">✏️ Product name change karein — e.g. "medical equipment"</div>
+        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">🌍 Doosri country try karein — UAE, UK, Germany</div>
+        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">🏙️ City field khali rakhein — poora country search hoga</div>
+      </div>
+      <button onclick="document.getElementById('searchProduct').focus()" style="padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">✏️ Search Edit Karein</button>
+    </div>`;
 }
 
 // ===== INIT ALL =====
