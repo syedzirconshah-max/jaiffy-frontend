@@ -26,7 +26,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .auth-box{width:440px;max-width:95vw;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:42px;animation:fadeUp 0.4s ease;box-shadow:0 24px 60px rgba(0,0,0,0.4);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 .auth-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
-.auth-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;}
+.auth-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:17px;font-weight:800;color:#fff;}
 .auth-logo-text{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}.auth-logo-sub{font-size:11px;color:var(--muted);}
 .auth-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:5px;}
 .auth-sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
@@ -34,19 +34,19 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .fl{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.7px;text-transform:uppercase;margin-bottom:5px;display:block;}
 .fi{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
 .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}.fi::placeholder{color:var(--muted);}.fi option{background:var(--bg2);}
-.btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:12px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(240,125,42,0.3);}
 .btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .auth-link{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);}.auth-link a{color:var(--orange);cursor:pointer;font-weight:500;}
 .err-box{background:rgba(240,74,74,0.08);border:1px solid rgba(240,74,74,0.25);color:#f47070;padding:10px 13px;border-radius:8px;font-size:12px;margin-bottom:12px;display:none;}
 .trial-banner{background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(168,85,247,0.1));border:1px solid rgba(240,125,42,0.2);border-radius:12px;padding:14px 16px;margin-bottom:20px;text-align:center;}
-.trial-banner-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--orange);margin-bottom:4px;}
+.trial-banner-title{font-family:'Inter',sans-serif;font-size:15px;font-weight:800;color:var(--orange);margin-bottom:4px;}
 .trial-banner-sub{font-size:12px;color:var(--muted);}.trial-banner-sub strong{color:var(--text);}
 #pg-app{flex-direction:row;}
 .sidebar{width:var(--sw);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform 0.3s;}
 .s-logo{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-.s-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;}
-.s-logo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;}
+.s-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;color:#fff;}
+.s-logo-text{font-family:'Inter',sans-serif;font-size:15px;font-weight:800;}
 .s-logo-version{font-size:9px;color:var(--muted);background:var(--bg3);padding:1px 6px;border-radius:20px;margin-left:4px;}
 .s-nav{flex:1;padding:10px 8px;overflow-y:auto;}
 .nav-label{font-size:9px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;padding:0 10px;margin:12px 0 5px;}
@@ -58,7 +58,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .nav-badge.new{background:var(--success);}
 .s-foot{padding:10px 12px;border-top:1px solid var(--border);}
 .user-card{background:var(--bg3);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:9px;}
-.user-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.user-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
 .user-name{font-size:12px;font-weight:500;}
 .user-plan-badge{font-size:9px;padding:1px 7px;border-radius:20px;font-weight:600;display:inline-block;margin-top:2px;}
 .badge-free{background:rgba(90,106,130,0.2);color:var(--muted);}.badge-trial{background:rgba(240,125,42,0.2);color:var(--orange);}
@@ -68,9 +68,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .main{margin-left:var(--sw);flex:1;min-height:100vh;}
 .inner{display:none;padding:32px 36px;}.inner.active{display:block;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
-.page-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
+.page-title{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
 .page-sub{color:var(--muted);font-size:13px;margin-top:4px;}
-.btn-act{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.25s;box-shadow:0 4px 12px rgba(240,125,42,0.2);}
+.btn-act{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.25s;box-shadow:0 4px 12px rgba(240,125,42,0.2);}
 .btn-act:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,125,42,0.35);}.btn-act:active{transform:translateY(0);}
 .smart-banner{border-radius:14px;padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;animation:slideInRight 0.4s ease;}
 @keyframes slideInRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
@@ -80,9 +80,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .sb-ref{background:linear-gradient(135deg,rgba(29,184,126,0.12),rgba(0,212,255,0.06));border:1px solid rgba(29,184,126,0.25);}
 .sb-limit{background:linear-gradient(135deg,rgba(240,74,74,0.12),rgba(240,125,42,0.06));border:1px solid rgba(240,74,74,0.25);}
 .sb-icon{font-size:28px;flex-shrink:0;}.sb-content{flex:1;}
-.sb-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
+.sb-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
 .sb-text{font-size:12px;color:var(--muted);}.sb-text strong{color:var(--text);}
-.sb-btn{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
+.sb-btn{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
 .sb-btn:hover{background:var(--orange2);}
 .sb-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
@@ -91,12 +91,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .stat-card:hover{border-color:rgba(240,125,42,0.35);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
 .stat-card:hover::before{opacity:1;}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px;}
-.stat-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;}
+.stat-val{font-family:'Inter',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;}
 .stat-sub{font-size:12px;margin-top:4px;color:var(--success);}
 .usage-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-bottom:20px;transition:border-color 0.25s;}
 .usage-wrap:hover{border-color:rgba(240,125,42,0.2);}
 .usage-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.usage-title{font-size:12px;font-weight:600;}.usage-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.usage-title{font-size:12px;font-weight:600;}.usage-num{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;}
 .usage-track{height:10px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-bottom:8px;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);}
 .usage-fill{height:100%;border-radius:99px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);position:relative;}
 .usage-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shimmer 2s infinite;}
@@ -106,14 +106,14 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .usage-fill.full{background:linear-gradient(90deg,var(--danger),var(--warning));}
 .usage-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}.usage-meta a{color:var(--orange);cursor:pointer;}
 .onboard-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;}
-.onboard-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.onboard-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;position:relative;}
 .step-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;}
 .step-item:hover{transform:translateY(-2px);}
 .step-item.done{border-color:rgba(29,184,126,0.4);background:linear-gradient(135deg,rgba(29,184,126,0.08),rgba(29,184,126,0.02));}
 .step-item.active-step{border-color:rgba(240,125,42,0.5);background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(240,125,42,0.03));box-shadow:0 0 20px rgba(240,125,42,0.1);}
 .step-item.active-step::before{content:'← Yeh karein!';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--orange);font-weight:600;white-space:nowrap;}
-.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;margin:0 auto 8px;}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:12px;font-weight:800;margin:0 auto 8px;}
 .step-item.done .step-num{background:rgba(29,184,126,0.2);color:var(--success);box-shadow:0 0 12px rgba(29,184,126,0.2);}
 .step-item.active-step .step-num{background:rgba(240,125,42,0.2);color:var(--orange);box-shadow:0 0 12px rgba(240,125,42,0.2);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 12px rgba(240,125,42,0.2);}50%{box-shadow:0 0 20px rgba(240,125,42,0.4);}}
@@ -124,16 +124,16 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .camp-card::after{content:'→';position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;transition:all 0.25s;opacity:0;}
 .camp-card:hover{border-color:rgba(240,125,42,0.4);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
 .camp-card:hover::after{opacity:1;right:14px;}
-.camp-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;}
+.camp-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;}
 .camp-stats{display:flex;gap:14px;margin-top:10px;}
-.camp-stat span{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;display:block;}.camp-stat{font-size:10px;color:var(--muted);}
+.camp-stat span{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;display:block;}.camp-stat{font-size:10px;color:var(--muted);}
 .search-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;}
 .search-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
 .fg2{display:flex;flex-direction:column;gap:5px;}
 .fl2{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.6px;text-transform:uppercase;}
 .fi2{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
 .fi2:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}.fi2::placeholder{color:var(--muted);}.fi2 option{background:var(--bg2);}
-.btn-search{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);}
+.btn-search{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);}
 .btn-search:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,125,42,0.4);}
 .btn-search:active{transform:translateY(0);}.btn-search:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .ai-hint{background:rgba(240,125,42,0.04);border:1px solid rgba(240,125,42,0.12);border-radius:9px;padding:10px 14px;margin-top:12px;display:none;}
@@ -157,7 +157,7 @@ thead tr{background:var(--bg3);}
 th{padding:9px 13px;text-align:left;font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;white-space:nowrap;}
 td{padding:12px 14px;font-size:13px;border-top:1px solid var(--border);vertical-align:middle;transition:background 0.15s;}
 tr:hover td{background:rgba(255,255,255,0.01);}
-.score-pill{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;transition:transform 0.2s;}
+.score-pill{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:800;transition:transform 0.2s;}
 .score-pill:hover{transform:scale(1.15);}
 .sp-high{background:rgba(240,125,42,0.15);color:var(--orange);}.sp-med{background:rgba(240,165,42,0.15);color:var(--warning);}.sp-low{background:rgba(90,106,130,0.15);color:var(--muted);}
 .pri-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;text-transform:uppercase;}
@@ -178,7 +178,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .btn-copy{background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);border-radius:7px;padding:6px 12px;font-size:11px;cursor:pointer;font-weight:600;white-space:nowrap;margin-left:10px;transition:all 0.15s;}
 .btn-copy:hover{background:rgba(240,125,42,0.2);}
 .pro-progress{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
-.progress-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
+.progress-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
 .progress-sub{font-size:12px;color:var(--muted);margin-bottom:14px;}
 .progress-track{height:14px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-bottom:10px;position:relative;box-shadow:inset 0 2px 4px rgba(0,0,0,0.3);}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--purple));border-radius:99px;transition:width 1s cubic-bezier(0.4,0,0.2,1);position:relative;}
@@ -192,10 +192,10 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .pm-label{font-size:10px;color:var(--muted);margin-top:2px;}.pm-reward{font-size:11px;font-weight:600;margin-top:4px;}
 .pm-item.reached .pm-reward{color:var(--success);}.pm-item:not(.reached) .pm-reward{color:var(--muted);}.pm-item.pro-reward .pm-reward{color:var(--orange);}
 .ref-history{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
-.ref-history-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.ref-history-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
 .ref-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;margin-bottom:6px;transition:background 0.2s;border:1px solid transparent;}
 .ref-row:hover{background:var(--bg2);border-color:var(--border);}.ref-row:last-child{border:none;}
-.ref-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--blue));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.ref-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--blue));display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
 .ref-info{flex:1;}.ref-name{font-size:12px;font-weight:500;}.ref-email{font-size:11px;color:var(--muted);}
 .ref-date{font-size:11px;color:var(--muted);}.ref-bonus{font-size:11px;color:var(--success);font-weight:600;}
 .share-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
@@ -213,36 +213,36 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .plan-card.popular::before{opacity:1;background:linear-gradient(90deg,var(--blue),var(--cyan));}
 .plan-card.current{border-color:var(--orange);}.plan-card.popular{border-color:rgba(42,110,240,0.4);}
 .popular-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap;}
-.plan-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
-.plan-price{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--orange);}
+.plan-name{font-family:'Inter',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
+.plan-price{font-family:'Inter',sans-serif;font-size:30px;font-weight:800;color:var(--orange);}
 .plan-price span{font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400;}
 .plan-leads{font-size:11px;color:var(--muted);margin-top:4px;margin-bottom:14px;}
 .plan-features{list-style:none;margin-bottom:14px;}
 .plan-features li{font-size:12px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
 .plan-features li:last-child{border:none;}.plan-features li::before{content:'✓';color:var(--success);font-weight:700;font-size:11px;}
-.plan-btn{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.plan-btn{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;}
 .plan-btn:hover{border-color:var(--orange);color:var(--orange);}
 .plan-card.current .plan-btn,.plan-btn.current-btn{background:var(--orange);color:#fff;border-color:var(--orange);}
 .payment-note{background:rgba(29,184,126,0.06);border:1px solid rgba(29,184,126,0.2);border-radius:12px;padding:16px 20px;margin-bottom:16px;}
-.payment-note-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--success);margin-bottom:8px;}
+.payment-note-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--success);margin-bottom:8px;}
 .payment-steps{list-style:none;counter-reset:steps;}
 .payment-steps li{counter-increment:steps;padding:6px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;}
 .payment-steps li::before{content:counter(steps);background:rgba(29,184,126,0.2);color:var(--success);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
 .payment-steps li strong{color:var(--text);}
 .settings-sec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px;}
-.settings-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.settings-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.settings-grid .full{grid-column:1/-1;}
-.btn-save{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;margin-top:14px;}
+.btn-save{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;margin-top:14px;}
 .badge-online{background:rgba(29,184,126,0.1);color:var(--success);font-size:11px;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;}
 .admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
 .admin-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;}
 .admin-card.good{border-color:rgba(29,184,126,0.3);}.admin-card.warn{border-color:rgba(240,165,42,0.3);}.admin-card.danger{border-color:rgba(240,74,74,0.3);}
 .admin-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:7px;}
-.admin-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;}
+.admin-val{font-family:'Inter',sans-serif;font-size:24px;font-weight:800;}
 .admin-sub{font-size:11px;color:var(--muted);margin-top:3px;}
 .admin-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 .admin-sec{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px;}
-.admin-sec-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:14px;}
+.admin-sec-title{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;margin-bottom:14px;}
 .api-bar{margin-bottom:10px;}
 .api-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px;}
 .api-bar-track{height:7px;background:var(--bg3);border-radius:99px;overflow:hidden;}
@@ -260,7 +260,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;width:560px;max-width:94vw;max-height:88vh;overflow-y:auto;animation:slideUp 0.25s ease;}
 @keyframes slideUp{from{transform:translateY(16px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 .modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
-.modal-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.modal-title{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;}
 .modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;padding:3px 6px;border-radius:5px;}
 .email-subject{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;font-size:13px;font-weight:600;margin-bottom:10px;}
 .email-body{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px;font-size:12px;line-height:1.7;white-space:pre-wrap;min-height:150px;}
@@ -274,9 +274,9 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .loading-box{display:none;flex-direction:column;align-items:center;padding:40px;gap:12px;color:var(--muted);font-size:13px;}.loading-box.on{display:flex;}
 .empty{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty svg{margin:0 auto 12px;display:block;opacity:0.25;}
-.empty h3{font-family:'Syne',sans-serif;font-size:15px;color:var(--text);margin-bottom:5px;}.empty p{font-size:12px;}
+.empty h3{font-family:'Inter',sans-serif;font-size:15px;color:var(--text);margin-bottom:5px;}.empty p{font-size:12px;}
 .admin-login-box{max-width:360px;width:95vw;background:var(--card);border:1px solid rgba(168,85,247,0.3);border-radius:18px;padding:32px;}
-.admin-login-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;color:var(--purple);}
+.admin-login-title{font-family:'Inter',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;color:var(--purple);}
 .admin-login-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
 @media(max-width:768px){
   .sidebar{transform:translateX(-100%);z-index:200;}.sidebar.open{transform:translateX(0);}
@@ -344,7 +344,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .plan-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
 .plan-price-big{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--orange);}
 .plan-price-period{font-size:13px;color:var(--muted);}
-.plan-leads-big{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;line-height:1;margin-bottom:4px;}
+.plan-leads-big{font-family:'Inter',sans-serif;font-size:48px;font-weight:800;line-height:1;margin-bottom:4px;}
 .plan-card.free-card .plan-leads-big{color:var(--muted);}
 .plan-card.pro-card .plan-leads-big{background:linear-gradient(135deg,var(--orange),var(--orange3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .plan-card.agency-card .plan-leads-big{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -356,7 +356,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .plan-card.free-card .plan-check{background:rgba(90,106,130,0.2);color:var(--muted);}
 .plan-card.pro-card .plan-check{background:rgba(240,125,42,0.15);color:var(--orange);}
 .plan-card.agency-card .plan-check{background:rgba(42,110,240,0.15);color:var(--blue);}
-.plan-btn-new{width:100%;border:none;border-radius:12px;padding:14px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.plan-btn-new{width:100%;border:none;border-radius:12px;padding:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .plan-card.free-card .plan-btn-new{background:var(--bg2);color:var(--muted);border:1px solid var(--border);}
 .plan-card.pro-card .plan-btn-new{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;box-shadow:0 8px 24px rgba(240,125,42,0.3);}
 .plan-card.pro-card .plan-btn-new:hover{box-shadow:0 12px 32px rgba(240,125,42,0.5);transform:translateY(-2px);}
@@ -520,7 +520,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 }
 .hunt-count:hover{border-color:rgba(240,125,42,0.3);transform:translateY(-2px);}
 .hunt-num{
-  font-family:'Syne',sans-serif;font-size:24px;font-weight:800;
+  font-family:'Inter',sans-serif;font-size:24px;font-weight:800;
   color:var(--orange);display:block;
 }
 .hunt-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;}
@@ -1203,6 +1203,71 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 @media(max-width:768px){
   .testimonials { grid-template-columns:1fr !important; }
 }
+
+/* ===== MOBILE OVERLAP FIX ===== */
+@media(max-width:768px){
+  #waFloat { bottom:70px !important; right:12px !important; z-index:9980 !important; }
+  .ai-guide { bottom:70px !important; right:12px !important; z-index:9970 !important; max-width:240px !important; }
+  /* When both visible, stack them */
+  #waFloat { bottom:130px !important; }
+  .ai-guide { bottom:70px !important; }
+  /* Hide WA tooltip on mobile */
+  #waTooltip { display:none !important; }
+}
+
+/* ===== SOCIAL LINKS ===== */
+.social-link-pill {
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:6px;font-size:10px;
+  font-weight:600;text-decoration:none;transition:all 0.2s;
+  margin:1px;white-space:nowrap;
+}
+.social-fb { background:rgba(24,119,242,0.15);color:#1877f2;border:1px solid rgba(24,119,242,0.3); }
+.social-ig { background:rgba(225,48,108,0.15);color:#e1306c;border:1px solid rgba(225,48,108,0.3); }
+.social-li { background:rgba(10,102,194,0.15);color:#0a66c2;border:1px solid rgba(10,102,194,0.3); }
+.social-yt { background:rgba(255,0,0,0.12);color:#ff0000;border:1px solid rgba(255,0,0,0.25); }
+.social-tw { background:rgba(29,155,240,0.15);color:#1d9bf0;border:1px solid rgba(29,155,240,0.3); }
+.social-tk { background:rgba(0,0,0,0.2);color:#fff;border:1px solid rgba(255,255,255,0.1); }
+.social-wa { background:rgba(37,211,102,0.15);color:#25d366;border:1px solid rgba(37,211,102,0.3); }
+.social-link-pill:hover { transform:scale(1.05); box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+
+/* ===== EMAIL VERIFY BANNER ===== */
+.verify-banner {
+  background: linear-gradient(135deg, rgba(240,125,42,0.12), rgba(240,125,42,0.06));
+  border: 1px solid rgba(240,125,42,0.35);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.4s ease;
+}
+.verify-banner-icon { font-size: 28px; flex-shrink: 0; }
+.verify-banner-text { flex: 1; min-width: 200px; }
+.verify-banner-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.verify-banner-sub { font-size: 12px; color: var(--muted); }
+.verify-banner-btn {
+  background: linear-gradient(135deg, var(--orange), var(--orange2));
+  color: #fff; border: none; border-radius: 10px;
+  padding: 9px 18px; font-size: 12px; font-weight: 700;
+  cursor: pointer; transition: all 0.3s; white-space: nowrap;
+}
+.verify-banner-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240,125,42,0.35); }
+.verify-success-banner {
+  background: linear-gradient(135deg, rgba(29,184,126,0.12), rgba(29,184,126,0.06));
+  border: 1px solid rgba(29,184,126,0.35);
+  border-radius: 14px; padding: 14px 20px;
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; animation: fadeInUp 0.4s ease;
+}
+/* Verify page */
+.verify-page-card {
+  max-width: 440px; margin: 60px auto;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px 36px; text-align: center;
+}
 </style>
 </head>
 <body>
@@ -1213,23 +1278,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 <!-- Live Ticker -->
 <div class="live-ticker" id="liveTicker" style="display:none;">
   <div class="ticker-track" id="tickerTrack">
-    <span class="ticker-item"><span class="ticker-dot"></span> <strong>47</strong> users aaj join hue</span>
-    <span class="ticker-item">🔥 Rizwan ne <strong>UAE</strong> mein 12 hot leads dhundhein</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> AI ne <strong>230</strong> emails generate kiye aaj</span>
-    <span class="ticker-item">💼 Ahmad ne <strong>Surgical instruments</strong> search ki</span>
-    <span class="ticker-item">🌟 <strong>3 referrals</strong> aaj join hue</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Google Maps <strong>$199.26</strong> free baaki</span>
-    <span class="ticker-item">🚀 Jaiffy v4.2 — <strong>AI Lead Hunter</strong> — Pakistan ka #1 B2B tool</span>
-    <span class="ticker-item">💡 <strong>Leather goods</strong> search — Germany mein 18 buyers mile</span>
-    <!-- Duplicate for seamless loop -->
-    <span class="ticker-item"><span class="ticker-dot"></span> <strong>47</strong> users aaj join hue</span>
-    <span class="ticker-item">🔥 Rizwan ne <strong>UAE</strong> mein 12 hot leads dhundhein</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> AI ne <strong>230</strong> emails generate kiye aaj</span>
-    <span class="ticker-item">💼 Ahmad ne <strong>Surgical instruments</strong> search ki</span>
-    <span class="ticker-item">🌟 <strong>3 referrals</strong> aaj join hue</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Google Maps <strong>$199.26</strong> free baaki</span>
-    <span class="ticker-item">🚀 Jaiffy v4.2 — <strong>AI Lead Hunter</strong> — Pakistan ka #1 B2B tool</span>
-    <span class="ticker-item">💡 <strong>Leather goods</strong> search — Germany mein 18 buyers mile</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Loading live data...</span>
   </div>
 </div>
 
@@ -1398,17 +1447,17 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">🔍</div>
-            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">1. Product Likho</div>
+            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">1. Product Likho</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.6;">Surgical instruments, leather goods, sports gear — kuch bhi. AI samajh jaata hai.</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">🌍</div>
-            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">2. Country Chuno</div>
+            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">2. Country Chuno</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.6;">UAE, UK, Germany, USA — 10 countries. Jahan buyers hain, wahan search karo.</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">📧</div>
-            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">3. Email Bhejo</div>
+            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">3. Email Bhejo</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.6;">AI professional email likhta hai. Ek click mein buyer ke inbox mein!</div>
           </div>
         </div>
@@ -1499,7 +1548,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
         <!-- Sample CSV Download -->
         <div style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;flex-wrap:wrap;">
           <div style="flex:1;">
-            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;">📊 Data Format Dekhna Chahte Ho?</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;">📊 Data Format Dekhna Chahte Ho?</div>
             <div style="font-size:12px;color:var(--muted);">Free sample CSV download karein — Name, Phone, Email, Address, Score columns</div>
           </div>
           <button class="sample-csv-btn" onclick="downloadSampleCSV()">⬇ Sample CSV Download</button>
@@ -1544,10 +1593,57 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
       <div class="search-card">
         <div class="search-grid">
           <div class="fg2"><label class="fl2">Product / Service</label><input class="fi2" id="searchProduct" placeholder="Surgical instruments, Gym equipment, Leather goods..." oninput="previewKW()"></div>
-          <div class="fg2"><label class="fl2">Country</label>
-            <select class="fi2" id="searchCountry">
-              <option value="AE">🇦🇪 UAE</option><option value="SA">🇸🇦 Saudi Arabia</option><option value="GB">🇬🇧 UK</option><option value="US">🇺🇸 USA</option><option value="DE">🇩🇪 Germany</option><option value="TR">🇹🇷 Turkey</option><option value="CN">🇨🇳 China</option><option value="CA">🇨🇦 Canada</option><option value="AU">🇦🇺 Australia</option><option value="PK">🇵🇰 Pakistan</option>
+          <div class="fg2">
+            <label class="fl2">Country</label>
+            <select class="fi2" id="searchCountry" onchange="updateCityOptions()">
+              <optgroup label="Middle East">
+                <option value="AE">🇦🇪 UAE</option>
+                <option value="SA">🇸🇦 Saudi Arabia</option>
+                <option value="QA">🇶🇦 Qatar</option>
+                <option value="KW">🇰🇼 Kuwait</option>
+                <option value="OM">🇴🇲 Oman</option>
+                <option value="BH">🇧🇭 Bahrain</option>
+              </optgroup>
+              <optgroup label="Europe">
+                <option value="GB">🇬🇧 UK</option>
+                <option value="DE">🇩🇪 Germany</option>
+                <option value="FR">🇫🇷 France</option>
+                <option value="IT">🇮🇹 Italy</option>
+                <option value="NL">🇳🇱 Netherlands</option>
+                <option value="ES">🇪🇸 Spain</option>
+              </optgroup>
+              <optgroup label="Americas">
+                <option value="US">🇺🇸 USA</option>
+                <option value="CA">🇨🇦 Canada</option>
+                <option value="MX">🇲🇽 Mexico</option>
+              </optgroup>
+              <optgroup label="Asia Pacific">
+                <option value="CN">🇨🇳 China</option>
+                <option value="AU">🇦🇺 Australia</option>
+                <option value="MY">🇲🇾 Malaysia</option>
+                <option value="SG">🇸🇬 Singapore</option>
+                <option value="TR">🇹🇷 Turkey</option>
+              </optgroup>
+              <optgroup label="Africa">
+                <option value="ZA">🇿🇦 South Africa</option>
+                <option value="NG">🇳🇬 Nigeria</option>
+                <option value="EG">🇪🇬 Egypt</option>
+              </optgroup>
+              <optgroup label="South Asia">
+                <option value="PK">🇵🇰 Pakistan</option>
+                <option value="IN">🇮🇳 India</option>
+                <option value="BD">🇧🇩 Bangladesh</option>
+              </optgroup>
             </select>
+          </div>
+          <div class="fg2">
+            <label class="fl2">City / State <span style="color:var(--muted);font-size:10px;font-weight:400;">(Optional — zyada specific)</span></label>
+            <div style="display:flex;gap:6px;">
+              <select class="fi2" id="searchCityPreset" onchange="setCityFromPreset()" style="flex:1;min-width:0;">
+                <option value="">— Poora Country —</option>
+              </select>
+              <input class="fi2" id="searchCity" placeholder="Ya khud likho..." style="flex:1;min-width:0;">
+            </div>
           </div>
           <div class="fg2"><label class="fl2">Campaign Name</label><input class="fi2" id="searchCampaign" placeholder="UAE Surgical Campaign"></div>
           <button class="btn-search" onclick="doSearch()" id="searchBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Search</button>
@@ -1559,7 +1655,21 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
         <div class="sb-content"><div class="sb-title">Contact info locked hai</div><div class="sb-text">Free plan mein email aur phone blur hoti hai. <strong>Pro plan (Rs.2,000/mo)</strong> mein sab unlock hoga — ya 20 dost refer karo!</div></div>
         <button class="sb-btn" onclick="goTo('plans')">Upgrade karein</button>
       </div>
-      <div class="radar-loading" id="searchLoading">
+
+      <!-- Smart Keywords Section -->
+      <div id="smartKeywordsBox" style="display:none;margin-bottom:16px;background:var(--card);border:1px solid rgba(240,125,42,0.2);border-radius:14px;padding:16px 18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="font-size:12px;font-weight:700;color:var(--orange);">🎯 Related Keywords — Zyada Leads Ke Liye</div>
+          <div style="font-size:11px;color:var(--muted);">Click to add</div>
+        </div>
+        <div id="keywordSuggestions" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;"></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="flex:1;"><div id="selectedKeywordsDisplay" style="font-size:11px;color:var(--muted);"></div></div>
+          <button id="multiSearchBtn" onclick="doMultiSearch()" style="display:none;padding:8px 16px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">🔥 Multi Search</button>
+        </div>
+      </div>
+
+            <div class="radar-loading" id="searchLoading">
       <div class="radar-container">
         <div class="rl-ring"></div><div class="rl-ring"></div>
         <div class="rl-ring"></div><div class="rl-ring"></div>
@@ -1619,7 +1729,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
         <div id="refHistoryList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Loading...</div></div>
       </div>
       <div class="share-box">
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;">📱 Share Karo — Jahan Chahein</div>
+        <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;">📱 Share Karo — Jahan Chahein</div>
         <div class="share-channels">
           <button class="share-btn share-wa" onclick="shareWhatsApp()">💬 WhatsApp</button>
           <button class="share-btn share-fb" onclick="shareFB()">📘 Facebook</button>
@@ -1644,7 +1754,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
       </div>
       <div class="plans-grid" id="plansGrid"><div style="text-align:center;padding:40px;color:var(--muted);"><div class="big-spin" style="margin:0 auto 12px;"></div>Plans load ho rahe hain...</div></div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;">💡 Paid nahi karna? Free mein upgrade karo!</div>
+        <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;">💡 Paid nahi karna? Free mein upgrade karo!</div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:14px;"><strong style="color:var(--orange)">20 dost refer karo</strong> = 1 mahina Pro <strong>bilkul FREE</strong></div>
         <button class="btn-act" onclick="goTo('referral')">Referral Link Dekho</button>
       </div>
@@ -1765,6 +1875,17 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
       </div>
     </div>
 
+
+    <!-- VERIFY EMAIL PAGE -->
+    <div class="page" id="pg-verify">
+      <div class="verify-page-card">
+        <div style="font-size:52px;margin-bottom:16px;" id="verifyIcon">⏳</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;" id="verifyTitle">Email Verify Ho Raha Hai...</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7;" id="verifyMsg">Thoda intezaar karein...</div>
+        <div id="verifyAction" style="margin-top:24px;"></div>
+      </div>
+    </div>
+
 <!-- AI Guide Bubble -->
 <div class="ai-guide" id="aiGuide" style="display:none;">
   <div class="ai-bubble">
@@ -1794,7 +1915,11 @@ const SAVED_COLS=[{id:'business_name',label:'Business',def:true},{id:'email',lab
 let activeSC=SEARCH_COLS.filter(c=>c.def).map(c=>c.id);
 let activeSaved=SAVED_COLS.filter(c=>c.def).map(c=>c.id);
 
-window.onload=()=>{
+window.onload=async ()=>{
+  // Check for email verification token first
+  const verifyHandled = await checkVerifyToken();
+  if (verifyHandled) return;
+  
   const hash=location.hash.replace('#','');
   if(hash===ADMIN_SECRET){history.replaceState(null,'',location.pathname);showPage('adminlogin');return;}
   token=localStorage.getItem('j_token')||'';
@@ -1864,7 +1989,7 @@ function doLogout(){
   localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
   U=null;token='';adminToken='';showPage('login');
 }
-function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();}
+function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);setTimeout(showVerifyBanner,1000);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();}
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
   if(!U)return;
@@ -1931,7 +2056,7 @@ async function doSearch(page=1){
   const btn=document.getElementById('searchBtn');btn.disabled=true;btn.innerHTML='<div class="spin"></div> Searching...';
   document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';startRadarSteps();
   try{
-    const r=await api('POST','/search',{query:product,country,page,campaign});
+    const r=await api('POST','/search',{query:product,country,city:(document.getElementById('searchCity')?.value||'').trim()||undefined,page,campaign});
     if(r.status===429||r.limit_reached){showToast(r.error||'Limit khatam!',true);return;}
     if(r.error){showToast(r.error,true);return;}
     currentLeads=r.leads||[];window._lastSearch=r;
@@ -1957,16 +2082,146 @@ function renderResults(d){
     const isBlurred=l.email_blurred||l.phone_blurred;
     const emailHtml=l.emails?.length?`<div class="${isBlurred?'blur-info':'confirmed'}" ${isBlurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${isBlurred?'🔒':''} ${l.emails[0]}</div>`:`<div class="not-found">—</div>`;
     const phoneHtml=l.phone?`<div class="${l.phone_blurred?'blur-info':'confirmed'}" ${l.phone_blurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${l.phone_blurred?'🔒':''} ${l.phone}</div>`:`<div class="not-found">—</div>`;
-    const cells={name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,contact:`${emailHtml}${phoneHtml}`,website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),score:`<div class="score-pill ${sc}">${l.score}</div>`,priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,notes:`<div style="font-size:10px;color:var(--muted);font-style:italic">${(l.data_notes||[]).join(' · ')}</div>`,action:`<button class="btn-email" onclick="openEmailModal(${i})">✉ Email</button>`};
+    const cells={name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,contact:`${emailHtml}${phoneHtml}`,website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),score:`<div class="score-pill ${sc}">${l.score}</div>`,priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,notes:`<div style="font-size:10px;color:var(--muted);font-style:italic">${(l.data_notes||[]).join(' · ')}</div>`,action:`<div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn-email" onclick="openEmailModal(${i})">✉ Email</button>
+        <button class="btn-social" onclick="enrichLead(${i},this)" id="socialBtn${i}" style="background:rgba(168,85,247,0.1);color:var(--purple);border:1px solid rgba(168,85,247,0.2);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all 0.2s;">🔗 Social</button>
+        <div id="socialLinks${i}" style="display:none;"></div>
+      </div>`};
     return `<tr>${activeSC.map(c=>`<td>${cells[c]||''}</td>`).join('')}</tr>`;
   }).join('');
   const pg=d.pagination;document.getElementById('resPagination').innerHTML=pg&&pg.total_pages>1?`<button class="page-btn" onclick="doSearch(${pg.page-1})" ${pg.page<=1?'disabled':''}>← Prev</button><span style="font-size:11px;color:var(--muted)">Page ${pg.page}/${pg.total_pages}</span><button class="page-btn" onclick="doSearch(${pg.page+1})" ${!pg.has_next?'disabled':''}>Next →</button>`:'';
 }
 function openEmailModal(idx){
-  const lead=currentLeads[idx];if(!lead)return;const modal=document.createElement('div');modal.className='modal-overlay';
-  modal.innerHTML=`<div class="modal"><div class="modal-hdr"><div class="modal-title">✉ AI Email — ${lead.name}</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div><div id="eContent"><div class="loading-box on" style="justify-content:center;"><div class="big-spin"></div><div>AI email ban rahi hai...</div></div></div></div>`;
-  document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});genEmail(lead,modal);
+  const lead=currentLeads[idx];if(!lead)return;
+  const modal=document.createElement('div');modal.className='modal-overlay';
+  modal.innerHTML=`
+  <div class="modal" style="max-width:620px;width:95%;">
+    <div class="modal-hdr">
+      <div class="modal-title">✉ Email — ${lead.name}</div>
+      <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+    </div>
+    <!-- Mode Toggle -->
+    <div style="display:flex;gap:8px;margin-bottom:16px;padding:0 4px;">
+      <button id="eAiBtn" onclick="switchEmailMode('ai',${idx})" style="flex:1;padding:9px;border-radius:10px;border:2px solid var(--orange);background:rgba(240,125,42,0.1);color:var(--orange);font-size:12px;font-weight:700;cursor:pointer;">🤖 AI Generate</button>
+      <button id="eCustomBtn" onclick="switchEmailMode('custom',${idx})" style="flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;">✏️ Khud Likho</button>
+    </div>
+    <!-- AI Mode -->
+    <div id="eAiMode">
+      <div id="eContent">
+        <div class="loading-box on" style="justify-content:center;"><div class="big-spin"></div><div>AI email ban rahi hai...</div></div>
+      </div>
+    </div>
+    <!-- Custom Mode -->
+    <div id="eCustomMode" style="display:none;">
+      <div style="margin-bottom:12px;">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;">AAPKA MESSAGE TEMPLATE</div>
+        <textarea id="eCustomText" style="width:100%;min-height:160px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--text);font-size:13px;line-height:1.7;resize:vertical;box-sizing:border-box;" placeholder="Jaise:
+Assalam o Alaikum,
+
+Main Pakistan se [COMPANY_NAME] hun aur aapko high-quality surgical instruments supply karna chahta hun.
+
+Humari products:
+- ISO certified surgical tools
+- Competitive pricing
+- Fast delivery
+
+Kya aap interested hain?
+
+Shukriya,
+[SENDER_NAME]">${localStorage.getItem('j_custom_template')||''}</textarea>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">💡 <strong>[COMPANY_NAME]</strong> = client company name, <strong>[SENDER_NAME]</strong> = aapka naam — AI khud fill karega</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="saveCustomTemplate()" style="flex:1;padding:10px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;">💾 Template Save</button>
+        <button onclick="genCustomEmail(${idx})" style="flex:2;padding:10px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;">✨ Personalize & Generate</button>
+      </div>
+      <div id="eCustomResult" style="margin-top:14px;"></div>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+  genEmail(lead,modal);
 }
+
+function switchEmailMode(mode, idx) {
+  const aiBtn = document.getElementById('eAiBtn');
+  const customBtn = document.getElementById('eCustomBtn');
+  const aiMode = document.getElementById('eAiMode');
+  const customMode = document.getElementById('eCustomMode');
+  if(!aiBtn) return;
+  if(mode === 'ai') {
+    aiBtn.style.border = '2px solid var(--orange)';
+    aiBtn.style.background = 'rgba(240,125,42,0.1)';
+    aiBtn.style.color = 'var(--orange)';
+    customBtn.style.border = '1px solid var(--border)';
+    customBtn.style.background = 'var(--bg2)';
+    customBtn.style.color = 'var(--muted)';
+    aiMode.style.display = 'block';
+    customMode.style.display = 'none';
+  } else {
+    customBtn.style.border = '2px solid var(--blue)';
+    customBtn.style.background = 'rgba(42,110,240,0.1)';
+    customBtn.style.color = 'var(--blue)';
+    aiBtn.style.border = '1px solid var(--border)';
+    aiBtn.style.background = 'var(--bg2)';
+    aiBtn.style.color = 'var(--muted)';
+    aiMode.style.display = 'none';
+    customMode.style.display = 'block';
+  }
+}
+
+function saveCustomTemplate() {
+  const txt = document.getElementById('eCustomText')?.value;
+  if(txt) { localStorage.setItem('j_custom_template', txt); showToast('✅ Template save ho gaya!'); }
+}
+
+async function genCustomEmail(idx) {
+  const lead = currentLeads[idx]; if(!lead) return;
+  const template = document.getElementById('eCustomText')?.value?.trim();
+  if(!template) { showToast('Pehle template likho!', true); return; }
+  const resultDiv = document.getElementById('eCustomResult');
+  if(resultDiv) resultDiv.innerHTML = '<div style="text-align:center;padding:20px;"><div class="big-spin" style="margin:0 auto;"></div><div style="margin-top:8px;font-size:12px;color:var(--muted);">Personalizing...</div></div>';
+  
+  // Replace placeholders
+  let personalized = template
+    .replace(/\[COMPANY_NAME\]/g, lead.name || 'Company')
+    .replace(/\[SENDER_NAME\]/g, U?.name || 'Sender')
+    .replace(/\[PRODUCT\]/g, document.getElementById('searchProduct')?.value || 'products')
+    .replace(/\[COUNTRY\]/g, lead.country || '');
+  
+  // Ask AI to polish it
+  try {
+    const r = await api('POST', '/generate-email', {
+      business_name: lead.name,
+      category: lead.category,
+      country: lead.country,
+      product: document.getElementById('searchProduct')?.value || '',
+      sender_name: U?.name || '',
+      sender_company: U?.company || '',
+      custom_template: personalized
+    });
+    if(r.error) throw new Error(r.error);
+    const emailTxt = r.email || personalized;
+    if(resultDiv) resultDiv.innerHTML = `
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;">
+        <div style="font-size:11px;color:var(--orange);font-weight:700;margin-bottom:10px;">✅ PERSONALIZED EMAIL READY</div>
+        <pre style="white-space:pre-wrap;font-size:13px;color:var(--text);line-height:1.7;font-family:inherit;">${emailTxt}</pre>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <button onclick="navigator.clipboard.writeText(this.closest('div').querySelector('pre').textContent);showToast('📋 Copied!')" style="flex:1;padding:9px;background:var(--orange);border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">📋 Copy</button>
+          ${lead.email?`<a href="mailto:${lead.email}?subject=Business Inquiry&body=${encodeURIComponent(emailTxt)}" style="flex:1;padding:9px;background:var(--blue);border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;">📧 Send Email</a>`:''}
+        </div>
+      </div>`;
+  } catch(e) {
+    // Show personalized template even without AI
+    if(resultDiv) resultDiv.innerHTML = `
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;">
+        <pre style="white-space:pre-wrap;font-size:13px;line-height:1.7;font-family:inherit;">${personalized}</pre>
+        <button onclick="navigator.clipboard.writeText('${personalized.replace(/'/g,"\'")}');showToast('Copied!')" style="margin-top:10px;padding:9px 18px;background:var(--orange);border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">📋 Copy</button>
+      </div>`;
+  }
+}
+
+
 async function genEmail(lead,modal){
   try{
     const r=await api('POST','/generate-email',{business_name:lead.name,category:lead.category,country:lead.country,product:document.getElementById('searchProduct').value,sender_name:U?.name||'',sender_company:U?.company||''});
@@ -2020,6 +2275,15 @@ async function loadPlans(){
     if(!plans.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Plans load nahi hue</div>';return;}
     if(d.payment_number)document.getElementById('paymentNumber').textContent=d.payment_number;
     if(d.payment_whatsapp)document.getElementById('paymentWhatsapp').textContent=d.payment_whatsapp;
+    // Store support email globally
+    if(d.support_email) {
+      window._supportEmail = d.support_email;
+      // Update all support email links on page
+      document.querySelectorAll('.support-email-link').forEach(el => {
+        el.textContent = d.support_email;
+        el.href = 'mailto:' + d.support_email;
+      });
+    }
     const cardClass={free:'free-card',pro:'pro-card',agency:'agency-card'};
     const cardIcon={free:'🎯',pro:'🚀',agency:'🏢'};
     const cardBadge={free:'',pro:'<span class="plan-badge-new">⭐ Most Popular</span>',agency:'<span class="plan-badge-popular">💼 Agency</span>'};
@@ -2030,7 +2294,7 @@ async function loadPlans(){
         <div class="plan-card-inner">
           <div class="plan-header">
             <div>
-              <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px;">${cardIcon[p.id]||'🎯'} ${p.name}</div>
+              <div style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px;">${cardIcon[p.id]||'🎯'} ${p.name}</div>
               ${isCurrent?'<span class="plan-current-badge">✓ Current Plan</span>':''}
             </div>
             ${!isCurrent?cardBadge[p.id]||'':''}
@@ -2356,11 +2620,63 @@ function cycleAiMessages(){
   },1000);
 }
 
-// ===== LIVE TICKER =====
-function showTicker(){
-  const ticker=document.getElementById('liveTicker');
-  if(ticker)ticker.style.display='block';
+// ===== LIVE TICKER - Real Data =====
+const _tickerTemplates = [
+  (d) => `<span class="ticker-dot"></span> <strong>${d.total_users}</strong> users registered hain`,
+  (d) => `🔥 Aaj <strong>${d.leads_today}</strong> leads generate hue`,
+  (d) => `<span class="ticker-dot"></span> Google Maps <strong>$${d.maps_free}</strong> free baaki`,
+  (d) => `🚀 Jaiffy v4.2 — <strong>AI Lead Hunter</strong> — Pakistan ka #1 B2B tool`,
+  (d) => `💼 Is mahine <strong>${d.total_leads}</strong> total leads mile`,
+  (d) => `<span class="ticker-dot"></span> <strong>${d.active_today}</strong> users aaj active hain`,
+  (d) => `🌍 Aaj <strong>${d.searches_today||'5+'}</strong> searches hui hain`,
+  (d) => `⭐ Free trial — <strong>30 leads/day</strong> — signup karo abhi!`,
+];
+
+async function showTicker(){
+  const ticker = document.getElementById('liveTicker');
+  if(!ticker) return;
+  ticker.style.display = 'block';
+  
+  try {
+    const r = await api('POST', '/public/stats', {});
+    const stats = r.stats || {};
+    buildTicker(stats);
+  } catch(e) {
+    // Fallback with user data
+    buildTicker({
+      total_users: 4,
+      leads_today: 24,
+      total_leads: 54,
+      maps_free: '198.41',
+      active_today: 2,
+    });
+  }
 }
+
+function buildTicker(d) {
+  const track = document.getElementById('tickerTrack');
+  if(!track) return;
+  
+  const items = _tickerTemplates.map(fn => {
+    try { return fn(d); } catch(e) { return ''; }
+  }).filter(Boolean);
+  
+  // Build twice for seamless loop
+  const itemsHTML = [...items, ...items].map(content => 
+    `<span class="ticker-item">${content}</span>`
+  ).join('');
+  
+  track.innerHTML = itemsHTML;
+  
+  // Adjust animation speed based on content
+  track.style.animation = 'none';
+  track.offsetHeight; // reflow
+  track.style.animation = `tickerScroll ${items.length * 4}s linear infinite`;
+}
+
+// Refresh ticker every 5 minutes
+setInterval(() => { if(document.getElementById('liveTicker')?.style.display !== 'none') showTicker(); }, 300000);
+
 
 
 // ===== LIVE ACTIVITY =====
@@ -2505,6 +2821,7 @@ function initAllInteractions() {
   initRipples();
   initTilts();
   initCursorGlow();
+  initSearchSuggestions();
   // Click flash on all buttons
   document.querySelectorAll('button').forEach(btn => addClickFlash(btn));
 }
@@ -2620,6 +2937,365 @@ window.loadDashboard = async function() {
   updatePageMeta('Dashboard', 'AI-powered B2B leads for Pakistani exporters');
 };
 
+
+// ===== KEYWORD DICTIONARY =====
+const KEYWORD_MAP = {
+  'surgical': ['surgical instruments','surgical tools','medical equipment','hospital supplies','orthopedic instruments','dental instruments','laparoscopic instruments'],
+  'leather': ['leather goods','leather bags','leather jackets','leather belts','leather gloves','leather accessories','genuine leather products'],
+  'sports': ['sports goods','sports equipment','football gear','cricket equipment','gym equipment','fitness accessories','outdoor sports gear'],
+  'textile': ['textile fabric','cotton fabric','polyester fabric','denim fabric','silk fabric','synthetic fabric','garment fabric'],
+  'furniture': ['wooden furniture','office furniture','bedroom furniture','sofa sets','dining furniture','outdoor furniture','home decor'],
+  'rice': ['basmati rice','long grain rice','rice suppliers','rice exporters','organic rice','white rice','brown rice'],
+  'tool': ['hand tools','power tools','industrial tools','cutting tools','measuring tools','workshop tools'],
+  'glove': ['medical gloves','surgical gloves','latex gloves','nitrile gloves','safety gloves','work gloves'],
+};
+
+let _selectedKeywords = [];
+
+function getKeywordSuggestions(product) {
+  if(!product || product.length < 3) return [];
+  const lower = product.toLowerCase();
+  for(const [key, words] of Object.entries(KEYWORD_MAP)) {
+    if(lower.includes(key)) return words.filter(w => w !== lower);
+  }
+  // Generic suggestions based on product
+  return [
+    product + ' suppliers',
+    product + ' manufacturers',
+    product + ' exporters',
+    product + ' wholesale',
+    product + ' importers',
+  ];
+}
+
+function showKeywordSuggestions(product) {
+  const box = document.getElementById('smartKeywordsBox');
+  const container = document.getElementById('keywordSuggestions');
+  if(!box || !container || !product) return;
+  
+  const suggestions = getKeywordSuggestions(product);
+  if(!suggestions.length) { box.style.display = 'none'; return; }
+  
+  box.style.display = 'block';
+  _selectedKeywords = [product]; // Always include original
+  
+  container.innerHTML = suggestions.slice(0,8).map(kw => `
+    <span onclick="toggleKeyword('${kw.replace(/'/g,"\'")}',this)" 
+      style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;transition:all 0.2s;background:var(--bg2);color:var(--muted);" 
+      data-kw="${kw}">
+      + ${kw}
+    </span>`).join('');
+  
+  updateSelectedDisplay();
+}
+
+function toggleKeyword(kw, el) {
+  if(_selectedKeywords.includes(kw)) {
+    _selectedKeywords = _selectedKeywords.filter(k => k !== kw);
+    el.style.background = 'var(--bg2)';
+    el.style.color = 'var(--muted)';
+    el.style.borderColor = 'var(--border)';
+  } else {
+    if(_selectedKeywords.length >= 4) { showToast('Max 4 keywords select kar sakte hain', true); return; }
+    _selectedKeywords.push(kw);
+    el.style.background = 'rgba(240,125,42,0.15)';
+    el.style.color = 'var(--orange)';
+    el.style.borderColor = 'rgba(240,125,42,0.4)';
+  }
+  updateSelectedDisplay();
+}
+
+function updateSelectedDisplay() {
+  const display = document.getElementById('selectedKeywordsDisplay');
+  const btn = document.getElementById('multiSearchBtn');
+  const extras = _selectedKeywords.filter(k => k !== document.getElementById('searchProduct')?.value);
+  if(display) {
+    display.textContent = extras.length ? 
+      `✅ ${extras.length} extra keyword(s) selected — Multi Search karega` : 
+      'Keyword click karo to add karein';
+  }
+  if(btn) btn.style.display = extras.length > 0 ? 'block' : 'none';
+}
+
+async function doMultiSearch() {
+  const country = document.getElementById('searchCountry')?.value;
+  if(!_selectedKeywords.length || !country) { doSearch(); return; }
+  
+  showToast(`🔥 ${_selectedKeywords.length} keywords search ho rahi hain...`);
+  const btn = document.getElementById('multiSearchBtn');
+  if(btn) { btn.textContent = '⏳ Searching...'; btn.disabled = true; }
+  
+  // Search each keyword and combine
+  const allLeads = [];
+  const seen = new Set();
+  
+  for(const kw of _selectedKeywords) {
+    document.getElementById('searchProduct').value = kw;
+    try {
+      const r = await api('POST', '/search', {
+        product: kw, country: country,
+        campaign: document.getElementById('searchCampaign')?.value || kw,
+        page: 1, page_size: 20, force_refresh: false
+      });
+      if(r.leads) {
+        r.leads.forEach(lead => {
+          const key = lead.name + lead.country;
+          if(!seen.has(key)) { seen.add(key); allLeads.push(lead); }
+        });
+      }
+    } catch(e) {}
+    await new Promise(res => setTimeout(res, 500)); // Small delay between calls
+  }
+  
+  if(btn) { btn.textContent = '🔥 Multi Search'; btn.disabled = false; }
+  
+  if(allLeads.length) {
+    // Restore original product
+    document.getElementById('searchProduct').value = _selectedKeywords[0];
+    currentLeads = allLeads.sort((a,b) => (b.score||0)-(a.score||0));
+    renderResults({leads: allLeads, total: allLeads.length, page: 1, total_pages: 1, has_next: false});
+    showToast(`✅ ${allLeads.length} unique leads mile ${_selectedKeywords.length} keywords se!`);
+  } else {
+    showToast('Koi leads nahi mili. Single search try karein.', true);
+  }
+}
+
+// Patch search input to show keyword suggestions
+function initSearchSuggestions() {
+  const productInput = document.getElementById('searchProduct');
+  if(!productInput || productInput._kw_patched) return;
+  productInput._kw_patched = true;
+  productInput.addEventListener('input', (e) => {
+    if(e.target.value.length > 2) showKeywordSuggestions(e.target.value);
+    else document.getElementById('smartKeywordsBox').style.display = 'none';
+  });
+  productInput.addEventListener('blur', (e) => {
+    if(e.target.value.length > 2) showKeywordSuggestions(e.target.value);
+  });
+}
+
+
+// ===== CITY / STATE DATA =====
+const CITY_DATA = {
+  US: ['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','San Jose','Austin','Seattle','Miami','Boston','Denver','Atlanta','Las Vegas','Portland','Minneapolis','Detroit'],
+  GB: ['London','Birmingham','Manchester','Glasgow','Liverpool','Bristol','Sheffield','Leeds','Edinburgh','Leicester','Coventry','Bradford','Cardiff','Belfast','Nottingham'],
+  DE: ['Berlin','Hamburg','Munich','Cologne','Frankfurt','Stuttgart','Dusseldorf','Leipzig','Dortmund','Essen','Bremen','Dresden','Hannover','Nuremberg'],
+  AE: ['Dubai','Abu Dhabi','Sharjah','Ajman','Ras Al Khaimah','Fujairah','Al Ain'],
+  SA: ['Riyadh','Jeddah','Mecca','Medina','Dammam','Khobar','Taif','Tabuk','Buraidah','Abha'],
+  CA: ['Toronto','Vancouver','Montreal','Calgary','Edmonton','Ottawa','Winnipeg','Quebec City','Hamilton','Kitchener'],
+  AU: ['Sydney','Melbourne','Brisbane','Perth','Adelaide','Gold Coast','Canberra','Hobart','Darwin'],
+  CN: ['Shanghai','Beijing','Guangzhou','Shenzhen','Chengdu','Hangzhou','Wuhan','Tianjin','Nanjing','Xian'],
+  TR: ['Istanbul','Ankara','Izmir','Bursa','Adana','Gaziantep','Konya','Antalya','Mersin'],
+  FR: ['Paris','Lyon','Marseille','Toulouse','Nice','Nantes','Strasbourg','Montpellier','Bordeaux'],
+  IT: ['Rome','Milan','Naples','Turin','Palermo','Genoa','Bologna','Florence','Venice'],
+  NL: ['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven','Groningen','Tilburg'],
+  ES: ['Madrid','Barcelona','Valencia','Seville','Bilbao','Malaga','Zaragoza'],
+  QA: ['Doha','Al Wakrah','Al Khor','Lusail'],
+  KW: ['Kuwait City','Ahmadi','Hawalli','Salmiya','Farwaniya'],
+  MY: ['Kuala Lumpur','Penang','Johor Bahru','Ipoh','Subang Jaya','Petaling Jaya'],
+  SG: ['Singapore'],
+  ZA: ['Johannesburg','Cape Town','Durban','Pretoria','Port Elizabeth'],
+  EG: ['Cairo','Alexandria','Giza','Port Said','Suez'],
+  IN: ['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Kolkata','Pune','Ahmedabad','Surat'],
+  PK: ['Karachi','Lahore','Islamabad','Rawalpindi','Faisalabad','Multan','Sialkot','Gujranwala','Peshawar','Quetta'],
+};
+
+function updateCityOptions() {
+  const country = document.getElementById('searchCountry')?.value;
+  const preset = document.getElementById('searchCityPreset');
+  const cityInput = document.getElementById('searchCity');
+  if(!preset) return;
+  
+  preset.innerHTML = '<option value="">— Poora Country —</option>';
+  if(cityInput) cityInput.value = '';
+  
+  const cities = CITY_DATA[country] || [];
+  if(cities.length) {
+    cities.forEach(city => {
+      const opt = document.createElement('option');
+      opt.value = city; opt.textContent = city;
+      preset.appendChild(opt);
+    });
+    preset.style.display = 'block';
+  } else {
+    preset.style.display = 'none';
+  }
+}
+
+function setCityFromPreset() {
+  const preset = document.getElementById('searchCityPreset');
+  const cityInput = document.getElementById('searchCity');
+  if(preset?.value && cityInput) cityInput.value = preset.value;
+}
+
+// Init on page load
+document.addEventListener('DOMContentLoaded', () => { updateCityOptions(); });
+
+
+// ===== SOCIAL MEDIA ENRICHMENT =====
+const SOCIAL_STYLE = {
+  facebook: ['social-fb','🔵 FB'],
+  instagram: ['social-ig','📸 IG'],
+  linkedin: ['social-li','💼 LI'],
+  youtube: ['social-yt','▶ YT'],
+  twitter: ['social-tw','🐦 TW'],
+  tiktok: ['social-tk','🎵 TK'],
+  whatsapp: ['social-wa','💬 WA'],
+};
+
+// Cache social results per session
+const _socialCache = {};
+
+async function enrichLead(idx, btn) {
+  const lead = currentLeads[idx];
+  if(!lead) return;
+  
+  const linksDiv = document.getElementById('socialLinks' + idx);
+  if(!linksDiv) return;
+  
+  // Already loaded
+  if(_socialCache[idx]) {
+    renderSocialLinks(idx, _socialCache[idx]);
+    return;
+  }
+  
+  // Loading state
+  btn.textContent = '⏳';
+  btn.disabled = true;
+  
+  try {
+    const r = await api('POST', '/enrich-lead', {
+      business_name: lead.name,
+      website: lead.website || ''
+    });
+    
+    _socialCache[idx] = r.social || {};
+    renderSocialLinks(idx, _socialCache[idx]);
+    
+    // Update lead object with social data
+    currentLeads[idx].social = _socialCache[idx];
+    
+    const count = Object.keys(_socialCache[idx]).length;
+    btn.textContent = count > 0 ? `✅ ${count} found` : '❌ None';
+    btn.style.background = count > 0 ? 'rgba(29,184,126,0.1)' : 'rgba(90,106,130,0.1)';
+    btn.style.color = count > 0 ? 'var(--success)' : 'var(--muted)';
+    
+    if(count === 0) showToast('Social links nahi mile — company ke paas public profiles nahi hain');
+    else showToast(`✅ ${count} social profile(s) mili!`);
+    
+  } catch(e) {
+    btn.textContent = '🔗 Retry';
+    btn.disabled = false;
+    showToast('Social search failed — retry karein', true);
+  }
+}
+
+function renderSocialLinks(idx, social) {
+  const linksDiv = document.getElementById('socialLinks' + idx);
+  if(!linksDiv) return;
+  
+  if(!social || Object.keys(social).length === 0) {
+    linksDiv.style.display = 'none';
+    return;
+  }
+  
+  const pills = Object.entries(social).map(([platform, url]) => {
+    const [cssClass, label] = SOCIAL_STYLE[platform] || ['', platform];
+    return `<a href="${url}" target="_blank" rel="noopener" class="social-link-pill ${cssClass}">${label}</a>`;
+  }).join('');
+  
+  linksDiv.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:2px;margin-top:4px;">${pills}</div>`;
+  linksDiv.style.display = 'block';
+}
+
+
+// ===== EMAIL VERIFICATION SYSTEM =====
+
+// Check URL for ?token= on page load
+async function checkVerifyToken() {
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+  if (!token) return false;
+  
+  // Show verify page
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const verifyPage = document.getElementById('pg-verify');
+  if (verifyPage) verifyPage.classList.add('active');
+  
+  try {
+    const r = await fetch(SERVER + '/verify?token=' + encodeURIComponent(token));
+    const d = await r.json();
+    
+    const icon = document.getElementById('verifyIcon');
+    const title = document.getElementById('verifyTitle');
+    const msg = document.getElementById('verifyMsg');
+    const action = document.getElementById('verifyAction');
+    
+    if (d.success) {
+      if (icon) icon.textContent = '🎉';
+      if (title) title.textContent = 'Email Verify Ho Gaya!';
+      if (msg) msg.innerHTML = 'Mubarak ho! Aapka Jaiffy account activate ho gaya hai.<br><br>Ab login karein aur lead hunting shuru karein! 🎯';
+      if (action) action.innerHTML = '<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>';
+    } else {
+      if (icon) icon.textContent = '❌';
+      if (title) title.textContent = 'Link Kaam Nahi Kiya';
+      if (msg) msg.textContent = d.error || 'Verification failed — nayi link mangwao';
+      if (action) action.innerHTML = '<button onclick="showPage('login');history.replaceState({},'','/')" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 28px;font-size:14px;cursor:pointer;">Login Page</button>';
+    }
+  } catch(e) {
+    const icon = document.getElementById('verifyIcon');
+    const title = document.getElementById('verifyTitle');
+    if (icon) icon.textContent = '⚠️';
+    if (title) title.textContent = 'Connection Error';
+  }
+  return true;
+}
+
+// Show verify banner if user is not verified
+function showVerifyBanner() {
+  if (!U || U.is_verified) return;
+  
+  const smartBanners = document.getElementById('smartBanners');
+  if (!smartBanners) return;
+  
+  // Don't show if already shown
+  if (document.getElementById('verifyBanner')) return;
+  
+  const banner = document.createElement('div');
+  banner.id = 'verifyBanner';
+  banner.className = 'verify-banner';
+  banner.innerHTML = `
+    <div class="verify-banner-icon">📧</div>
+    <div class="verify-banner-text">
+      <div class="verify-banner-title">Email Verify Karein — Account Secure Rakhen</div>
+      <div class="verify-banner-sub">Aapke email par verification link bheja gaya hai — check karein!</div>
+    </div>
+    <button class="verify-banner-btn" onclick="resendVerification(this)">📨 Resend Email</button>
+    <button onclick="this.closest('.verify-banner').remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;">×</button>
+  `;
+  smartBanners.insertBefore(banner, smartBanners.firstChild);
+}
+
+async function resendVerification(btn) {
+  btn.textContent = '⏳ Sending...';
+  btn.disabled = true;
+  try {
+    const r = await api('POST', '/resend-verification', {});
+    if (r.success) {
+      btn.textContent = '✅ Bhej Diya!';
+      btn.style.background = 'var(--success)';
+      showToast('✅ Verification email bhej diya — inbox check karein!');
+    } else {
+      btn.textContent = '❌ Failed';
+      btn.disabled = false;
+      showToast(r.error || 'Failed', true);
+    }
+  } catch(e) {
+    btn.textContent = '🔄 Retry';
+    btn.disabled = false;
+  }
+}
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded',()=>{
   initParticles();
@@ -2674,6 +3350,18 @@ function goToAnimated(p) {
     if (p === 'plans') loadPlans();
     if (p === 'settings') loadSettings();
     if (p === 'admin') loadAdmin();
+    // Hide AI guide + WA on search page for focus
+    const aiGuide = document.getElementById('aiGuide');
+    const waFloat = document.getElementById('waFloat');
+    if (p === 'search') {
+      if (aiGuide) aiGuide.style.display = 'none';
+      if (waFloat) waFloat.style.opacity = '0.3';
+      setTimeout(initSearchSuggestions, 300);
+    } else {
+      if (waFloat) waFloat.style.opacity = '1';
+      // Show AI guide on dashboard only
+      if (p === 'dashboard' && aiGuide) setTimeout(() => aiGuide.style.display = 'block', 2000);
+    }
     // Trigger scroll reveals
     setTimeout(initReveal, 100);
   }, 220);
