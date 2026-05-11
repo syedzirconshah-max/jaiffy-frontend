@@ -3235,12 +3235,12 @@ async function checkVerifyToken() {
       if (icon) icon.textContent = '🎉';
       if (title) title.textContent = 'Email Verify Ho Gaya!';
       if (msg) msg.innerHTML = 'Mubarak ho! Aapka Jaiffy account activate ho gaya hai.<br><br>Ab login karein aur lead hunting shuru karein! 🎯';
-      if (action) action.innerHTML = '<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>';
+      if (action) action.innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>`;
     } else {
       if (icon) icon.textContent = '❌';
       if (title) title.textContent = 'Link Kaam Nahi Kiya';
       if (msg) msg.textContent = d.error || 'Verification failed — nayi link mangwao';
-      if (action) action.innerHTML = '<button onclick="showPage('login');history.replaceState({},'','/')" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 28px;font-size:14px;cursor:pointer;">Login Page</button>';
+      if (action) action.innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 28px;font-size:14px;cursor:pointer;">Login Page</button>`;
     }
   } catch(e) {
     const icon = document.getElementById('verifyIcon');
