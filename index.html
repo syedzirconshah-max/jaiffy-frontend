@@ -6,6 +6,7 @@
 <meta name="keywords" content="B2B leads Pakistan, lead generation, surgical instruments buyers, leather goods buyers, Pakistani exporters, AI lead hunter">
 <meta name="author" content="Jaiffy AI Lead Hunter">
 <meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="e3dYFhfUkG5WWJq-xOA76tmXpSBF3Fur-f8Sx4J8kYA" />
 <meta property="og:title" content="Jaiffy — AI Lead Hunter">
 <meta property="og:description" content="Pakistani exporters ke liye best B2B lead tool. Real buyers dhundho — AI se!">
 <meta property="og:image" content="data:image/png;base64,{log_b64}">
@@ -1269,6 +1270,27 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
   border-radius: 20px; padding: 40px 36px; text-align: center;
 }
 </style>
+
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G9HYF9WW28"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G9HYF9WW28');
+</script>
+
+<!-- SEO Tags -->
+<link rel="canonical" href="https://jaiffyleads.com/">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="PK">
+<meta name="geo.placename" content="Pakistan">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jaiffyleads.com/">
+<meta property="og:site_name" content="Jaiffy AI Lead Hunter">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jaiffy — Pakistan ka #1 AI B2B Lead Hunter">
+<meta name="twitter:description" content="Pakistani exporters ke liye AI-powered B2B lead generation. Surgical instruments, leather goods buyers UAE, UK, Germany mein dhundho.">
 </head>
 <body>
 <!-- Animated Background -->
@@ -1440,6 +1462,29 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
         <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span><span id="uTrialBadge"></span></div>
       </div>
       <!-- How It Works - Long Page Section -->
+      <!-- GLOBAL PLATFORM STATS -->
+      <div style="margin-bottom:28px;" class="reveal">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">🌍 Platform Stats — Live</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;" id="globalStatsGrid">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--orange);" id="gsTotalUsers">—</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Total Users</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--success);" id="gsActiveToday">—</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Active Today</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--blue);" id="gsTotalLeads">—</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Leads Generated</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--purple);" id="gsLeadsToday">—</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Leads Today</div>
+          </div>
+        </div>
+      </div>
+
       <div class="section-divider reveal"></div>
       <div style="margin-bottom:32px;" class="reveal">
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">🎯 Kaise Kaam Karta Hai?</div>
@@ -3151,8 +3196,30 @@ const _origLoadDashboard = window.loadDashboard || loadDashboard;
 window.loadDashboard = async function() {
   await _origLoadDashboard();
   loadRecentSearches();
+  loadGlobalStats();
   updatePageMeta('Dashboard', 'AI-powered B2B leads for Pakistani exporters');
 };
+
+async function loadGlobalStats() {
+  try {
+    const r = await api('POST', '/public/stats', {});
+    const s = r.stats || {};
+    const animate = (id, val) => {
+      const el = document.getElementById(id);
+      if(!el || val === undefined) return;
+      let current = 0, target = parseInt(val) || 0;
+      const timer = setInterval(() => {
+        current += Math.ceil((target - current) / 6);
+        el.textContent = current.toLocaleString();
+        if(current >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
+      }, 50);
+    };
+    animate('gsTotalUsers', s.total_users);
+    animate('gsActiveToday', s.active_today);
+    animate('gsTotalLeads', s.total_leads);
+    animate('gsLeadsToday', s.leads_today);
+  } catch(e) {}
+}
 
 
 // ===== KEYWORD DICTIONARY =====
