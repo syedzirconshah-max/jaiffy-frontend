@@ -1207,12 +1207,10 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 
 /* ===== MOBILE OVERLAP FIX ===== */
 @media(max-width:768px){
-  #waFloat { bottom:70px !important; right:12px !important; z-index:9980 !important; }
-  .ai-guide { bottom:70px !important; right:12px !important; z-index:9970 !important; max-width:240px !important; }
-  /* When both visible, stack them */
-  #waFloat { bottom:130px !important; }
-  .ai-guide { bottom:70px !important; }
-  /* Hide WA tooltip on mobile */
+  /* WA button at very bottom so it doesn't overlap search button */
+  #waFloat { bottom:16px !important; right:16px !important; z-index:9980 !important; }
+  /* Hide AI guide on mobile — saves space and avoids blocking form buttons */
+  .ai-guide { display:none !important; }
   #waTooltip { display:none !important; }
 }
 
