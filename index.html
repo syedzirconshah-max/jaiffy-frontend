@@ -2136,6 +2136,9 @@ async function doSearch(page=1){
   try{
     const r=await api('POST','/search',{query:product,country,city:(document.getElementById('searchCity')?.value||'').trim()||undefined,page,campaign});
     if(r.status===429||r.limit_reached){showSearchLimitUI(r);return;}
+    if(r.verify_required){
+      showVerifyRequiredUI();return;
+    }
     if(r.error){showSearchErrorUI(r.error);return;}
     currentLeads=r.leads||[];window._lastSearch=r;
     if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
@@ -3990,6 +3993,52 @@ function showFreeNudge(r) {
   `;
   const resultsArea = document.getElementById('resultsArea');
   if (resultsArea) resultsArea.insertBefore(nudge, resultsArea.firstChild);
+}
+
+function showVerifyRequiredUI() {
+  document.getElementById('searchLoading').classList.remove('on');
+  document.getElementById('resultsArea').style.display = 'block';
+  document.getElementById('resultsArea').innerHTML = `
+    <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;border:1px solid rgba(240,125,42,0.3);">
+      <div style="font-size:48px;margin-bottom:16px;">📧</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Email Verify Karein Pehle</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7;">
+        Search karne se pehle aapki email verify karni hogi.<br>
+        Inbox mein 6-digit code aaya hoga — neeche enter karein.
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+        <input id="searchVerifyInput" type="text" maxlength="6" placeholder="000000"
+          style="width:140px;text-align:center;font-size:22px;font-weight:800;letter-spacing:8px;font-family:monospace;background:var(--bg2);border:2px solid var(--border);border-radius:10px;padding:12px 8px;color:var(--text);outline:none;"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        />
+        <button onclick="verifyFromSearch()" style="padding:12px 24px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">✅ Verify Karein</button>
+        <button onclick="resendOTP()" style="padding:12px 18px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:10px;font-size:13px;cursor:pointer;">📨 Code Dobara Bhejo</button>
+      </div>
+      <div id="searchVerifyErr" style="color:var(--danger);font-size:12px;margin-top:12px;display:none;"></div>
+    </div>`;
+  setTimeout(() => document.getElementById('searchVerifyInput')?.focus(), 100);
+}
+
+async function verifyFromSearch() {
+  const otp = (document.getElementById('searchVerifyInput')?.value || '').trim();
+  const errEl = document.getElementById('searchVerifyErr');
+  if (otp.length !== 6) { if(errEl){errEl.textContent='6 digit code daalen';errEl.style.display='block';} return; }
+  try {
+    const r = await fetch(SERVER + '/verify', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({otp})
+    });
+    const d = await r.json();
+    if (d.success) {
+      if (U) { U.is_verified = true; localStorage.setItem('j_user', JSON.stringify(U)); }
+      document.getElementById('verifyBanner')?.remove();
+      showToast('🎉 Email verify ho gaya! Ab search karein.');
+      document.getElementById('resultsArea').style.display = 'none';
+    } else {
+      if(errEl){errEl.textContent=d.error||'Code galat hai';errEl.style.display='block';}
+    }
+  } catch(e) { if(errEl){errEl.textContent='Error — dobara try karein';errEl.style.display='block';} }
 }
 
 function showSearchLimitUI(r) {
