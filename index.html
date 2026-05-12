@@ -3284,11 +3284,15 @@ function downloadSampleCSV() {
 
 // ===== RECENT SEARCHES (localStorage) =====
 function saveSearch(query, country) {
-  const searches = JSON.parse(localStorage.getItem('j_searches') || '[]');
-  const item = {query, country, time: Date.now()};
-  const filtered = searches.filter(s => s.query !== query || s.country !== country);
-  filtered.unshift(item);
-  localStorage.setItem('j_searches', JSON.stringify(filtered.slice(0, 8)));
+  try {
+    const searches = JSON.parse(localStorage.getItem('j_searches') || '[]');
+    const item = {query, country, time: Date.now()};
+    const filtered = searches.filter(s => s.query !== query || s.country !== country);
+    filtered.unshift(item);
+    localStorage.setItem('j_searches', JSON.stringify(filtered.slice(0, 8)));
+  } catch(e) {
+    try { localStorage.removeItem('j_searches'); } catch(e2) {}
+  }
 }
 
 function loadRecentSearches() {
@@ -3325,7 +3329,9 @@ const _origDoSearch = window.doSearch || doSearch;
 window.doSearch = async function(page=1) {
   const product = document.getElementById('searchProduct')?.value?.trim();
   const country = document.getElementById('searchCountry')?.value;
-  if (product && country && page === 1) saveSearch(product, country);
+  try {
+    if (product && country && page === 1) saveSearch(product, country);
+  } catch(e) {}
   return _origDoSearch(page);
 };
 
