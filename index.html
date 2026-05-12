@@ -2067,7 +2067,10 @@ function doLogout(){
   localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
   U=null;token='';adminToken='';showPage('login');
 }
-function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);setTimeout(showVerifyBanner,1000);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();}
+function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();
+  // Fresh user data fetch — is_verified latest milega
+  api('GET','/auth/me').then(r=>{if(r&&r.email){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}setTimeout(showVerifyBanner,1000);}).catch(()=>setTimeout(showVerifyBanner,1000));
+}
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
   if(!U)return;
@@ -2474,10 +2477,12 @@ function renderAdmin(d){
     </div>
     <div class="admin-sec">
       <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;">👥 Users <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="loadAllUsers()">All Users</button></div>
-      <table class="admin-users-tbl">
-        <thead><tr><th>Naam</th><th>Email</th><th>Plan</th><th>Leads</th><th>Refs</th><th>Action</th></tr></thead>
+      <div style="max-height:320px;overflow-y:auto;border-radius:8px;border:1px solid var(--border);">
+      <table class="admin-users-tbl" style="border:none;">
+        <thead style="position:sticky;top:0;background:var(--bg2);z-index:1;"><tr><th>Naam</th><th>Email</th><th>Plan</th><th>Leads</th><th>Refs</th><th>Action</th></tr></thead>
         <tbody>${(d.top_users||[]).map(u=>`<tr><td>${u.name||''}</td><td style="color:var(--muted)">${u.email||''}</td><td><span class="pp-${u.plan||'free'}">${u.plan||'free'}</span></td><td>${u.lead_count||0}</td><td>${u.ref_count||0}</td><td><button class="btn-up" onclick="quickUpgrade('${u.email}')">Upgrade</button></td></tr>`).join('')}</tbody>
       </table>
+      </div>
     </div>
     <div class="admin-sec">
       <div class="admin-sec-title">⚡ Quick Actions</div>
@@ -2497,7 +2502,7 @@ function renderAdmin(d){
           <button class="btn-act" style="font-size:11px;padding:6px 12px;background:var(--blue);" onclick="showAddKeyModal('maps')">+ Maps Key</button>
         </div>
       </div>
-      <div id="apiKeysList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Keys load ho rahi hain...</div></div>
+      <div id="apiKeysList" style="max-height:280px;overflow-y:auto;border-radius:8px;"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Keys load ho rahi hain...</div></div>
     </div>
 
     <!-- SOCIAL MEDIA + TUTORIALS in admin settings -->
