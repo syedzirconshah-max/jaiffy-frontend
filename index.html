@@ -1723,9 +1723,9 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <div style="font-size:11px;color:var(--muted);">Click to add</div>
         </div>
         <div id="keywordSuggestions" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;"></div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="flex:1;"><div id="selectedKeywordsDisplay" style="font-size:11px;color:var(--muted);"></div></div>
-          <button id="multiSearchBtn" onclick="doMultiSearch()" style="display:none;padding:8px 16px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">🔥 Multi Search</button>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+          <button id="multiSearchBtn" onclick="doMultiSearch()" style="display:none;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:9px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;padding:11px 22px;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);transition:all 0.25s;white-space:nowrap;">🔥 Multi Search</button>
+          <div id="selectedKeywordsDisplay" style="font-size:11px;color:var(--muted);"></div>
         </div>
       </div>
 
@@ -3469,7 +3469,7 @@ function updateSelectedDisplay() {
       `✅ ${extras.length} extra keyword(s) selected — Multi Search karega` : 
       'Keyword click karo to add karein';
   }
-  if(btn) btn.style.display = extras.length > 0 ? 'block' : 'none';
+  if(btn) btn.style.display = extras.length > 0 ? 'inline-flex' : 'none';
 }
 
 async function doMultiSearch() {
@@ -3488,9 +3488,10 @@ async function doMultiSearch() {
     document.getElementById('searchProduct').value = kw;
     try {
       const r = await api('POST', '/search', {
-        product: kw, country: country,
+        query: kw, country: country,
+        city: (document.getElementById('searchCity')?.value || '').trim() || undefined,
         campaign: document.getElementById('searchCampaign')?.value || kw,
-        page: 1, page_size: 20, force_refresh: false
+        page: 1, force_refresh: false
       });
       if(r.leads) {
         r.leads.forEach(lead => {
