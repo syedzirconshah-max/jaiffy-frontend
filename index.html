@@ -1738,6 +1738,18 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
       <div class="radar-loading-text">🎯 AI Hunt Mode — Active</div>
       <div class="radar-loading-sub">Google Maps + AI scoring chal raha hai...</div>
+
+      <!-- Progress Bar -->
+      <div style="width:100%;max-width:380px;margin:16px auto 8px;">
+        <div style="background:rgba(255,255,255,0.08);border-radius:20px;height:8px;overflow:hidden;">
+          <div id="searchProgressBar" style="height:100%;width:0%;background:linear-gradient(90deg,#f07d2a,#e05a0a);border-radius:20px;transition:width 0.8s ease;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;">
+          <span id="searchProgressText" style="font-size:11px;color:rgba(255,255,255,0.5);">Shuru ho raha hai...</span>
+          <span id="searchTimer" style="font-size:11px;color:rgba(255,255,255,0.4);">0s</span>
+        </div>
+      </div>
+
       <div class="radar-loading-steps">
         <div class="rl-step" id="rlStep1">📡 Google Maps scan kar raha hai...</div>
         <div class="rl-step" id="rlStep2">🤖 AI har business analyze kar raha hai...</div>
@@ -2155,7 +2167,7 @@ async function doSearch(page=1){
     }
     document.getElementById('step2').className='step-item done';document.getElementById('step2').querySelector('.step-num').textContent='✓';
   }catch(e){showToast('Server error',true);}
-  finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';document.getElementById('searchLoading').classList.remove('on');}
+  finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';stopRadarSteps();document.getElementById('searchLoading').classList.remove('on');}
 }
 function renderResults(d){
   const leads=d.leads||[];document.getElementById('resultsArea').style.display='block';
@@ -2970,7 +2982,7 @@ let _serverDownShown = false;
 
 async function api(method, endpoint, body=null) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 25000); // 25 sec timeout
+  const timeout = setTimeout(() => controller.abort(), 90000); // 90 sec — AI scoring time lagti hai
   
   const opts = {
     method,
@@ -4182,14 +4194,58 @@ function initReveal() {
 }
 
 // ===== RADAR LOADING STEPS =====
+let _searchTimerInterval = null;
+let _searchStartTime = null;
+
 function startRadarSteps() {
+  // Steps
   ['rlStep1','rlStep2','rlStep3'].forEach((id, i) => {
     const el = document.getElementById(id);
     if (el) {
       el.classList.remove('active');
-      setTimeout(() => el.classList.add('active'), i * 1800);
+      setTimeout(() => el.classList.add('active'), i * 6000);
     }
   });
+
+  // Progress bar — 90 seconds total
+  const bar = document.getElementById('searchProgressBar');
+  const txt = document.getElementById('searchProgressText');
+  const timerEl = document.getElementById('searchTimer');
+  if (!bar) return;
+
+  _searchStartTime = Date.now();
+  bar.style.width = '0%';
+
+  const steps = [
+    { at: 5,  pct: 15, msg: '📡 Google Maps se data aa raha hai...' },
+    { at: 15, pct: 35, msg: '🤖 AI businesses analyze kar raha hai...' },
+    { at: 30, pct: 55, msg: '🧠 Scoring aur ranking ho rahi hai...' },
+    { at: 50, pct: 75, msg: '⚡ Hot leads identify ho rahi hain...' },
+    { at: 70, pct: 88, msg: '✅ Almost done — results sort ho rahe hain...' },
+    { at: 85, pct: 95, msg: '🎯 Bilkul thoda aur wait karein...' },
+  ];
+
+  steps.forEach(s => {
+    setTimeout(() => {
+      if (bar) bar.style.width = s.pct + '%';
+      if (txt) txt.textContent = s.msg;
+    }, s.at * 1000);
+  });
+
+  // Live timer
+  if (_searchTimerInterval) clearInterval(_searchTimerInterval);
+  _searchTimerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - _searchStartTime) / 1000);
+    if (timerEl) timerEl.textContent = elapsed + 's';
+  }, 1000);
+}
+
+function stopRadarSteps() {
+  if (_searchTimerInterval) { clearInterval(_searchTimerInterval); _searchTimerInterval = null; }
+  const bar = document.getElementById('searchProgressBar');
+  const txt = document.getElementById('searchProgressText');
+  if (bar) bar.style.width = '100%';
+  if (txt) txt.textContent = '✅ Results aa gaye!';
 }
 
 // ===== HERO TIME =====
