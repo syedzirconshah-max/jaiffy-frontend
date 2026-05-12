@@ -1474,7 +1474,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       <div class="usage-wrap reveal">
         <div class="usage-top"><div class="usage-title">Aaj ki Lead Limit</div><div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div></div>
         <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
-        <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a></span><span id="uTrialBadge"></span></div>
+        <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +10 leads/day!</a></span><span id="uTrialBadge"></span></div>
       </div>
       <!-- How It Works - Long Page Section -->
       <!-- GLOBAL PLATFORM STATS -->
@@ -1712,8 +1712,8 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
       <div class="smart-banner sb-upgrade" id="blurNotice" style="display:none;margin-bottom:16px;">
         <div class="sb-icon">🔒</div>
-        <div class="sb-content"><div class="sb-title">Contact info locked hai</div><div class="sb-text">Free plan mein email aur phone blur hoti hai. <strong>Pro plan (Rs.2,000/mo)</strong> mein sab unlock hoga — ya 20 dost refer karo!</div></div>
-        <button class="sb-btn" onclick="goTo('plans')">Upgrade karein</button>
+        <div class="sb-content"><div class="sb-title">Phone, Email, Website — sab lock hain</div><div class="sb-text">Yeh leads real hain — contacts sirf <strong>Pro plan (Rs.3,000/mo)</strong> mein milenge. Ya <strong>5 dost refer karo</strong> — +50 leads/day free!</div></div>
+        <button class="sb-btn" onclick="goTo('plans')">Unlock karein →</button>
       </div>
 
       <!-- Smart Keywords Section -->
@@ -1723,9 +1723,9 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <div style="font-size:11px;color:var(--muted);">Click to add</div>
         </div>
         <div id="keywordSuggestions" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;"></div>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
-          <button id="multiSearchBtn" onclick="doMultiSearch()" style="display:none;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:9px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;padding:11px 22px;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);transition:all 0.25s;white-space:nowrap;">🔥 Multi Search</button>
-          <div id="selectedKeywordsDisplay" style="font-size:11px;color:var(--muted);"></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="flex:1;"><div id="selectedKeywordsDisplay" style="font-size:11px;color:var(--muted);"></div></div>
+          <button id="multiSearchBtn" onclick="doMultiSearch()" style="display:none;padding:8px 16px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:9px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">🔥 Multi Search</button>
         </div>
       </div>
 
@@ -1766,10 +1766,10 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
     <!-- REFERRAL -->
     <div class="inner" id="inner-referral">
-      <div class="page-hdr"><div><div class="page-title">Referral Program</div><div class="page-sub">Har dost = +1 lead/day · 20 dost = Pro FREE!</div></div></div>
+      <div class="page-hdr"><div><div class="page-title">Referral Program</div><div class="page-sub">Har dost = +10 leads/day (max 5 refs = +50) · 20 dost = Pro FREE!</div></div></div>
       <div class="ref-hero">
         <div class="ref-hero-title">🎯 Apna Referral Link Share Karo</div>
-        <div class="ref-hero-sub">Har dost jo is link se join kare = <strong style="color:var(--orange)">aapko +1 lead/day permanently</strong></div>
+        <div class="ref-hero-sub">Har dost jo is link se join kare = <strong style="color:var(--orange)">aapko +10 leads/day</strong> — max 5 dost = <strong style="color:var(--orange)">+50 leads/day bonus</strong> permanently</div>
         <div class="ref-link-box"><span class="ref-link-text" id="refLink">Loading...</span><button class="btn-copy" onclick="copyRef()">Copy</button></div>
       </div>
       <div class="pro-progress">
@@ -1939,10 +1939,28 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     <!-- VERIFY EMAIL PAGE -->
     <div class="page" id="pg-verify">
       <div class="verify-page-card">
-        <div style="font-size:52px;margin-bottom:16px;" id="verifyIcon">⏳</div>
-        <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;" id="verifyTitle">Email Verify Ho Raha Hai...</div>
-        <div style="font-size:14px;color:var(--muted);line-height:1.7;" id="verifyMsg">Thoda intezaar karein...</div>
-        <div id="verifyAction" style="margin-top:24px;"></div>
+        <div style="font-size:52px;margin-bottom:16px;" id="verifyIcon">🔐</div>
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;" id="verifyTitle">Email Verify Karein</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;" id="verifyMsg">Aapki email par 6-digit code bheja gaya hai.<br>Woh code neeche enter karein.</div>
+        <div id="verifyAction">
+          <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px;">
+            <input id="otpInput" type="text" maxlength="6" placeholder="000000"
+              style="width:160px;text-align:center;font-size:28px;font-weight:800;letter-spacing:10px;font-family:monospace;background:var(--bg2);border:2px solid var(--border);border-radius:12px;padding:14px;color:var(--text);outline:none;transition:border-color 0.2s;"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length===6)submitOTP()"
+              onfocus="this.style.borderColor='var(--orange)'"
+              onblur="this.style.borderColor='var(--border)'"
+            />
+          </div>
+          <button onclick="submitOTP()" id="otpBtn"
+            style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 40px;font-size:15px;font-weight:700;cursor:pointer;width:100%;max-width:240px;">
+            ✅ Verify Karein
+          </button>
+          <div id="otpError" style="color:var(--danger);font-size:13px;margin-top:12px;display:none;"></div>
+          <div style="margin-top:20px;font-size:12px;color:var(--muted);">
+            Code nahi mila? 
+            <a onclick="resendOTP()" style="color:var(--orange);cursor:pointer;font-weight:600;">Dobara bhejo</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2025,7 +2043,7 @@ async function doSignup(){
   const btn=document.getElementById('signupBtn');const err=document.getElementById('signupErr');err.style.display='none';
   if(!name||!email||pass.length<6){showErr(err,'Sab fields bharein — password 6+ char');return;}
   btn.disabled=true;btn.innerHTML='<div class="spin"></div> Account ban raha hai...';
-  try{const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;adminToken='';localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));localStorage.removeItem('j_admin');enterApp();showToast('🎉 Welcome! 7 din trial shuru!');}catch(e){showErr(err,'Server error');}
+  try{const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;adminToken='';localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));localStorage.removeItem('j_admin');showOTPPage(email);showToast('📧 Verification code email par bhej diya!');}catch(e){showErr(err,'Server error');}
   finally{btn.disabled=false;btn.innerHTML='Free Trial Shuru Karein 🚀';}
 }
 async function doAdminLogin(){
@@ -2070,7 +2088,7 @@ function renderBanners(){
   if(pct>=80&&pct<100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">⚠️</div><div class="sb-content"><div class="sb-title">Limit khatam hone wali hai!</div><div class="sb-text">${used}/${lim} leads use. <strong>${lim-used} baaki.</strong></div></div><button class="sb-btn" onclick="goTo('referral')">Limit Badhao</button></div>`;}
   if(pct>=100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">🚫</div><div class="sb-content"><div class="sb-title">Aaj ki limit khatam!</div><div class="sb-text">Kal fresh limit milegi. Ya abhi refer karo!</div></div><button class="sb-btn" onclick="goTo('referral')">Refer Karo</button></div>`;}
   if(plan==='free'&&!trial&&(U.ref_count||0)<5){div.innerHTML+=`<div class="smart-banner sb-ref"><div class="sb-icon">🎯</div><div class="sb-content"><div class="sb-title">Free mein zyada leads chahiye?</div><div class="sb-text">Har dost = <strong>+1 lead/day</strong>. 20 dost = <strong>Pro FREE</strong>!</div></div><button class="sb-btn" onclick="goTo('referral')">Referral Link Lo</button></div>`;}
-  if(plan==='free'&&!trial&&pct>=70){div.innerHTML+=`<div class="smart-banner sb-upgrade"><div class="sb-icon">⚡</div><div class="sb-content"><div class="sb-title">Pro = 100 leads/day — Rs.2,000/month</div><div class="sb-text">Ek order = hazaron ka faida!</div></div><button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button></div>`;}
+  if(plan==='free'&&!trial&&pct>=70){div.innerHTML+=`<div class="smart-banner sb-upgrade"><div class="sb-icon">⚡</div><div class="sb-content"><div class="sb-title">Pro = 100 leads/day + full contacts — Rs.3,000/month</div><div class="sb-text">Ek order = hazaron ka faida!</div></div><button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button></div>`;}
 }
 function animateCounter(el,target){if(!el)return;const start=parseInt(el.textContent)||0,dur=600,step=20;let current=start;const inc=(target-start)/(dur/step);const timer=setInterval(()=>{current+=inc;if((inc>0&&current>=target)||(inc<0&&current<=target)){current=target;clearInterval(timer);}el.textContent=Math.round(current);},step);}
 async function loadDashboard(){
@@ -2089,7 +2107,7 @@ function updateUsageBar(){
   const fill=document.getElementById('uFill');fill.style.width=pct+'%';fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
   const hint=document.getElementById('uHint');const trial=U.in_trial,trialDays=U.trial_days_remaining||0;
   if(trial)hint.innerHTML=`🔥 Trial: ${trialDays} din baaki — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Pro lo ya refer karo!</a>`;
-  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer karo, +1 lead/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
+  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer karo, +10 leads/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
   else hint.innerHTML=`${U.plan} plan: ${lim} leads/day`;
   const trialBadge=document.getElementById('uTrialBadge');
   if(trial)trialBadge.innerHTML=`<span style="background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;">🔥 Trial Active</span>`;
@@ -2123,7 +2141,12 @@ async function doSearch(page=1){
     if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
     renderResults(r);
     const blurNotice=document.getElementById('blurNotice');
-    if(U&&U.plan==='free'&&!U.in_trial)blurNotice.style.display='flex';else blurNotice.style.display='none';
+    if(U&&U.plan==='free'&&!U.in_trial){
+      blurNotice.style.display='flex';
+      showFreeNudge(r);
+    } else {
+      blurNotice.style.display='none';
+    }
     document.getElementById('step2').className='step-item done';document.getElementById('step2').querySelector('.step-num').textContent='✓';
   }catch(e){showToast('Server error',true);}
   finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';document.getElementById('searchLoading').classList.remove('on');}
@@ -3031,7 +3054,7 @@ const aiMessages=[
   '💡 Tip: "surgical instruments UAE" search karo — 15-20 real buyers milenge!',
   '🎯 Hot leads = Score 70+. Inhe pehle contact karo!',
   '📧 Har lead ke saath AI email bhi generate hoti hai — bilkul free!',
-  '👥 Dost refer karo = +1 lead/day permanently. 20 dost = Pro FREE!',
+  '👥 Dost refer karo = +10 leads/day (max 5 refs). 20 dost = Pro FREE!',
   '🔍 Leather goods Germany, Textile UK, Gym equipment USA — try karo!',
 ];
 let aiMsgIdx=0;
@@ -3469,7 +3492,7 @@ function updateSelectedDisplay() {
       `✅ ${extras.length} extra keyword(s) selected — Multi Search karega` : 
       'Keyword click karo to add karein';
   }
-  if(btn) btn.style.display = extras.length > 0 ? 'inline-flex' : 'none';
+  if(btn) btn.style.display = extras.length > 0 ? 'block' : 'none';
 }
 
 async function doMultiSearch() {
@@ -3488,10 +3511,9 @@ async function doMultiSearch() {
     document.getElementById('searchProduct').value = kw;
     try {
       const r = await api('POST', '/search', {
-        query: kw, country: country,
-        city: (document.getElementById('searchCity')?.value || '').trim() || undefined,
+        product: kw, country: country,
         campaign: document.getElementById('searchCampaign')?.value || kw,
-        page: 1, force_refresh: false
+        page: 1, page_size: 20, force_refresh: false
       });
       if(r.leads) {
         r.leads.forEach(lead => {
@@ -3668,41 +3690,110 @@ function renderSocialLinks(idx, social) {
 // ===== EMAIL VERIFICATION SYSTEM =====
 
 // Check URL for ?token= on page load
-async function checkVerifyToken() {
-  const params = new URLSearchParams(location.search);
-  const token = params.get('token');
-  if (!token) return false;
-  
-  // Show verify page
+// ===== OTP VERIFICATION =====
+// Show OTP entry page after signup (if verify_pending)
+function showOTPPage(emailHint) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const verifyPage = document.getElementById('pg-verify');
   if (verifyPage) verifyPage.classList.add('active');
-  
-  try {
-    const r = await fetch(SERVER + '/verify?token=' + encodeURIComponent(token));
-    const d = await r.json();
-    
-    const icon = document.getElementById('verifyIcon');
-    const title = document.getElementById('verifyTitle');
+  if (emailHint) {
     const msg = document.getElementById('verifyMsg');
-    const action = document.getElementById('verifyAction');
-    
+    if (msg) msg.innerHTML = `<strong style="color:var(--text)">${emailHint}</strong> par 6-digit code bheja gaya hai.<br>Woh code neeche enter karein. ⏳ 15 minute valid hai.`;
+  }
+  setTimeout(() => { const inp = document.getElementById('otpInput'); if(inp) inp.focus(); }, 300);
+}
+
+async function submitOTP() {
+  const otp = (document.getElementById('otpInput')?.value || '').trim();
+  const errEl = document.getElementById('otpError');
+  const btn = document.getElementById('otpBtn');
+  if (otp.length !== 6) { if(errEl){errEl.textContent='6 digit code daalen';errEl.style.display='block';} return; }
+  if(btn){btn.textContent='⏳ Verify Ho Raha Hai...';btn.disabled=true;}
+  if(errEl) errEl.style.display='none';
+  try {
+    const r = await fetch(SERVER + '/verify', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({otp})
+    });
+    const d = await r.json();
     if (d.success) {
-      if (icon) icon.textContent = '🎉';
-      if (title) title.textContent = 'Email Verify Ho Gaya!';
-      if (msg) msg.innerHTML = 'Mubarak ho! Aapka Jaiffy account activate ho gaya hai.<br><br>Ab login karein aur lead hunting shuru karein! 🎯';
-      if (action) action.innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>`;
+      // Mark verified in local user object
+      if (U) { U.is_verified = true; localStorage.setItem('j_user', JSON.stringify(U)); }
+      document.getElementById('verifyIcon').textContent = '🎉';
+      document.getElementById('verifyTitle').textContent = 'Email Verify Ho Gaya!';
+      document.getElementById('verifyMsg').innerHTML = 'Mubarak ho! Account activate ho gaya. Ab dashboard use karein! 🎯';
+      document.getElementById('verifyAction').innerHTML = `<button onclick="enterApp()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Dashboard Kholein 🚀</button>`;
     } else {
-      if (icon) icon.textContent = '❌';
-      if (title) title.textContent = 'Link Kaam Nahi Kiya';
-      if (msg) msg.textContent = d.error || 'Verification failed — nayi link mangwao';
-      if (action) action.innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 28px;font-size:14px;cursor:pointer;">Login Page</button>`;
+      if(errEl){errEl.textContent=d.error||'Code galat hai — dobara check karein';errEl.style.display='block';}
+      if(btn){btn.textContent='✅ Verify Karein';btn.disabled=false;}
     }
   } catch(e) {
-    const icon = document.getElementById('verifyIcon');
-    const title = document.getElementById('verifyTitle');
-    if (icon) icon.textContent = '⚠️';
-    if (title) title.textContent = 'Connection Error';
+    if(errEl){errEl.textContent='Server error — thodi der mein try karein';errEl.style.display='block';}
+    if(btn){btn.textContent='✅ Verify Karein';btn.disabled=false;}
+  }
+}
+
+async function resendOTP() {
+  showToast('📨 Naya code bheja ja raha hai...');
+  try {
+    const r = await api('POST', '/resend-verification', {});
+    if (r.success) showToast('✅ Naya code bhej diya — email check karein!');
+    else showToast(r.error || 'Failed', true);
+  } catch(e) { showToast('Server error', true); }
+}
+
+async function submitBannerOTP(btn) {
+  const inp = document.getElementById('bannerOtpInput');
+  const otp = (inp?.value || '').trim();
+  if (otp.length !== 6) { showToast('6 digit code daalen', true); return; }
+  btn.textContent = '⏳'; btn.disabled = true;
+  try {
+    const r = await fetch(SERVER + '/verify', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({otp})
+    });
+    const d = await r.json();
+    if (d.success) {
+      if (U) { U.is_verified = true; localStorage.setItem('j_user', JSON.stringify(U)); }
+      document.getElementById('verifyBanner')?.remove();
+      showToast('🎉 Email verify ho gaya! Account fully active hai.');
+    } else {
+      btn.textContent = 'Verify ✓'; btn.disabled = false;
+      showToast(d.error || 'Code galat hai', true);
+    }
+  } catch(e) { btn.textContent = 'Verify ✓'; btn.disabled = false; showToast('Error', true); }
+}
+
+async function checkVerifyToken() {
+  // Old link-based tokens — still support them for backward compatibility
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+  if (!token) return false;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const verifyPage = document.getElementById('pg-verify');
+  if (verifyPage) verifyPage.classList.add('active');
+  // Auto-fill OTP input if token looks like 6-digit code
+  if (/^\d{6}$/.test(token)) {
+    const inp = document.getElementById('otpInput');
+    if (inp) { inp.value = token; submitOTP(); }
+  } else {
+    // Old URL token — call verify with it
+    try {
+      const r = await fetch(SERVER + '/verify?token=' + encodeURIComponent(token));
+      const d = await r.json();
+      if (d.success) {
+        document.getElementById('verifyIcon').textContent = '🎉';
+        document.getElementById('verifyTitle').textContent = 'Email Verify Ho Gaya!';
+        document.getElementById('verifyMsg').innerHTML = 'Mubarak ho! Ab login karein. 🎯';
+        document.getElementById('verifyAction').innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>`;
+      } else {
+        document.getElementById('verifyIcon').textContent = '❌';
+        document.getElementById('verifyTitle').textContent = 'Link Kaam Nahi Kiya';
+        document.getElementById('verifyMsg').textContent = d.error || 'Code expire ho gaya — naya mangwayein';
+      }
+    } catch(e) {}
   }
   return true;
 }
@@ -3721,13 +3812,20 @@ function showVerifyBanner() {
   banner.id = 'verifyBanner';
   banner.className = 'verify-banner';
   banner.innerHTML = `
-    <div class="verify-banner-icon">📧</div>
+    <div class="verify-banner-icon">🔐</div>
     <div class="verify-banner-text">
-      <div class="verify-banner-title">Email Verify Karein — Account Secure Rakhen</div>
-      <div class="verify-banner-sub">Aapke email par verification link bheja gaya hai — check karein!</div>
+      <div class="verify-banner-title">Email Verify Karein</div>
+      <div class="verify-banner-sub">Email par 6-digit code aaya hoga — yahan enter karein:</div>
     </div>
-    <button class="verify-banner-btn" onclick="resendVerification(this)">📨 Resend Email</button>
-    <button onclick="this.closest('.verify-banner').remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;">×</button>
+    <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+      <input id="bannerOtpInput" type="text" maxlength="6" placeholder="000000"
+        style="width:110px;text-align:center;font-size:18px;font-weight:800;letter-spacing:6px;font-family:monospace;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:8px 6px;color:var(--text);outline:none;"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+      />
+      <button onclick="submitBannerOTP(this)" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">Verify ✓</button>
+      <button onclick="resendOTP()" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:11px;cursor:pointer;white-space:nowrap;">Resend</button>
+    </div>
+    <button onclick="this.closest('.verify-banner').remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;flex-shrink:0;">×</button>
   `;
   smartBanners.insertBefore(banner, smartBanners.firstChild);
 }
@@ -3869,6 +3967,31 @@ async function downloadSearchCSV() {
 
 
 // ===== HELPFUL ERROR STATES =====
+function showFreeNudge(r) {
+  const leads = r.leads || [];
+  const lockedCount = leads.filter(l => l.email_blurred || l.phone_blurred || l.website_blurred).length;
+  if (!lockedCount) return;
+  // Remove old nudge
+  document.getElementById('freeNudge')?.remove();
+  const nudge = document.createElement('div');
+  nudge.id = 'freeNudge';
+  nudge.style.cssText = `background:linear-gradient(135deg,rgba(240,125,42,0.08),rgba(168,85,247,0.06));border:1px solid rgba(240,125,42,0.25);border-radius:14px;padding:20px 24px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;animation:fadeIn 0.4s ease;`;
+  nudge.innerHTML = `
+    <div style="font-size:32px;flex-shrink:0;">🔒</div>
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">${lockedCount} leads ke contacts lock hain</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6;">Inhe real buyers se contact karo — phone, email, website sab Pro mein milega. <strong style="color:var(--orange)">Ek order = hazaron ka faida.</strong></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;">
+      <button onclick="goTo('plans')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 Pro — Rs.3,000/mo</button>
+      <button onclick="goTo('referral')" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:9px;padding:10px 16px;font-size:12px;cursor:pointer;white-space:nowrap;">👥 Refer karo — Free unlock</button>
+    </div>
+    <button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;flex-shrink:0;">×</button>
+  `;
+  const resultsArea = document.getElementById('resultsArea');
+  if (resultsArea) resultsArea.insertBefore(nudge, resultsArea.firstChild);
+}
+
 function showSearchLimitUI(r) {
   document.getElementById('searchLoading').classList.remove('on');
   document.getElementById('resultsArea').style.display = 'block';
