@@ -1705,7 +1705,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
               <input class="fi2" id="searchCity" placeholder="Ya khud likho..." style="flex:1;min-width:0;">
             </div>
           </div>
-          <div class="fg2"><label class="fl2">Campaign Name</label><input class="fi2" id="searchCampaign" placeholder="UAE Surgical Campaign"></div>
+          <div class="fg2"><label class="fl2">Campaign Name <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:9px;">(apni marzi ka naam — e.g. UAE Surgical)</span></label><input class="fi2" id="searchCampaign" placeholder="UAE Surgical Campaign"></div>
           <button class="btn-search" onclick="doSearch()" id="searchBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Search</button>
         </div>
         <div class="ai-hint" id="aiHint"><div class="ai-hint-title">🤖 Suggested searches</div><div id="aiHintTags"></div></div>
@@ -1957,8 +1957,8 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           </button>
           <div id="otpError" style="color:var(--danger);font-size:13px;margin-top:12px;display:none;"></div>
           <div style="margin-top:20px;font-size:12px;color:var(--muted);">
-            Code nahi mila? 
-            <a onclick="resendOTP()" style="color:var(--orange);cursor:pointer;font-weight:600;">Dobara bhejo</a>
+            Code nahi mila? <strong style="color:var(--orange)">Spam/Junk folder</strong> check karein —
+            ya <a onclick="resendOTP()" style="color:var(--orange);cursor:pointer;font-weight:600;">Dobara bhejo</a>
           </div>
         </div>
       </div>
@@ -2449,15 +2449,16 @@ function renderAdmin(d){
     <div class="admin-2col">
       <div class="admin-sec">
         <div class="admin-sec-title">📊 API Usage — Is Mahine</div>
-        <div class="api-bar"><div class="api-bar-label"><span>Google Maps ($200 Free)</span><span>${am.google_used_pct||0}%</span></div><div class="api-bar-track"><div class="api-bar-fill ${barClass}" style="width:${am.google_used_pct||0}%"></div></div></div>
+        <div class="api-bar"><div class="api-bar-label"><span>Google Maps (Free Quota per Key)</span><span>${am.google_used_pct||0}%</span></div><div class="api-bar-track"><div class="api-bar-fill ${barClass}" style="width:${am.google_used_pct||0}%"></div></div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
           <div class="admin-card"><div class="admin-label">Places Search</div><div class="admin-val" style="font-size:18px;">${am.places_search||0}</div></div>
           <div class="admin-card"><div class="admin-label">Place Details</div><div class="admin-val" style="font-size:18px;">${am.places_details||0}</div></div>
           <div class="admin-card"><div class="admin-label">Gemini AI</div><div class="admin-val" style="font-size:18px;">${am.gemini_calls||0}</div></div>
-          <div class="admin-card ${am.status==='CRITICAL'?'danger':am.status==='WARNING'?'warn':'good'}"><div class="admin-label">Total Cost</div><div class="admin-val" style="font-size:18px;">$${am.total_cost_usd||0}</div><div class="admin-sub">$${am.google_free_remaining||200} free baaki</div></div>
+          <div class="admin-card ${am.status==='CRITICAL'?'danger':am.status==='WARNING'?'warn':'good'}"><div class="admin-label">Google Maps Cost</div><div class="admin-val" style="font-size:18px;">$${am.total_cost_usd||0}</div><div class="admin-sub">≈ Rs.${Math.round((am.total_cost_usd||0)*280).toLocaleString()} · Free baaki: $${am.google_free_remaining||0}</div></div>
         </div>
         <div style="margin-top:10px;padding:10px;background:var(--bg2);border-radius:8px;font-size:12px;">
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted)">Aaj kharcha:</span><strong>$${d.api_today?.cost_usd||0}</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted)">Aaj kharcha:</span><strong>$${d.api_today?.cost_usd||0} (Rs.${Math.round((d.api_today?.cost_usd||0)*280)})</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Mahine kharcha:</span><strong style="color:var(--danger)">Rs.${(am.total_cost_pkr||0).toLocaleString()} ($${am.total_cost_usd||0})</strong></div>
           <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Status:</span><strong style="color:${am.status==='OK'?'var(--success)':am.status==='WARNING'?'var(--warning)':'var(--danger)'}">${am.status||'OK'}</strong></div>
           <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Gemini Keys:</span><strong style="color:var(--orange)">${ks.gemini?.active||0}/${ks.gemini?.total||0} active</strong></div>
           <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted)">Maps Keys:</span><strong style="color:var(--blue)">${ks.maps?.active||0}/${ks.maps?.total||0} active</strong></div>
