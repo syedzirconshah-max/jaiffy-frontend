@@ -2181,13 +2181,52 @@ function renderResults(d){
   tbody.innerHTML=leads.map((l,i)=>{
     const sc=l.score>=70?'sp-high':l.score>=40?'sp-med':'sp-low';const pc=(l.priority||'').toLowerCase()==='high'?'pp-high':(l.priority||'').toLowerCase()==='medium'?'pp-med':'pp-low';
     const isBlurred=l.email_blurred||l.phone_blurred;
-    const emailHtml=l.emails?.length?`<div class="${isBlurred?'blur-info':'confirmed'}" ${isBlurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${isBlurred?'🔒':''} ${l.emails[0]}</div>`:`<div class="not-found">—</div>`;
-    const phoneHtml=l.phone?`<div class="${l.phone_blurred?'blur-info':'confirmed'}" ${l.phone_blurred?`onclick="goTo('plans')" title="Pro mein unlock karein"`:''}>${l.phone_blurred?'🔒':''} ${l.phone}</div>`:`<div class="not-found">—</div>`;
-    const cells={name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,contact:`${emailHtml}${phoneHtml}`,website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),score:`<div class="score-pill ${sc}">${l.score}</div>`,priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,notes:`<div style="font-size:10px;color:var(--muted);font-style:italic">${(l.data_notes||[]).join(' · ')}</div>`,action:`<div style="display:flex;flex-direction:column;gap:4px;">
+
+    // Email display — all emails
+    let emailHtml = '';
+    if(l.emails?.length && !isBlurred) {
+      emailHtml = l.emails.map(e => `<div class="confirmed" style="font-size:11px;">✉ ${e}</div>`).join('');
+    } else if(l.emails?.length && isBlurred) {
+      emailHtml = `<div class="blur-info" onclick="goTo('plans')" title="Pro mein unlock karein">🔒 ${l.emails[0]}</div>`;
+    } else {
+      emailHtml = `<div class="not-found" style="font-size:10px;">Email nahi mila</div>`;
+    }
+
+    // Phone display — all phones
+    let phoneHtml = '';
+    const allPhones = l.all_phones?.length ? l.all_phones : (l.phone ? [l.phone] : []);
+    if(allPhones.length && !l.phone_blurred) {
+      phoneHtml = allPhones.map((ph, idx) =>
+        `<div class="confirmed" style="font-size:11px;">${idx===0?'📞':'📱'} ${ph}${allPhones.length>1&&idx===0?' <span style="font-size:9px;color:var(--muted)">(primary)</span>':''}</div>`
+      ).join('');
+    } else if(l.phone && l.phone_blurred) {
+      phoneHtml = `<div class="blur-info" onclick="goTo('plans')" title="Pro mein unlock karein">🔒 ${l.phone}</div>`;
+    } else {
+      phoneHtml = `<div class="not-found" style="font-size:10px;">Phone nahi mila</div>`;
+    }
+
+    // Data quality notes with icons
+    const notesHtml = (l.data_notes||[]).length ?
+      `<div style="font-size:10px;line-height:1.6;">${(l.data_notes||[]).map(n =>
+        `<div style="color:${n.startsWith('✅')?'var(--green)':n.startsWith('⚠️')?'#f59e0b':'var(--muted)'}">${n}</div>`
+      ).join('')}</div>` : '<div style="font-size:10px;color:var(--muted)">—</div>';
+
+    const cells={
+      name:`<div style="font-weight:500;font-size:12px">${l.name}</div>`,
+      address:`<div style="font-size:11px;color:var(--muted)">${(l.address||'').substring(0,45)}${(l.address||'').length>45?'...':''}</div>`,
+      category:`<div style="font-size:11px;color:var(--muted)">${l.category||''}</div>`,
+      rating:`<div style="font-size:11px">⭐ ${l.rating||0} <span style="color:var(--muted)">(${l.reviews||0})</span></div>`,
+      contact:`${emailHtml}${phoneHtml}`,
+      website:l.website&&!l.website_blurred?`<a href="${l.website}" target="_blank" class="website-link">🔗 Visit</a>`:(l.website_blurred?`<span class="blur-info" onclick="goTo('plans')" title="Pro mein unlock">🔒 Locked</span>`:`<span class="not-found">—</span>`),
+      score:`<div class="score-pill ${sc}">${l.score}</div>`,
+      priority:`<span class="pri-pill ${pc}">${l.priority||'Med'}</span>`,
+      notes: notesHtml,
+      action:`<div style="display:flex;flex-direction:column;gap:4px;">
         <button class="btn-email" onclick="openEmailModal(${i})">✉ Email</button>
         <button class="btn-social" onclick="enrichLead(${i},this)" id="socialBtn${i}" style="background:rgba(168,85,247,0.1);color:var(--purple);border:1px solid rgba(168,85,247,0.2);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all 0.2s;">🔗 Social</button>
         <div id="socialLinks${i}" style="display:none;"></div>
-      </div>`};
+      </div>`
+    };
     return `<tr>${activeSC.map(c=>`<td>${cells[c]||''}</td>`).join('')}</tr>`;
   }).join('');
   const pg=d.pagination;document.getElementById('resPagination').innerHTML=pg&&pg.total_pages>1?`<button class="page-btn" onclick="doSearch(${pg.page-1})" ${pg.page<=1?'disabled':''}>← Prev</button><span style="font-size:11px;color:var(--muted)">Page ${pg.page}/${pg.total_pages}</span><button class="page-btn" onclick="doSearch(${pg.page+1})" ${!pg.has_next?'disabled':''}>Next →</button>`:'';
