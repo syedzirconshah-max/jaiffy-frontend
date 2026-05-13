@@ -959,90 +959,124 @@ button:focus-visible, a:focus-visible {
 @media(max-width:768px){
   /* Fix font stretching */
   body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  
+
+  /* GLOBAL overflow fix */
+  html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+  * { max-width: 100% !important; }
+  .inner, .main, .page, .app-wrap {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .inner { padding: 16px 12px 100px !important; }
+
   /* Hero title fix */
-  .hero-title { 
-    font-size: 24px !important; 
+  .hero-title {
+    font-size: 22px !important;
     line-height: 1.3 !important;
     letter-spacing: -0.5px !important;
     word-break: break-word !important;
   }
   .hook-word { display: inline !important; }
-  
-  /* Overflow fix - nothing goes outside screen */
-  .inner { 
-    padding: 16px 14px 100px !important; 
-    overflow-x: hidden !important;
-    width: 100% !important;
-  }
-  .main { overflow-x: hidden !important; }
-  
-  /* 3-step grid - stack on mobile */
-  .inner [style*="grid-template-columns:repeat(3,1fr)"] {
-    display: grid !important;
+
+  /* Search form — stack fields */
+  .search-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .search-grid > * { width: 100% !important; }
+
+  /* Tables — scrollable */
+  .tbl-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; width: 100% !important; }
+  table { min-width: 480px; width: max-content; }
+
+  /* Results table — smaller font */
+  .results-tbl td, .results-tbl th { font-size: 11px !important; padding: 6px 8px !important; }
+
+  /* 3-col → 1-col */
+  .inner [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
-  
-  /* 2-col product grid - stack */
-  .inner [style*="grid-template-columns:repeat(2,1fr)"] {
-    display: grid !important;
+
+  /* 2-col → 1-col */
+  .inner [style*="grid-template-columns:repeat(2,1fr)"],
+  [style*="grid-template-columns: repeat(2, 1fr)"] {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
-  
-  /* Hero section */
+
+  /* Hero */
   .hero-radar { display: none !important; }
-  .fish-hook { font-size: 28px !important; top: 10px !important; right: 16px !important; }
+  .fish-hook { font-size: 24px !important; top: 10px !important; right: 12px !important; }
   .product-float { display: none !important; }
-  .hero-subtitle { font-size: 13px !important; }
-  
-  /* Product badges wrap properly */
-  .product-badges { gap: 6px !important; }
-  .prod-badge { font-size: 11px !important; padding: 5px 10px !important; }
-  
+  .hero-subtitle { font-size: 12px !important; }
+
+  /* Product badges */
+  .product-badges { gap: 6px !important; flex-wrap: wrap !important; }
+  .prod-badge { font-size: 10px !important; padding: 4px 8px !important; }
+
   /* Hunt counters */
-  .hunt-counters { grid-template-columns: repeat(3,1fr) !important; gap: 8px !important; }
-  .hunt-num { font-size: 18px !important; }
-  
-  /* Stats grid 2 col */
+  .hunt-counters { grid-template-columns: repeat(3,1fr) !important; gap: 6px !important; }
+  .hunt-num { font-size: 16px !important; }
+
+  /* Stats grid */
   .stats-grid { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
-  .stat-val { font-size: 28px !important; }
-  .stat-card { padding: 14px 12px !important; }
-  
-  /* Steps grid 2 col */
+  .stat-val { font-size: 26px !important; }
+  .stat-card { padding: 12px 10px !important; }
+
+  /* Steps */
   .steps-grid { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
-  .step-item { padding: 14px 10px !important; }
-  
+  .step-item { padding: 12px 8px !important; }
+
   /* Plans */
   .plans-grid { grid-template-columns: 1fr !important; }
-  .plan-card-inner { padding: 22px 18px !important; }
-  .plan-leads-big { font-size: 40px !important; }
-  
-  /* Search grid */
-  .search-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-  
+  .plan-card-inner { padding: 20px 16px !important; }
+  .plan-leads-big { font-size: 38px !important; }
+
   /* Admin */
   .admin-grid { grid-template-columns: repeat(2,1fr) !important; }
   .admin-2col { grid-template-columns: 1fr !important; }
-  
-  /* Live ticker font */
-  .ticker-item { font-size: 10px !important; padding: 0 14px !important; }
-  
-  /* Usage wrap */
-  .usage-wrap { padding: 16px !important; }
-  
+  #apiKeysList [style*="grid-template-columns:1fr 1fr"],
+  #apiKeysList [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Live ticker */
+  .ticker-item { font-size: 10px !important; padding: 0 12px !important; }
+
+  /* Usage bar */
+  .usage-wrap { padding: 14px !important; }
+  .usage-meta { flex-direction: column !important; gap: 4px !important; font-size: 11px !important; }
+
   /* AI guide bubble */
-  .ai-guide { max-width: 260px !important; bottom: 70px !important; right: 10px !important; }
-  
-  /* Table scroll */
-  .tbl-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
-  table { min-width: 500px !important; }
-  
+  .ai-guide { max-width: 240px !important; bottom: 70px !important; right: 8px !important; font-size: 11px !important; }
+
+  /* WhatsApp float */
+  .wa-float, #waFloat { bottom: 14px !important; right: 14px !important; }
+
+  /* Verify banner */
+  #verifyBanner { flex-wrap: wrap !important; gap: 8px !important; }
+  #verifyBanner input { width: 90px !important; font-size: 14px !important; }
+
   /* Section divider */
-  .section-divider { margin: 20px 0 !important; }
-  
+  .section-divider { margin: 16px 0 !important; }
+
   /* Onboard card */
+  .onboard-steps { grid-template-columns: repeat(2,1fr) !important; }
+
+  /* Referral page */
+  .ref-milestones { grid-template-columns: repeat(2,1fr) !important; }
+
+  /* Smart banner */
+  .smart-banner { flex-wrap: wrap !important; gap: 8px !important; }
+  .sb-btn { width: 100% !important; }
+
+  /* Saved leads filters */
+  .leads-filter-bar { flex-wrap: wrap !important; gap: 6px !important; }
+
+  /* Page headers */
+  .page-hdr { flex-direction: column !important; gap: 8px !important; }
+  .page-title { font-size: 20px !important; }
+}
   .onboard-card { padding: 16px !important; }
   
   /* Ref hero */
