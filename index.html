@@ -2415,43 +2415,88 @@ async function loadPlans(){
     if(!plans.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Plans load nahi hue</div>';return;}
     if(d.payment_number)document.getElementById('paymentNumber').textContent=d.payment_number;
     if(d.payment_whatsapp)document.getElementById('paymentWhatsapp').textContent=d.payment_whatsapp;
-    // Store support email globally
     if(d.support_email) {
       window._supportEmail = d.support_email;
-      // Update all support email links on page
       document.querySelectorAll('.support-email-link').forEach(el => {
         el.textContent = d.support_email;
         el.href = 'mailto:' + d.support_email;
       });
     }
+
+    // Original prices (crossed out) aur discount info
+    const originalPrices = {free: 0, pro: 16500, agency: 35600};
+    const discountPct = {free: 0, pro: 82, agency: 83};
     const cardClass={free:'free-card',pro:'pro-card',agency:'agency-card'};
     const cardIcon={free:'🎯',pro:'🚀',agency:'🏢'};
-    const cardBadge={free:'',pro:'<span class="plan-badge-new">⭐ Most Popular</span>',agency:'<span class="plan-badge-popular">💼 Agency</span>'};
-    grid.innerHTML=plans.map((p,i)=>{
+
+    grid.innerHTML = plans.map((p,i) => {
       const isCurrent=(U?.plan||'free')===p.id;
       const cc=cardClass[p.id]||'free-card';
-      return `<div class="plan-card ${cc}" style="animation:fadeUp 0.5s ease ${i*0.12}s both;">
+      const origPrice = originalPrices[p.id] || 0;
+      const disc = discountPct[p.id] || 0;
+
+      // Badge
+      let badge = '';
+      if(!isCurrent) {
+        if(p.id==='pro') badge=`<span class="plan-badge-new" style="background:linear-gradient(135deg,#f07d2a,#e05a0a);color:#fff;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;">⭐ Most Popular</span>`;
+        if(p.id==='agency') badge=`<span class="plan-badge-popular" style="background:rgba(99,102,241,0.15);color:#818cf8;border:1px solid rgba(99,102,241,0.3);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;">💼 Agency</span>`;
+      }
+
+      // Discount banner for pro/agency
+      const discBanner = p.id !== 'free' ? `
+        <div style="background:rgba(240,125,42,0.1);border:1px solid rgba(240,125,42,0.25);border-radius:10px;padding:8px 12px;margin-bottom:12px;text-align:center;">
+          <div style="font-size:11px;color:#f07d2a;font-weight:700;letter-spacing:0.5px;">🎁 LAUNCH OFFER — PEHLE 100 MEMBERS</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Baad mein yeh discount khatam ho jaayegi</div>
+        </div>` : '';
+
+      // Price display
+      let priceHtml = '';
+      if(p.price_pkr === 0) {
+        priceHtml = '<span style="font-size:24px;font-weight:800;color:var(--muted);">FREE</span>';
+      } else {
+        priceHtml = `
+          <div style="margin-bottom:4px;">
+            <span style="font-size:14px;color:var(--muted);text-decoration:line-through;">Rs. ${origPrice.toLocaleString()}</span>
+            <span style="background:rgba(29,184,126,0.15);color:var(--success);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px;">${disc}% OFF</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <span class="plan-price-big">Rs. ${p.price_pkr.toLocaleString()}</span>
+            <span class="plan-price-period">/month</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Aaj Rs.${(origPrice-p.price_pkr).toLocaleString()} bachaye!</div>`;
+      }
+
+      return `<div class="plan-card ${cc}" style="animation:fadeUp 0.5s ease ${i*0.12}s both;${p.id==='pro'?'border-color:rgba(240,125,42,0.4);':''}">
         <div class="plan-card-inner">
           <div class="plan-header">
             <div>
               <div style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px;">${cardIcon[p.id]||'🎯'} ${p.name}</div>
               ${isCurrent?'<span class="plan-current-badge">✓ Current Plan</span>':''}
             </div>
-            ${!isCurrent?cardBadge[p.id]||'':''}
+            ${!isCurrent?badge:''}
           </div>
           <div class="plan-leads-big">${p.leads_per_day}</div>
           <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">leads per day</div>
-          <div class="plan-price-row">
-            ${p.price_pkr===0?'<span style="font-size:24px;font-weight:800;color:var(--muted);">FREE</span>':'<span class="plan-price-big">Rs. '+p.price_pkr.toLocaleString()+'</span><span class="plan-price-period">/month</span>'}
-          </div>
+          ${discBanner}
+          <div class="plan-price-row">${priceHtml}</div>
           <div class="plan-divider"></div>
           <ul class="plan-features-new">${(p.features||[]).map(f=>`<li><span class="plan-check">✓</span><span>${f}</span></li>`).join('')}</ul>
           ${!isCurrent?`<button class="plan-btn-new" onclick="selectPlan('${p.id}','${p.price_pkr}')">
             ${p.price_pkr===0?'Free Shuru Karein':'🚀 Select '+p.name+' Plan'}
           </button>`:`<button class="plan-btn-new" style="background:var(--bg3);color:var(--muted);cursor:default;" disabled>✓ Aapka Current Plan</button>`}
+          ${p.id!=='free'?`<div style="text-align:center;font-size:10px;color:var(--muted);margin-top:8px;">⚡ Pehle 100 golden members only</div>`:''}
         </div>
       </div>`;
     }).join('');
+
+    // Golden members counter banner
+    const banner = document.createElement('div');
+    banner.style.cssText = 'grid-column:1/-1;background:linear-gradient(135deg,rgba(240,125,42,0.08),rgba(168,85,247,0.06));border:1px solid rgba(240,125,42,0.2);border-radius:14px;padding:16px 20px;text-align:center;margin-bottom:4px;';
+    banner.innerHTML = `
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🏆 Launch Offer — Pehle 100 Golden Members</div>
+      <div style="font-size:12px;color:var(--muted);">Yeh special discount sirf pehle 100 paying members ke liye hai — join karo aur hamesha ke liye yeh rate lock ho jaayegi</div>`;
+    grid.insertBefore(banner, grid.firstChild);
+
   }catch(e){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--danger)">Error: '+e.message+'</div>';}
 }
 function selectPlan(planId,price){
@@ -3956,11 +4001,20 @@ async function loadSearchAnalytics() {
   try {
     const q = document.getElementById('saSearchFilter')?.value || '';
     const country = document.getElementById('saCountryFilter')?.value || '';
-    
-    const r = await api('POST', '/admin/searches', {
-      admin_pass: adminToken, page: _saPage, q, country
-    });
-    if(r.error) return;
+
+    const r = await fetch(SERVER + '/admin/searches', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Token': adminToken
+      },
+      body: JSON.stringify({admin_pass: adminToken, page: _saPage, q, country})
+    }).then(r => r.json());
+
+    if(r.error) {
+      console.error('Search analytics error:', r.error);
+      return;
+    }
     
     _saData = r.searches || [];
     
