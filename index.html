@@ -2896,30 +2896,67 @@ async function loadApiKeys(){
 function renderApiKeys(keys){
   const el=document.getElementById('apiKeysList');if(!el)return;
   const geminiKeys=keys.filter(k=>k.service==='gemini');const mapsKeys=keys.filter(k=>k.service==='maps');
+
   const renderKeyRow=(k)=>{
     const usedPct=k.daily_limit>0?Math.round(k.used_today/k.daily_limit*100):0;
     const barColor=usedPct>=90?'var(--danger)':usedPct>=70?'var(--warning)':'var(--success)';
     const maskedKey=k.key_value?'••••'+String(k.key_value).slice(-6):'(hidden)';
-    return `<div style="background:var(--bg2);border:1px solid ${k.is_active?'var(--border)':'rgba(240,74,74,0.3)'};border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      <div style="flex:1;min-width:160px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-          <span style="font-size:12px;font-weight:600;color:${k.is_active?'var(--text)':'var(--muted)'};">${k.label||'Key #'+k.id}</span>
-          <span style="font-size:9px;padding:1px 7px;border-radius:20px;font-weight:700;${k.is_active?'background:rgba(29,184,126,0.15);color:var(--success)':'background:rgba(240,74,74,0.15);color:var(--danger)'};">${k.is_active?'ACTIVE':'DISABLED'}</span>
-          ${k.error_count>0?`<span style="font-size:9px;background:rgba(240,165,42,0.15);color:var(--warning);padding:1px 7px;border-radius:20px;">⚠ ${k.error_count} errors</span>`:''}
+
+    // Monthly quota bars for Maps keys
+    let monthlyQuotaHtml = '';
+    if(k.service === 'maps' && k.text_search_quota) {
+      const tsQ = k.text_search_quota;
+      const pdQ = k.place_details_quota;
+      const tsColor = tsQ.pct>=90?'var(--danger)':tsQ.pct>=70?'var(--warning)':'var(--success)';
+      const pdColor = pdQ.pct>=90?'var(--danger)':pdQ.pct>=70?'var(--warning)':'var(--success)';
+      const criticalBanner = k.quota_critical ?
+        `<div style="background:rgba(240,74,74,0.15);border:1px solid rgba(240,74,74,0.3);border-radius:6px;padding:4px 8px;font-size:10px;color:var(--danger);margin-bottom:6px;">🔴 Free quota khatam! Naya key add karein</div>` :
+        k.quota_warning ?
+        `<div style="background:rgba(240,165,42,0.15);border:1px solid rgba(240,165,42,0.3);border-radius:6px;padding:4px 8px;font-size:10px;color:var(--warning);margin-bottom:6px;">⚠️ 70%+ quota use — jaldi naya key add karein</div>` : '';
+
+      monthlyQuotaHtml = `
+        ${criticalBanner}
+        <div style="margin-top:6px;">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:2px;">
+            <span>Text Search (monthly)</span>
+            <span style="color:${tsColor};font-weight:600;">${tsQ.used.toLocaleString()} / 10,000 (${tsQ.pct}%)</span>
+          </div>
+          <div style="height:5px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-bottom:6px;">
+            <div style="height:100%;width:${Math.min(100,tsQ.pct)}%;background:${tsColor};border-radius:99px;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:2px;">
+            <span>Place Details (monthly)</span>
+            <span style="color:${pdColor};font-weight:600;">${pdQ.used.toLocaleString()} / 10,000 (${pdQ.pct}%)</span>
+          </div>
+          <div style="height:5px;background:var(--bg3);border-radius:99px;overflow:hidden;">
+            <div style="height:100%;width:${Math.min(100,pdQ.pct)}%;background:${pdColor};border-radius:99px;"></div>
+          </div>
+        </div>`;
+    }
+
+    return `<div style="background:var(--bg2);border:1px solid ${k.quota_critical?'rgba(240,74,74,0.4)':k.is_active?'var(--border)':'rgba(240,74,74,0.3)'};border-radius:10px;padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:160px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:12px;font-weight:600;color:${k.is_active?'var(--text)':'var(--muted)'};">${k.label||'Key #'+k.id}</span>
+            <span style="font-size:9px;padding:1px 7px;border-radius:20px;font-weight:700;${k.is_active?'background:rgba(29,184,126,0.15);color:var(--success)':'background:rgba(240,74,74,0.15);color:var(--danger)'};">${k.is_active?'ACTIVE':'DISABLED'}</span>
+            ${k.error_count>0?`<span style="font-size:9px;background:rgba(240,165,42,0.15);color:var(--warning);padding:1px 7px;border-radius:20px;">⚠ ${k.error_count} errors</span>`:''}
+          </div>
+          <div style="font-size:10px;color:var(--muted);font-family:monospace;">${maskedKey}</div>
+          ${k.last_error?`<div style="font-size:10px;color:var(--danger);margin-top:2px;">${String(k.last_error).substring(0,50)}</div>`:''}
         </div>
-        <div style="font-size:10px;color:var(--muted);font-family:monospace;">${maskedKey}</div>
-        ${k.last_error?`<div style="font-size:10px;color:var(--danger);margin-top:2px;">${String(k.last_error).substring(0,50)}</div>`:''}
+        <div style="min-width:110px;">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${k.used_today}/${k.daily_limit} today</div>
+          <div style="height:6px;background:var(--bg3);border-radius:99px;overflow:hidden;"><div style="height:100%;width:${usedPct}%;background:${barColor};border-radius:99px;"></div></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">${k.last_used||'Never'}</div>
+        </div>
+        <div style="display:flex;gap:5px;flex-shrink:0;">
+          <button onclick="toggleApiKey(${k.id})" style="background:${k.is_active?'rgba(240,165,42,0.1)':'rgba(29,184,126,0.1)'};color:${k.is_active?'var(--warning)':'var(--success)'};border:1px solid ${k.is_active?'rgba(240,165,42,0.3)':'rgba(29,184,126,0.3)'};border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">${k.is_active?'Disable':'Enable'}</button>
+          <button onclick="resetKeyUsage(${k.id})" style="background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Reset</button>
+          <button onclick="deleteApiKey(${k.id})" style="background:rgba(240,74,74,0.1);color:var(--danger);border:1px solid rgba(240,74,74,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Del</button>
+        </div>
       </div>
-      <div style="min-width:110px;">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${k.used_today}/${k.daily_limit} today</div>
-        <div style="height:6px;background:var(--bg3);border-radius:99px;overflow:hidden;"><div style="height:100%;width:${usedPct}%;background:${barColor};border-radius:99px;"></div></div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${k.last_used||'Never'}</div>
-      </div>
-      <div style="display:flex;gap:5px;flex-shrink:0;">
-        <button onclick="toggleApiKey(${k.id})" style="background:${k.is_active?'rgba(240,165,42,0.1)':'rgba(29,184,126,0.1)'};color:${k.is_active?'var(--warning)':'var(--success)'};border:1px solid ${k.is_active?'rgba(240,165,42,0.3)':'rgba(29,184,126,0.3)'};border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">${k.is_active?'Disable':'Enable'}</button>
-        <button onclick="resetKeyUsage(${k.id})" style="background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Reset</button>
-        <button onclick="deleteApiKey(${k.id})" style="background:rgba(240,74,74,0.1);color:var(--danger);border:1px solid rgba(240,74,74,0.3);border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;">Del</button>
-      </div>
+      ${monthlyQuotaHtml}
     </div>`;
   };
   el.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
