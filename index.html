@@ -1032,9 +1032,15 @@ button:focus-visible, a:focus-visible {
   .plan-card-inner { padding: 20px 16px !important; }
   .plan-leads-big { font-size: 38px !important; }
 
-  /* Admin */
-  .admin-grid { grid-template-columns: repeat(2,1fr) !important; }
+  /* Admin mobile optimization */
+  .admin-grid { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
   .admin-2col { grid-template-columns: 1fr !important; }
+  .admin-card { padding: 10px 12px !important; }
+  .admin-val { font-size: 20px !important; }
+  .admin-label { font-size: 10px !important; }
+  .admin-sec { padding: 12px !important; margin-bottom: 12px !important; }
+  .admin-sec-title { font-size: 12px !important; }
+  div[style*="max-height:320px"] { max-height: 220px !important; }
   #apiKeysList [style*="grid-template-columns:1fr 1fr"],
   #apiKeysList [style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;
@@ -1812,10 +1818,51 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
     <!-- REFERRAL -->
     <div class="inner" id="inner-referral">
-      <div class="page-hdr"><div><div class="page-title">Referral Program</div><div class="page-sub">Har dost = +10 leads/day (max 5 refs = +50) · 20 dost = Pro FREE!</div></div></div>
+      <div class="page-hdr"><div><div class="page-title">Referral Program</div><div class="page-sub">Dost invite karo — leads badhao ya Rs.500 cashback lo!</div></div></div>
+
+      <!-- WALLET CARD -->
+      <div id="walletCard" style="background:linear-gradient(135deg,rgba(29,184,126,0.1),rgba(240,125,42,0.08));border:1px solid rgba(29,184,126,0.25);border-radius:16px;padding:20px 24px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">💰 Aapka Wallet Balance</div>
+            <div style="font-size:36px;font-weight:900;color:var(--success);" id="walletBalance">Rs.0</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+              Kul kamaya: <span id="walletEarned">Rs.0</span> ·
+              Nikala: <span id="walletWithdrawn">Rs.0</span>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <button id="withdrawBtn" onclick="showWithdrawModal()" style="background:linear-gradient(135deg,var(--success),#16a34a);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;opacity:0.5;" disabled>
+              💸 Withdraw Karein
+            </button>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;" id="withdrawHint">Rs.1,000 minimum</div>
+          </div>
+        </div>
+        <div id="pendingWithdrawBanner" style="display:none;background:rgba(240,165,42,0.1);border:1px solid rgba(240,165,42,0.3);border-radius:8px;padding:8px 12px;margin-top:12px;font-size:12px;color:var(--warning);">
+          ⏳ Withdrawal request pending hai — admin process kar raha hai
+        </div>
+      </div>
+
+      <!-- HOW TO EARN -->
+      <div style="background:var(--card);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;">💡 Paise kaise kamaein?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:var(--bg2);border-radius:10px;padding:12px;">
+            <div style="font-size:20px;margin-bottom:6px;">👥</div>
+            <div style="font-size:13px;font-weight:600;">Free User Invite</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Dost invite karo → woh free use kare → <strong style="color:var(--orange)">+10 leads/day</strong> bonus aapko</div>
+          </div>
+          <div style="background:var(--bg2);border-radius:10px;padding:12px;">
+            <div style="font-size:20px;margin-bottom:6px;">💰</div>
+            <div style="font-size:13px;font-weight:600;">Pro Upgrade = Rs.500</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Invited dost Pro le → aapko <strong style="color:var(--success)">Rs.500 wallet</strong> mein — fori!</div>
+          </div>
+        </div>
+      </div>
+
       <div class="ref-hero">
         <div class="ref-hero-title">🎯 Apna Referral Link Share Karo</div>
-        <div class="ref-hero-sub">Har dost jo is link se join kare = <strong style="color:var(--orange)">aapko +10 leads/day</strong> — max 5 dost = <strong style="color:var(--orange)">+50 leads/day bonus</strong> permanently</div>
+        <div class="ref-hero-sub">Free users: <strong style="color:var(--orange)">+10 leads/day bonus</strong> · Pro upgrade: <strong style="color:var(--success)">Rs.500 cashback</strong></div>
         <div class="ref-link-box"><span class="ref-link-text" id="refLink">Loading...</span><button class="btn-copy" onclick="copyRef()">Copy</button></div>
       </div>
       <div class="pro-progress">
@@ -1834,6 +1881,13 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div class="ref-history-title">👥 Aapke Referrals <span style="font-size:11px;color:var(--muted)" id="refHistoryCount">Loading...</span></div>
         <div id="refHistoryList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Loading...</div></div>
       </div>
+
+      <!-- WALLET TRANSACTIONS -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;">💳 Wallet History</div>
+        <div id="walletTxnList"><div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">Loading...</div></div>
+      </div>
+
       <div class="share-box">
         <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;">📱 Share Karo — Jahan Chahein</div>
         <div class="share-channels">
@@ -1843,6 +1897,36 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <button class="share-btn share-copy" onclick="copyShareMsg()">📋 Message Copy</button>
         </div>
         <div class="share-msg-box" id="shareMsg"></div>
+      </div>
+    </div>
+
+    <!-- WITHDRAW MODAL -->
+    <div id="withdrawModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:90%;max-width:420px;margin:20px;">
+        <div style="font-size:18px;font-weight:700;margin-bottom:16px;">💸 Withdrawal Request</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Amount aur payment details bharein — admin 24 ghante mein process karega</div>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">AMOUNT (Rs.)</label>
+          <input id="wdAmount" type="number" min="1000" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;" placeholder="1000">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">PAYMENT METHOD</label>
+          <select id="wdMethod" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:13px;">
+            <option>JazzCash</option>
+            <option>EasyPaisa</option>
+            <option>SadaPay</option>
+            <option>Bank Transfer</option>
+          </select>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">ACCOUNT NUMBER / IBAN</label>
+          <input id="wdNumber" type="text" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:13px;" placeholder="03XX-XXXXXXX">
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="submitWithdraw()" style="flex:1;background:linear-gradient(135deg,var(--success),#16a34a);color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;">Request Bhejein</button>
+          <button onclick="document.getElementById('withdrawModal').style.display='none'" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:10px;padding:12px 20px;cursor:pointer;">Cancel</button>
+        </div>
+        <div id="wdError" style="color:var(--danger);font-size:12px;margin-top:10px;display:none;"></div>
       </div>
     </div>
 
@@ -1876,7 +1960,30 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <div class="fg"><label class="fl">Company</label><input class="fi" id="settCompany"></div>
           <div class="fg full"><label class="fl">Email</label><input class="fi" id="settEmail" disabled style="opacity:0.5;"></div>
         </div>
-        <button class="btn-save" onclick="showToast('Profile update feature coming soon!')">Save</button>
+
+        <!-- Portfolio Fields -->
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+          <div style="font-size:12px;font-weight:600;color:var(--orange);margin-bottom:12px;">📧 AI Email Signature — Ek baar set karo, har email mein auto aayega</div>
+          <div class="settings-grid">
+            <div class="fg full">
+              <label class="fl">Company Website</label>
+              <input class="fi" id="settWebsite" placeholder="https://yourcompany.com">
+            </div>
+            <div class="fg full">
+              <label class="fl">Portfolio / Catalog Link <span style="font-weight:400;color:var(--muted);font-size:10px;">(Google Drive, Dropbox, etc.)</span></label>
+              <input class="fi" id="settPortfolio" placeholder="https://drive.google.com/...">
+            </div>
+            <div class="fg full">
+              <label class="fl">Company Description <span style="font-weight:400;color:var(--muted);font-size:10px;">(2-3 lines — AI email mein include hoga)</span></label>
+              <textarea class="fi" id="settCompanyDesc" rows="3" maxlength="300" placeholder="We are a leading manufacturer of surgical instruments based in Sialkot, Pakistan. ISO certified with 15+ years of export experience." style="resize:vertical;min-height:70px;"></textarea>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;">
+            💡 Yeh sab AI email mein automatically add hoga — alag se likhna nahi padega
+          </div>
+        </div>
+
+        <button class="btn-save" onclick="saveProfile()" style="margin-top:16px;">💾 Save Profile</button>
       </div>
       <div class="settings-sec">
         <div class="settings-title">Account Info</div>
@@ -2043,11 +2150,32 @@ window.onload=async ()=>{
   // Check for email verification token first
   const verifyHandled = await checkVerifyToken();
   if (verifyHandled) return;
-  
+
   const hash=location.hash.replace('#','');
-  if(hash===ADMIN_SECRET){history.replaceState(null,'',location.pathname);showPage('adminlogin');return;}
-  token=localStorage.getItem('j_token')||'';
+
+  // Admin URL check
+  if(hash===ADMIN_SECRET){
+    history.replaceState(null,'',location.pathname);
+    showPage('adminlogin');
+    return;
+  }
+
+  // Admin session already saved — direct enter
   adminToken=localStorage.getItem('j_admin')||'';
+  if(adminToken && hash !== ADMIN_SECRET) {
+    // Verify admin token still valid
+    try {
+      const r = await fetch(SERVER+'/admin/dashboard', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({admin_pass: adminToken})
+      }).then(r=>r.json());
+      if(!r.error) { showAdminOnly(); return; }
+      else { localStorage.removeItem('j_admin'); adminToken=''; }
+    } catch(e) { localStorage.removeItem('j_admin'); adminToken=''; }
+  }
+
+  token=localStorage.getItem('j_token')||'';
   const saved=localStorage.getItem('j_user');
   if(token&&saved){U=JSON.parse(saved);enterApp();fetchMe();}
   const ref=new URLSearchParams(location.search).get('ref');
@@ -2069,7 +2197,7 @@ function goTo(p){
   document.getElementById('inner-'+p).classList.add('active');
   const nav=document.getElementById('nav-'+p);if(nav)nav.classList.add('active');
   closeSidebar();
-  if(p==='dashboard')loadDashboard();if(p==='leads')loadSavedLeads();if(p==='referral')loadReferral();
+  if(p==='dashboard')loadDashboard();if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('mobOverlay');s.classList.toggle('open');o.classList.toggle('on');}
@@ -2114,7 +2242,9 @@ function doLogout(){
   U=null;token='';adminToken='';showPage('login');
 }
 function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();
-  // Fresh user data fetch — is_verified latest milega
+  // Mobile warning for users (not admin)
+  if(!adminToken && window.innerWidth < 768) { showMobileWarning(); }
+  // Fresh user data fetch
   api('GET','/auth/me').then(r=>{if(r&&r.email){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}setTimeout(showVerifyBanner,1000);}).catch(()=>setTimeout(showVerifyBanner,1000));
 }
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
@@ -2398,7 +2528,17 @@ async function genCustomEmail(idx) {
 
 async function genEmail(lead,modal){
   try{
-    const r=await api('POST','/generate-email',{business_name:lead.name,category:lead.category,country:lead.country,product:document.getElementById('searchProduct').value,sender_name:U?.name||'',sender_company:U?.company||''});
+    const r=await api('POST','/generate-email',{
+      business_name:lead.name,
+      category:lead.category,
+      country:lead.country,
+      product:document.getElementById('searchProduct').value,
+      sender_name:U?.name||'',
+      sender_company:U?.company||'',
+      sender_website: U?.website||'',
+      sender_portfolio: U?.portfolio_link||'',
+      sender_company_desc: U?.company_desc||''
+    });
     if(r.error){document.getElementById('eContent').innerHTML=`<p style="color:var(--danger);padding:20px;">${r.error}</p>`;return;}
     const to=lead.emails?.length&&!lead.email_blurred?lead.emails[0]:'';
     document.getElementById('eContent').innerHTML=`<div style="margin-bottom:8px;font-size:11px;color:var(--muted)">To: <strong style="color:var(--text)">${to||'Email available nahi'}</strong></div><div class="email-subject"><strong>Subject:</strong> ${r.subject}</div><div class="email-body">${r.body}</div><div class="modal-actions"><button class="btn-sec" onclick="navigator.clipboard.writeText(${JSON.stringify('Subject: '+r.subject+'\n\n'+r.body)});showToast('Copy ho gaya!')">📋 Copy</button>${to?`<a href="mailto:${to}?subject=${encodeURIComponent(r.subject)}&body=${encodeURIComponent(r.body)}" class="btn-act" style="text-decoration:none;padding:8px 14px;font-size:12px;">📧 Email App</a>`:''}</div>`;
@@ -2539,9 +2679,54 @@ function selectPlan(planId,price){
   if(confirm(msg))window.open(`https://wa.me/${PAYMENT_WA.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(`Jaiffy ${planId.toUpperCase()} Plan lena hai - Rs.${price}/month - User: ${U?.email||''}`)}`,'_blank');
 }
 function loadSettings(){
-  if(!U)return;document.getElementById('settName').value=U.name||'';document.getElementById('settEmail').value=U.email||'';document.getElementById('settCompany').value=U.company||'';
-  document.getElementById('settPlan').textContent=(U.plan||'free').toUpperCase()+(U.in_trial?' (Trial)':'');document.getElementById('settLimit').textContent=U.daily_limit||5;
-  document.getElementById('settRef').textContent=U.ref_code||'-';document.getElementById('settRefs').textContent=U.ref_count||0;checkServer();
+  if(!U)return;
+  document.getElementById('settName').value=U.name||'';
+  document.getElementById('settEmail').value=U.email||'';
+  document.getElementById('settCompany').value=U.company||'';
+  document.getElementById('settWebsite').value=U.website||'';
+  document.getElementById('settPortfolio').value=U.portfolio_link||'';
+  document.getElementById('settCompanyDesc').value=U.company_desc||'';
+  document.getElementById('settPlan').textContent=(U.plan||'free').toUpperCase()+(U.in_trial?' (Trial)':'');
+  document.getElementById('settLimit').textContent=U.daily_limit||5;
+  document.getElementById('settRef').textContent=U.ref_code||'-';
+  document.getElementById('settRefs').textContent=U.ref_count||0;
+  checkServer();
+}
+
+async function saveProfile() {
+  const name = document.getElementById('settName')?.value?.trim();
+  const company = document.getElementById('settCompany')?.value?.trim();
+  const website = document.getElementById('settWebsite')?.value?.trim();
+  const portfolio_link = document.getElementById('settPortfolio')?.value?.trim();
+  const company_desc = document.getElementById('settCompanyDesc')?.value?.trim();
+
+  if (!name) { showToast('Naam required hai', true); return; }
+
+  const btn = document.querySelector('.btn-save');
+  if (btn) { btn.textContent = '⏳ Saving...'; btn.disabled = true; }
+
+  try {
+    const r = await api('POST', '/auth/update-profile', {
+      name, company, website, portfolio_link, company_desc
+    });
+    if (r.success) {
+      // Update local user object
+      if (U) {
+        U.name = name; U.company = company;
+        U.website = website; U.portfolio_link = portfolio_link;
+        U.company_desc = company_desc;
+        localStorage.setItem('j_user', JSON.stringify(U));
+      }
+      showToast('✅ Profile save ho gaya!');
+      updateSidebar();
+    } else {
+      showToast(r.error || 'Error', true);
+    }
+  } catch(e) {
+    showToast('Server error', true);
+  } finally {
+    if (btn) { btn.textContent = '💾 Save Profile'; btn.disabled = false; }
+  }
 }
 async function checkServer(){
   const badge = document.getElementById('srvBadge');
@@ -2565,7 +2750,7 @@ async function loadAdmin(){
     const r=await api('POST','/admin/dashboard',{admin_pass:adminToken});
     if(r.error){document.getElementById('adminContent').innerHTML='<div style="text-align:center;padding:40px;color:var(--danger);">Access denied</div>';return;}
     renderAdmin(r);
-    setTimeout(()=>{loadApiKeys();loadAppSettings();},300);
+    setTimeout(()=>{loadApiKeys();loadAppSettings();loadWalletRequests();},300);
   }catch(e){document.getElementById('adminContent').innerHTML='<div style="text-align:center;padding:40px;color:var(--danger);">Server error</div>';}
 }
 function renderAdmin(d){
@@ -2723,7 +2908,88 @@ function renderAdmin(d){
         <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="saveAppSettings()">💾 Save All</button>
       </div>
       <div id="appSettingsList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;"><div class="big-spin" style="margin:0 auto 8px;border-top-color:var(--purple);"></div>Settings load ho rahi hain...</div></div>
+    </div>
+
+    <div class="admin-sec" style="border:1px solid rgba(29,184,126,0.25);background:rgba(29,184,126,0.04);border-radius:14px;padding:16px;margin-top:12px;">
+      <div class="admin-sec-title" style="display:flex;justify-content:space-between;align-items:center;color:var(--success);">
+        💰 Wallet Withdrawal Requests
+        <button class="btn-act" style="font-size:11px;padding:6px 12px;" onclick="loadWalletRequests()">🔄 Refresh</button>
+      </div>
+      <div id="walletRequestsList"><div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">Refresh karein</div></div>
     </div>`;
+}
+
+async function loadWalletRequests() {
+  const el = document.getElementById('walletRequestsList');
+  if (!el) return;
+  el.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">Loading...</div>';
+  try {
+    const r = await fetch(SERVER + '/admin/wallet-requests', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','X-Admin-Token':adminToken},
+      body: JSON.stringify({admin_pass: adminToken, action: 'list'})
+    }).then(r => r.json());
+    if (r.error) { el.innerHTML = `<div style="color:var(--danger);font-size:12px;">${r.error}</div>`; return; }
+
+    const reqs = r.requests || [];
+    const pending = reqs.filter(x => x.status === 'pending');
+    const others = reqs.filter(x => x.status !== 'pending');
+
+    let html = `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:700;color:var(--warning);">${r.pending_count||0}</div>
+        <div style="font-size:10px;color:var(--muted);">Pending</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:700;color:var(--warning);">Rs.${(r.pending_amount||0).toLocaleString()}</div>
+        <div style="font-size:10px;color:var(--muted);">Pending Amount</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:700;color:var(--success);">Rs.${(r.paid_total||0).toLocaleString()}</div>
+        <div style="font-size:10px;color:var(--muted);">Total Paid</div>
+      </div>
+    </div>`;
+
+    if (!reqs.length) {
+      html += '<div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">Koi request nahi</div>';
+    } else {
+      [...pending, ...others].forEach(req => {
+        const statusColor = req.status==='pending'?'var(--warning)':req.status==='paid'?'var(--success)':'var(--danger)';
+        html += `<div style="background:var(--bg2);border:1px solid ${req.status==='pending'?'rgba(240,165,42,0.3)':'var(--border)'};border-radius:10px;padding:12px 14px;margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+            <div>
+              <div style="font-size:13px;font-weight:600;">${req.name} <span style="font-size:10px;color:var(--muted);">${req.email}</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;">${req.payment_method}: ${req.payment_number}</div>
+              <div style="font-size:10px;color:var(--muted);">${req.requested_at}</div>
+              ${req.admin_note?`<div style="font-size:10px;color:var(--muted);margin-top:2px;">Note: ${req.admin_note}</div>`:''}
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:18px;font-weight:700;color:var(--success);">Rs.${req.amount.toLocaleString()}</div>
+              <div style="font-size:10px;color:${statusColor};font-weight:600;text-transform:uppercase;">${req.status}</div>
+            </div>
+          </div>
+          ${req.status==='pending'?`<div style="display:flex;gap:6px;margin-top:10px;">
+            <button onclick="processWithdrawal(${req.id},'pay')" style="flex:1;background:rgba(29,184,126,0.15);color:var(--success);border:1px solid rgba(29,184,126,0.3);border-radius:7px;padding:7px;font-size:12px;font-weight:700;cursor:pointer;">✅ Paid — Mark Karo</button>
+            <button onclick="processWithdrawal(${req.id},'reject')" style="background:rgba(240,74,74,0.1);color:var(--danger);border:1px solid rgba(240,74,74,0.2);border-radius:7px;padding:7px 12px;font-size:12px;cursor:pointer;">❌ Reject</button>
+          </div>`:''}
+        </div>`;
+      });
+    }
+    el.innerHTML = html;
+  } catch(e) { el.innerHTML = `<div style="color:var(--danger);font-size:12px;">Error: ${e.message}</div>`; }
+}
+
+async function processWithdrawal(reqId, action) {
+  const note = action === 'pay' ? 'JazzCash/EasyPaisa pe bhej diya' : prompt('Reject reason?') || 'Rejected';
+  try {
+    const r = await fetch(SERVER + '/admin/wallet-requests', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','X-Admin-Token':adminToken},
+      body: JSON.stringify({admin_pass: adminToken, action, request_id: reqId, note})
+    }).then(r => r.json());
+    if (r.success) { showToast(r.message); loadWalletRequests(); }
+    else showToast(r.error || 'Error', true);
+  } catch(e) { showToast('Error', true); }
 }
 
 async function loadAllUsers(){
@@ -3687,9 +3953,10 @@ async function doMultiSearch() {
     document.getElementById('searchProduct').value = kw;
     try {
       const r = await api('POST', '/search', {
-        product: kw, country: country,
+        query: kw, country: country,
+        city: (document.getElementById('searchCity')?.value || '').trim() || undefined,
         campaign: document.getElementById('searchCampaign')?.value || kw,
-        page: 1, page_size: 20, force_refresh: false
+        page: 1, force_refresh: false
       });
       if(r.leads) {
         r.leads.forEach(lead => {
@@ -4221,6 +4488,113 @@ async function verifyFromSearch() {
       if(errEl){errEl.textContent=d.error||'Code galat hai';errEl.style.display='block';}
     }
   } catch(e) { if(errEl){errEl.textContent='Error — dobara try karein';errEl.style.display='block';} }
+}
+
+// ===== WALLET =====
+async function loadWallet() {
+  try {
+    const r = await api('GET', '/wallet');
+    if (!r || r.error) return;
+
+    // Balance display
+    const bal = document.getElementById('walletBalance');
+    const earned = document.getElementById('walletEarned');
+    const withdrawn = document.getElementById('walletWithdrawn');
+    const wBtn = document.getElementById('withdrawBtn');
+    const wHint = document.getElementById('withdrawHint');
+    const pendingBanner = document.getElementById('pendingWithdrawBanner');
+
+    if (bal) bal.textContent = `Rs.${(r.balance||0).toLocaleString()}`;
+    if (earned) earned.textContent = `Rs.${(r.total_earned||0).toLocaleString()}`;
+    if (withdrawn) withdrawn.textContent = `Rs.${(r.total_withdrawn||0).toLocaleString()}`;
+
+    if (wBtn) {
+      if (r.pending_request) {
+        wBtn.disabled = true; wBtn.style.opacity = '0.5';
+        if (wHint) wHint.textContent = 'Request pending hai';
+        if (pendingBanner) pendingBanner.style.display = 'block';
+      } else if (r.can_withdraw) {
+        wBtn.disabled = false; wBtn.style.opacity = '1';
+        if (wHint) wHint.textContent = `Rs.${r.balance.toLocaleString()} available`;
+      } else {
+        wBtn.disabled = true; wBtn.style.opacity = '0.5';
+        if (wHint) wHint.textContent = `Rs.${(r.min_withdrawal - r.balance).toLocaleString()} aur chahiye`;
+      }
+    }
+
+    // Transactions
+    const txnList = document.getElementById('walletTxnList');
+    if (txnList) {
+      if (!r.transactions?.length) {
+        txnList.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">Koi transaction nahi — referral karo aur kamaao!</div>';
+      } else {
+        txnList.innerHTML = r.transactions.map(t => {
+          const isCredit = t.type !== 'withdrawal';
+          const icon = t.type === 'referral_pro' ? '💰' : t.type === 'withdrawal' ? '💸' : '⭐';
+          const statusBadge = t.status === 'pending' ? '<span style="background:rgba(240,165,42,0.15);color:var(--warning);font-size:9px;padding:1px 6px;border-radius:10px;">Pending</span>' :
+                              t.status === 'paid' ? '<span style="background:rgba(29,184,126,0.15);color:var(--success);font-size:9px;padding:1px 6px;border-radius:10px;">Paid</span>' : '';
+          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:500;">${icon} ${t.description||t.type} ${statusBadge}</div>
+              <div style="font-size:10px;color:var(--muted);">${t.created_at||''}</div>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:${isCredit?'var(--success)':'var(--danger)'};">
+              ${isCredit?'+':'-'}Rs.${Math.abs(t.amount).toLocaleString()}
+            </div>
+          </div>`;
+        }).join('');
+      }
+    }
+  } catch(e) {}
+}
+
+function showWithdrawModal() {
+  const modal = document.getElementById('withdrawModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+async function submitWithdraw() {
+  const amount = parseInt(document.getElementById('wdAmount')?.value || 0);
+  const method = document.getElementById('wdMethod')?.value;
+  const number = document.getElementById('wdNumber')?.value?.trim();
+  const errEl = document.getElementById('wdError');
+
+  if (!amount || amount < 1000) { if(errEl){errEl.textContent='Minimum Rs.1,000 hai';errEl.style.display='block';} return; }
+  if (!number) { if(errEl){errEl.textContent='Payment number daalen';errEl.style.display='block';} return; }
+  if (errEl) errEl.style.display='none';
+
+  try {
+    const r = await api('POST', '/wallet/withdraw', {amount, payment_method: method, payment_number: number});
+    if (r.error) { if(errEl){errEl.textContent=r.error;errEl.style.display='block';} return; }
+
+    document.getElementById('withdrawModal').style.display = 'none';
+    showToast(`✅ Rs.${amount.toLocaleString()} ki request bhej di!`);
+
+    // Admin ko WhatsApp open karo
+    if (r.admin_wa_url) {
+      setTimeout(() => {
+        if(confirm('Admin ko WhatsApp pe notification bhejein?')) window.open(r.admin_wa_url, '_blank');
+      }, 500);
+    }
+    loadWallet();
+  } catch(e) { if(errEl){errEl.textContent='Error — dobara try karein';errEl.style.display='block';} }
+}
+
+function showMobileWarning() {
+  // Sirf ek baar dikhao
+  if (localStorage.getItem('mobile_warned')) return;
+  localStorage.setItem('mobile_warned', '1');
+
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#1a0a00,#111827);border-bottom:2px solid rgba(240,125,42,0.4);padding:14px 16px;text-align:center;';
+  banner.innerHTML = `
+    <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">💻 Laptop/PC pe best experience milta hai</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Search, leads table aur email generator desktop ke liye design kiye gaye hain</div>
+    <div style="display:flex;gap:8px;justify-content:center;">
+      <button onclick="this.closest('div[style]').remove()" style="background:rgba(240,125,42,0.2);color:#f07d2a;border:1px solid rgba(240,125,42,0.3);border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;">Theek hai, samajh gaya</button>
+      <button onclick="localStorage.removeItem('mobile_warned');this.closest('div[style]').remove()" style="background:transparent;color:rgba(255,255,255,0.4);border:none;font-size:11px;cursor:pointer;">Dobara mat dikhao</button>
+    </div>`;
+  document.body.prepend(banner);
 }
 
 function showSearchLimitUI(r) {
