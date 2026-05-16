@@ -1528,6 +1528,8 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     <div class="fg"><label class="fl">Email</label><input class="fi" id="loginEmail" type="email" placeholder="aap@company.com"></div>
     <div class="fg"><label class="fl">Password <a onclick="showForgotPassword()" style="float:right;font-size:11px;color:var(--orange);cursor:pointer;font-weight:500;">Forgot password?</a></label><input class="fi" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btn-primary" onclick="doLogin()" id="loginBtn">Sign In</button>
+    <div style="text-align:center;margin:8px 0;color:var(--muted);font-size:12px;">or</div>
+    <button onclick="enterGuestMode()" style="width:100%;padding:11px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">👀 Try Demo Without Signing Up</button>
     <div class="auth-link">Don't have an account? <a onclick="showPage('signup')">Sign up free</a></div>
   </div>
 </div>
@@ -1763,9 +1765,15 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div style="font-size:40px;margin-bottom:12px;">🪝</div>
         <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;">Start Now — It's FREE!</div>
         <div style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto;">30 leads/day for 7 days. No credit card. Just enter your product!</div>
-        <button class="btn-act" onclick="goTo('search')" style="font-size:16px;padding:14px 32px;margin:0 auto;">
-          🎯 Start Free Search
-        </button>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn-act" onclick="showPage('signup')" style="font-size:16px;padding:14px 32px;">
+            🎯 Start Free — Sign Up
+          </button>
+          <button onclick="enterGuestMode()" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:14px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+            👀 Try Demo First
+          </button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:12px;">No signup needed for demo — see real results</div>
       </div>
 
       <!-- TESTIMONIALS -->
@@ -2526,6 +2534,21 @@ function renderColChooser(id,cols,active,onChange){const el=document.getElementB
 function toggleCol(id,el,colId){el.classList.toggle('on');if(id==='colTags'){activeSC=[...document.querySelectorAll('#colTags .col-tag.on')].map(e=>e.dataset.id);if(window._lastSearch)renderResults(window._lastSearch);}else{activeSaved=[...document.querySelectorAll('#savedColTags .col-tag.on')].map(e=>e.dataset.id);renderSavedLeads(allLeads);}}
 function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');}
 function goTo(p){
+  // Guest mode — allow dashboard, search preview only; prompt signup for rest
+  if(window._isGuest && !['dashboard','search'].includes(p)){
+    const modal = document.createElement('div');
+    modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    modal.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px;max-width:400px;width:100%;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px;">🔒</div>
+      <div style="font-size:20px;font-weight:800;margin-bottom:8px;">Sign Up to Access</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Create your free account to access all features — 7-day trial, 30 leads/day, no credit card</div>
+      <button onclick="showPage('signup');this.closest('[style*=fixed]').remove();window._isGuest=false;document.getElementById('guestBanner')?.remove();" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px;">🚀 Sign Up Free</button>
+      <button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;">Continue Demo</button>
+    </div>`;
+    document.body.appendChild(modal);
+    return;
+  }
+
   document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
   document.getElementById('inner-'+p)?.classList.add('active');
@@ -2536,11 +2559,11 @@ function goTo(p){
   document.querySelectorAll('.mob-nav-item').forEach(x=>x.classList.remove('active'));
   const mbn = document.getElementById('mbn-'+p);
   if(mbn) mbn.classList.add('active');
-  // Map pages to bottom nav
   const mobMap = {search:'leads', help:'settings', plans:'settings', admin:'settings'};
   if(mobMap[p]) document.getElementById('mbn-'+mobMap[p])?.classList.add('active');
 
-  if(p==='dashboard')loadDashboard();if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
+  if(p==='dashboard'){loadDashboard(); if(window._isGuest) setTimeout(loadGuestDashboard, 200);}
+  if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('mobOverlay');s.classList.toggle('open');o.classList.toggle('on');}
@@ -2584,6 +2607,125 @@ function doLogout(){
   localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
   U=null;token='';adminToken='';showPage('login');
 }
+// ===== GUEST / DEMO MODE =====
+function enterGuestMode() {
+  // Set guest flag
+  window._isGuest = true;
+  U = null; token = ''; adminToken = '';
+
+  // Show app
+  showPage('app');
+
+  // Show guest banner at top
+  const banner = document.createElement('div');
+  banner.id = 'guestBanner';
+  banner.style.cssText = 'background:linear-gradient(135deg,rgba(240,125,42,0.15),rgba(168,85,247,0.1));border-bottom:1px solid rgba(240,125,42,0.3);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:9990;position:sticky;top:0;';
+  banner.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">👀</span>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);">You're viewing a Demo</div>
+        <div style="font-size:11px;color:var(--muted);">Sign up free to search real buyers & unlock all features</div>
+      </div>
+    </div>
+    <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 Sign Up Free</button>`;
+  document.getElementById('pg-app')?.prepend(banner);
+
+  // Show mobile bottom nav
+  const nav = document.getElementById('mobileBottomNav');
+  if (nav && window.innerWidth <= 768) nav.style.display = 'flex';
+
+  goTo('dashboard');
+  loadGuestDashboard();
+}
+
+function loadGuestDashboard() {
+  if (!window._isGuest) return;
+
+  // Override stats with demo data
+  const statEls = {
+    'totalLeads': 0, 'hotLeads': 0, 'todayUsage': 0, 'refCount': 0
+  };
+  Object.entries(statEls).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) animateCounter(el, val);
+  });
+
+  // Show demo search results when they click search
+  const uBar = document.getElementById('uHint');
+  if (uBar) uBar.innerHTML = '<span style="color:var(--orange);">Demo Mode — <a onclick="showPage(\'signup\')" style="color:var(--orange);font-weight:700;">Sign up free</a> to search real buyers</span>';
+
+  // Show demo nudge on dashboard
+  setTimeout(() => {
+    if (!window._isGuest) return;
+    const inner = document.getElementById('inner-dashboard');
+    if (!inner) return;
+    const existing = document.getElementById('guestDemoCard');
+    if (existing) return;
+    const card = document.createElement('div');
+    card.id = 'guestDemoCard';
+    card.style.cssText = 'background:linear-gradient(135deg,rgba(240,125,42,0.1),rgba(168,85,247,0.08));border:1px solid rgba(240,125,42,0.3);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;';
+    card.innerHTML = `
+      <div style="font-size:32px;margin-bottom:8px;">🎯</div>
+      <div style="font-size:17px;font-weight:800;margin-bottom:6px;">See Real Buyers — Try a Search</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">This is a demo view. Sign up free to search actual importers & wholesalers worldwide.</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Sign Up Free — 7 Day Trial</button>
+        <button onclick="showGuestSearchDemo()" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;">👀 See Sample Results</button>
+      </div>`;
+    inner.prepend(card);
+  }, 500);
+}
+
+function showGuestSearchDemo() {
+  // Show sample blurred results to entice signup
+  goTo('search');
+  setTimeout(() => {
+    if (!window._isGuest) return;
+    const resultsArea = document.getElementById('resultsArea');
+    if (!resultsArea) return;
+    resultsArea.style.display = 'block';
+
+    // Demo leads - realistic looking but blurred
+    const demoLeads = [
+      { name: "Al Rasheed Medical Supplies", category: "Medical Equipment Importer", city: "Dubai", score: 92, phone: "+971-50-***-****", email: "info@a***.ae" },
+      { name: "Gulf Surgical Trading Co.", category: "Surgical Instruments Distributor", city: "Abu Dhabi", score: 88, phone: "+971-2-***-****", email: "sales@g***.com" },
+      { name: "Emirates Healthcare Group", category: "Healthcare Products Importer", city: "Sharjah", score: 85, phone: "+971-6-***-****", email: "purchase@e***.ae" },
+      { name: "Arabian Medical Devices LLC", category: "Medical Device Importer", city: "Dubai", score: 81, phone: "+971-4-***-****", email: "orders@a***.com" },
+      { name: "Medex International FZE", category: "Healthcare Distributor", city: "Dubai", score: 78, phone: "+971-4-***-****", email: "info@m***.ae" },
+    ];
+
+    resultsArea.innerHTML = `
+      <div style="margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div style="font-size:15px;font-weight:700;">🔍 Sample Results: <span style="color:var(--orange);">Surgical Instruments → UAE</span></div>
+        <div style="background:rgba(240,125,42,0.1);border:1px solid rgba(240,125,42,0.3);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--orange);font-weight:600;">⚠️ Demo — Contacts Blurred</div>
+      </div>
+      <div style="display:grid;gap:10px;">
+        ${demoLeads.map((l, i) => `
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;">
+              <div style="font-weight:700;font-size:14px;margin-bottom:3px;">${l.name}</div>
+              <div style="font-size:12px;color:var(--muted);">${l.category} • ${l.city}</div>
+              <div style="display:flex;gap:12px;margin-top:6px;font-size:12px;color:var(--muted);">
+                <span>📞 ${l.phone}</span>
+                <span>📧 ${l.email}</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="background:rgba(29,184,126,0.15);color:var(--success);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;">🔥 ${l.score}</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--muted);cursor:pointer;" onclick="showPage('signup')">🔓 Unlock</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top:16px;background:linear-gradient(135deg,rgba(240,125,42,0.12),rgba(168,85,247,0.08));border:1px solid rgba(240,125,42,0.3);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-size:16px;font-weight:800;margin-bottom:8px;">🔓 Unlock Full Contacts + 100 More Results</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Free account gives you real phone numbers, emails, websites & AI email generation</div>
+        <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;">🚀 Create Free Account — 7 Day Trial</button>
+      </div>`;
+  }, 300);
+}
+
 function enterApp(){
   showPage('app');updateSidebar();
   document.getElementById('nav-admin').style.display='none';
