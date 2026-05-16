@@ -2584,7 +2584,7 @@ async function doSignup(){
   if(!name||!email||pass.length<6){showErr(err,'All fields required — password 6+ characters');return;}
   btn.disabled=true;btn.innerHTML='<div class="spin"></div> Account ban raha hai...';
   try{const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;adminToken='';localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));localStorage.removeItem('j_admin');showOTPPage(email);showToast('📧 Verification code email par bhej diya!');}catch(e){showErr(err,'Server error');}
-  finally{btn.disabled=false;btn.innerHTML='Free Trial Shuru Karein 🚀';}
+  finally{btn.disabled=false;btn.innerHTML='Start Free Trial 🚀';}
 }
 async function doAdminLogin(){
   const pass=document.getElementById('adminPass').value;const btn=document.getElementById('adminBtn');const err=document.getElementById('adminErr');err.style.display='none';
@@ -2767,7 +2767,7 @@ function renderBanners(){
   if(pct>=80&&pct<100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">⚠️</div><div class="sb-content"><div class="sb-title">Limit khatam hone wali hai!</div><div class="sb-text">${used}/${lim} leads use. <strong>${lim-used} baaki.</strong></div></div><button class="sb-btn" onclick="goTo('referral')">Limit Badhao</button></div>`;}
   if(pct>=100){div.innerHTML+=`<div class="smart-banner sb-limit"><div class="sb-icon">🚫</div><div class="sb-content"><div class="sb-title">Daily limit reached!</div><div class="sb-text">Resets tomorrow at midnight. Or refer friends now!</div></div><button class="sb-btn" onclick="goTo('referral')">Refer Karo</button></div>`;}
   if(plan==='free'&&!trial&&(U.ref_count||0)<5){div.innerHTML+=`<div class="smart-banner sb-ref"><div class="sb-icon">🎯</div><div class="sb-content"><div class="sb-title">Want more free leads?</div><div class="sb-text">Har dost = <strong>+1 lead/day</strong>. 20 dost = <strong>Pro FREE</strong>!</div></div><button class="sb-btn" onclick="goTo('referral')">Referral Link Lo</button></div>`;}
-  if(plan==='free'&&!trial&&pct>=70){div.innerHTML+=`<div class="smart-banner sb-upgrade"><div class="sb-icon">⚡</div><div class="sb-content"><div class="sb-title">Pro = 100 leads/day + full contacts — Rs.3,000/month</div><div class="sb-text">Ek order = hazaron ka faida!</div></div><button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button></div>`;}
+  if(plan==='free'&&!trial&&pct>=70){div.innerHTML+=`<div class="smart-banner sb-upgrade"><div class="sb-icon">⚡</div><div class="sb-content"><div class="sb-title">Pro = 100 leads/day + full contactsontacts — Rs.3,000/month</div><div class="sb-text">Ek order = hazaron ka faida!</div></div><button class="sb-btn" onclick="goTo('plans')">Upgrade Karein</button></div>`;}
 }
 function animateCounter(el,target){if(!el)return;const start=parseInt(el.textContent)||0,dur=600,step=20;let current=start;const inc=(target-start)/(dur/step);const timer=setInterval(()=>{current+=inc;if((inc>0&&current>=target)||(inc<0&&current<=target)){current=target;clearInterval(timer);}el.textContent=Math.round(current);},step);}
 async function loadDashboard(){
@@ -3089,14 +3089,14 @@ async function loadReferral(){
     const hist=r.history||[];document.getElementById('refHistoryCount').textContent=`${hist.length} log join hue`;
     if(!hist.length){document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">No friends have joined yet — share karo! 🚀</div>`;}
     else{document.getElementById('refHistoryList').innerHTML=hist.map(h=>`<div class="ref-row"><div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div><div class="ref-info"><div class="ref-name">${h.name||'User'} <span style="font-size:10px;background:rgba(90,106,130,0.15);color:var(--muted);padding:1px 6px;border-radius:20px;">${h.plan||'free'}</span></div><div class="ref-email">${h.email_masked||''}</div></div><div style="text-align:right;"><div class="ref-date">${h.created_at||''}</div><div class="ref-bonus">+1 lead/day</div></div></div>`).join('');}
-    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nPakistani exporters ke liye best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE se shuru karein!\n\nMere link se join karein:\n${r.ref_link}\n\n(Join karo to dono ko extra leads foundnge!)`;
+    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nFor Pakistani exporters best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE to start!\n\nJoin using my link:\n${r.ref_link}\n\n(Join to dono ko extra leads foundnge!)`;
     if(r.total_refs>0){document.getElementById('step4').className='step-item done';document.getElementById('step4').querySelector('.step-num').textContent='✓';}
     else{document.getElementById('step4').className='step-item active-step';}
   }catch(e){}
 }
 function copyRef(){navigator.clipboard.writeText(document.getElementById('refLink').textContent);showToast('Link copy ho gaya! 🎉');}
 function copyShareMsg(){navigator.clipboard.writeText(document.getElementById('shareMsg').textContent);showToast('Message copy ho gaya!');}
-function shareWhatsApp(){if(!refData)return;const msg=encodeURIComponent(`🚀 Jaiffy AI Lead Hunter\nPakistani exporters ke liye!\nFree join karein: ${refData.ref_link}`);window.open(`https://wa.me/?text=${msg}`,'_blank');}
+function shareWhatsApp(){if(!refData)return;const msg=encodeURIComponent(`🚀 Jaiffy AI Lead Hunter\nFor Pakistani exporters!\nJoin free: ${refData.ref_link}`);window.open(`https://wa.me/?text=${msg}`,'_blank');}
 function shareFB(){if(!refData)return;window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(refData.ref_link)}`,'_blank');}
 function shareLinkedIn(){if(!refData)return;window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(refData.ref_link)}`,'_blank');}
 
@@ -3729,7 +3729,7 @@ async function deleteUnverified() {
   const unverified = (window._allUsersData||[]).filter(u=>!u.is_verified);
   if(!unverified.length){ showToast('Koi unverified user nahi!'); return; }
   
-  if(!confirm(`${unverified.length} unverified users delete karne hain?\n\n${unverified.map(u=>u.email).join('\n')}\n\nYeh wapas nahi hoga!`)) return;
+  if(!confirm(`${unverified.length} unverified users will be deleted permanently?\n\n${unverified.map(u=>u.email).join('\n')}\n\nYeh wapas nahi hoga!`)) return;
   
   let deleted = 0;
   for(const u of unverified){
@@ -3836,14 +3836,14 @@ function renderApiKeys(keys){
         🤖 Gemini Keys (${geminiKeys.filter(k=>k.is_active).length}/${geminiKeys.length} active)
         <button onclick="showAddKeyModal('gemini')" style="background:rgba(240,125,42,0.1);color:var(--orange);border:1px solid rgba(240,125,42,0.2);border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer;">+ Add</button>
       </div>
-      ${geminiKeys.length?geminiKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">Koi key nahi — + Add karo</div>'}
+      ${geminiKeys.length?geminiKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">No keys added — + Add karo</div>'}
     </div>
     <div>
       <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
         🗺️ Maps Keys (${mapsKeys.filter(k=>k.is_active).length}/${mapsKeys.length} active)
         <button onclick="showAddKeyModal('maps')" style="background:rgba(42,110,240,0.1);color:var(--blue);border:1px solid rgba(42,110,240,0.2);border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer;">+ Add</button>
       </div>
-      ${mapsKeys.length?mapsKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">Koi key nahi — + Add karo</div>'}
+      ${mapsKeys.length?mapsKeys.map(renderKeyRow).join(''):'<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">No keys added — + Add karo</div>'}
     </div>
   </div>
   <div style="margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:8px;font-size:11px;color:var(--muted);">
@@ -3856,7 +3856,7 @@ function showAddKeyModal(service){
   const sLabel=service==='gemini'?'🤖 Gemini AI':'🗺️ Google Maps';
   const defLimit=service==='gemini'?1500:5000;
   modal.innerHTML=`<div class="modal" style="max-width:460px;">
-    <div class="modal-hdr"><div class="modal-title" style="color:${sColor};">+ ${sLabel} Key Add Karein</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div>
+    <div class="modal-hdr"><div class="modal-title" style="color:${sColor};">+ Add ${sLabel} Key</div><button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button></div>
     <div class="fg"><label class="fl">Key Label (apna naam do)</label><input class="fi" id="newKeyLabel" placeholder="e.g. Gemini Key 1, My Free Key"></div>
     <div class="fg"><label class="fl">API Key Value</label><input class="fi" id="newKeyValue" placeholder="${service==='gemini'?'AIzaSy...':'AIzaSy...'}" style="font-family:monospace;font-size:13px;">
     <div style="font-size:10px;color:var(--muted);margin-top:4px;">${service==='gemini'?'👉 aistudio.google.com → Get API Key':'👉 console.cloud.google.com → Credentials'}</div></div>
@@ -3917,7 +3917,7 @@ async function saveAppSettings(){
   const updates={};
   document.querySelectorAll('#appSettingsList input[data-key]').forEach(inp=>{updates[inp.getAttribute('data-key')]=inp.value;});
   document.querySelectorAll('#appSettingsList [data-val]').forEach(tog=>{const oc=tog.getAttribute('onclick')||'';const m=oc.match(/'([^']+)'/);if(m)updates[m[1]]=tog.getAttribute('data-val');});
-  if(!Object.keys(updates).length){showToast('Kuch update nahi hua',true);return;}
+  if(!Object.keys(updates).length){showToast('Nothing was updated',true);return;}
   const r=await api('POST','/admin/settings',{admin_pass:adminToken,action:'update',updates});
   if(r.error){showToast(r.error,true);return;}showToast('✅ Settings save ho gayi!');
 }
@@ -4018,11 +4018,11 @@ function initParticles(){
 
 // ===== AI GUIDE MESSAGES =====
 const aiMessages=[
-  'Assalam o Alaikum! 👋 Main aapka AI assistant hoon. Lead Search mein apna product likho!',
-  '💡 Tip: "surgical instruments UAE" search karo — 15-20 real buyers milenge!',
+  'Hello! 👋 I'm your AI assistant. Enter your product in Lead Searcht likho!',
+  '💡 Tip: Search "surgical instruments UAE" — find 15-20 real buyers!',
   '🎯 Hot leads = Score 70+. Inhe pehle contact karo!',
   '📧 AI generates professional emails for every lead — completely free!',
-  '👥 Dost refer karo = +10 leads/day (max 5 refs). 20 friends = Pro FREE!',
+  '👥 Refer friends = +10 leads/day (max 5 refs). 20 friends = Pro FREE!',
   '🔍 Leather goods Germany, Textile UK, Gym equipment USA — try karo!',
 ];
 let aiMsgIdx=0;
@@ -4503,7 +4503,7 @@ async function doMultiSearch() {
     renderResults({leads: allLeads, total: allLeads.length, page: 1, total_pages: 1, has_next: false});
     showToast(`✅ ${allLeads.length} unique leads found ${_selectedKeywords.length} keywords se!`);
   } else {
-    showToast('Koi leads nahi mili. Single search try karein.', true);
+    showToast('Koi leads nahi mili. Single search try now.', true);
   }
 }
 
@@ -4758,7 +4758,7 @@ async function submitOTP() {
       document.getElementById('verifyMsg').innerHTML = 'Congratulations! Your account is now active. 🎯';
       document.getElementById('verifyAction').innerHTML = `<button onclick="enterApp()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Open Dashboard 🚀</button>`;
     } else {
-      if(errEl){errEl.textContent=d.error||'Code galat hai — dobara check karein';errEl.style.display='block';}
+      if(errEl){errEl.textContent=d.error||'Code galat hai — dobara check now';errEl.style.display='block';}
       if(btn){btn.textContent='✅ Verify';btn.disabled=false;}
     }
   } catch(e) {
@@ -4771,7 +4771,7 @@ async function resendOTP() {
   showToast('📨 Naya code bheja ja raha hai...');
   try {
     const r = await api('POST', '/resend-verification', {});
-    if (r.success) showToast('✅ Naya code bhej diya — email check karein!');
+    if (r.success) showToast('✅ Naya code bhej diya — email check now!');
     else showToast(r.error || 'Failed', true);
   } catch(e) { showToast('Server error', true); }
 }
@@ -4827,7 +4827,7 @@ async function checkVerifyToken() {
       if (d.success) {
         document.getElementById('verifyIcon').textContent = '🎉';
         document.getElementById('verifyTitle').textContent = 'Email Verified!';
-        document.getElementById('verifyMsg').innerHTML = 'Mubarak ho! Ab login karein. 🎯';
+        document.getElementById('verifyMsg').innerHTML = 'Mubarak ho! Ab login now. 🎯';
         document.getElementById('verifyAction').innerHTML = `<button onclick="showPage('login');history.replaceState({},'','/')" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;">Login Karein →</button>`;
       } else {
         document.getElementById('verifyIcon').textContent = '❌';
@@ -5116,7 +5116,7 @@ function showVerifyRequiredUI() {
       <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Verify Your Email Pehle</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7;">
         Please verify your email before searching.<br>
-        A 6-digit code has been sent to your inbox — neeche enter karein.
+        A 6-digit code has been sent to your inbox — neeche enter now.
       </div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
         <input id="searchVerifyInput" type="text" maxlength="6" placeholder="000000"
@@ -5145,12 +5145,12 @@ async function verifyFromSearch() {
     if (d.success) {
       if (U) { U.is_verified = true; localStorage.setItem('j_user', JSON.stringify(U)); }
       document.getElementById('verifyBanner')?.remove();
-      showToast('🎉 Email verify ho gaya! Ab search karein.');
+      showToast('🎉 Email verify ho gaya! Ab search now.');
       document.getElementById('resultsArea').style.display = 'none';
     } else {
       if(errEl){errEl.textContent=d.error||'Code galat hai';errEl.style.display='block';}
     }
-  } catch(e) { if(errEl){errEl.textContent='Error — dobara try karein';errEl.style.display='block';} }
+  } catch(e) { if(errEl){errEl.textContent='Error — dobara try now';errEl.style.display='block';} }
 }
 
 // ===== WALLET =====
@@ -5240,7 +5240,7 @@ async function submitWithdraw() {
       }, 500);
     }
     loadWallet();
-  } catch(e) { if(errEl){errEl.textContent='Error — dobara try karein';errEl.style.display='block';} }
+  } catch(e) { if(errEl){errEl.textContent='Error — dobara try now';errEl.style.display='block';} }
 }
 
 function showMobileWarning() {
@@ -5391,7 +5391,7 @@ function showSearchErrorUI(errMsg) {
     <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;">
       <div style="font-size:48px;margin-bottom:16px;">${isServerErr ? '🔌' : '⚠️'}</div>
       <div style="font-size:16px;font-weight:700;margin-bottom:8px;">${isServerErr ? 'Server Connection Failed' : 'Search Nahi Hua'}</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">${errMsg || 'Thodi der mein dobara try karein'}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">${errMsg || 'Thodi der mein dobara try now'}</div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <button onclick="doSearch()" style="padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">🔄 Try Again</button>
         ${isServerErr ? `<a href="https://wa.me/923025074727?text=Search+kaam+nahi+kar+rahi" target="_blank" style="padding:10px 20px;background:rgba(37,211,102,0.1);color:#25d366;border:1px solid rgba(37,211,102,0.3);border-radius:9px;font-size:13px;cursor:pointer;text-decoration:none;">💬 Get Help</a>` : ''}
@@ -5404,10 +5404,10 @@ function showNoResultsUI() {
     <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;">
       <div style="font-size:48px;margin-bottom:16px;">🔍</div>
       <div style="font-size:16px;font-weight:700;margin-bottom:8px;">Koi Leads Nahi Mili</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.7;">Yeh try karein:</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.7;">Try these:</div>
       <div style="display:flex;flex-direction:column;gap:8px;max-width:300px;margin:0 auto 20px;text-align:left;">
-        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">✏️ Product name change karein — e.g. "medical equipment"</div>
-        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">🌍 Doosri country try karein — UAE, UK, Germany</div>
+        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">✏️ Product name change — e.g. "medical equipment"</div>
+        <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">🌍 Doosri country try — UAE, UK, Germany</div>
         <div style="font-size:12px;color:var(--muted);background:var(--bg2);padding:10px 14px;border-radius:8px;">🏙️ City field khali rakhein — poora country search hoga</div>
       </div>
       <button onclick="document.getElementById('searchProduct').focus()" style="padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">✏️ Search Edit Karein</button>
