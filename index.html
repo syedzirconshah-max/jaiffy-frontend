@@ -282,12 +282,137 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .admin-login-title{font-family:'Inter',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;color:var(--purple);}
 .admin-login-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
 @media(max-width:768px){
-  .sidebar{transform:translateX(-100%);z-index:200;}.sidebar.open{transform:translateX(0);}
-  .main{margin-left:0;}.inner{padding:20px 16px;}
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
-  .admin-grid{grid-template-columns:repeat(2,1fr);}
-  .steps-grid{grid-template-columns:repeat(2,1fr);}.search-grid{grid-template-columns:1fr;}
-  .admin-2col{grid-template-columns:1fr;}.mob-menu{display:flex!important;}
+  /* ===== GLOBAL MOBILE RESET ===== */
+  html,body{overflow-x:hidden !important;max-width:100vw !important;-webkit-text-size-adjust:100%;}
+  *{max-width:100% !important;box-sizing:border-box !important;}
+
+  /* ===== SIDEBAR — hidden on mobile, bottom nav instead ===== */
+  .sidebar{display:none !important;}
+  .main{margin-left:0 !important;}
+  .mob-menu{display:none !important;}
+
+  /* ===== BOTTOM NAV BAR — WhatsApp style ===== */
+  #mobileBottomNav{
+    display:flex !important;
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--bg2);
+    border-top:1px solid var(--border);
+    z-index:500;
+    padding:8px 0 env(safe-area-inset-bottom,8px);
+    height:60px;
+  }
+
+  /* Push content above bottom nav */
+  .inner{
+    padding:16px 14px 80px !important;
+    overflow-x:hidden !important;
+  }
+  #pg-app{padding-bottom:60px;}
+
+  /* ===== MOBILE BANNER — compact ===== */
+  #mobilePcBanner{
+    padding:8px 14px !important;
+    font-size:11px !important;
+  }
+  #mobilePcBanner .banner-sub{display:none !important;}
+
+  /* ===== DASHBOARD — clean mobile ===== */
+  /* Hide heavy elements on mobile */
+  .live-ticker{display:none !important;}
+  .ai-guide{display:none !important;}
+  .hero-radar{display:none !important;}
+  .fish-hook{display:none !important;}
+  .product-float{display:none !important;}
+  .animated-bg .particle{display:none !important;}
+  .grid-lines{display:none !important;}
+
+  /* Stats grid 2x2 clean */
+  .stats-grid{grid-template-columns:repeat(2,1fr) !important;gap:8px !important;}
+  .stat-card{padding:12px !important;}
+  .stat-val{font-size:24px !important;-webkit-text-fill-color:var(--text) !important;background:none !important;}
+  .stat-label{font-size:10px !important;}
+  .stat-sub{font-size:10px !important;}
+
+  /* Steps 2x2 */
+  .steps-grid{grid-template-columns:repeat(2,1fr) !important;gap:8px !important;}
+  .step-item{padding:10px 8px !important;}
+  .step-icon{font-size:20px !important;}
+  .step-title{font-size:11px !important;}
+
+  /* Hunt counters 3 cols */
+  .hunt-counters{grid-template-columns:repeat(3,1fr) !important;gap:6px !important;}
+  .hunt-num{font-size:16px !important;}
+  .hunt-label{font-size:9px !important;}
+
+  /* Usage bar */
+  .usage-wrap{padding:12px !important;}
+  .usage-meta{flex-direction:column !important;gap:3px !important;font-size:10px !important;}
+
+  /* ===== HERO — mobile compact ===== */
+  .hero-title{font-size:22px !important;line-height:1.25 !important;}
+  .hero-subtitle{font-size:12px !important;}
+  .product-badges{gap:6px !important;flex-wrap:wrap !important;}
+  .prod-badge{font-size:10px !important;padding:4px 8px !important;}
+  .hero-cta-group{flex-direction:column !important;gap:8px !important;}
+  .btn-hero-primary,.btn-hero-sec{width:100% !important;justify-content:center !important;}
+
+  /* ===== SEARCH PAGE — mobile ===== */
+  .search-grid{grid-template-columns:1fr !important;gap:8px !important;}
+  .fi2{font-size:14px !important;padding:11px 12px !important;}
+  .btn-search{width:100% !important;padding:14px !important;font-size:15px !important;}
+  #citySuggestions{max-height:160px !important;}
+
+  /* ===== RESULTS TABLE — horizontal scroll ===== */
+  .tbl-wrap{overflow-x:auto !important;-webkit-overflow-scrolling:touch !important;}
+  .results-tbl{min-width:600px !important;}
+  .results-tbl td,.results-tbl th{font-size:11px !important;padding:7px 8px !important;}
+
+  /* ===== PLANS — single column ===== */
+  .plans-grid{grid-template-columns:1fr !important;}
+  .plan-card-inner{padding:18px 16px !important;}
+  .plan-leads-big{font-size:36px !important;}
+
+  /* ===== REFERRAL — clean ===== */
+  .ref-hero{padding:16px !important;}
+  .ref-link-box{flex-direction:column !important;gap:8px !important;}
+  .ref-link-text{font-size:11px !important;word-break:break-all !important;}
+  .btn-copy{width:100% !important;}
+
+  /* ===== SETTINGS — clean ===== */
+  .settings-grid{grid-template-columns:1fr !important;}
+  .settings-sec{padding:16px !important;}
+
+  /* ===== HELP PAGE ===== */
+  .help-section-title{font-size:13px !important;padding:13px 14px !important;}
+  .help-body{padding:0 14px 12px !important;}
+  .help-q{font-size:12px !important;}
+  .help-a{font-size:12px !important;}
+
+  /* ===== MODALS — full screen ===== */
+  .modal{width:100% !important;max-width:100vw !important;margin:0 !important;border-radius:16px 16px 0 0 !important;position:fixed !important;bottom:0 !important;max-height:85vh !important;}
+  .modal-overlay{align-items:flex-end !important;}
+
+  /* ===== VERIFY BANNER ===== */
+  .verify-banner{flex-wrap:wrap !important;gap:8px !important;padding:12px !important;}
+  #bannerOtpInput{width:100px !important;font-size:16px !important;}
+
+  /* ===== PAGE HEADERS ===== */
+  .page-hdr{flex-direction:column !important;gap:8px !important;margin-bottom:14px !important;}
+  .page-title{font-size:20px !important;}
+
+  /* ===== HIDE clutter on mobile ===== */
+  .smart-banner .sb-icon{display:none !important;}
+  .section-sub{font-size:11px !important;}
+  .onboard-steps{grid-template-columns:repeat(2,1fr) !important;}
+
+  /* ===== ADMIN — scrollable ===== */
+  .admin-grid{grid-template-columns:repeat(2,1fr) !important;gap:8px !important;}
+  .admin-2col{grid-template-columns:1fr !important;}
+  .admin-sec{padding:12px !important;}
+  div[style*="max-height:320px"]{max-height:220px !important;}
+
+  /* Wallet card */
+  #walletCard{padding:14px !important;}
 }
 .mob-menu{display:none;position:fixed;top:14px;left:14px;z-index:300;background:var(--card);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;align-items:center;justify-content:center;cursor:pointer;}
 .mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150;}.mob-overlay.on{display:block;}
@@ -1250,7 +1375,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 /* ===== MOBILE OVERLAP FIX ===== */
 @media(max-width:768px){
   /* WA button at very bottom so it doesn't overlap search button */
-  #waFloat { bottom:16px !important; right:16px !important; z-index:9980 !important; }
+  #waFloat { bottom:72px !important; right:16px !important; z-index:9980 !important; }
   /* Hide AI guide on mobile — saves space and avoids blocking form buttons */
   .ai-guide { display:none !important; }
   #waTooltip { display:none !important; }
@@ -1336,6 +1461,15 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 .help-a{font-size:13px;color:var(--muted);line-height:1.7;padding-left:12px;}
 .help-a strong{color:var(--text);}
 .help-hidden{display:none !important;}
+/* Mobile Bottom Nav */
+#mobileBottomNav{display:none;align-items:center;justify-content:space-around;}
+.mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 2px;cursor:pointer;color:var(--muted);transition:color 0.2s;font-size:10px;font-weight:500;position:relative;}
+.mob-nav-item.active{color:var(--orange);}
+.mob-nav-item svg{transition:stroke 0.2s;}
+.mob-nav-item.active svg{stroke:var(--orange);}
+.mob-nav-center{position:relative;}
+.mob-nav-fab{width:48px;height:48px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin-top:-20px;box-shadow:0 4px 16px rgba(240,125,42,0.4);}
+.mob-nav-badge{position:absolute;top:4px;right:8px;background:var(--danger);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;min-width:16px;text-align:center;}
 </style>
 
 <!-- Google Analytics GA4 -->
@@ -1493,7 +1627,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         </div>
         <button class="btn-act" onclick="goTo('search')" style="width:fit-content;font-size:15px;padding:13px 28px;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          🎯 Lead Hunt Shuru Karein
+          🎯 Start Lead Hunt
         </button>
       </div>
       <div class="section-divider"></div>
@@ -1519,15 +1653,15 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         </div>
       </div>
       <div class="stats-grid reveal">
-        <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="sTotalLeads">0</div><div class="stat-sub">Today tak</div></div>
+        <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="sTotalLeads">0</div><div class="stat-sub">Total</div></div>
         <div class="stat-card"><div class="stat-label">Hot Leads</div><div class="stat-val" id="sHotLeads">0</div><div class="stat-sub">Score 70+</div></div>
         <div class="stat-card"><div class="stat-label">Today Use Ki</div><div class="stat-val" id="sUsedToday">0</div><div class="stat-sub" id="sRemText">remaining</div></div>
-        <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-val" id="sRefs">0</div><div class="stat-sub" id="sRefsTo">Pro ke liye</div></div>
+        <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-val" id="sRefs">0</div><div class="stat-sub" id="sRefsTo">to Pro</div></div>
       </div>
       <div class="usage-wrap reveal">
         <div class="usage-top"><div class="usage-title">Today's Lead Limit</div><div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div></div>
         <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
-        <div class="usage-meta"><span id="uHint">Free plan: 5 leads/day · <a onclick="goTo('referral')">Refer karo, +10 leads/day!</a></span><span id="uTrialBadge"></span></div>
+        <div class="usage-meta"><span id="uHint">Free plan: 10 leads/day · <a onclick="goTo('referral')">Refer friends, +10 leads/day!</a></span><span id="uTrialBadge"></span></div>
       </div>
       <!-- How It Works - Long Page Section -->
       <!-- GLOBAL PLATFORM STATS -->
@@ -1561,17 +1695,17 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">🔍</div>
             <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">1. Enter Your Product</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6;">Surgical instruments, leather goods, sports gear — kuch bhi. AI samajh jaata hai.</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">Surgical instruments, leather goods, sports gear — anything. AI understands.</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">🌍</div>
-            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">2. Country Chuno</div>
+            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">2. Select Country</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.6;">UAE, UK, Germany, USA — 10 countries. Search where your buyers are.</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
             <div style="font-size:40px;margin-bottom:12px;">📧</div>
             <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">3. Send Email</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6;">AI writes professional emails. One click mein buyer ke inbox mein!</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">AI writes professional emails. One click to reach any buyer!</div>
           </div>
         </div>
       </div>
@@ -1620,16 +1754,16 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       <div style="background:linear-gradient(135deg,rgba(240,125,42,0.08),rgba(168,85,247,0.05));border:1px solid rgba(240,125,42,0.2);border-radius:20px;padding:36px;text-align:center;margin-bottom:32px;" class="reveal">
         <div style="font-size:40px;margin-bottom:12px;">🪝</div>
         <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;">Start Now — It's FREE!</div>
-        <div style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto;">7 din mein 30 leads/day. No credit card required. Sirf product likho aur buyers pakro!</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto;">30 leads/day for 7 days. No credit card. Just enter your product!</div>
         <button class="btn-act" onclick="goTo('search')" style="font-size:16px;padding:14px 32px;margin:0 auto;">
-          🎯 First Search Karein — FREE
+          🎯 Start Free Search
         </button>
       </div>
 
       <!-- TESTIMONIALS -->
       <div class="section-divider reveal"></div>
       <div style="margin-bottom:32px;" class="reveal">
-        <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">⭐ Users Kya Kehte Hain?</div>
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">⭐ What Users Say</div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Real feedback, real results</div>
         <div class="testimonials">
           <div class="testimonial-card">
@@ -1673,21 +1807,21 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       <div style="margin-bottom:32px;" class="reveal">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
           <div>
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:4px;">🕒 Aapki Recent Searches</div>
+            <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:4px;">🕒 Your Recent Searches</div>
             <div style="font-size:13px;color:var(--muted);">Search again — instant results from cache!</div>
           </div>
         </div>
         <div id="recentSearches" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-          <div style="text-align:center;padding:24px;color:var(--muted);grid-column:1/-1;font-size:13px;">No tak koi search nahi — Lead Search se shuru karein!</div>
+          <div style="text-align:center;padding:24px;color:var(--muted);grid-column:1/-1;font-size:13px;">No searches yet — go to Lead Search to start!</div>
         </div>
       </div>
 
       <!-- CAMPAIGNS HEADER -->
       <div style="font-family:'Inter',system-ui,sans-serif;font-size:18px;font-weight:700;margin-bottom:12px;" class="reveal">
-        📂 Aapke Campaigns
+        📂 Your Campaigns
       </div>
 
-      <div class="camp-grid" id="campGrid"><div class="empty" style="grid-column:1/-1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe click karein — product daalo</p></div></div>
+      <div class="camp-grid" id="campGrid"><div class="empty" style="grid-column:1/-1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Run your first search!</h3><p>Go to Lead Search and enter your product</p></div></div>
     </div>
 
     <!-- SEARCH -->
@@ -2025,6 +2159,29 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
   </div>
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- MOBILE BOTTOM NAV — WhatsApp style, only on mobile -->
+<nav id="mobileBottomNav" style="display:none;">
+  <div class="mob-nav-item" id="mbn-dashboard" onclick="goTo('dashboard')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span>Home</span>
+  </div>
+  <div class="mob-nav-item" id="mbn-leads" onclick="goTo('leads')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span>Search</span>
+  </div>
+  <div class="mob-nav-item mob-nav-center" id="mbn-search" onclick="goTo('search')">
+    <div class="mob-nav-fab">🎯</div>
+  </div>
+  <div class="mob-nav-item" id="mbn-referral" onclick="goTo('referral')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span>Earn</span>
+  </div>
+  <div class="mob-nav-item" id="mbn-settings" onclick="goTo('settings')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+    <span>Profile</span>
+  </div>
+</nav>
 <!-- WhatsApp Floating Button -->
 <div id="waFloat" style="display:none;">
   <div class="wa-tooltip" id="waTooltip">💬 Chat on WhatsApp!</div>
@@ -2363,9 +2520,18 @@ function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.r
 function goTo(p){
   document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
-  document.getElementById('inner-'+p).classList.add('active');
+  document.getElementById('inner-'+p)?.classList.add('active');
   const nav=document.getElementById('nav-'+p);if(nav)nav.classList.add('active');
   closeSidebar();
+
+  // Mobile bottom nav active state
+  document.querySelectorAll('.mob-nav-item').forEach(x=>x.classList.remove('active'));
+  const mbn = document.getElementById('mbn-'+p);
+  if(mbn) mbn.classList.add('active');
+  // Map pages to bottom nav
+  const mobMap = {search:'leads', help:'settings', plans:'settings', admin:'settings'};
+  if(mobMap[p]) document.getElementById('mbn-'+mobMap[p])?.classList.add('active');
+
   if(p==='dashboard')loadDashboard();if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
 }
@@ -2410,9 +2576,24 @@ function doLogout(){
   localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
   U=null;token='';adminToken='';showPage('login');
 }
-function enterApp(){showPage('app');updateSidebar();document.getElementById('nav-admin').style.display='none';if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';showTicker();setTimeout(()=>{const g=document.getElementById('aiGuide');if(g)g.style.display='block';},2500);const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';goTo('dashboard');checkServer();
+function enterApp(){
+  showPage('app');updateSidebar();
+  document.getElementById('nav-admin').style.display='none';
+  if(adminToken&&!U)document.getElementById('nav-admin').style.display='flex';
+  showTicker();
+  setTimeout(()=>{const g=document.getElementById('aiGuide');if(g&&window.innerWidth>768)g.style.display='block';},2500);
+  const waf=document.getElementById('waFloat');if(waf)waf.style.display='flex';
+  goTo('dashboard');checkServer();
+
+  // Show mobile bottom nav
+  if(window.innerWidth <= 768 && !adminToken) {
+    const nav = document.getElementById('mobileBottomNav');
+    if(nav) nav.style.display = 'flex';
+  }
+
   // Mobile warning for users (not admin)
   if(!adminToken && window.innerWidth < 768) { showMobileWarning(); }
+
   // Fresh user data fetch
   api('GET','/auth/me').then(r=>{if(r&&r.email){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}setTimeout(showVerifyBanner,1000);}).catch(()=>setTimeout(showVerifyBanner,1000));
 }
@@ -2455,7 +2636,7 @@ function updateUsageBar(){
   const fill=document.getElementById('uFill');fill.style.width=pct+'%';fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
   const hint=document.getElementById('uHint');const trial=U.in_trial,trialDays=U.trial_days_remaining||0;
   if(trial)hint.innerHTML=`🔥 Trial: ${trialDays} days remaining — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Upgrade to Pro or refer friends!</a>`;
-  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer karo, +10 leads/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
+  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer friends, +10 leads/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
   else hint.innerHTML=`${U.plan} plan: ${lim} leads/day`;
   const trialBadge=document.getElementById('uTrialBadge');
   if(trial)trialBadge.innerHTML=`<span style="background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;">🔥 Trial Active</span>`;
@@ -2464,7 +2645,7 @@ function updateUsageBar(){
 function renderCampGrid(leads){
   const camps={};leads.forEach(l=>{if(!camps[l.campaign])camps[l.campaign]={leads:0,hot:0};camps[l.campaign].leads++;if(l.score>=70)camps[l.campaign].hot++;});
   const g=document.getElementById('campGrid'),keys=Object.keys(camps);
-  if(!keys.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Pehli search karein!</h3><p>Lead Search pe jaayein</p></div>';return;}
+  if(!keys.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Run your first search!</h3><p>Lead Search pe jaayein</p></div>';return;}
   g.innerHTML=keys.slice(0,4).map(k=>`<div class="camp-card" onclick="goTo('leads')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><div class="camp-name">${k}</div><span style="font-size:10px;background:rgba(29,184,126,0.1);color:var(--success);padding:1px 7px;border-radius:20px;">Active</span></div><div class="camp-stats"><div class="camp-stat"><span>${camps[k].leads}</span>Leads</div><div class="camp-stat"><span>${camps[k].hot}</span>Hot</div></div></div>`).join('');
 }
 
@@ -2758,7 +2939,7 @@ async function loadReferral(){
     const hist=r.history||[];document.getElementById('refHistoryCount').textContent=`${hist.length} log join hue`;
     if(!hist.length){document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">No tak koi dost join nahi hua — share karo! 🚀</div>`;}
     else{document.getElementById('refHistoryList').innerHTML=hist.map(h=>`<div class="ref-row"><div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div><div class="ref-info"><div class="ref-name">${h.name||'User'} <span style="font-size:10px;background:rgba(90,106,130,0.15);color:var(--muted);padding:1px 6px;border-radius:20px;">${h.plan||'free'}</span></div><div class="ref-email">${h.email_masked||''}</div></div><div style="text-align:right;"><div class="ref-date">${h.created_at||''}</div><div class="ref-bonus">+1 lead/day</div></div></div>`).join('');}
-    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nPakistani exporters ke liye best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE se shuru karein!\n\nMere link se join karein:\n${r.ref_link}\n\n(Join karo to dono ko extra leads milenge!)`;
+    document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nPakistani exporters ke liye best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE se shuru karein!\n\nMere link se join karein:\n${r.ref_link}\n\n(Join karo to dono ko extra leads foundnge!)`;
     if(r.total_refs>0){document.getElementById('step4').className='step-item done';document.getElementById('step4').querySelector('.step-num').textContent='✓';}
     else{document.getElementById('step4').className='step-item active-step';}
   }catch(e){}
@@ -3788,14 +3969,14 @@ setInterval(() => { if(document.getElementById('liveTicker')?.style.display !== 
 
 // ===== LIVE ACTIVITY =====
 const liveActivities=[
-  '🔍 Kisi ne "Leather goods" UK mein search ki — 14 leads mile',
+  '🔍 Someone searched "Leather goods" UK in 14 leads found',
   '✉️ AI ne ek professional email generate ki — Germany buyer ke liye',
   '👤 Naya user join hua — 7 din trial shuru!',
   '🎯 Hot lead mili — Score 94/100, UAE surgical importer',
   '📊 Today 230+ leads generate ho chuki hain',
   '🌍 UK mein "Gym equipment" search — 18 buyers mile',
   '💼 Sialkot exporter ne 3 hot leads save kiye',
-  '🤝 Referral join hua — dono ko bonus leads mile!',
+  '🤝 New referral joined — both got bonus leads!',
   '🔥 Textile search — Germany mein 22 buyers mile',
   '📧 Cold email bheja — Dubai buyer ko surgical instruments ke baare mein',
 ];
@@ -4190,7 +4371,7 @@ async function doMultiSearch() {
     document.getElementById('searchProduct').value = _selectedKeywords[0];
     currentLeads = allLeads.sort((a,b) => (b.score||0)-(a.score||0));
     renderResults({leads: allLeads, total: allLeads.length, page: 1, total_pages: 1, has_next: false});
-    showToast(`✅ ${allLeads.length} unique leads mile ${_selectedKeywords.length} keywords se!`);
+    showToast(`✅ ${allLeads.length} unique leads found ${_selectedKeywords.length} keywords se!`);
   } else {
     showToast('Koi leads nahi mili. Single search try karein.', true);
   }
@@ -4860,20 +5041,14 @@ async function submitWithdraw() {
 }
 
 function showMobileWarning() {
-  // Sirf ek baar dikhao
   if (localStorage.getItem('mobile_warned')) return;
   localStorage.setItem('mobile_warned', '1');
-
-  const banner = document.createElement('div');
-  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#1a0a00,#111827);border-bottom:2px solid rgba(240,125,42,0.4);padding:14px 16px;text-align:center;';
-  banner.innerHTML = `
-    <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">💻 Best experience on Laptop/PC</div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Search, leads table and email generator are designed for desktop use</div>
-    <div style="display:flex;gap:8px;justify-content:center;">
-      <button onclick="this.closest('div[style]').remove()" style="background:rgba(240,125,42,0.2);color:#f07d2a;border:1px solid rgba(240,125,42,0.3);border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;">Got it, understood</button>
-      <button onclick="localStorage.removeItem('mobile_warned');this.closest('div[style]').remove()" style="background:transparent;color:rgba(255,255,255,0.4);border:none;font-size:11px;cursor:pointer;">Don't show again</button>
-    </div>`;
-  document.body.prepend(banner);
+  const inner = document.querySelector('.inner.active');
+  if(!inner) return;
+  const bar = document.createElement('div');
+  bar.style.cssText = 'background:rgba(240,125,42,0.08);border:1px solid rgba(240,125,42,0.2);border-radius:10px;padding:8px 12px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.6);';
+  bar.innerHTML = `<span>💻</span><span style="flex:1">Desktop recommended for full features</span><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;">×</button>`;
+  inner.prepend(bar);
 }
 
 // ===== HELP PAGE =====
