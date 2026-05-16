@@ -1526,7 +1526,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     <div class="auth-title">Welcome Back</div><div class="auth-sub">Sign in to your account</div>
     <div class="err-box" id="loginErr"></div>
     <div class="fg"><label class="fl">Email</label><input class="fi" id="loginEmail" type="email" placeholder="aap@company.com"></div>
-    <div class="fg"><label class="fl">Password</label><input class="fi" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="fg"><label class="fl">Password <a onclick="showForgotPassword()" style="float:right;font-size:11px;color:var(--orange);cursor:pointer;font-weight:500;">Forgot password?</a></label><input class="fi" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btn-primary" onclick="doLogin()" id="loginBtn">Sign In</button>
     <div class="auth-link">Don't have an account? <a onclick="showPage('signup')">Sign up free</a></div>
   </div>
@@ -3104,20 +3104,28 @@ async function saveProfile() {
     if (btn) { btn.textContent = '💾 Save Profile'; btn.disabled = false; }
   }
 }
+let _serverCheckCount = 0;
 async function checkServer(){
   const badge = document.getElementById('srvBadge');
   try {
     const controller = new AbortController();
-    setTimeout(() => controller.abort(), 8000);
+    setTimeout(() => controller.abort(), 15000); // 15s — Railway cold start takes time
     const r = await fetch(`${SERVER}/health`, {signal: controller.signal});
     const d = await r.json();
     if(badge) { badge.className='badge-online'; badge.textContent='v'+d.version+' Online'; }
     _serverDown = false;
-    // Remove server down banner if present
+    _serverCheckCount = 0;
     document.getElementById('serverDownBanner')?.remove();
   } catch(e) {
+    _serverCheckCount++;
     if(badge) { badge.className='badge-offline'; badge.textContent='Server Offline'; }
-    showServerDown('network');
+    // Only show error after 2 failed attempts (not on first try — Railway needs warm-up)
+    // Also don't show on auth pages
+    const onAuthPage = document.getElementById('pg-auth')?.classList.contains('active') ||
+                       document.getElementById('pg-verify')?.classList.contains('active');
+    if(_serverCheckCount >= 2 && !onAuthPage) {
+      showServerDown('network');
+    }
   }
 }
 async function loadAdmin(){
@@ -4650,8 +4658,16 @@ async function submitBannerOTP(btn) {
 }
 
 async function checkVerifyToken() {
-  // Old link-based tokens — still support them for backward compatibility
   const params = new URLSearchParams(location.search);
+
+  // Check for password reset token
+  const resetToken = params.get('reset');
+  if (resetToken) {
+    showResetPasswordPage(resetToken);
+    return true;
+  }
+
+  // Old link-based tokens — still support them for backward compatibility
   const token = params.get('token');
   if (!token) return false;
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -4679,6 +4695,71 @@ async function checkVerifyToken() {
     } catch(e) {}
   }
   return true;
+}
+
+// Show verify banner if user is not verified
+function showResetPasswordPage(token) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const loginPage = document.getElementById('pg-login');
+  if (loginPage) loginPage.classList.add('active');
+
+  // Show reset modal directly
+  const modal = document.createElement('div');
+  modal.id = 'resetModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  modal.innerHTML = `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px;width:100%;max-width:420px;">
+      <div style="font-size:36px;text-align:center;margin-bottom:8px;">🔐</div>
+      <div style="font-size:20px;font-weight:700;text-align:center;margin-bottom:6px;">Set New Password</div>
+      <div style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:20px;">Enter your new password below</div>
+      <div id="resetMsg" style="display:none;padding:10px;border-radius:8px;font-size:13px;margin-bottom:12px;"></div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--muted);text-transform:uppercase;">New Password</label>
+        <input id="resetPass1" type="password" class="fi" placeholder="Min 6 characters" style="width:100%;margin-top:6px;">
+      </div>
+      <div style="margin-bottom:18px;">
+        <label style="font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--muted);text-transform:uppercase;">Confirm Password</label>
+        <input id="resetPass2" type="password" class="fi" placeholder="Repeat password" style="width:100%;margin-top:6px;" onkeydown="if(event.key==='Enter')doResetPassword('${token}')">
+      </div>
+      <button onclick="doResetPassword('${token}')" id="resetBtn" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;">Update Password</button>
+    </div>`;
+  document.body.appendChild(modal);
+  history.replaceState({}, '', '/');
+  setTimeout(() => document.getElementById('resetPass1')?.focus(), 100);
+}
+
+async function doResetPassword(token) {
+  const p1 = document.getElementById('resetPass1')?.value || '';
+  const p2 = document.getElementById('resetPass2')?.value || '';
+  const btn = document.getElementById('resetBtn');
+  const msg = document.getElementById('resetMsg');
+
+  const showMsg = (text, isErr) => {
+    msg.style.display = 'block';
+    msg.style.background = isErr ? 'rgba(240,74,74,0.1)' : 'rgba(29,184,126,0.1)';
+    msg.style.color = isErr ? 'var(--danger)' : 'var(--success)';
+    msg.style.border = isErr ? '1px solid rgba(240,74,74,0.3)' : '1px solid rgba(29,184,126,0.3)';
+    msg.textContent = text;
+  };
+
+  if (p1.length < 6) { showMsg('Password must be at least 6 characters', true); return; }
+  if (p1 !== p2) { showMsg('Passwords do not match', true); return; }
+
+  btn.disabled = true; btn.textContent = 'Updating...';
+  try {
+    const r = await api('POST', '/auth/reset-password', { token, password: p1 });
+    if (r.error) {
+      showMsg(r.error, true);
+      btn.disabled = false; btn.textContent = 'Update Password';
+    } else {
+      showMsg('✅ Password updated! Please login with your new password.', false);
+      btn.textContent = 'Done ✓';
+      setTimeout(() => { document.getElementById('resetModal')?.remove(); showPage('login'); }, 2500);
+    }
+  } catch(e) {
+    showMsg('Connection error — please try again', true);
+    btn.disabled = false; btn.textContent = 'Update Password';
+  }
 }
 
 // Show verify banner if user is not verified
@@ -5059,6 +5140,77 @@ function filterHelp(query) {
       sec.classList.add('help-hidden');
     }
   });
+}
+
+// ===== FORGOT PASSWORD =====
+function showForgotPassword() {
+  const existing = document.getElementById('forgotModal');
+  if (existing) { existing.remove(); return; }
+
+  const modal = document.createElement('div');
+  modal.id = 'forgotModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  modal.innerHTML = `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px;width:100%;max-width:420px;position:relative;">
+      <button onclick="document.getElementById('forgotModal').remove()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;">×</button>
+      <div style="font-size:24px;margin-bottom:8px;">🔐</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:6px;">Reset Password</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Enter your email and we'll send a reset link</div>
+      <div id="forgotMsg" style="display:none;padding:10px;border-radius:8px;font-size:13px;margin-bottom:12px;"></div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--muted);text-transform:uppercase;">Email Address</label>
+        <input id="forgotEmail" type="email" class="fi" placeholder="your@email.com" style="width:100%;margin-top:6px;" onkeydown="if(event.key==='Enter')submitForgotPassword()">
+      </div>
+      <button onclick="submitForgotPassword()" id="forgotBtn" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;">Send Reset Link</button>
+      <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted);">Check your Spam/Junk folder if not received</div>
+    </div>`;
+  document.body.appendChild(modal);
+  setTimeout(() => document.getElementById('forgotEmail')?.focus(), 100);
+}
+
+async function submitForgotPassword() {
+  const email = document.getElementById('forgotEmail')?.value?.trim();
+  const btn = document.getElementById('forgotBtn');
+  const msg = document.getElementById('forgotMsg');
+
+  if (!email || !email.includes('@')) {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(240,74,74,0.1)';
+    msg.style.color = 'var(--danger)';
+    msg.style.border = '1px solid rgba(240,74,74,0.3)';
+    msg.textContent = 'Please enter a valid email address';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const r = await api('POST', '/auth/forgot-password', { email });
+    msg.style.display = 'block';
+    if (r.error) {
+      msg.style.background = 'rgba(240,74,74,0.1)';
+      msg.style.color = 'var(--danger)';
+      msg.style.border = '1px solid rgba(240,74,74,0.3)';
+      msg.textContent = r.error;
+      btn.disabled = false;
+      btn.textContent = 'Send Reset Link';
+    } else {
+      msg.style.background = 'rgba(29,184,126,0.1)';
+      msg.style.color = 'var(--success)';
+      msg.style.border = '1px solid rgba(29,184,126,0.3)';
+      msg.textContent = '✅ Reset link sent! Check your inbox (and spam folder)';
+      btn.textContent = 'Email Sent ✓';
+      setTimeout(() => document.getElementById('forgotModal')?.remove(), 3000);
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(240,74,74,0.1)';
+    msg.style.color = 'var(--danger)';
+    msg.textContent = 'Connection error — please try again';
+    btn.disabled = false;
+    btn.textContent = 'Send Reset Link';
+  }
 }
 
 // Quick search from badge click
