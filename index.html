@@ -2205,7 +2205,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       <div class="settings-sec">
         <div class="settings-title">Account Info</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
-          <div><span style="color:var(--muted)">Plan:</span> <strong id="settPlan">Free</strong></div>
+          <div><span style="color:var(--muted)">Plan:</span> <strong id="settPlan">Free</strong> <span id="settPlanExpiry" style="font-size:11px;margin-left:8px;"></span></div>
           <div><span style="color:var(--muted)">Daily Limit:</span> <strong id="settLimit">5</strong></div>
           <div><span style="color:var(--muted)">Referral Code:</span> <strong id="settRef" style="color:var(--orange)">-</strong></div>
           <div><span style="color:var(--muted)">Total Referrals:</span> <strong id="settRefs">0</strong></div>
@@ -2681,14 +2681,12 @@ function showAdminOnly(){
 }
 function doLogout(){
   fetch(`${SERVER}/auth/logout`,{method:'POST',headers:{Authorization:'Bearer '+token}}).catch(()=>{});
-  // Clear ALL stored data
   localStorage.removeItem('j_token');
   localStorage.removeItem('j_user');
   localStorage.removeItem('j_admin');
-  localStorage.removeItem('j_theme_keep'); // keep theme pref
   sessionStorage.clear();
-  U=null; token=''; adminToken=''; window._isGuest=false;
-  showPage('login');
+  // Force reload so all state is cleared cleanly
+  window.location.href = '/';
 }
 // ===== GUEST / DEMO MODE =====
 function enterGuestMode() {
@@ -3247,9 +3245,32 @@ async function loadReferral(){
     document.getElementById('refLink').textContent=r.ref_link;document.getElementById('refTotal').textContent=r.total_refs;document.getElementById('refBonus').textContent=r.bonus_leads_per_day;document.getElementById('refToPro').textContent=r.refs_to_pro;
     document.getElementById('refProgressFill').style.width=r.progress_pct+'%';document.getElementById('refProgressText').textContent=`${r.total_refs} / 20`;
     document.getElementById('refMilestones').innerHTML=(r.milestones||[]).map(m=>`<div class="pm-item ${m.reached?'reached':''} ${m.is_pro?'pro-reward':''}"><div class="pm-num">${m.refs}</div><div class="pm-label">Referrals</div><div class="pm-reward">${m.reward} ${m.reached?'✓':''}</div></div>`).join('');
-    const hist=r.history||[];document.getElementById('refHistoryCount').textContent=`${hist.length} log join hue`;
-    if(!hist.length){document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">No friends have joined yet — share karo! 🚀</div>`;}
-    else{document.getElementById('refHistoryList').innerHTML=hist.map(h=>`<div class="ref-row"><div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div><div class="ref-info"><div class="ref-name">${h.name||'User'} <span style="font-size:10px;background:rgba(90,106,130,0.15);color:var(--muted);padding:1px 6px;border-radius:20px;">${h.plan||'free'}</span></div><div class="ref-email">${h.email_masked||''}</div></div><div style="text-align:right;"><div class="ref-date">${h.created_at||''}</div><div class="ref-bonus">+1 lead/day</div></div></div>`).join('');}
+    const hist=r.history||[];
+    document.getElementById('refHistoryCount').textContent=`${hist.length} joined`;
+    if(!hist.length){
+      document.getElementById('refHistoryList').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">No friends joined yet — share your link! 🚀</div>`;
+    } else {
+      document.getElementById('refHistoryList').innerHTML=hist.map(h=>{
+        const isPro = h.plan==='pro'||h.plan==='agency';
+        const planBg = isPro ? 'rgba(240,125,42,0.15)' : 'rgba(90,106,130,0.15)';
+        const planColor = isPro ? 'var(--orange)' : 'var(--muted)';
+        const planLabel = isPro ? '💎 '+h.plan.toUpperCase() : h.plan||'free';
+        return `<div class="ref-row">
+          <div class="ref-av">${h.name?.[0]?.toUpperCase()||'?'}</div>
+          <div class="ref-info">
+            <div class="ref-name">${h.name||'User'} 
+              <span style="font-size:10px;background:${planBg};color:${planColor};padding:1px 6px;border-radius:20px;">${planLabel}</span>
+              ${isPro ? '<span style="font-size:10px;color:var(--success);margin-left:4px;">+Rs.500 cashback ✅</span>' : ''}
+            </div>
+            <div class="ref-email">${h.email_masked||''}</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="ref-date">${new Date(h.created_at||'').toLocaleDateString('en-PK',{day:'numeric',month:'short'})}</div>
+            <div class="ref-bonus" style="color:${isPro?'var(--orange)':'var(--success)'};">${isPro?'+Rs.500':'+10 leads/day'}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
     document.getElementById('shareMsg').textContent=`🚀 Jaiffy - AI Lead Hunter\n\nFor Pakistani exporters best tool!\n✅ Real B2B leads — Google data\n✅ AI scoring\n✅ Email generator\n✅ FREE to start!\n\nJoin using my link:\n${r.ref_link}\n\n(Join to dono ko extra leads foundnge!)`;
     if(r.total_refs>0){document.getElementById('step4').className='step-item done';document.getElementById('step4').querySelector('.step-num').textContent='✓';}
     else{document.getElementById('step4').className='step-item active-step';}
@@ -3365,7 +3386,26 @@ function loadSettings(){
   document.getElementById('settWebsite').value=U.website||'';
   document.getElementById('settPortfolio').value=U.portfolio_link||'';
   document.getElementById('settCompanyDesc').value=U.company_desc||'';
-  document.getElementById('settPlan').textContent=(U.plan||'free').toUpperCase()+(U.in_trial?' (Trial)':'');
+
+  const plan = (U.plan||'free').toUpperCase() + (U.in_trial?' (Trial)':'');
+  document.getElementById('settPlan').textContent = plan;
+
+  // Show plan expiry
+  const expiryEl = document.getElementById('settPlanExpiry');
+  if (expiryEl) {
+    if (U.plan_expiry && U.plan !== 'free') {
+      const d = new Date(U.plan_expiry);
+      const now = new Date();
+      const daysLeft = Math.ceil((d - now) / (1000*60*60*24));
+      const dateStr = d.toLocaleDateString('en-PK', {day:'numeric', month:'short', year:'numeric'});
+      expiryEl.textContent = `Expires: ${dateStr} (${daysLeft > 0 ? daysLeft+' days left' : 'Expired'})`;
+      expiryEl.style.color = daysLeft <= 5 ? 'var(--danger)' : daysLeft <= 10 ? 'var(--orange)' : 'var(--success)';
+    } else {
+      expiryEl.textContent = U.plan === 'free' ? 'Free plan — upgrade anytime' : '';
+      expiryEl.style.color = 'var(--muted)';
+    }
+  }
+
   document.getElementById('settLimit').textContent=U.daily_limit||5;
   document.getElementById('settRef').textContent=U.ref_code||'-';
   document.getElementById('settRefs').textContent=U.ref_count||0;
