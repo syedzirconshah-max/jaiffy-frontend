@@ -1503,7 +1503,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 .skeleton-line { height: 14px; margin-bottom: 8px; }
 .skeleton-box { height: 60px; margin-bottom: 10px; border-radius: 10px; }
 
-/* FIX: Remove blank space - inner pages should not force 100vh */
+
 #inner-help, #inner-settings, #inner-plans, #inner-referral,
 #inner-leads, #inner-search, #inner-admin, #inner-privacy {
   min-height: unset !important;
@@ -1525,6 +1525,36 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
   min-height: unset !important; 
   height: auto !important;
 }
+
+/* ============ DEFINITIVE LAYOUT FIX ============ */
+/* Sidebar is 240px fixed on left */
+/* .main must always start after sidebar */
+.main {
+  margin-left: var(--sw) !important;
+  width: calc(100% - var(--sw)) !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+/* Inner pages fill .main exactly */
+.inner, .inner.active {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  min-height: unset !important;
+  padding: 24px 28px !important;
+}
+/* On mobile sidebar hidden, main takes full width */
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .inner, .inner.active {
+    padding: 16px 14px 80px !important;
+  }
+}
+/* ============ END LAYOUT FIX ============ */
 </style>
 
 <!-- Google Analytics GA4 -->
