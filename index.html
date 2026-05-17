@@ -4261,7 +4261,7 @@ let _serverDownShown = false;
 async function api(method, endpoint, body=null, retries=1) {
   const controller = new AbortController();
   const isAuthCall = ['/auth/login','/auth/signup','/auth/forgot-password','/auth/reset-password','/verify','/resend-verification'].includes(endpoint);
-  const timeoutMs = endpoint === '/search' ? 90000 : 20000;
+  const timeoutMs = endpoint === '/search' ? 90000 : endpoint === '/profile/photo' ? 60000 : 20000;
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   const opts = {
@@ -4416,19 +4416,33 @@ function showProfilePhotoModal() {
 function previewPhoto(input) {
   const file = input.files[0];
   if (!file) return;
-  if (file.size > 1024 * 1024) {
+  if (file.size > 800 * 1024) {
     document.getElementById('photoMsg').style.color = 'var(--danger)';
-    document.getElementById('photoMsg').textContent = 'File too large — max 1MB';
+    document.getElementById('photoMsg').textContent = 'File too large — max 800KB';
     return;
   }
   const reader = new FileReader();
   reader.onload = e => {
-    const preview = document.getElementById('photoPreview');
-    preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
-    document.getElementById('photoMsg').style.color = 'var(--success)';
-    document.getElementById('photoMsg').textContent = '✅ Ready to save';
-    document.getElementById('photoUploadBtn').style.display = 'block';
-    window._pendingPhoto = e.target.result;
+    // Compress image via canvas before upload
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 400;
+      let w = img.width, h = img.height;
+      if (w > h) { if (w > MAX) { h = h * MAX / w; w = MAX; } }
+      else { if (h > MAX) { w = w * MAX / h; h = MAX; } }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const compressed = canvas.toDataURL('image/jpeg', 0.75);
+      const preview = document.getElementById('photoPreview');
+      if (!preview) return;
+      preview.innerHTML = `<img src="${compressed}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+      document.getElementById('photoMsg').style.color = 'var(--success)';
+      document.getElementById('photoMsg').textContent = '✅ Ready to save';
+      document.getElementById('photoUploadBtn').style.display = 'block';
+      window._pendingPhoto = compressed;
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
