@@ -24,7 +24,7 @@
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;background:radial-gradient(ellipse at 60% 0%,rgba(240,125,42,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 ::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
-.page{display:none;min-height:100vh;}.page.active{display:flex;}
+.page{display:none;}.page.active{display:flex;}
 #pg-login,#pg-signup,#pg-adminlogin{align-items:center;justify-content:center;background:var(--bg);flex-direction:column;}
 .auth-box{width:440px;max-width:95vw;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:42px;animation:fadeUp 0.4s ease;box-shadow:0 24px 60px rgba(0,0,0,0.4);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
@@ -68,7 +68,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .badge-pro{background:rgba(240,125,42,0.2);color:var(--orange);}.badge-agency{background:rgba(42,110,240,0.2);color:var(--blue);}
 .logout-btn{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;border-radius:5px;transition:all 0.15s;}
 .logout-btn:hover{color:var(--danger);}
-.main{margin-left:var(--sw);flex:1;min-height:100vh;overflow-y:auto;overflow-x:hidden;}
+.main{margin-left:var(--sw);flex:1;overflow-y:auto;overflow-x:hidden;}
 .inner{display:none;padding:24px 28px;box-sizing:border-box;width:100%;overflow-x:hidden;}.inner.active{display:block;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
 .page-title{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
@@ -965,7 +965,7 @@ tbody tr:hover td:first-child { color: var(--orange); }
 .main { overflow-x: hidden; }
 
 /* Dashboard sections are now tall */
-#inner-dashboard { min-height: 100vh; }
+#inner-dashboard { min-height: unset; }
 
 /* Stats section tall */
 .stats-grid { margin-bottom: 32px !important; }
@@ -1516,6 +1516,15 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
   overflow-x: hidden;
 }
 
+
+/* FINAL FIX: No forced blank space on any page */
+.page { min-height: unset !important; }
+.inner, .inner.active { min-height: unset !important; }
+#inner-dashboard, #inner-help, #inner-search, #inner-leads,
+#inner-referral, #inner-plans, #inner-settings, #inner-admin { 
+  min-height: unset !important; 
+  height: auto !important;
+}
 </style>
 
 <!-- Google Analytics GA4 -->
