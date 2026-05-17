@@ -1837,7 +1837,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div id="reviewCarousel" style="position:relative;min-height:140px;">
           <div id="reviewCard" class="testimonial-card" style="transition:opacity 0.4s,transform 0.4s;opacity:1;">
             <div class="test-stars" id="reviewStars">★★★★★</div>
-            <div class="test-text" id="reviewText" style="font-size:13px;line-height:1.5;">"Loading reviews..."</div>
+            <div class="test-text" id="reviewCardText" style="font-size:13px;line-height:1.5;">"Loading reviews..."</div>
             <div class="test-author">
               <div class="test-avatar" id="reviewAvatar" style="background:linear-gradient(135deg,var(--orange),var(--orange2));">A</div>
               <div>
@@ -4478,7 +4478,7 @@ function showReview(idx) {
   if (!rv) return;
   const stars = '★'.repeat(rv.stars) + '☆'.repeat(5-rv.stars);
   document.getElementById('reviewStars').textContent = stars;
-  document.getElementById('reviewText').textContent = `"${rv.text}"`;
+  document.getElementById('reviewCardText').textContent = `"${rv.text}"`;
   document.getElementById('reviewName').textContent = rv.name;
   document.getElementById('reviewCity').textContent = rv.city;
   document.getElementById('reviewAvatar').textContent = rv.name[0].toUpperCase();
@@ -4538,7 +4538,7 @@ function showReviewForm() {
       <!-- Review text -->
       <div style="margin-bottom:12px;">
         <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Your Experience (2-3 lines)</div>
-        <textarea id="reviewText" maxlength="200" placeholder="e.g. Found 10 buyers in UAE on first search. Very useful tool!" style="width:100%;height:80px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-size:13px;resize:none;outline:none;box-sizing:border-box;" oninput="document.getElementById('reviewCount').textContent=this.value.length"></textarea>
+        <textarea id="reviewInputText" maxlength="200" placeholder="e.g. Found 10 buyers in UAE on first search. Very useful tool!" style="width:100%;height:80px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-size:13px;resize:none;outline:none;box-sizing:border-box;" oninput="document.getElementById('reviewCount').textContent=document.getElementById('reviewInputText').value.length"></textarea>
         <div style="font-size:10px;color:var(--muted);text-align:right;"><span id="reviewCount">0</span>/200</div>
       </div>
 
@@ -4578,7 +4578,7 @@ function setReviewStars(n) {
 }
 
 async function submitReview() {
-  const text = document.getElementById('reviewText')?.value?.trim();
+  const text = document.getElementById('reviewInputText')?.value?.trim();
   const product = document.getElementById('reviewProduct')?.value?.trim();
   const city = document.getElementById('reviewCity')?.value?.trim();
   const stars = window._reviewStars || 5;
