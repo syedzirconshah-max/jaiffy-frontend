@@ -2542,7 +2542,7 @@ function goTo(p){
       <div style="font-size:40px;margin-bottom:12px;">🔒</div>
       <div style="font-size:20px;font-weight:800;margin-bottom:8px;">Sign Up to Access</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Create your free account to access all features — 7-day trial, 30 leads/day, no credit card</div>
-      <button onclick="showPage('signup');this.closest('[style*=fixed]').remove();window._isGuest=false;document.getElementById('guestBanner')?.remove();" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px;">🚀 Sign Up Free</button>
+    <button onclick="showPage('signup');this.closest('[style*=fixed]').remove();window._isGuest=false;document.getElementById('guestBanner')?.remove();document.getElementById('pg-app') && (document.getElementById('pg-app').style.paddingTop='');document.getElementById('sidebar') && (document.getElementById('sidebar').style.display='');document.querySelector('.app-main') && (document.querySelector('.app-main').style.marginLeft='');" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px;">🚀 Sign Up Free</button>
       <button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;">Continue Demo</button>
     </div>`;
     document.body.appendChild(modal);
@@ -2637,31 +2637,53 @@ function doLogout(){
 }
 // ===== GUEST / DEMO MODE =====
 function enterGuestMode() {
-  // Set guest flag
   window._isGuest = true;
   U = null; token = ''; adminToken = '';
 
-  // Show app
   showPage('app');
 
-  // Show guest banner at top
+  // Hide sidebar completely in guest mode
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) sidebar.style.display = 'none';
+
+  // Make main content full width (no sidebar offset)
+  const appMain = document.querySelector('.app-main');
+  if (appMain) appMain.style.marginLeft = '0';
+
+  // Hide mobile bottom nav in guest (keep it clean)
+  const mbn = document.getElementById('mobileBottomNav');
+  if (mbn) mbn.style.display = 'none';
+
+  // Top banner — full width, above everything
+  const existing = document.getElementById('guestBanner');
+  if (existing) existing.remove();
+
   const banner = document.createElement('div');
   banner.id = 'guestBanner';
-  banner.style.cssText = 'background:linear-gradient(135deg,rgba(240,125,42,0.15),rgba(168,85,247,0.1));border-bottom:1px solid rgba(240,125,42,0.3);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:9990;position:sticky;top:0;';
+  banner.style.cssText = [
+    'position:fixed', 'top:0', 'left:0', 'right:0', 'z-index:9999',
+    'background:linear-gradient(135deg,#1a0f00,#0d1a0d)',
+    'border-bottom:2px solid var(--orange)',
+    'padding:10px 20px',
+    'display:flex', 'align-items:center', 'justify-content:space-between', 'gap:12px',
+  ].join(';');
   banner.innerHTML = `
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:20px;">👀</span>
+      <span style="font-size:22px;">👀</span>
       <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);">You're viewing a Demo</div>
-        <div style="font-size:11px;color:var(--muted);">Sign up free to search real buyers & unlock all features</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Demo Mode</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);">Sign up free — 7-day trial, 30 leads/day</div>
       </div>
     </div>
-    <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 Sign Up Free</button>`;
-  document.getElementById('pg-app')?.prepend(banner);
+    <button onclick="window._isGuest=false;document.getElementById('guestBanner')?.remove();document.getElementById('sidebar') && (document.getElementById('sidebar').style.display='');document.querySelector('.app-main') && (document.querySelector('.app-main').style.marginLeft='');showPage('signup');"
+      style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">
+      🚀 Sign Up Free
+    </button>`;
+  document.body.prepend(banner);
 
-  // Show mobile bottom nav
-  const nav = document.getElementById('mobileBottomNav');
-  if (nav && window.innerWidth <= 768) nav.style.display = 'flex';
+  // Push content down so banner doesn't overlap
+  const pgApp = document.getElementById('pg-app');
+  if (pgApp) pgApp.style.paddingTop = '52px';
 
   goTo('dashboard');
   loadGuestDashboard();
@@ -2698,7 +2720,7 @@ function loadGuestDashboard() {
       <div style="font-size:17px;font-weight:800;margin-bottom:6px;">See Real Buyers — Try a Search</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">This is a demo view. Sign up free to search actual importers & wholesalers worldwide.</div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Sign Up Free — 7 Day Trial</button>
+        <button onclick="window._isGuest=false;document.getElementById('guestBanner')?.remove();document.getElementById('pg-app') && (document.getElementById('pg-app').style.paddingTop='');document.getElementById('sidebar') && (document.getElementById('sidebar').style.display='');document.querySelector('.app-main') && (document.querySelector('.app-main').style.marginLeft='');showPage('signup');" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Sign Up Free — 7 Day Trial</button>
         <button onclick="showGuestSearchDemo()" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;">👀 See Sample Results</button>
       </div>`;
     inner.prepend(card);
@@ -2749,7 +2771,7 @@ function showGuestSearchDemo() {
       <div style="margin-top:16px;background:linear-gradient(135deg,rgba(240,125,42,0.12),rgba(168,85,247,0.08));border:1px solid rgba(240,125,42,0.3);border-radius:14px;padding:20px;text-align:center;">
         <div style="font-size:16px;font-weight:800;margin-bottom:8px;">🔓 Unlock Full Contacts + 100 More Results</div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Free account gives you real phone numbers, emails, websites & AI email generation</div>
-        <button onclick="showPage('signup');document.getElementById('guestBanner')?.remove()" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;">🚀 Create Free Account — 7 Day Trial</button>
+      <button onclick="window._isGuest=false;document.getElementById('guestBanner')?.remove();document.getElementById('pg-app') && (document.getElementById('pg-app').style.paddingTop='');document.getElementById('sidebar') && (document.getElementById('sidebar').style.display='');document.querySelector('.app-main') && (document.querySelector('.app-main').style.marginLeft='');showPage('signup');" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;">🚀 Create Free Account — 7 Day Trial</button>
       </div>`;
   }, 300);
 }
