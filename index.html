@@ -1478,6 +1478,30 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 .mob-nav-center{position:relative;}
 .mob-nav-fab{width:48px;height:48px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin-top:-20px;box-shadow:0 4px 16px rgba(240,125,42,0.4);}
 .mob-nav-badge{position:absolute;top:4px;right:8px;background:var(--danger);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;min-width:16px;text-align:center;}
+
+:root.light-mode {
+  --bg1: #f0f2f5 !important;
+  --bg2: #ffffff !important;
+  --bg3: #e8eaed !important;
+  --card: #ffffff !important;
+  --text: #1a1a1a !important;
+  --muted: #5f6368 !important;
+  --border: rgba(0,0,0,0.12) !important;
+  --success: #137333 !important;
+  --danger: #c5221f !important;
+  --blue: #1a73e8 !important;
+  --purple: #7b1ea2 !important;
+}
+:root.light-mode body { background: var(--bg1) !important; }
+:root.light-mode .sidebar { background: #fff !important; border-right: 1px solid rgba(0,0,0,0.1) !important; }
+
+
+.skeleton { background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: 6px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.skeleton-line { height: 14px; margin-bottom: 8px; }
+.skeleton-box { height: 60px; margin-bottom: 10px; border-radius: 10px; }
 </style>
 
 <!-- Google Analytics GA4 -->
@@ -1567,7 +1591,8 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 <!-- APP -->
 <div id="pg-app" class="page">
   <div class="sidebar" id="sidebar">
-    <div class="s-logo"><div class="s-logo-text">Jaiffy <span class="s-logo-version">v4.2</span></div></div>
+    <button onclick="toggleTheme()" id="themeToggle" title="Toggle Light/Dark" style="position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text);">🌙</button>
+<div class="s-logo"><div class="s-logo-text">Jaiffy <span class="s-logo-version">v4.2</span></div></div>
     <nav class="s-nav">
       <div class="nav-label">Main</div>
       <div class="nav-item active" id="nav-dashboard" onclick="goTo('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
@@ -1670,7 +1695,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           </div>
           <div class="step-item" id="step4" style="display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 10px;flex:1;min-width:120px;cursor:pointer;" onclick="goTo('referral')">
             <div class="step-num" style="width:18px;height:18px;font-size:10px;margin:0;flex-shrink:0;">4</div>
-            <div style="font-size:12px;font-weight:600;color:var(--muted);">Invite Friends</div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted);">Invite → Rs.500 cashback</div>
           </div>
         </div>
       </div>
@@ -1804,7 +1829,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
             Try Demo
           </button>
         </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:12px;">No signup needed</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:12px;">Demo — no account needed</div>
       </div>
 
       <!-- TESTIMONIALS -->
@@ -1859,7 +1884,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           </div>
         </div>
         <div id="recentSearches" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-          <div style="text-align:center;padding:24px;color:var(--muted);grid-column:1/-1;font-size:13px;">No searches yet — go to Lead Search to start!</div>
+          <div style="text-align:center;padding:24px;color:var(--muted);grid-column:1/-1;font-size:13px;">🔍 No searches yet — try "Surgical Instruments UAE"!</div>
         </div>
       </div>
 
@@ -1995,7 +2020,13 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div class="rl-step" id="rlStep3">⚡ Sorting top leads...</div>
       </div>
     </div>
-      <div id="resultsArea" style="display:none">
+      <div id="scoreLegend" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <span style="font-weight:600;color:var(--muted);">Lead Quality:</span>
+  <span style="color:#137333;">🟢 70+ High — contact first</span>
+  <span style="color:var(--orange);">🟡 40–70 Medium — worth trying</span>
+  <span style="color:var(--muted);">⚪ Below 40 Low</span>
+</div>
+<div id="resultsArea" style="display:none">
         <div class="col-chooser"><div class="col-chooser-title">📊 Choose Columns</div><div class="col-tags" id="colTags"></div></div>
         <div class="results-wrap">
           <div class="results-hdr"><div class="results-title" id="resTitle">Results</div><div style="display:flex;align-items:center;gap:8px;"><span id="resCacheBadge"></span><span style="font-size:11px;color:var(--muted)" id="resMeta"></span></div></div>
@@ -2976,6 +3007,7 @@ async function doSearch(page=1){
 }
 function renderResults(d){
   const leads=d.leads||[];document.getElementById('resultsArea').style.display='block';
+  document.getElementById('scoreLegend') && (document.getElementById('scoreLegend').style.display='flex');
   document.getElementById('resTitle').textContent=`${d.pagination?.total_results||leads.length} Leads Mile`;
   document.getElementById('resMeta').textContent=`Page ${d.pagination?.page||1}/${d.pagination?.total_pages||1}`;
   const cb=document.getElementById('resCacheBadge');cb.className=d.cache?.from_cache?'cache-badge cb-old':'cache-badge cb-fresh';cb.textContent=d.cache?.from_cache?`📦 Cache (${d.cache.age_days}d)`:'🔄 Fresh';
@@ -3203,6 +3235,11 @@ function filterLeads(){const q=document.getElementById('leadsSearch').value.toLo
 async function exportCSV(){if(U?.plan==='free'){showToast('CSV export Pro/Agency mein hai!',true);goTo('plans');return;}window.open(`${SERVER}/leads/export`,{headers:{Authorization:'Bearer '+token}});showToast('CSV download ho rahi hai...');}
 
 async function loadReferral(){
+  // Show skeleton while loading
+  const refArea = document.getElementById('refStatsArea');
+  if(refArea && !refArea.dataset.loaded) {
+    refArea.innerHTML = '<div class="skeleton skeleton-box" style="width:100%;margin-bottom:8px;"></div><div class="skeleton skeleton-box" style="width:100%;"></div>';
+  }
   try{
     const r=await api('GET','/referral/history');if(r.error)return;refData=r;
     document.getElementById('refLink').textContent=r.ref_link;document.getElementById('refTotal').textContent=r.total_refs;document.getElementById('refBonus').textContent=r.bonus_leads_per_day;document.getElementById('refToPro').textContent=r.refs_to_pro;
@@ -4163,6 +4200,20 @@ function togglePw(inputId, btn) {
     btn.textContent = '👁️';
   }
 }
+
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('light-mode');
+  localStorage.setItem('j_theme', isLight ? 'light' : 'dark');
+  document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+}
+(function(){
+  if(localStorage.getItem('j_theme') === 'light') {
+    document.documentElement.classList.add('light-mode');
+    setTimeout(() => { const b = document.getElementById('themeToggle'); if(b) b.textContent = '☀️'; }, 200);
+  }
+})();
 
 // ===== AI GUIDE MESSAGES =====
 const aiMessages=[
