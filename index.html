@@ -2570,20 +2570,48 @@ function toggleSidebar(){const s=document.getElementById('sidebar');const o=docu
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('on');}
 
 async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();const pass=document.getElementById('loginPass').value;
-  const btn=document.getElementById('loginBtn');const err=document.getElementById('loginErr');err.style.display='none';
-  if(!email||!pass){showErr(err,'Enter email and password');return;}
-  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Login...';
-  try{const r=await api('POST','/auth/login',{email,password:pass});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;adminToken='';localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));localStorage.removeItem('j_admin');enterApp();}catch(e){showErr(err,'Server error');}
-  finally{btn.disabled=false;btn.innerHTML='Sign in';}
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');
+  const err=document.getElementById('loginErr');
+  err.style.display='none';
+  if(!email||!pass){showErr(err,'Please enter your email and password');return;}
+  if(btn.disabled) return; // prevent double-click
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Signing in...';
+  try{
+    const r=await api('POST','/auth/login',{email,password:pass});
+    if(r.error){showErr(err,r.error);return;}
+    token=r.token;U=r.user;adminToken='';
+    localStorage.setItem('j_token',token);
+    localStorage.setItem('j_user',JSON.stringify(U));
+    localStorage.removeItem('j_admin');
+    enterApp();
+  }catch(e){showErr(err,'Connection error — check internet and try again');}
+  finally{btn.disabled=false;btn.innerHTML='Sign In';}
 }
 async function doSignup(){
-  const name=document.getElementById('sName').value.trim();const company=document.getElementById('sCompany').value.trim();
-  const email=document.getElementById('sEmail').value.trim();const pass=document.getElementById('sPass').value;const ref=document.getElementById('sRef').value.trim();
-  const btn=document.getElementById('signupBtn');const err=document.getElementById('signupErr');err.style.display='none';
-  if(!name||!email||pass.length<6){showErr(err,'All fields required — password 6+ characters');return;}
-  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Account ban raha hai...';
-  try{const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});if(r.error){showErr(err,r.error);return;}token=r.token;U=r.user;adminToken='';localStorage.setItem('j_token',token);localStorage.setItem('j_user',JSON.stringify(U));localStorage.removeItem('j_admin');showOTPPage(email);showToast('📧 Verification code email par bhej diya!');}catch(e){showErr(err,'Server error');}
+  const name=document.getElementById('sName').value.trim();
+  const company=document.getElementById('sCompany').value.trim();
+  const email=document.getElementById('sEmail').value.trim();
+  const pass=document.getElementById('sPass').value;
+  const ref=document.getElementById('sRef').value.trim();
+  const btn=document.getElementById('signupBtn');
+  const err=document.getElementById('signupErr');
+  err.style.display='none';
+  if(!name||!email||pass.length<6){showErr(err,'All fields required — password must be 6+ characters');return;}
+  if(!email.includes('@')||!email.includes('.')){showErr(err,'Please enter a valid email address');return;}
+  if(btn.disabled) return; // prevent double-click
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Creating account...';
+  try{
+    const r=await api('POST','/auth/signup',{name,company,email,password:pass,ref_code:ref});
+    if(r.error){showErr(err,r.error);return;}
+    token=r.token;U=r.user;adminToken='';
+    localStorage.setItem('j_token',token);
+    localStorage.setItem('j_user',JSON.stringify(U));
+    localStorage.removeItem('j_admin');
+    showOTPPage(email);
+    showToast('📧 Verification code sent to your email!');
+  }catch(e){showErr(err,'Connection error — check internet and try again');}
   finally{btn.disabled=false;btn.innerHTML='Start Free Trial 🚀';}
 }
 async function doAdminLogin(){
@@ -3251,7 +3279,7 @@ async function checkServer(){
   const badge = document.getElementById('srvBadge');
   try {
     const controller = new AbortController();
-    setTimeout(() => controller.abort(), 15000); // 15s — Railway cold start takes time
+    setTimeout(() => controller.abort(), 15000);
     const r = await fetch(`${SERVER}/health`, {signal: controller.signal});
     const d = await r.json();
     if(badge) { badge.className='badge-online'; badge.textContent='v'+d.version+' Online'; }
@@ -3260,16 +3288,21 @@ async function checkServer(){
     document.getElementById('serverDownBanner')?.remove();
   } catch(e) {
     _serverCheckCount++;
-    if(badge) { badge.className='badge-offline'; badge.textContent='Server Offline'; }
-    // Only show error after 2 failed attempts (not on first try — Railway needs warm-up)
-    // Also don't show on auth pages
-    const onAuthPage = document.getElementById('pg-auth')?.classList.contains('active') ||
-                       document.getElementById('pg-verify')?.classList.contains('active');
-    if(_serverCheckCount >= 2 && !onAuthPage) {
+    if(badge) { badge.className='badge-offline'; badge.textContent='Connecting...'; }
+    // Only show error after 3 failed attempts AND not on auth pages
+    const onAuthPage = ['pg-login','pg-signup','pg-verify'].some(id =>
+      document.getElementById(id)?.classList.contains('active')
+    );
+    if(_serverCheckCount >= 3 && !onAuthPage) {
       showServerDown('network');
     }
   }
 }
+// Start checking after 5s delay (Railway cold start needs time)
+setTimeout(() => {
+  checkServer();
+  setInterval(checkServer, 60000); // Check every 60s (not too frequent)
+}, 5000);
 async function loadAdmin(){
   document.getElementById('adminContent').innerHTML='<div class="loading-box on" style="justify-content:center;"><div class="big-spin" style="border-top-color:var(--purple);"></div><div>Loading admin data...</div></div>';
   try{
@@ -3927,36 +3960,44 @@ async function saveAppSettings(){
 let _serverDown = false;
 let _serverDownShown = false;
 
-async function api(method, endpoint, body=null) {
+async function api(method, endpoint, body=null, retries=1) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 90000); // 90 sec — AI scoring time lagti hai
-  
+  const isAuthCall = ['/auth/login','/auth/signup','/auth/forgot-password','/auth/reset-password','/verify','/resend-verification'].includes(endpoint);
+  const timeoutMs = endpoint === '/search' ? 90000 : 20000;
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
   const opts = {
     method,
     headers: {'Content-Type':'application/json', 'Authorization':'Bearer '+token},
     signal: controller.signal
   };
   if(body) opts.body = JSON.stringify(body);
-  
+
   try {
     const r = await fetch(SERVER+endpoint, opts);
     clearTimeout(timeout);
     _serverDown = false;
     _serverDownShown = false;
+    document.getElementById('serverDownBanner')?.remove();
     const d = await r.json();
     if(!r.ok) return {...d, _status:r.status};
     return d;
   } catch(e) {
     clearTimeout(timeout);
+
+    // Retry once on network errors (Railway cold start)
+    if(retries > 0 && e.name !== 'AbortError') {
+      await new Promise(res => setTimeout(res, 2000));
+      return api(method, endpoint, body, retries - 1);
+    }
+
     if(e.name === 'AbortError') {
-      showServerDown('timeout');
-      return {error:'Server did not respond — please retry in a moment'};
+      if(!isAuthCall) showServerDown('timeout');
+      return {error: endpoint === '/search' ? 'Search timed out — Railway server busy, please try again' : 'Server did not respond — please tap Retry'};
     }
-    if(e.message?.includes('fetch') || e.message?.includes('network') || e.message?.includes('Failed')) {
-      showServerDown('network');
-      return {error:'Please check your internet connection'};
-    }
-    return {error: 'Server error — please try again shortly'};
+    // Network / CORS / fetch failed
+    if(!isAuthCall) showServerDown('network');
+    return {error: 'Connection failed — check WiFi/data and try again'};
   }
 }
 
