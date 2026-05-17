@@ -1649,15 +1649,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           <span style="color:var(--muted);font-size:0.65em;font-weight:600;">🪝 AI-Powered — B2B Leads in Seconds</span>
         </div>
         <div class="hero-subtitle">
-          Pakistan's <strong>first AI-powered</strong> B2B lead hunter — surgical instruments, leather goods → <strong>real buyers worldwide.</strong>
-        </div>
-        <div class="product-badges" id="prodBadges" style="margin-bottom:16px;">
-          <span class="prod-badge" onclick="quickSearch('Surgical Instruments')" style="animation-delay:0.1s;cursor:pointer;">💊 Surgical Instruments</span>
-          <span class="prod-badge" onclick="quickSearch('Leather Goods')" style="animation-delay:0.2s;cursor:pointer;">🧤 Leather Goods</span>
-          <span class="prod-badge" onclick="quickSearch('Sports Goods')" style="animation-delay:0.3s;cursor:pointer;">⚽ Sports Goods</span>
-          <span class="prod-badge" onclick="quickSearch('Textile Fabric')" style="animation-delay:0.4s;cursor:pointer;">🧵 Textile</span>
-          <span class="prod-badge" onclick="quickSearch('Furniture')" style="animation-delay:0.5s;cursor:pointer;">🛋️ Furniture</span>
-          <span class="prod-badge" onclick="quickSearch('Hardware Tools')" style="animation-delay:0.6s;cursor:pointer;">🔧 Hardware</span>
+          Pakistan's <strong>first AI-powered</strong> B2B lead hunter — <strong>real buyers worldwide.</strong>
         </div>
         <button class="btn-act" onclick="goTo('search')" style="width:fit-content;font-size:15px;padding:13px 28px;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2230,6 +2222,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     <div class="inner" id="inner-admin">
       <div class="page-hdr">
         <div><div class="page-title" style="color:var(--purple);">🔐 Admin Panel</div><div class="page-sub">System stats — admin only</div></div>
+        <button onclick="doLogout()" style="background:rgba(240,74,74,0.1);border:1px solid rgba(240,74,74,0.3);color:var(--danger);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">← Logout</button>
         <button class="btn-act" style="background:var(--purple);" onclick="loadAdmin()">↻ Refresh</button>
       </div>
       <div id="adminContent"><div class="loading-box on" style="justify-content:center;"><div class="big-spin" style="border-top-color:var(--purple);"></div><div>Loading...</div></div></div>
@@ -2693,8 +2686,14 @@ function showAdminOnly(){
 }
 function doLogout(){
   fetch(`${SERVER}/auth/logout`,{method:'POST',headers:{Authorization:'Bearer '+token}}).catch(()=>{});
-  localStorage.removeItem('j_token');localStorage.removeItem('j_user');localStorage.removeItem('j_admin');
-  U=null;token='';adminToken='';showPage('login');
+  // Clear ALL stored data
+  localStorage.removeItem('j_token');
+  localStorage.removeItem('j_user');
+  localStorage.removeItem('j_admin');
+  localStorage.removeItem('j_theme_keep'); // keep theme pref
+  sessionStorage.clear();
+  U=null; token=''; adminToken=''; window._isGuest=false;
+  showPage('login');
 }
 // ===== GUEST / DEMO MODE =====
 function enterGuestMode() {
