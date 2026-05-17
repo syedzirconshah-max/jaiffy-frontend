@@ -69,7 +69,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .logout-btn{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;border-radius:5px;transition:all 0.15s;}
 .logout-btn:hover{color:var(--danger);}
 .main{margin-left:var(--sw);flex:1;min-height:100vh;}
-.inner{display:none;padding:32px 36px;}.inner.active{display:block;}
+.inner{display:none;padding:24px 28px;box-sizing:border-box;width:100%;overflow-x:hidden;}.inner.active{display:block;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
 .page-title{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
 .page-sub{color:var(--muted);font-size:13px;margin-top:4px;}
@@ -727,7 +727,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 }
 
 /* ===== MOBILE SCROLL OPTIMIZATION ===== */
-.inner{min-height:100vh;padding-bottom:80px;}
+.inner{min-height:100vh;padding-bottom:80px;box-sizing:border-box;}
 @media(max-width:768px){
   .hero-title{font-size:26px;}
   .hunt-counters{grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -1452,7 +1452,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
   letter-spacing: -0.3px;
 }
 /* Help Page */
-.help-section{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.help-section{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;width:100%;box-sizing:border-box;}
 .help-section-title{padding:16px 18px;font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:background 0.2s;}
 .help-section-title:hover{background:var(--bg2);}
 .help-arrow{font-size:11px;color:var(--muted);transition:transform 0.2s;}
@@ -2268,7 +2268,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <svg style="position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
 
-      <div id="helpContent">
+      <div id="helpContent" style="width:100%;max-width:100%;overflow-x:hidden;">
       <!-- Getting Started -->
       <div class="help-section" data-tags="start signup account create register">
         <div class="help-section-title" onclick="toggleHelp(this)">🚀 Getting Started <span class="help-arrow">▼</span></div>
