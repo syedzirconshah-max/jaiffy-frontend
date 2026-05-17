@@ -1652,46 +1652,78 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         </div>
         <div style="font-size:11px;color:var(--muted);white-space:nowrap;" id="liveTime"></div>
       </div>
-      <div class="onboard-card reveal" id="onboardCard">
-        <div class="onboard-title">🗺️ Getting Started — 4 Easy Steps</div>
-        <div class="steps-grid">
-          <div class="step-item done" id="step1"><div class="step-num">✓</div><div class="step-title">Account Created</div><div class="step-desc">Your free account is ready</div></div>
-          <div class="step-item" id="step2"><div class="step-num">2</div><div class="step-title">First Search</div><div class="step-desc">Enter your product in Lead Search</div></div>
-          <div class="step-item" id="step3"><div class="step-num">3</div><div class="step-title">Send Email</div><div class="step-desc">Generate email with AI</div></div>
-          <div class="step-item" id="step4"><div class="step-num">4</div><div class="step-title">Invite Friends</div><div class="step-desc">20 referrals = Pro FREE!</div></div>
+      <!-- Getting Started — compact inline -->
+      <div id="onboardCard" class="reveal" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Getting Started</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;" class="steps-grid">
+          <div class="step-item done" id="step1" style="display:flex;align-items:center;gap:6px;background:rgba(29,184,126,0.08);border:1px solid rgba(29,184,126,0.2);border-radius:8px;padding:5px 10px;flex:1;min-width:120px;">
+            <div class="step-num" style="width:18px;height:18px;font-size:10px;margin:0;flex-shrink:0;">✓</div>
+            <div style="font-size:12px;font-weight:600;">Account Created</div>
+          </div>
+          <div class="step-item" id="step2" style="display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 10px;flex:1;min-width:120px;cursor:pointer;" onclick="goTo('search')">
+            <div class="step-num" style="width:18px;height:18px;font-size:10px;margin:0;flex-shrink:0;">2</div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted);">First Search</div>
+          </div>
+          <div class="step-item" id="step3" style="display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 10px;flex:1;min-width:120px;">
+            <div class="step-num" style="width:18px;height:18px;font-size:10px;margin:0;flex-shrink:0;">3</div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted);">Send AI Email</div>
+          </div>
+          <div class="step-item" id="step4" style="display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 10px;flex:1;min-width:120px;cursor:pointer;" onclick="goTo('referral')">
+            <div class="step-num" style="width:18px;height:18px;font-size:10px;margin:0;flex-shrink:0;">4</div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted);">Invite Friends</div>
+          </div>
         </div>
       </div>
-      <div class="stats-grid reveal">
-        <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="sTotalLeads">0</div><div class="stat-sub">Total</div></div>
-        <div class="stat-card"><div class="stat-label">Hot Leads</div><div class="stat-val" id="sHotLeads">0</div><div class="stat-sub">Score 70+</div></div>
-        <div class="stat-card"><div class="stat-label">Today's Usage</div><div class="stat-val" id="sUsedToday">0</div><div class="stat-sub" id="sRemText">remaining</div></div>
-        <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-val" id="sRefs">0</div><div class="stat-sub" id="sRefsTo">to Pro</div></div>
+
+      <!-- Stats — compact 4-col -->
+      <div class="stats-grid reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
+        <div class="stat-card" style="padding:10px 12px;border-radius:10px;">
+          <div class="stat-label" style="font-size:10px;margin-bottom:2px;">Leads</div>
+          <div class="stat-val" id="sTotalLeads" style="font-size:22px;line-height:1;">0</div>
+          <div class="stat-sub" style="font-size:10px;">total</div>
+        </div>
+        <div class="stat-card" style="padding:10px 12px;border-radius:10px;">
+          <div class="stat-label" style="font-size:10px;margin-bottom:2px;">Hot</div>
+          <div class="stat-val" id="sHotLeads" style="font-size:22px;line-height:1;">0</div>
+          <div class="stat-sub" style="font-size:10px;">score 70+</div>
+        </div>
+        <div class="stat-card" style="padding:10px 12px;border-radius:10px;">
+          <div class="stat-label" style="font-size:10px;margin-bottom:2px;">Today</div>
+          <div class="stat-val" id="sUsedToday" style="font-size:22px;line-height:1;">0</div>
+          <div class="stat-sub" id="sRemText" style="font-size:10px;">used</div>
+        </div>
+        <div class="stat-card" style="padding:10px 12px;border-radius:10px;">
+          <div class="stat-label" style="font-size:10px;margin-bottom:2px;">Refs</div>
+          <div class="stat-val" id="sRefs" style="font-size:22px;line-height:1;">0</div>
+          <div class="stat-sub" id="sRefsTo" style="font-size:10px;">to Pro</div>
+        </div>
       </div>
-      <div class="usage-wrap reveal">
-        <div class="usage-top"><div class="usage-title">Today's Lead Limit</div><div class="usage-num"><span id="uUsed">0</span> / <span id="uLimit">10</span> leads</div></div>
-        <div class="usage-track"><div class="usage-fill ok" id="uFill" style="width:0%"></div></div>
-        <div class="usage-meta"><span id="uHint">Free plan: 10 leads/day · <a onclick="goTo('referral')">Refer friends, +10 leads/day!</a></span><span id="uTrialBadge"></span></div>
+
+      <!-- Usage bar — compact -->
+      <div class="usage-wrap reveal" style="margin-bottom:12px;">
+        <div class="usage-top" style="margin-bottom:4px;"><div class="usage-title" style="font-size:11px;">Today's Leads</div><div class="usage-num" style="font-size:11px;"><span id="uUsed">0</span>/<span id="uLimit">10</span></div></div>
+        <div class="usage-track" style="height:4px;"><div class="usage-fill ok" id="uFill" style="width:0%;height:4px;"></div></div>
+        <div class="usage-meta" style="font-size:10px;margin-top:3px;"><span id="uHint">Free: 10/day · <a onclick="goTo('referral')" style="color:var(--orange);">Refer = +10 leads</a></span><span id="uTrialBadge"></span></div>
       </div>
-      <!-- How It Works - Long Page Section -->
-      <!-- GLOBAL PLATFORM STATS -->
-      <div style="margin-bottom:28px;" class="reveal">
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">🌍 Platform Stats — Live</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;" id="globalStatsGrid">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:800;color:var(--orange);" id="gsTotalUsers">—</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Total Users</div>
+
+      <!-- Platform Stats — compact single row -->
+      <div class="reveal" style="margin-bottom:12px;">
+        <div style="display:flex;gap:6px;align-items:stretch;" id="globalStatsGrid">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
+            <div style="font-size:18px;font-weight:800;color:var(--orange);" id="gsTotalUsers">—</div>
+            <div style="font-size:10px;color:var(--muted);">Users</div>
           </div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:800;color:var(--success);" id="gsActiveToday">—</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Active Now</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
+            <div style="font-size:18px;font-weight:800;color:var(--success);" id="gsActiveToday">—</div>
+            <div style="font-size:10px;color:var(--muted);">Active Now</div>
           </div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:800;color:var(--blue);" id="gsTotalLeads">—</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Leads Generated</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
+            <div style="font-size:18px;font-weight:800;color:var(--blue);" id="gsTotalLeads">—</div>
+            <div style="font-size:10px;color:var(--muted);">Leads Found</div>
           </div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:800;color:var(--purple);" id="gsLeadsToday">—</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Leads Today</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
+            <div style="font-size:18px;font-weight:800;color:var(--purple);" id="gsLeadsToday">—</div>
+            <div style="font-size:10px;color:var(--muted);">Today</div>
           </div>
         </div>
       </div>
@@ -2208,14 +2240,13 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
     <!-- HELP PAGE -->
     <div class="inner" id="inner-help">
-      <div class="page-hdr"><div><div class="page-title">❓ Help & Guide</div><div class="page-sub">Everything you need to know about using Jaiffy</div></div></div>
+      <div class="page-hdr"><div><div class="page-title">Help & Guide</div><div class="page-sub">How to use Jaiffy</div></div></div>
 
-      <!-- Search -->
-      <div style="position:relative;margin-bottom:20px;">
+      <div style="position:relative;margin-bottom:16px;">
         <input id="helpSearch" type="text" placeholder="Search help..."
-          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 20px 14px 46px;color:var(--text);font-size:14px;outline:none;"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 16px 10px 40px;color:var(--text);font-size:14px;outline:none;"
           oninput="filterHelp(this.value)">
-        <svg style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg style="position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
 
       <div id="helpContent">
@@ -2828,15 +2859,16 @@ function enterApp(){
       U=r;
       localStorage.setItem('j_user',JSON.stringify(U));
       updateSidebar();
-      // Remove stale banner if user is now verified
       if(U.is_verified) {
+        // Verified — remove any stale banner immediately
         document.getElementById('verifyBanner')?.remove();
         sessionStorage.removeItem('verify_banner_shown');
+        localStorage.removeItem('show_verify_banner');
       } else {
-        setTimeout(showVerifyBanner, 1000);
+        setTimeout(showVerifyBanner, 1500);
       }
     }
-  }).catch(()=>{ if(U && !U.is_verified) setTimeout(showVerifyBanner,1000); });
+  }).catch(()=>{ if(U && !U.is_verified) setTimeout(showVerifyBanner,1500); });
 }
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
@@ -4884,12 +4916,20 @@ async function submitOTP() {
 }
 
 async function resendOTP() {
-  showToast('📨 Naya code bheja ja raha hai...');
+  const btn = event?.target;
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
   try {
     const r = await api('POST', '/resend-verification', {});
-    if (r.success) showToast('✅ Naya code bhej diya — email check now!');
-    else showToast(r.error || 'Failed', true);
-  } catch(e) { showToast('Server error', true); }
+    if (r.success) {
+      showToast('✅ New code sent — check your inbox!');
+    } else {
+      showToast(r.error || 'Could not send — try again', true);
+    }
+  } catch(e) {
+    showToast('Connection error — try again', true);
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Resend'; }
+  }
 }
 
 async function submitBannerOTP(btn) {
@@ -5023,17 +5063,25 @@ async function doResetPassword(token) {
 // Show verify banner if user is not verified
 function showVerifyBanner() {
   if (!U) return;
-  if (U.is_verified) {
-    // User is verified — remove any stale banner and clear session flag
+
+  // Always remove banner if verified (check both local U and localStorage)
+  const stored = JSON.parse(localStorage.getItem('j_user') || '{}');
+  const isVerified = U.is_verified || stored.is_verified;
+
+  if (isVerified) {
     document.getElementById('verifyBanner')?.remove();
+    localStorage.removeItem('show_verify_banner');
     sessionStorage.removeItem('verify_banner_shown');
     return;
   }
+
   // Only show once per session
   if (sessionStorage.getItem('verify_banner_shown')) return;
+  if (document.getElementById('verifyBanner')) return;
+
   const smartBanners = document.getElementById('smartBanners');
   if (!smartBanners) return;
-  if (document.getElementById('verifyBanner')) return;
+
   sessionStorage.setItem('verify_banner_shown', '1');
 
   const banner = document.createElement('div');
