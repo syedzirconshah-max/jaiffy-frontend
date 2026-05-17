@@ -469,8 +469,8 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .plan-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
 .plan-badge-new{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;}
 .plan-badge-popular{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;}
-.plan-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
-.plan-price-big{font-family:'Inter',system-ui,sans-serif;font-size:36px;font-weight:800;color:var(--orange);}
+.plan-price-row{display:flex;align-items:baseline;gap:2px;margin-bottom:6px;flex-wrap:nowrap;}
+.plan-price-big{font-family:'Inter',system-ui,sans-serif;font-size:36px;font-weight:800;color:var(--orange);white-space:nowrap;}
 .plan-price-period{font-size:13px;color:var(--muted);}
 .plan-leads-big{font-family:'Inter',sans-serif;font-size:48px;font-weight:800;line-height:1;margin-bottom:4px;}
 .plan-card.free-card .plan-leads-big{color:var(--muted);}
@@ -2689,6 +2689,11 @@ function goTo(p){
   if(p==='dashboard'){loadDashboard(); if(window._isGuest) setTimeout(loadGuestDashboard, 200);}
   if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
+  // CRITICAL FIX: Reset scroll to top on every page switch
+  const mainEl = document.querySelector('.main');
+  if(mainEl) mainEl.scrollTop = 0;
+  const innerEl = document.getElementById('inner-'+p);
+  if(innerEl) innerEl.scrollTop = 0;
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('mobOverlay');s.classList.toggle('open');o.classList.toggle('on');}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('on');}
@@ -2966,7 +2971,7 @@ function enterApp(){
         setTimeout(showVerifyBanner, 1500);
       }
     }
-  }).catch(()=>{ if(U && !U.is_verified) setTimeout(showVerifyBanner,1500); });
+  }).catch(()=>{ /* Network error on /auth/me — don't show verify banner, might be cold start */ });
 }
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
@@ -4261,7 +4266,7 @@ let _serverDownShown = false;
 async function api(method, endpoint, body=null, retries=1) {
   const controller = new AbortController();
   const isAuthCall = ['/auth/login','/auth/signup','/auth/forgot-password','/auth/reset-password','/verify','/resend-verification'].includes(endpoint);
-  const timeoutMs = endpoint === '/search' ? 90000 : endpoint === '/profile/photo' ? 60000 : 20000;
+  const timeoutMs = endpoint === '/search' ? 90000 : endpoint === '/profile/photo' ? 60000 : endpoint === '/auth/me' ? 30000 : 20000;
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   const opts = {
@@ -4329,7 +4334,7 @@ function showServerDown(type) {
   document.body.prepend(banner);
   setTimeout(() => { banner?.remove(); _serverDownShown = false; }, 20000);
 }
-function showToast(msg,isErr=false){const t=document.getElementById('toast');t.textContent=msg;t.style.background=isErr?'var(--danger)':'var(--success)';t.style.display='block';setTimeout(()=>t.style.display='none',3500);}
+function showToast(msg,isErr=false){const t=document.getElementById('toast');t.textContent=msg;t.style.background=isErr?'var(--danger)':'var(--success)';t.style.opacity='1';t.style.display='block';clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>{t.style.display='none';},3000);}
 
 // ===== PARTICLES =====
 function initParticles(){
