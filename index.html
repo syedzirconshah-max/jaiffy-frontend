@@ -560,6 +560,8 @@ tr:hover td{background:rgba(255,255,255,0.01);}
   position:absolute;right:-100px;top:50%;transform:translateY(-50%);
   width:500px;height:500px;opacity:0.06;pointer-events:none;
 }
+/* Dashboard inner must be position:relative so radar/float elements stay inside */
+#inner-dashboard{position:relative;overflow:hidden;}
 .radar-ring{
   position:absolute;border-radius:50%;border:1px solid var(--orange);
   top:50%;left:50%;transform:translate(-50%,-50%);
