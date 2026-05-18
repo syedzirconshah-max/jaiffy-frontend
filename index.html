@@ -288,7 +288,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 
   /* ===== SIDEBAR — hidden on mobile, bottom nav instead ===== */
   .sidebar{display:none !important;}
-  .main{margin-left:0 !important;}
+  .main{margin-left:0 !important;height:auto !important;overflow:visible !important;min-height:auto !important;}
   .mob-menu{display:none !important;}
 
   /* ===== BOTTOM NAV BAR — WhatsApp style ===== */
@@ -307,7 +307,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
     padding:16px 14px 80px !important;
     overflow-x:hidden !important;
   }
-  #pg-app{padding-bottom:60px;}
+  #pg-app{padding-bottom:60px;height:auto !important;overflow:visible !important;flex-direction:column !important;}
 
   /* ===== MOBILE BANNER — compact ===== */
   #mobilePcBanner{
@@ -2708,11 +2708,21 @@ function goTo(p){
   // Show verify notice on search page for unverified users
   const svn = document.getElementById('searchVerifyNotice');
   if(svn) svn.style.display = (p==='search' && U && !U.is_verified) ? 'flex' : 'none';
-  // CRITICAL FIX: Reset scroll to top on every page switch
+  // CRITICAL FIX: Reset ALL possible scroll containers to top
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
   const mainEl = document.querySelector('.main');
   if(mainEl) mainEl.scrollTop = 0;
   const innerEl = document.getElementById('inner-'+p);
-  if(innerEl) innerEl.scrollTop = 0;
+  if(innerEl) {
+    innerEl.scrollTop = 0;
+    // Force scroll the element into view (handles mobile edge cases)
+    setTimeout(() => {
+      innerEl.scrollIntoView({block: 'start', behavior: 'instant'});
+      window.scrollTo(0, 0);
+    }, 50);
+  }
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('mobOverlay');s.classList.toggle('open');o.classList.toggle('on');}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('on');}
@@ -2990,7 +3000,14 @@ function enterApp(){
         setTimeout(showVerifyBanner, 1500);
       }
     }
-  }).catch(()=>{ /* Network error on /auth/me — don't show verify banner, might be cold start */ });
+  }).catch((e)=>{ 
+    // Network error — don't show banner (might be Railway cold start)
+    console.log('auth/me failed:', e?.message);
+  });
+  // Show verify banner only if we KNOW user is unverified (from cached U object)
+  if(U && U.is_verified === false) {
+    setTimeout(()=>{ try{ showVerifyBanner(); }catch(_){} }, 1500);
+  }
 }
 async function fetchMe(){try{const r=await api('GET','/auth/me');if(!r.error){U=r;localStorage.setItem('j_user',JSON.stringify(U));updateSidebar();}}catch(e){}}
 function updateSidebar(){
