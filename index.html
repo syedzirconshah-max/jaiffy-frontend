@@ -1961,7 +1961,17 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
       <div class="search-card">
         <div class="search-grid">
-          <div class="fg2"><label class="fl2">Product / Service</label><input class="fi2" id="searchProduct" placeholder="e.g. Surgical instruments" oninput="previewKW()"></div>
+          <div class="fg2" style="position:relative;">
+            <label class="fl2">Product / Service</label>
+            <input class="fi2" id="searchProduct" placeholder="e.g. Surgical instruments" 
+              autocomplete="off"
+              oninput="onProductInput()" 
+              onfocus="onProductFocus()"
+              onblur="setTimeout(()=>{document.getElementById('kwDropdown')?.style && (document.getElementById('kwDropdown').style.display='none');},200);">
+            <div id="kwDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;max-height:340px;overflow-y:auto;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+              <div id="kwDropdownInner"></div>
+            </div>
+          </div>
           <div class="fg2">
             <label class="fl2">Country</label>
             <select class="fi2" id="searchCountry" onchange="updateCityOptions()">
@@ -5136,55 +5146,112 @@ async function loadGlobalStats() {
 }
 
 
-// ===== KEYWORD DICTIONARY =====
-const KEYWORD_MAP = {
-  'surgical': ['surgical instruments','surgical tools','medical equipment','hospital supplies','orthopedic instruments','dental instruments','laparoscopic instruments'],
-  'leather': ['leather goods','leather bags','leather jackets','leather belts','leather gloves','leather accessories','genuine leather products'],
-  'sports': ['sports goods','sports equipment','football gear','cricket equipment','gym equipment','fitness accessories','outdoor sports gear'],
-  'textile': ['textile fabric','cotton fabric','polyester fabric','denim fabric','silk fabric','synthetic fabric','garment fabric'],
-  'furniture': ['wooden furniture','office furniture','bedroom furniture','sofa sets','dining furniture','outdoor furniture','home decor'],
-  'rice': ['basmati rice','long grain rice','rice suppliers','rice exporters','organic rice','white rice','brown rice'],
-  'tool': ['hand tools','power tools','industrial tools','cutting tools','measuring tools','workshop tools'],
-  'glove': ['medical gloves','surgical gloves','latex gloves','nitrile gloves','safety gloves','work gloves'],
-};
-
+// ===== KEYWORD AUTOCOMPLETE (Phase 1 - Alibaba Style, 50+ keywords, country-aware) =====
+let _kwTimer = null;
+let _kwCache = {}; // session cache: 'product:country' -> [keywords]
 let _selectedKeywords = [];
+let _kwLastFetch = '';
 
-function getKeywordSuggestions(product) {
-  if(!product || product.length < 3) return [];
-  const lower = product.toLowerCase();
-  for(const [key, words] of Object.entries(KEYWORD_MAP)) {
-    if(lower.includes(key)) return words.filter(w => w !== lower);
-  }
-  // Generic suggestions based on product
-  return [
-    product + ' suppliers',
-    product + ' manufacturers',
-    product + ' exporters',
-    product + ' wholesale',
-    product + ' importers',
-  ];
+function getCurrentCountry() {
+  return document.getElementById('searchCountry')?.value || 'SA';
 }
 
+function onProductFocus() {
+  const product = document.getElementById('searchProduct')?.value.trim();
+  if(product && product.length >= 2) {
+    fetchAndShowKeywords(product);
+  }
+}
+
+function onProductInput() {
+  clearTimeout(_kwTimer);
+  const product = document.getElementById('searchProduct')?.value.trim();
+  if(!product || product.length < 2) {
+    const dd = document.getElementById('kwDropdown');
+    if(dd) dd.style.display = 'none';
+    return;
+  }
+  // Debounce: wait 350ms after last keystroke
+  _kwTimer = setTimeout(() => fetchAndShowKeywords(product), 350);
+}
+
+async function fetchAndShowKeywords(product) {
+  const country = getCurrentCountry();
+  const cacheKey = product.toLowerCase() + ':' + country;
+  
+  // Session cache hit
+  if(_kwCache[cacheKey]) {
+    renderKeywordDropdown(_kwCache[cacheKey], product);
+    return;
+  }
+  
+  // Show loading state
+  const dd = document.getElementById('kwDropdown');
+  const inner = document.getElementById('kwDropdownInner');
+  if(dd && inner) {
+    dd.style.display = 'block';
+    inner.innerHTML = '<div style="padding:14px 18px;color:var(--muted);font-size:12px;">⏳ Loading suggestions...</div>';
+  }
+  
+  _kwLastFetch = cacheKey;
+  try {
+    const r = await api('POST', '/suggest-keywords', { product, country });
+    // Ignore stale responses
+    if(_kwLastFetch !== cacheKey) return;
+    
+    const keywords = (r && r.keywords) || [];
+    _kwCache[cacheKey] = keywords;
+    renderKeywordDropdown(keywords, product);
+  } catch(e) {
+    if(inner) inner.innerHTML = '<div style="padding:14px 18px;color:var(--muted);font-size:12px;">Type to search...</div>';
+  }
+}
+
+function renderKeywordDropdown(keywords, currentProduct) {
+  const dd = document.getElementById('kwDropdown');
+  const inner = document.getElementById('kwDropdownInner');
+  if(!dd || !inner) return;
+  
+  if(!keywords || !keywords.length) {
+    dd.style.display = 'none';
+    return;
+  }
+  
+  // Highlight matching part with currentProduct prefix
+  const q = (currentProduct || '').toLowerCase();
+  const html = keywords.slice(0, 60).map(kw => {
+    const safe = kw.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    let display = kw;
+    if(q && kw.toLowerCase().includes(q)) {
+      const idx = kw.toLowerCase().indexOf(q);
+      display = kw.substring(0, idx) + '<strong style="color:var(--orange);font-weight:700;">' + kw.substring(idx, idx + q.length) + '</strong>' + kw.substring(idx + q.length);
+    }
+    return `<div onclick="pickKeyword('${safe}')" 
+      style="padding:10px 18px;cursor:pointer;font-size:13px;color:var(--text);border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.15s;"
+      onmouseover="this.style.background='rgba(240,125,42,0.08)'"
+      onmouseout="this.style.background=''">${display}</div>`;
+  }).join('');
+  
+  inner.innerHTML = html + `<div style="padding:8px 18px;font-size:10px;color:var(--muted);background:rgba(0,0,0,0.2);border-top:1px solid var(--border);">${keywords.length} suggestions • country-specific</div>`;
+  dd.style.display = 'block';
+}
+
+function pickKeyword(kw) {
+  const input = document.getElementById('searchProduct');
+  if(input) {
+    input.value = kw;
+    input.focus();
+  }
+  const dd = document.getElementById('kwDropdown');
+  if(dd) dd.style.display = 'none';
+}
+
+// Legacy compatibility for any old calls
+function getKeywordSuggestions(product) { return []; }
+
 function showKeywordSuggestions(product) {
-  const box = document.getElementById('smartKeywordsBox');
-  const container = document.getElementById('keywordSuggestions');
-  if(!box || !container || !product) return;
-  
-  const suggestions = getKeywordSuggestions(product);
-  if(!suggestions.length) { box.style.display = 'none'; return; }
-  
-  box.style.display = 'block';
-  _selectedKeywords = [product]; // Always include original
-  
-  container.innerHTML = suggestions.slice(0,8).map(kw => `
-    <span onclick="toggleKeyword('${kw.replace(/'/g,"\'")}',this)" 
-      style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;transition:all 0.2s;background:var(--bg2);color:var(--muted);" 
-      data-kw="${kw}">
-      + ${kw}
-    </span>`).join('');
-  
-  updateSelectedDisplay();
+  // Legacy compat - now uses dropdown autocomplete
+  if(product) fetchAndShowKeywords(product);
 }
 
 function toggleKeyword(kw, el) {
