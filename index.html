@@ -69,7 +69,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .logout-btn{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;border-radius:5px;transition:all 0.15s;}
 .logout-btn:hover{color:var(--danger);}
 .main{margin-left:var(--sw);flex:1;height:100vh;overflow-y:auto;overflow-x:hidden;}
-.inner{display:none;padding:24px 28px;box-sizing:border-box;width:100%;overflow-x:hidden;}.inner.active{display:block;}
+.inner{display:none;padding:24px 28px;box-sizing:border-box;width:100%;overflow-x:hidden;min-height:0;}.inner.active{display:block;min-height:0;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
 .page-title{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
 .page-sub{color:var(--muted);font-size:13px;margin-top:4px;}
@@ -1712,7 +1712,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         </button>
       </div>
       <div class="section-divider"></div>
-      <div id="smartBanners"></div>
+      <div id="smartBanners" style="min-height:0;overflow:hidden;"></div>
 
       <!-- Live Activity Feed -->
       <div id="liveActivity" style="background:linear-gradient(135deg,rgba(29,184,126,0.05),rgba(240,125,42,0.03));border:1px solid rgba(29,184,126,0.15);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
@@ -1940,6 +1940,14 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
     <!-- SEARCH -->
     <div class="inner" id="inner-search">
+      <div id="searchVerifyNotice" style="display:none;background:linear-gradient(135deg,rgba(240,125,42,0.12),rgba(240,125,42,0.05));border:1px solid rgba(240,125,42,0.35);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:22px;">🔐</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:3px;">Email Verify Karein Pehle</div>
+          <div style="font-size:12px;color:var(--muted);">Search karne ke liye apni email verify karein — inbox ya spam mein 6-digit code check karein.</div>
+        </div>
+        <button onclick="goTo('dashboard')" style="margin-left:auto;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">Verify Now</button>
+      </div>
       <div class="search-hero reveal">
         <div class="hero-title" style="font-size:clamp(22px,3vw,38px);margin-bottom:8px;">
           🎯 <span class="hook-word">Hunt</span> Mode
@@ -2293,8 +2301,8 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     <span>Home</span>
   </div>
   <div class="mob-nav-item" id="mbn-leads" onclick="goTo('leads')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <span>Search</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    <span>Saved</span>
   </div>
   <div class="mob-nav-item mob-nav-center" id="mbn-search" onclick="goTo('search')">
     <div class="mob-nav-fab">🎯</div>
@@ -2681,6 +2689,9 @@ function goTo(p){
   document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
   document.getElementById('inner-'+p)?.classList.add('active');
+  // FIX: verifyBanner inside #inner-dashboard creates phantom height on other pages
+  const _vb = document.getElementById('verifyBanner');
+  if(_vb) _vb.style.display = (p === 'dashboard') ? '' : 'none';
   const nav=document.getElementById('nav-'+p);if(nav)nav.classList.add('active');
   closeSidebar();
 
@@ -2694,6 +2705,9 @@ function goTo(p){
   if(p==='dashboard'){loadDashboard(); if(window._isGuest) setTimeout(loadGuestDashboard, 200);}
   if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
+  // Show verify notice on search page for unverified users
+  const svn = document.getElementById('searchVerifyNotice');
+  if(svn) svn.style.display = (p==='search' && U && !U.is_verified) ? 'flex' : 'none';
   // CRITICAL FIX: Reset scroll to top on every page switch
   const mainEl = document.querySelector('.main');
   if(mainEl) mainEl.scrollTop = 0;
