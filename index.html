@@ -1375,7 +1375,7 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 /* ===== MOBILE OVERLAP FIX ===== */
 @media(max-width:768px){
   /* WA button at very bottom so it doesn't overlap search button */
-  #waFloat { bottom:72px !important; right:16px !important; z-index:9980 !important; }
+  #waFloat { bottom:80px !important; right:16px !important; z-index:9980 !important; }
   /* Hide AI guide on mobile — saves space and avoids blocking form buttons */
   .ai-guide { display:none !important; }
   #waTooltip { display:none !important; }
@@ -1787,7 +1787,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
             <div style="font-size:18px;font-weight:800;color:var(--success);" id="gsActiveToday">—</div>
-            <div style="font-size:10px;color:var(--muted);">Active Now</div>
+            <div style="font-size:10px;color:var(--muted);">Active</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;flex:1;text-align:center;">
             <div style="font-size:18px;font-weight:800;color:var(--blue);" id="gsTotalLeads">—</div>
@@ -2290,40 +2290,6 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
       <div id="adminContent"><div class="loading-box on" style="justify-content:center;"><div class="big-spin" style="border-top-color:var(--purple);"></div><div>Loading...</div></div></div>
     </div>
-  </div>
-</div>
-<div class="toast" id="toast"></div>
-
-<!-- MOBILE BOTTOM NAV — WhatsApp style, only on mobile -->
-<nav id="mobileBottomNav" style="display:none;">
-  <div class="mob-nav-item" id="mbn-dashboard" onclick="goTo('dashboard')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-    <span>Home</span>
-  </div>
-  <div class="mob-nav-item" id="mbn-leads" onclick="goTo('leads')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-    <span>Saved</span>
-  </div>
-  <div class="mob-nav-item mob-nav-center" id="mbn-search" onclick="goTo('search')">
-    <div class="mob-nav-fab">🎯</div>
-  </div>
-  <div class="mob-nav-item" id="mbn-referral" onclick="goTo('referral')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    <span>Earn</span>
-  </div>
-  <div class="mob-nav-item" id="mbn-settings" onclick="goTo('settings')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-    <span>Profile</span>
-  </div>
-</nav>
-<!-- WhatsApp Floating Button -->
-<div id="waFloat" style="display:none;">
-  <div class="wa-tooltip" id="waTooltip">💬 Chat on WhatsApp!</div>
-  <a class="wa-btn" href="https://wa.me/923025074727?text=Jaiffy%20AI%20Lead%20Hunter%20ke%20baare%20mein%20puchna%20tha" target="_blank" title="WhatsApp Support">💬</a>
-</div>
-
-
-
 
     <!-- HELP PAGE -->
     <div class="inner" id="inner-help">
@@ -2566,6 +2532,38 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         </div>
       </div>
     </div>
+  </div><!-- end .main -->
+</div><!-- end #pg-app -->
+<div class="toast" id="toast"></div>
+
+<!-- MOBILE BOTTOM NAV — WhatsApp style, only on mobile -->
+<nav id="mobileBottomNav" style="display:none;">
+  <div class="mob-nav-item" id="mbn-dashboard" onclick="goTo('dashboard')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span>Home</span>
+  </div>
+  <div class="mob-nav-item" id="mbn-leads" onclick="goTo('leads')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    <span>Saved</span>
+  </div>
+  <div class="mob-nav-item mob-nav-center" id="mbn-search" onclick="goTo('search')">
+    <div class="mob-nav-fab">🎯</div>
+  </div>
+  <div class="mob-nav-item" id="mbn-referral" onclick="goTo('referral')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span>Earn</span>
+  </div>
+  <div class="mob-nav-item" id="mbn-settings" onclick="goTo('settings')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+    <span>Profile</span>
+  </div>
+</nav>
+<!-- WhatsApp Floating Button -->
+<div id="waFloat" style="display:none;">
+  <div class="wa-tooltip" id="waTooltip">💬 Chat on WhatsApp!</div>
+  <a class="wa-btn" href="https://wa.me/923025074727?text=Jaiffy%20AI%20Lead%20Hunter%20ke%20baare%20mein%20puchna%20tha" target="_blank" title="WhatsApp Support">💬</a>
+</div>
+
 
 
     <!-- VERIFY EMAIL PAGE -->
@@ -3608,7 +3606,7 @@ function renderAdmin(d){
   document.getElementById('adminContent').innerHTML=`
     <div class="admin-grid">
       <div class="admin-card good"><div class="admin-label">Total Users</div><div class="admin-val">${u.total||0}</div><div class="admin-sub">+${u.new_today||0} today · +${u.new_this_month||0} this month</div></div>
-      <div class="admin-card"><div class="admin-label">Active Now</div><div class="admin-val">${u.active_today||0}</div><div class="admin-sub">Free:${u.by_plan?.free||0} Pro:${u.by_plan?.pro||0} Agency:${u.by_plan?.agency||0}</div></div>
+      <div class="admin-card"><div class="admin-label">Active</div><div class="admin-val">${u.active_today||0}</div><div class="admin-sub">Free:${u.by_plan?.free||0} Pro:${u.by_plan?.pro||0} Agency:${u.by_plan?.agency||0}</div></div>
       <div class="admin-card good"><div class="admin-label">Total Leads</div><div class="admin-val">${l.total||0}</div><div class="admin-sub">Today: ${l.today||0} · Month: ${l.this_month||0}</div></div>
       <div class="admin-card ${rev.monthly_pkr>0?'good':''}"><div class="admin-label">Revenue (Est.)</div><div class="admin-val" style="color:var(--success);font-size:20px;">Rs.${(rev.monthly_pkr||0).toLocaleString()}</div><div class="admin-sub">$${rev.monthly_usd||0}/mo</div></div>
     </div>
