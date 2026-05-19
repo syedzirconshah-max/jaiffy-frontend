@@ -1778,6 +1778,9 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div class="usage-meta" style="font-size:10px;margin-top:3px;"><span id="uHint">Free: 10/day · <a onclick="goTo('referral')" style="color:var(--orange);">Refer = +10 leads</a></span><span id="uTrialBadge"></span></div>
       </div>
 
+      <!-- Phase 3: Monthly Pool box (only for Pro/Agency users) -->
+      <div id="monthlyUsageBox" class="reveal" style="display:none;margin-bottom:12px;background:linear-gradient(135deg,rgba(168,85,247,0.06),rgba(240,125,42,0.04));border:1px solid rgba(168,85,247,0.15);border-radius:10px;padding:12px 14px;"></div>
+
       <!-- Platform Stats — compact single row -->
       <div class="reveal" style="margin-bottom:12px;">
         <div style="display:flex;gap:6px;align-items:stretch;" id="globalStatsGrid">
@@ -2991,13 +2994,48 @@ async function loadDashboard(){
   renderCampGrid(leads);
 }
 function updateUsageBar(){
-  if(!U)return;const used=U.leads_used_today||0,lim=U.daily_limit||5;const rem=Math.max(0,lim-used),pct=lim>0?Math.min(100,Math.round(used/lim*100)):0;
-  document.getElementById('uUsed').textContent=used;document.getElementById('uLimit').textContent=lim;document.getElementById('sUsedToday').textContent=used;document.getElementById('sRemText').textContent=rem+' remaining';
-  const fill=document.getElementById('uFill');fill.style.width=pct+'%';fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
-  const hint=document.getElementById('uHint');const trial=U.in_trial,trialDays=U.trial_days_remaining||0;
-  if(trial)hint.innerHTML=`🔥 Trial: ${trialDays} days remaining — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Upgrade to Pro or refer friends!</a>`;
-  else if(U.plan==='free')hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer friends, +10 leads/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
+  if(!U)return;
+  const used=U.leads_used_today||0, lim=U.daily_limit||5;
+  const rem=Math.max(0,lim-used), pct=lim>0?Math.min(100,Math.round(used/lim*100)):0;
+  document.getElementById('uUsed').textContent=used;
+  document.getElementById('uLimit').textContent=lim;
+  document.getElementById('sUsedToday').textContent=used;
+  document.getElementById('sRemText').textContent=rem+' remaining';
+  const fill=document.getElementById('uFill');
+  fill.style.width=pct+'%';
+  fill.className='usage-fill '+(pct>=100?'full':pct>=70?'warn':'ok');
+  
+  // Phase 3: Show monthly progress for Pro/Agency users
+  const mlim = U.monthly_limit || 0;
+  const mused = U.leads_used_month || 0;
+  const hasMonthly = U.has_monthly_pool || mlim > 0;
+  const monthlyBox = document.getElementById('monthlyUsageBox');
+  if(hasMonthly && monthlyBox) {
+    const mrem = Math.max(0, mlim - mused);
+    const mpct = mlim > 0 ? Math.min(100, Math.round(mused/mlim*100)) : 0;
+    const mColor = mpct >= 90 ? '#ef4444' : (mpct >= 70 ? '#f59e0b' : '#1db87e');
+    monthlyBox.style.display = 'block';
+    monthlyBox.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:600;">📅 MONTHLY POOL (${U.plan})</div>
+        <div style="font-size:11px;color:var(--text);"><strong>${mused.toLocaleString()}</strong> / ${mlim.toLocaleString()} • <strong style="color:${mColor};">${mrem.toLocaleString()} remaining</strong></div>
+      </div>
+      <div style="height:6px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;background:${mColor};width:${mpct}%;transition:width 0.3s ease;"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">${mpct}% used this month • flexible daily use up to ${lim}/day</div>
+    `;
+  } else if(monthlyBox) {
+    monthlyBox.style.display = 'none';
+  }
+  
+  const hint=document.getElementById('uHint');
+  const trial=U.in_trial, trialDays=U.trial_days_remaining||0;
+  if(trial) hint.innerHTML=`🔥 Trial: ${trialDays} days remaining — <strong style="color:var(--orange)">${lim} leads/day</strong> · <a onclick="goTo('plans')">Upgrade to Pro or refer friends!</a>`;
+  else if(U.plan==='free') hint.innerHTML=`Free plan: ${lim} leads/day · <a onclick="goTo('referral')">Refer friends, +10 leads/day!</a> · <a onclick="goTo('plans')">Upgrade</a>`;
+  else if(hasMonthly) hint.innerHTML=`<strong>${U.plan.toUpperCase()}</strong> plan: ${mlim.toLocaleString()} leads/month • up to ${lim}/day`;
   else hint.innerHTML=`${U.plan} plan: ${lim} leads/day`;
+  
   const trialBadge=document.getElementById('uTrialBadge');
   if(trial)trialBadge.innerHTML=`<span style="background:rgba(240,125,42,0.15);color:var(--orange);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;">🔥 Trial Active</span>`;
   else trialBadge.innerHTML='';
@@ -3067,7 +3105,20 @@ async function doSearch(page=1, append=false){
       window._lastSearch=r;
     }
     
-    if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
+    if(r.usage&&U){
+      U.leads_used_today=r.usage.used_today;
+      U.daily_limit=r.usage.daily_limit;
+      U.leads_remaining=r.usage.remaining;
+      // Phase 3: monthly usage
+      if(r.usage.has_monthly_pool) {
+        U.monthly_limit = r.usage.monthly_limit;
+        U.leads_used_month = r.usage.used_month;
+        U.leads_remaining_month = r.usage.remaining_month;
+        U.has_monthly_pool = true;
+      }
+      localStorage.setItem('j_user',JSON.stringify(U));
+      updateUsageBar();
+    }
     
     renderResults(append ? {...r, leads: currentLeads} : r);
     
@@ -3458,8 +3509,9 @@ async function loadPlans(){
             </div>
             ${!isCurrent?badge:''}
           </div>
-          <div class="plan-leads-big">${p.leads_per_day}</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">leads per day</div>
+          <div class="plan-leads-big">${p.id==='free' ? p.leads_per_day : (p.leads_per_month||p.leads_per_day*30).toLocaleString()}</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">${p.id==='free' ? 'leads per day' : `leads per month <span style="color:var(--orange);font-weight:700;">• flexible</span>`}</div>
+          ${p.id!=='free' ? `<div style="font-size:11px;color:var(--muted);margin-bottom:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:8px;padding:8px 12px;">📅 Use up to <strong style="color:var(--text);">${p.leads_per_day}/day</strong> — month total: <strong style="color:var(--orange);">${(p.leads_per_month||p.leads_per_day*30).toLocaleString()}</strong></div>` : ''}
           ${discBanner}
           <div class="plan-price-row">${priceHtml}</div>
           <div class="plan-divider"></div>
@@ -6183,17 +6235,33 @@ function quickSearch(product) {
 function showSearchLimitUI(r) {
   document.getElementById('searchLoading').classList.remove('on');
   document.getElementById('resultsArea').style.display = 'block';
+  
+  // Phase 3: Differentiate daily vs monthly limit
+  const isMonthly = r.limit_type === 'monthly';
+  const icon = isMonthly ? '📅' : '⏰';
+  const title = isMonthly ? 'Monthly Limit Reached!' : 'Daily Limit Reached!';
+  let body;
+  if(isMonthly) {
+    body = `
+      Is mahine ki <strong style="color:var(--orange);">${(r.monthly_limit||3000).toLocaleString()}</strong> leads use ho gayi hain.<br>
+      Agle mahine ki 1st ko automatically reset hogi.
+    `;
+  } else {
+    body = `
+      Today's <strong>${r.daily_limit||10}</strong> leads use ho gayi hain.<br>
+      Resets after midnight — ${U && U.has_monthly_pool ? `${(U.leads_remaining_month||0).toLocaleString()} monthly pool mein abhi bhi available hai` : 'or upgrade to Pro!'}
+    `;
+  }
+  
   document.getElementById('resultsArea').innerHTML = `
     <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:16px;border:1px solid rgba(240,125,42,0.3);">
-      <div style="font-size:48px;margin-bottom:16px;">⏰</div>
-      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Daily Limit Reached!</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7;">
-        Today's ${r.daily_limit||10} leads use ho gayi hain.<br>
-        Resets after midnight — or upgrade to Pro!
-      </div>
+      <div style="font-size:48px;margin-bottom:16px;">${icon}</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">${title}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7;">${body}</div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button onclick="goTo('plans')" style="padding:12px 24px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Get Pro Plan</button>
-        <button onclick="goTo('referral')" style="padding:12px 24px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:10px;font-size:14px;cursor:pointer;">👥 Refer & Get +1 Lead</button>
+        ${!isMonthly ? `<button onclick="goTo('plans')" style="padding:12px 24px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">🚀 Upgrade Plan</button>` : ''}
+        ${isMonthly && U && U.plan === 'pro' ? `<button onclick="goTo('plans')" style="padding:12px 24px;background:linear-gradient(135deg,var(--purple),#7c3aed);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">⬆ Upgrade to Agency (15K/mo)</button>` : ''}
+        <button onclick="goTo('referral')" style="padding:12px 24px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:10px;font-size:14px;cursor:pointer;">👥 Refer Friends</button>
       </div>
     </div>`;
 }
