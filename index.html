@@ -5200,10 +5200,18 @@ async function fetchAndShowKeywords(product) {
     if(_kwLastFetch !== cacheKey) return;
     
     const keywords = (r && r.keywords) || [];
+    if(keywords.length === 0) {
+      // Show error or empty state hint
+      const errMsg = (r && r.error) ? r.error : 'No suggestions available';
+      if(inner) inner.innerHTML = `<div style="padding:14px 18px;color:var(--muted);font-size:12px;">💡 ${errMsg}</div>`;
+      console.warn('[kw] empty:', r);
+      return;
+    }
     _kwCache[cacheKey] = keywords;
     renderKeywordDropdown(keywords, product);
   } catch(e) {
-    if(inner) inner.innerHTML = '<div style="padding:14px 18px;color:var(--muted);font-size:12px;">Type to search...</div>';
+    console.warn('[kw] fetch error:', e);
+    if(inner) inner.innerHTML = '<div style="padding:14px 18px;color:var(--muted);font-size:12px;">⚠️ Could not load suggestions</div>';
   }
 }
 
