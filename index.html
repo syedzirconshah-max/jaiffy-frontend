@@ -739,7 +739,7 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 
 /* ===== SMOOTH SCROLL ===== */
 html{scroll-behavior:smooth;}
-/* .main scroll: see above */
+.main{overflow-y:auto;}
 
 /* ===== HOOK CURSOR ===== */
 .btn-search,.btn-act,.btn-primary{position:relative;overflow:hidden;}
@@ -962,7 +962,7 @@ tbody tr:hover td:first-child { color: var(--orange); }
 
 /* ===== LONG PAGE - ONE PAGE FEEL ===== */
 /* Remove sidebar scroll limit */
-/* .main overflow: see above */
+.main { overflow-x: hidden; }
 
 /* Dashboard sections are now tall */
 #inner-dashboard { min-height: unset; position: relative; overflow: hidden; }
@@ -2306,11 +2306,10 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       <div class="page-hdr">
         <div>
           <div class="page-title">Help & Guide</div>
-          <div class="page-sub">Jaiffy kaise use karein — jawabaat yahan hain</div>
+          <div class="page-sub">Jaiffy kaise use karein</div>
         </div>
       </div>
 
-      <!-- Search bar -->
       <div style="position:relative;margin-bottom:20px;">
         <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input id="helpSearch" type="text" placeholder="Kuch bhi search karein..."
@@ -2318,158 +2317,97 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
           style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px 10px 40px;color:var(--text);font-size:14px;outline:none;box-sizing:border-box;">
       </div>
 
-      <!-- FAQ sections -->
       <div id="helpContent">
 
-        <div class="help-section" data-tags="account signup login password verify email register">
+        <div class="help-section" data-tags="account signup login password verify email">
           <div class="help-section-title" onclick="toggleHelp(this)">
             🚀 Account &amp; Login
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body">
             <div class="help-q">Account kaise banayein?</div>
-            <div class="help-a">Login page pe "Create Account" click karein. Name, email aur password daalein. Email pe 6-digit code aayega — woh enter karein. Account activate hone ke baad automatically 7-day free trial shuru ho jaata hai (30 leads/day).</div>
-
-            <div class="help-q">Verification email nahi aayi — kya karein?</div>
-            <div class="help-a"><strong>Spam / Junk folder</strong> zaroor check karein — yeh sabse common wajah hai. Wahan bhi nahi mili to dashboard pe "Resend Code" button click karein. Gmail, Yahoo ya Outlook use karein — fake/temp emails kaam nahi kartay.</div>
-
-            <div class="help-q">Har baar login pe verify banner kyun aata hai?</div>
-            <div class="help-a">Matlab aapki email abhi verify nahi hui. Dashboard ke top pe banner mein 6-digit code enter karein — verify hone ke baad hamesha ke liye band ho jaayega.</div>
-
-            <div class="help-q">Password bhool gaya — reset kaise karein?</div>
-            <div class="help-a">Login page pe "Forgot Password" click karein. Email enter karein — reset link aayegi. Link pe click karke naya password set karein. Link 1 ghante mein expire hoti hai.</div>
+            <div class="help-a">Login page pe "Create Account" click karein. Name, email aur password daalein. Email pe 6-digit code aayega — enter karein. Verify hone ke baad 7-day trial mil jayega (30 leads/day).</div>
+            <div class="help-q">Verification email nahi aayi?</div>
+            <div class="help-a"><strong>Spam folder</strong> check karein zaroor. Phir bhi nahi to "Resend Code" click karein. Gmail, Yahoo, Outlook use karein.</div>
+            <div class="help-q">Password bhool gaya?</div>
+            <div class="help-a">Login page pe "Forgot Password" click karein. Email enter karein, reset link aayegi (1 hour mein expire hoti hai).</div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="search leads find buyers product country city">
+        <div class="help-section" data-tags="search leads find product country">
           <div class="help-section-title" onclick="toggleHelp(this)">
             🔍 Lead Search
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body" style="display:none;">
             <div class="help-q">Leads kaise search karein?</div>
-            <div class="help-a">Sidebar mein "Lead Search" pe click karein. Product type karein (maslan "surgical instruments", "leather gloves", "rice exporter"). Country select karein. Search karein — AI 30-90 seconds mein real businesses dhundh ke score karega.</div>
-
-            <div class="help-q">Product field mein kya likhein?</div>
-            <div class="help-a">Jo cheez aap export ya sell karte hain woh likhein. Misal ke tor par: "surgical instruments buyers", "leather goods importers", "sports goods wholesalers", "textile fabric UAE". Jitna specific likheinge, utna better result milega.</div>
-
-            <div class="help-q">City/State field kya hai?</div>
-            <div class="help-a">Ye optional hai. Blank chhod dein to poore country mein search hoga. City name type karein (e.g. "Dubai", "London", "New York") to sirf uss area ke leads milenge — zyada targeted results aate hain.</div>
-
-            <div class="help-q">Search slow kyun hai?</div>
-            <div class="help-a">Jaiffy AI har business ko analyse karta hai — is mein 30-90 seconds lagte hain. Progress bar dikhata rehta hai. Page refresh mat karein search ke dauran.</div>
-
-            <div class="help-q">AI Score (0-100) kya hota hai?</div>
-            <div class="help-a">AI har lead ko rate karta hai: phone available (+20), website (+15), email (+20), Google rating (+10), reviews (+5). <strong>70+ = High quality lead</strong> — pehle inhe contact karein.</div>
-
-            <div class="help-q">Kuch leads mein phone/email kyun nahi hai?</div>
-            <div class="help-a">Kuch businesses Google Maps pe apni contact info publicly list nahi karte. Yeh Jaiffy ka masla nahi — Google Maps mein data nahi hai. Unki website pe ja ke contact info mil sakti hai.</div>
+            <div class="help-a">Sidebar mein "Lead Search" → product type karein → country select karein → Search. AI 30-90 sec mein businesses dhundhega.</div>
+            <div class="help-q">Keyword suggestions kaise kaam karte hain?</div>
+            <div class="help-a">Product field mein type karte hi 50+ related keywords dikhte hain — country specific. Click karke select karein. (Example: "hoodie" → hoodies men, fleece hoodie, zip up hoodie...)</div>
+            <div class="help-q">Load More button kya hai?</div>
+            <div class="help-a">Pehle 20-60 leads dikhte hain. "Load More" click karke aur leads load kar sakte hain — Google Maps style. Saare leads automatically saved hote hain.</div>
+            <div class="help-q">AI Score (0-100) kya hai?</div>
+            <div class="help-a">Phone (+20), website (+15), email (+20), rating (+10), reviews (+5). <strong>70+ = High quality.</strong></div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="contact phone email locked blur pro upgrade unlock">
+        <div class="help-section" data-tags="contact phone email pro upgrade">
           <div class="help-section-title" onclick="toggleHelp(this)">
             📞 Contacts &amp; Data
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body" style="display:none;">
-            <div class="help-q">Phone aur email blur / locked kyun hain?</div>
-            <div class="help-a">Full contact details sirf <strong>Pro plan (Rs.3,000/month)</strong> pe milti hain. Free plan mein business name, address, rating aur AI score dikhta hai — contacts hidden rehte hain. Plans page se upgrade karein.</div>
-
-            <div class="help-q">Pro hun lekin contacts abhi bhi nahi dikh rahe?</div>
-            <div class="help-a">Settings mein jaayein aur check karein plan "Pro" show ho raha hai ya nahi. Agar "Free" dikhta hai to WhatsApp pe contact karein. Note: kuch businesses ka contact Google Maps pe publicly available hi nahi hota — yeh system ki kharabi nahi.</div>
-
-            <div class="help-q">Phone number website se match nahi karta — kya yeh galat data hai?</div>
-            <div class="help-a">Jaiffy Google Maps se phone leta hai — businesses kabhi kabhi Google pe alag number register karte hain website se. Dono valid ho sakte hain. Visit unki website for confirmation.</div>
+            <div class="help-q">Phone aur email blur kyun hain?</div>
+            <div class="help-a">Full contacts <strong>Pro plan (Rs.3,000/month)</strong> mein milte hain. Free mein business name, address, rating, score dikhte hain.</div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="email ai generate write template send">
+        <div class="help-section" data-tags="email ai generate write">
           <div class="help-section-title" onclick="toggleHelp(this)">
             ✉️ AI Email Generator
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body" style="display:none;">
             <div class="help-q">AI email kaise generate karein?</div>
-            <div class="help-a">Kisi bhi lead card pe <strong>Email button</strong> click karein. "AI Generate" tab se professional email auto-generate hogi. Copy karein aur apne Gmail ya Outlook se bhejein.</div>
-
-            <div class="help-q">Kya Jaiffy seedha email bhejta hai?</div>
-            <div class="help-a">Nahi — Jaiffy email content generate karta hai, aap apne account se send karte hain. Isse aapki emails authentic lagti hain aur spam filter mein nahi jaati.</div>
-
-            <div class="help-q">Email mein apni company info kaise add karein?</div>
-            <div class="help-a"><strong>Settings</strong> mein jaayein — Company Website, Portfolio Link, aur About Company fill karein. Save hone ke baad yeh info automatically AI emails mein include hogi.</div>
-
-            <div class="help-q">"AI temporarily unavailable" kya matlab hai?</div>
-            <div class="help-a">Gemini AI service temporarily busy hai — kuch minutes mein theek ho jaata hai. Tab tak "Write Yourself" tab use kar sakte hain apna email likhne ke liye.</div>
+            <div class="help-a">Lead card pe Email button click karein → AI Generate tab → professional email auto-generate hogi. Apne Gmail se bhejein.</div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="payment plan pro upgrade jazzcash easypaisa price cost">
+        <div class="help-section" data-tags="payment plan pro upgrade">
           <div class="help-section-title" onclick="toggleHelp(this)">
             💳 Plans &amp; Payment
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body" style="display:none;">
             <div class="help-q">Pro plan kaise lein?</div>
-            <div class="help-a">Sidebar mein <strong>Plans</strong> pe click karein. "Select Pro Plan" click karein. <strong>Rs.3,000</strong> JazzCash ya EasyPaisa se <strong>0302-5074727</strong> pe bhejein. Payment screenshot WhatsApp pe <strong>+923025074727</strong> pe send karein. 2-4 ghante mein account activate ho jaayega.</div>
-
-            <div class="help-q">Pro plan mein kya milta hai?</div>
-            <div class="help-a">100 leads/day · Full contacts (phone, email, website) · AI email generator · CSV export · Lead history · Data refresh. Monthly Rs.3,000.</div>
-
-            <div class="help-q">Refund hoga?</div>
-            <div class="help-a">Payment ke 48 ghante ke andar WhatsApp pe contact karein koi masla ho to. Hum fairly resolve karte hain.</div>
-
-            <div class="help-q">Card ya online payment ho sakti hai?</div>
-            <div class="help-a">Abhi sirf JazzCash/EasyPaisa available hai. Online card payment jald aa raha hai. Alternative ke liye WhatsApp pe contact karein.</div>
+            <div class="help-a">Plans page → Select Pro → Rs.3,000 JazzCash/EasyPaisa pe <strong>0302-5074727</strong>. Screenshot WhatsApp pe <strong>+923025074727</strong>. 2-4 hours mein activate.</div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="referral invite friend bonus free leads reward">
+        <div class="help-section" data-tags="referral invite friend bonus">
           <div class="help-section-title" onclick="toggleHelp(this)">
             🎁 Referral Program
             <span class="help-arrow">▼</span>
           </div>
           <div class="help-body" style="display:none;">
             <div class="help-q">Referral program kya hai?</div>
-            <div class="help-a">Apna referral link share karein — har dost jo sign up kare, aapko <strong>+10 extra leads/day</strong> milte hain. Maximum 5 referrals = +50 leads/day bonus. 20 referrals complete karo to Free se Pro upgrade bhi possible hai!</div>
-
-            <div class="help-q">Referral link kahan se milega?</div>
-            <div class="help-a">Sidebar mein <strong>Referral</strong> pe click karein. Wahan aapka unique link aur stats dikhenge.</div>
-
-            <div class="help-q">Referral bonus kab milta hai?</div>
-            <div class="help-a">Jab aapka referred dost apni email verify kare tab bonus activate hota hai — sirf sign up karne se nahi.</div>
+            <div class="help-a">Apna link share karein — har verified signup pe <strong>+10 leads/day</strong> bonus. 20 referrals = Pro upgrade free!</div>
           </div>
         </div>
 
-        <div class="help-section" data-tags="saved leads export csv download history">
-          <div class="help-section-title" onclick="toggleHelp(this)">
-            💾 Saved Leads &amp; Export
-            <span class="help-arrow">▼</span>
-          </div>
-          <div class="help-body" style="display:none;">
-            <div class="help-q">Leads kahan save hote hain?</div>
-            <div class="help-a">Har search ke results automatically <strong>Saved Leads</strong> mein save ho jaate hain. Sidebar mein "Saved Leads" pe click karein apni history dekhne ke liye.</div>
+      </div>
 
-            <div class="help-q">CSV mein export kaise karein?</div>
-            <div class="help-a">Saved Leads page pe "Export CSV" button click karein. Sari leads Excel mein download ho jaayengi — Pro plan required hai full data ke liye.</div>
-          </div>
-        </div>
-
-      </div><!-- end helpContent -->
-
-      <!-- WhatsApp Support -->
       <div style="background:linear-gradient(135deg,rgba(37,211,102,0.08),rgba(37,211,102,0.03));border:1px solid rgba(37,211,102,0.2);border-radius:14px;padding:24px;margin-top:20px;text-align:center;">
         <div style="font-size:20px;margin-bottom:8px;">💬</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Aur kuch masla hai?</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">WhatsApp pe 2-4 ghante mein reply milta hai</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">WhatsApp pe 2-4 hours mein reply</div>
         <a href="https://wa.me/923025074727?text=Jaiffy+support+needed" target="_blank"
-          style="display:inline-block;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;">
+          style="display:inline-block;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:700;text-decoration:none;">
           WhatsApp Support
         </a>
       </div>
 
     </div>
-    <!-- END HELP PAGE -->
 
         <!-- PRIVACY POLICY -->
     <div class="inner" id="inner-privacy">
@@ -2697,7 +2635,6 @@ function goTo(p){
   document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
   document.getElementById('inner-'+p)?.classList.add('active');
-  // FIX: verifyBanner inside #inner-dashboard creates phantom height on other pages
   const _vb = document.getElementById('verifyBanner');
   if(_vb) _vb.style.display = (p === 'dashboard') ? '' : 'none';
   const nav=document.getElementById('nav-'+p);if(nav)nav.classList.add('active');
@@ -2713,10 +2650,8 @@ function goTo(p){
   if(p==='dashboard'){loadDashboard(); if(window._isGuest) setTimeout(loadGuestDashboard, 200);}
   if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
-  // Show verify notice on search page for unverified users
   const svn = document.getElementById('searchVerifyNotice');
   if(svn) svn.style.display = (p==='search' && U && !U.is_verified) ? 'flex' : 'none';
-  // CRITICAL FIX: Reset ALL possible scroll containers to top
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
@@ -2725,7 +2660,6 @@ function goTo(p){
   const innerEl = document.getElementById('inner-'+p);
   if(innerEl) {
     innerEl.scrollTop = 0;
-    // Force scroll the element into view (handles mobile edge cases)
     setTimeout(() => {
       innerEl.scrollIntoView({block: 'start', behavior: 'instant'});
       window.scrollTo(0, 0);
@@ -3009,10 +2943,8 @@ function enterApp(){
       }
     }
   }).catch((e)=>{ 
-    // Network error — don't show banner (might be Railway cold start)
     console.log('auth/me failed:', e?.message);
   });
-  // Show verify banner only if we KNOW user is unverified (from cached U object)
   if(U && U.is_verified === false) {
     setTimeout(()=>{ try{ showVerifyBanner(); }catch(_){} }, 1500);
   }
@@ -3085,7 +3017,7 @@ function previewKW(){
   if(kws.length){box.style.display='block';tags.innerHTML=kws.map(k=>`<span class="tag" style="cursor:pointer;" onclick="document.getElementById('searchProduct').value='${k}';previewKW();">${k}</span>`).join('');}
   else box.style.display='none';
 }
-async function doSearch(page=1){
+async function doSearch(page=1, append=false){
   const product=document.getElementById('searchProduct').value.trim();
   const country=document.getElementById('searchCountry').value;
   const campaign=document.getElementById('searchCampaign').value.trim()||'Default';
@@ -3093,41 +3025,79 @@ async function doSearch(page=1){
 
   if(!product){showToast('Please enter a product or service first!',true);return;}
 
-  // City validation — warn if city not in known list for this country
-  if(cityVal && page===1) {
+  if(cityVal && page===1 && !append) {
     const knownCities = (CITY_DATA[country]||[]).map(c=>c.toLowerCase());
     if(!knownCities.includes(cityVal.toLowerCase())) {
-      // Unknown city — confirm with user
-      const ok = confirm(`Search in "${cityVal}" (${country})?\n\nThis city is not in our suggestions list — please verify the city spelling and country are correct.\n\nClick OK to search anyway, or Cancel to change.`);
-      if(!ok) {
-        document.getElementById('searchCity').focus();
-        return;
-      }
+      const ok = confirm(`Search in "${cityVal}" (${country})?\n\nThis city is not in our suggestions list — please verify.\n\nClick OK to search anyway, or Cancel to change.`);
+      if(!ok) { document.getElementById('searchCity').focus(); return; }
     }
   }
 
-  const btn=document.getElementById('searchBtn');btn.disabled=true;btn.innerHTML='<div class="spin"></div> Searching...';
-  document.getElementById('searchLoading').classList.add('on');document.getElementById('resultsArea').style.display='none';startRadarSteps();
+  const btn=document.getElementById('searchBtn');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  
+  if(append && loadMoreBtn) {
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.innerHTML = '<div class="spin" style="display:inline-block;width:14px;height:14px;border-width:2px;"></div> Loading more...';
+  } else {
+    btn.disabled=true;
+    btn.innerHTML='<div class="spin"></div> Searching...';
+    document.getElementById('searchLoading').classList.add('on');
+    document.getElementById('resultsArea').style.display='none';
+    startRadarSteps();
+  }
+  
   try{
     const r=await api('POST','/search',{query:product,country,city:(document.getElementById('searchCity')?.value||'').trim()||undefined,page,campaign});
     if(r.status===429||r.limit_reached){showSearchLimitUI(r);return;}
-    if(r.verify_required){
-      showVerifyRequiredUI();return;
-    }
+    if(r.verify_required){showVerifyRequiredUI();return;}
     if(r.error){showSearchErrorUI(r.error);return;}
-    currentLeads=r.leads||[];window._lastSearch=r;
+    
+    if(append && currentLeads.length > 0) {
+      currentLeads = currentLeads.concat(r.leads || []);
+      const seen = new Set();
+      currentLeads = currentLeads.filter(l => {
+        const key = (l.name||'').toLowerCase() + '|' + (l.address||'').toLowerCase().substr(0,80);
+        if(seen.has(key)) return false;
+        seen.add(key); return true;
+      });
+      window._lastSearch = {...r, leads: currentLeads};
+    } else {
+      currentLeads=r.leads||[];
+      window._lastSearch=r;
+    }
+    
     if(r.usage&&U){U.leads_used_today=r.usage.used_today;U.daily_limit=r.usage.daily_limit;U.leads_remaining=r.usage.remaining;localStorage.setItem('j_user',JSON.stringify(U));updateUsageBar();}
-    renderResults(r);
+    
+    renderResults(append ? {...r, leads: currentLeads} : r);
+    
     const blurNotice=document.getElementById('blurNotice');
     if(U&&U.plan==='free'&&!U.in_trial){
       blurNotice.style.display='flex';
-      showFreeNudge(r);
+      if(!append) showFreeNudge(r);
     } else {
       blurNotice.style.display='none';
     }
-    document.getElementById('step2').className='step-item done';document.getElementById('step2').querySelector('.step-num').textContent='✓';
+    if(!append) {
+      document.getElementById('step2').className='step-item done';
+      document.getElementById('step2').querySelector('.step-num').textContent='✓';
+    }
+    
+    if(append) {
+      setTimeout(() => {
+        const newRow = document.querySelectorAll('#resBody tr')[currentLeads.length - (r.leads?.length||0)];
+        if(newRow) newRow.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 100);
+    }
   }catch(e){showToast('Server error',true);}
-  finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';stopRadarSteps();document.getElementById('searchLoading').classList.remove('on');}
+  finally{
+    if(!append) {
+      btn.disabled=false;
+      btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Search';
+      stopRadarSteps();
+      document.getElementById('searchLoading').classList.remove('on');
+    }
+  }
 }
 function renderResults(d){
   const leads=d.leads||[];document.getElementById('resultsArea').style.display='block';
@@ -3190,7 +3160,22 @@ function renderResults(d){
     };
     return `<tr>${activeSC.map(c=>`<td>${cells[c]||''}</td>`).join('')}</tr>`;
   }).join('');
-  const pg=d.pagination;document.getElementById('resPagination').innerHTML=pg&&pg.total_pages>1?`<button class="page-btn" onclick="doSearch(${pg.page-1})" ${pg.page<=1?'disabled':''}>← Prev</button><span style="font-size:11px;color:var(--muted)">Page ${pg.page}/${pg.total_pages}</span><button class="page-btn" onclick="doSearch(${pg.page+1})" ${!pg.has_next?'disabled':''}>Next →</button>`:'';
+  const pg=d.pagination;
+  const loadMoreContainer = document.getElementById('resPagination');
+  if(pg && pg.has_next) {
+    loadMoreContainer.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 0;">
+        <button id="loadMoreBtn" class="page-btn" onclick="doSearch(${pg.page+1}, true)" 
+          style="background:linear-gradient(135deg,var(--orange),#e8631a);color:#fff;border:none;border-radius:10px;padding:12px 32px;font-size:13px;font-weight:700;cursor:pointer;min-width:200px;">
+          ⬇ Load More Leads
+        </button>
+        <div style="font-size:11px;color:var(--muted);">Showing ${currentLeads.length} of ${pg.total_results} • Page ${pg.page}/${pg.total_pages}</div>
+      </div>`;
+  } else if(pg && pg.total_results > 0) {
+    loadMoreContainer.innerHTML = `<div style="text-align:center;padding:18px;color:var(--muted);font-size:12px;">✅ All ${pg.total_results} leads loaded</div>`;
+  } else {
+    loadMoreContainer.innerHTML = '';
+  }
 }
 function openEmailModal(idx){
   const lead=currentLeads[idx];if(!lead)return;
@@ -4465,26 +4450,23 @@ function showProfilePhotoModal() {
 function previewPhoto(input) {
   const file = input.files[0];
   if (!file) return;
-  if (file.size > 800 * 1024) {
+  if (file.size > 1024 * 1024) {
     document.getElementById('photoMsg').style.color = 'var(--danger)';
-    document.getElementById('photoMsg').textContent = 'File too large — max 800KB';
+    document.getElementById('photoMsg').textContent = 'File too large — max 1MB';
     return;
   }
   const reader = new FileReader();
   reader.onload = e => {
-    // Compress image via canvas before upload
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement('canvas');
-      const MAX = 400;
-      let w = img.width, h = img.height;
-      if (w > h) { if (w > MAX) { h = h * MAX / w; w = MAX; } }
-      else { if (h > MAX) { w = w * MAX / h; h = MAX; } }
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      const compressed = canvas.toDataURL('image/jpeg', 0.75);
+      const MAX = 400; let w = img.width, h = img.height;
+      if(w > h){ if(w > MAX){h=h*MAX/w;w=MAX;} } else { if(h > MAX){w=w*MAX/h;h=MAX;} }
+      canvas.width=w; canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      const compressed = canvas.toDataURL('image/jpeg',0.75);
       const preview = document.getElementById('photoPreview');
-      if (!preview) return;
+      if(!preview) return;
       preview.innerHTML = `<img src="${compressed}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
       document.getElementById('photoMsg').style.color = 'var(--success)';
       document.getElementById('photoMsg').textContent = '✅ Ready to save';
@@ -5110,7 +5092,6 @@ window.loadDashboard = async function() {
 };
 
 async function loadGlobalStats() {
-  // Show placeholder numbers immediately (don't leave "—")
   const days = Math.max(0, Math.floor((Date.now() - new Date('2025-05-01')) / 86400000));
   const fallback = {
     gsTotalUsers:  (180 + days*4).toLocaleString(),
@@ -5140,15 +5121,13 @@ async function loadGlobalStats() {
     animate('gsActiveToday', s.active_today);
     animate('gsTotalLeads', s.total_leads);
     animate('gsLeadsToday', s.leads_today);
-  } catch(e) {
-    // fallback already shown above
-  }
+  } catch(e) {}
 }
 
 
-// ===== KEYWORD AUTOCOMPLETE (Phase 1 - Alibaba Style, 50+ keywords, country-aware) =====
+// ===== KEYWORD AUTOCOMPLETE (Phase 1 - Alibaba Style) =====
 let _kwTimer = null;
-let _kwCache = {}; // session cache: 'product:country' -> [keywords]
+let _kwCache = {};
 let _selectedKeywords = [];
 let _kwLastFetch = '';
 
@@ -5158,9 +5137,7 @@ function getCurrentCountry() {
 
 function onProductFocus() {
   const product = document.getElementById('searchProduct')?.value.trim();
-  if(product && product.length >= 2) {
-    fetchAndShowKeywords(product);
-  }
+  if(product && product.length >= 2) fetchAndShowKeywords(product);
 }
 
 function onProductInput() {
@@ -5171,7 +5148,6 @@ function onProductInput() {
     if(dd) dd.style.display = 'none';
     return;
   }
-  // Debounce: wait 350ms after last keystroke
   _kwTimer = setTimeout(() => fetchAndShowKeywords(product), 350);
 }
 
@@ -5179,13 +5155,11 @@ async function fetchAndShowKeywords(product) {
   const country = getCurrentCountry();
   const cacheKey = product.toLowerCase() + ':' + country;
   
-  // Session cache hit
   if(_kwCache[cacheKey]) {
     renderKeywordDropdown(_kwCache[cacheKey], product);
     return;
   }
   
-  // Show loading state
   const dd = document.getElementById('kwDropdown');
   const inner = document.getElementById('kwDropdownInner');
   if(dd && inner) {
@@ -5196,12 +5170,10 @@ async function fetchAndShowKeywords(product) {
   _kwLastFetch = cacheKey;
   try {
     const r = await api('POST', '/suggest-keywords', { product, country });
-    // Ignore stale responses
     if(_kwLastFetch !== cacheKey) return;
     
     const keywords = (r && r.keywords) || [];
     if(keywords.length === 0) {
-      // Show error or empty state hint
       const errMsg = (r && r.error) ? r.error : 'No suggestions available';
       if(inner) inner.innerHTML = `<div style="padding:14px 18px;color:var(--muted);font-size:12px;">💡 ${errMsg}</div>`;
       console.warn('[kw] empty:', r);
@@ -5225,7 +5197,6 @@ function renderKeywordDropdown(keywords, currentProduct) {
     return;
   }
   
-  // Highlight matching part with currentProduct prefix
   const q = (currentProduct || '').toLowerCase();
   const html = keywords.slice(0, 60).map(kw => {
     const safe = kw.replace(/'/g, "\\'").replace(/"/g, '&quot;');
@@ -5246,19 +5217,14 @@ function renderKeywordDropdown(keywords, currentProduct) {
 
 function pickKeyword(kw) {
   const input = document.getElementById('searchProduct');
-  if(input) {
-    input.value = kw;
-    input.focus();
-  }
+  if(input) { input.value = kw; input.focus(); }
   const dd = document.getElementById('kwDropdown');
   if(dd) dd.style.display = 'none';
 }
 
-// Legacy compatibility for any old calls
 function getKeywordSuggestions(product) { return []; }
 
 function showKeywordSuggestions(product) {
-  // Legacy compat - now uses dropdown autocomplete
   if(product) fetchAndShowKeywords(product);
 }
 
