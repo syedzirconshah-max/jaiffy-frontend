@@ -316,10 +316,11 @@ tr:hover td{background:rgba(255,255,255,0.01);}
   }
   #mobilePcBanner .banner-sub{display:none !important;}
 
-  /* ===== DASHBOARD — clean mobile ===== */
-  /* Hide heavy elements on mobile */
-  .live-ticker{display:none !important;}
-  .ai-guide{display:none !important;}
+  /* ===== DASHBOARD — feature parity with desktop ===== */
+  /* Keep functional features visible — only hide heavy animations */
+  .live-ticker{display:block !important;font-size:11px !important;}
+  .ai-guide{display:block !important;}
+  /* Heavy animations off for mobile performance only */
   .hero-radar{display:none !important;}
   .fish-hook{display:none !important;}
   .product-float{display:none !important;}
@@ -1376,8 +1377,8 @@ body, .fi, .fi2, td, .stat-sub, .nav-item {
 @media(max-width:768px){
   /* WA button at very bottom so it doesn't overlap search button */
   #waFloat { bottom:80px !important; right:16px !important; z-index:9980 !important; }
-  /* Hide AI guide on mobile — saves space and avoids blocking form buttons */
-  .ai-guide { display:none !important; }
+  /* AI guide visible on mobile too — but positioned smartly */
+  .ai-guide { display:block !important; margin-top:12px !important; }
   #waTooltip { display:none !important; }
 }
 
@@ -1463,11 +1464,26 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 .help-hidden{display:none !important;}
 
 @media(max-width:768px){
-  .how-it-works-section{display:none !important;}
-  .products-section{display:none !important;}
-  .testimonials-section{display:none !important;}
-  .section-divider.reveal{display:none !important;}
+  /* Mobile: ALL features available — same as desktop */
+  /* Sections kept visible for feature parity */
+  .how-it-works-section{display:block !important;}
+  .products-section{display:block !important;}
+  .testimonials-section{display:block !important;}
+  .section-divider.reveal{display:block !important;}
   #globalStatsGrid{grid-template-columns:repeat(2,1fr) !important;}
+  
+  /* Mobile-optimize section padding/sizes */
+  .how-it-works-section, .products-section, .testimonials-section {
+    padding: 20px 14px !important;
+    margin-top: 14px !important;
+  }
+  .how-it-works-section h2, .products-section h2, .testimonials-section h2 {
+    font-size: 18px !important;
+  }
+  .testimonial-card, .product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
 }
 /* Mobile Bottom Nav */
 #mobileBottomNav{display:none;align-items:center;justify-content:space-around;}
