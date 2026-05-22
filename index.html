@@ -1477,6 +1477,9 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
     padding: 20px 14px !important;
     margin-top: 14px !important;
   }
+  .how-it-works-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
   .how-it-works-section h2, .products-section h2, .testimonials-section h2 {
     font-size: 18px !important;
   }
@@ -1820,24 +1823,29 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
 
       <div class="section-divider reveal"></div>
-      <div style="margin-bottom:32px;" class="reveal">
+      <div style="margin-bottom:32px;" class="reveal how-it-works-section">
         <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">🎯 How It Works</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Find global buyers in 3 simple steps</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
-            <div style="font-size:40px;margin-bottom:12px;">🔍</div>
-            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">Enter Product</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6;">Any product</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Find global buyers in 4 simple steps</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="how-it-works-grid">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:36px;margin-bottom:10px;">🔍</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;color:var(--orange);">1. Enter Product</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6;">Any product + 50+ AI keyword suggestions</div>
           </div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
-            <div style="font-size:40px;margin-bottom:12px;">🌍</div>
-            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">Select Country</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6;">UAE, UK, Germany, USA & 7 more</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:36px;margin-bottom:10px;">🌍</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;color:var(--orange);">2. Select Country</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6;">UAE, UK, Germany, USA & 7 more</div>
           </div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:all 0.3s;" class="step-glow-card">
-            <div style="font-size:40px;margin-bottom:12px;">📧</div>
-            <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;color:var(--orange);">Send Email</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6;">AI writes emails instantly</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:36px;margin-bottom:10px;">⭐</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;color:var(--orange);">3. AI Scores Leads</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6;">High-quality buyers ranked 0-100</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;transition:all 0.3s;" class="step-glow-card">
+            <div style="font-size:36px;margin-bottom:10px;">📧</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;color:var(--orange);">4. Send Email</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6;">AI writes emails instantly</div>
           </div>
         </div>
       </div>
@@ -1900,7 +1908,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
       <!-- TESTIMONIALS -->
       <div class="section-divider reveal"></div>
-      <div style="margin-bottom:32px;" class="reveal">
+      <div style="margin-bottom:32px;" class="reveal testimonials-section">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
           <div style="font-family:'Inter',system-ui,sans-serif;font-size:22px;font-weight:800;">⭐ What Users Say</div>
           <button onclick="showReviewForm()" id="writeReviewBtn" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;">✍️ Write a Review → +10 Leads</button>
@@ -5216,7 +5224,9 @@ function onProductInput() {
     if(dd) dd.style.display = 'none';
     return;
   }
-  _kwTimer = setTimeout(() => fetchAndShowKeywords(product), 350);
+  // Longer debounce (500ms) — wait for user to STOP typing
+  // This prevents mid-typing suggestions like "hoodi" before "hoodie"
+  _kwTimer = setTimeout(() => fetchAndShowKeywords(product), 500);
 }
 
 async function fetchAndShowKeywords(product) {
