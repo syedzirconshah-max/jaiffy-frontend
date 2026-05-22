@@ -1995,7 +1995,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
               oninput="onProductInput()" 
               onfocus="onProductFocus()"
               onblur="setTimeout(()=>{document.getElementById('kwDropdown')?.style && (document.getElementById('kwDropdown').style.display='none');},200);">
-            <div id="kwDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;max-height:340px;overflow-y:auto;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+            <div id="kwDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;max-height:340px;overflow-y:auto;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
               <div id="kwDropdownInner"></div>
             </div>
           </div>
