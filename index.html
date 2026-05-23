@@ -131,12 +131,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .camp-stats{display:flex;gap:14px;margin-top:10px;}
 .camp-stat span{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;display:block;}.camp-stat{font-size:10px;color:var(--muted);}
 .search-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;}
-.search-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;position:relative;z-index:9998;}
+.search-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr auto;gap:12px;align-items:start;position:relative;z-index:9998;}
 .fg2{display:flex;flex-direction:column;gap:5px;}
 .fl2{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.6px;text-transform:uppercase;}
 .fi2{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
 .fi2:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,125,42,0.1);}.fi2::placeholder{color:var(--muted);}.fi2 option{background:var(--bg2);}
-.btn-search{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);}
+.btn-search{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 14px rgba(240,125,42,0.25);align-self:end;height:42px;}
 .btn-search:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,125,42,0.4);}
 .btn-search:active{transform:translateY(0);}.btn-search:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .ai-hint{background:rgba(240,125,42,0.04);border:1px solid rgba(240,125,42,0.12);border-radius:9px;padding:10px 14px;margin-top:12px;display:none;}
@@ -2000,13 +2000,22 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
 
     <!-- SEARCH -->
     <div class="inner" id="inner-search">
-      <div id="searchVerifyNotice" style="display:none;background:linear-gradient(135deg,rgba(240,125,42,0.12),rgba(240,125,42,0.05));border:1px solid rgba(240,125,42,0.35);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-        <span style="font-size:22px;">🔐</span>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:3px;">Email Verify Karein Pehle</div>
-          <div style="font-size:12px;color:var(--muted);">Search karne ke liye apni email verify karein — inbox ya spam mein 6-digit code check karein.</div>
+      <div id="searchVerifyNotice" style="display:none;background:linear-gradient(135deg,rgba(240,125,42,0.12),rgba(240,125,42,0.05));border:1px solid rgba(240,125,42,0.35);border-radius:12px;padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <span style="font-size:24px;">🔐</span>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:3px;">Email Verify Karein Pehle</div>
+            <div style="font-size:12px;color:var(--muted);">Inbox ya Spam mein 6-digit code check karein — neeche enter karein:</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+            <input id="searchOtpInput" type="text" maxlength="6" placeholder="000000"
+              style="width:120px;text-align:center;font-size:18px;font-weight:800;letter-spacing:6px;font-family:monospace;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:9px 6px;color:var(--text);outline:none;"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+            <button onclick="submitSearchOTP(this)" style="background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">Verify ✓</button>
+            <button onclick="resendVerifyCode(this)" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;">Resend</button>
+          </div>
         </div>
-        <button onclick="goTo('dashboard')" style="margin-left:auto;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">Verify Now</button>
+        <div id="searchOtpMsg" style="margin-top:8px;font-size:11px;display:none;"></div>
       </div>
       <div class="search-hero reveal">
         <div class="hero-title" style="font-size:clamp(22px,3vw,38px);margin-bottom:8px;">
@@ -5732,6 +5741,63 @@ async function submitBannerOTP(btn) {
       showToast(d.error || 'Code galat hai', true);
     }
   } catch(e) { btn.textContent = 'Verify ✓'; btn.disabled = false; showToast('Error', true); }
+}
+
+// Inline OTP for search page - so user doesn't have to leave Hunt Mode
+async function submitSearchOTP(btn) {
+  const inp = document.getElementById('searchOtpInput');
+  const msgEl = document.getElementById('searchOtpMsg');
+  const otp = (inp?.value || '').trim();
+  if (otp.length !== 6) {
+    if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--danger)'; msgEl.textContent='6 digit code daalen'; }
+    return;
+  }
+  btn.textContent = '⏳'; btn.disabled = true;
+  try {
+    const r = await fetch(SERVER + '/verify', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Authorization':'Bearer '+token},
+      body: JSON.stringify({otp})
+    });
+    const d = await r.json();
+    if (d.success) {
+      if (U) { U.is_verified = true; localStorage.setItem('j_user', JSON.stringify(U)); }
+      // Hide both notices since user is now verified
+      const svn = document.getElementById('searchVerifyNotice');
+      if(svn) svn.style.display = 'none';
+      document.getElementById('verifyBanner')?.remove();
+      if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--success)'; msgEl.textContent='✅ Email verify ho gaya! Ab aap search kar sakte hain.'; }
+      showToast('🎉 Email verified — start searching!');
+    } else {
+      btn.textContent = 'Verify ✓'; btn.disabled = false;
+      if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--danger)'; msgEl.textContent= d.error || 'Code galat hai — dobara try karein'; }
+    }
+  } catch(e) {
+    btn.textContent = 'Verify ✓'; btn.disabled = false;
+    if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--danger)'; msgEl.textContent='Server error — try again'; }
+  }
+}
+
+async function resendVerifyCode(btn) {
+  const msgEl = document.getElementById('searchOtpMsg');
+  const orig = btn.textContent;
+  btn.textContent = '⏳'; btn.disabled = true;
+  try {
+    const r = await fetch(SERVER + '/resend-verification', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Authorization':'Bearer '+token},
+      body: JSON.stringify({})
+    });
+    const d = await r.json();
+    if (d.success || d.message) {
+      if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--success)'; msgEl.textContent='📧 Naya code bhej diya — inbox/spam check karein'; }
+    } else {
+      if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--danger)'; msgEl.textContent= d.error || 'Resend failed'; }
+    }
+  } catch(e) {
+    if(msgEl){ msgEl.style.display='block'; msgEl.style.color='var(--danger)'; msgEl.textContent='Server error'; }
+  }
+  setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 3000);
 }
 
 async function checkVerifyToken() {
