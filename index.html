@@ -550,6 +550,39 @@ tr:hover td{background:rgba(255,255,255,0.01);}
 .reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 
+/* ===== ADMIN MODE: Hide all user-facing widgets ===== */
+body.admin-mode #liveTicker,
+body.admin-mode #aiGuide,
+body.admin-mode #waFloat,
+body.admin-mode #smartBanners,
+body.admin-mode #verifyBanner,
+body.admin-mode #onboardCard,
+body.admin-mode #mobileBottomNav,
+body.admin-mode .live-ticker,
+body.admin-mode .ai-guide,
+body.admin-mode #waTooltip,
+body.admin-mode #monthlyUsageBox,
+body.admin-mode .hero-radar,
+body.admin-mode .fish-hook,
+body.admin-mode .product-float,
+body.admin-mode .animated-bg {
+  display: none !important;
+}
+/* Admin mode: also hide user nav items (only admin features visible) */
+body.admin-mode #nav-dashboard,
+body.admin-mode #nav-search,
+body.admin-mode #nav-leads,
+body.admin-mode #nav-referral,
+body.admin-mode #nav-plans,
+body.admin-mode #nav-settings,
+body.admin-mode #nav-help {
+  display: none !important;
+}
+/* Admin mode: full-width content (no sidebar margin needed if user nav hidden) */
+body.admin-mode .sidebar {
+  padding-top: 20px;
+}
+
 /* ===== HOOK & HUNT HERO ===== */
 .hero-section{
   min-height:auto;
@@ -2755,7 +2788,30 @@ function showAdminOnly(){
   document.getElementById('uName').textContent='Owner';document.getElementById('uAv').textContent='🔐';document.getElementById('uAv').style.background='var(--purple)';
   document.getElementById('uPlanBadge').textContent='Admin';document.getElementById('uPlanBadge').className='user-plan-badge';
   document.getElementById('uPlanBadge').style.cssText='background:rgba(168,85,247,0.2);color:var(--purple);font-size:9px;padding:1px 7px;border-radius:20px;font-weight:600;display:inline-block;margin-top:2px;';
-  document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));document.getElementById('inner-admin').classList.add('active');loadAdmin();
+  document.querySelectorAll('.inner').forEach(x=>x.classList.remove('active'));document.getElementById('inner-admin').classList.add('active');
+  hideUserFacingWidgets();  // Hide chat, AI guide, live ticker, WA float from admin
+  loadAdmin();
+}
+
+// ADMIN MODE: Hide all user-facing widgets
+function hideUserFacingWidgets() {
+  document.body.classList.add('admin-mode');
+  const ids = ['liveTicker','aiGuide','waFloat','smartBanners','verifyBanner','onboardCard'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+  // Hide bottom nav too (user-facing only)
+  const bn = document.getElementById('mobileBottomNav');
+  if(bn) bn.style.display = 'none';
+}
+function showUserFacingWidgets() {
+  document.body.classList.remove('admin-mode');
+  const bn = document.getElementById('mobileBottomNav');
+  if(bn) bn.style.display = '';
+  // waFloat shown via showWAFloat()
+  const waf = document.getElementById('waFloat');
+  if(waf && U && !U.is_admin) waf.style.display = 'flex';
 }
 function doLogout(){
   fetch(`${SERVER}/auth/logout`,{method:'POST',headers:{Authorization:'Bearer '+token}}).catch(()=>{});
