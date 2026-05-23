@@ -131,7 +131,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .camp-stats{display:flex;gap:14px;margin-top:10px;}
 .camp-stat span{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;display:block;}.camp-stat{font-size:10px;color:var(--muted);}
 .search-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;}
-.search-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
+.search-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;position:relative;z-index:9998;}
 .fg2{display:flex;flex-direction:column;gap:5px;}
 .fl2{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.6px;text-transform:uppercase;}
 .fi2{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:14px;outline:none;transition:all 0.2s;}
@@ -2021,7 +2021,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
       </div>
       <div class="search-card">
         <div class="search-grid">
-          <div class="fg2" style="position:relative;">
+          <div class="fg2" style="position:relative;z-index:9998;">
             <label class="fl2">Product / Service</label>
             <input class="fi2" id="searchProduct" placeholder="e.g. Surgical instruments" 
               autocomplete="off"
@@ -2140,7 +2140,7 @@ h1, h2, h3, .page-title, .hero-title, .auth-title, .plan-name {
         <div class="rl-step" id="rlStep3">⚡ Sorting top leads...</div>
       </div>
     </div>
-      <div id="scoreLegend" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+      <div id="scoreLegend" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;gap:12px;flex-wrap:wrap;align-items:center;position:relative;z-index:1;">
   <span style="font-weight:600;color:var(--muted);">Lead Quality:</span>
   <span style="color:#137333;">🟢 70+ High — contact first</span>
   <span style="color:var(--orange);">🟡 40–70 Medium — worth trying</span>
