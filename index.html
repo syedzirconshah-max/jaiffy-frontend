@@ -2720,7 +2720,7 @@ function goTo(p){
   if(p==='leads')loadSavedLeads();if(p==='referral'){loadReferral();loadWallet();}
   if(p==='plans')loadPlans();if(p==='settings')loadSettings();if(p==='admin')loadAdmin();if(p==='help')filterHelp('');
   const svn = document.getElementById('searchVerifyNotice');
-  if(svn) svn.style.display = (p==='search' && U && !U.is_verified) ? 'flex' : 'none';
+  if(svn) svn.style.display = (p==='search' && U && !U.is_verified) ? 'block' : 'none';
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
