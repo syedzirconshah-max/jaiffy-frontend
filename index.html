@@ -5786,7 +5786,7 @@ async function resendVerifyCode(btn) {
     const r = await fetch(SERVER + '/resend-verification', {
       method: 'POST',
       headers: {'Content-Type':'application/json', 'Authorization':'Bearer '+token},
-      body: JSON.stringify({})
+      body: JSON.stringify({ email: U?.email || '' })  // Pass email as backup if token stale
     });
     const d = await r.json();
     if (d.success || d.message) {
